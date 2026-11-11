@@ -1,0 +1,1063 @@
+{
+ "sizeRank": {
+  "S": 1,
+  "M": 2,
+  "L": 3
+ },
+ "sizeWord": {
+  "S": "작은",
+  "M": "중간",
+  "L": "큰"
+ },
+ "zones": [
+  {
+   "id": "path",
+   "chip": "길",
+   "title": "길"
+  },
+  {
+   "id": "front",
+   "chip": "앞",
+   "title": "앞 풀밭"
+  },
+  {
+   "id": "back",
+   "chip": "뒤",
+   "title": "뒤 풀밭"
+  },
+  {
+   "id": "shore",
+   "chip": "물가",
+   "title": "물가"
+  },
+  {
+   "id": "sky",
+   "chip": "하늘",
+   "title": "하늘"
+  }
+ ],
+ "letters": {
+  "1": "#f4a0b8",
+  "2": "#ffe070",
+  "3": "#b8a0f0",
+  "W": "#b88a54",
+  "w": "#9a6a3c",
+  "x": "#74502c",
+  "F": "#e8e0c8",
+  "f": "#c4bda8",
+  "g": "#8a8470",
+  "I": "#8a90ac",
+  "i": "#6a7090",
+  "j": "#565c78",
+  "S": "#b4bad0",
+  "s": "#9aa0b8",
+  "z": "#707696",
+  "X": "#8890a8",
+  "Y": "#fff3c4",
+  "y": "#f0dc98",
+  "v": "#d8bf70",
+  "C": "#f4ecd2",
+  "c": "#dcd0aa",
+  "d": "#b8aa80",
+  "T": "#4aaab6",
+  "t": "#3a8a96",
+  "u": "#2c6c78",
+  "P": "#4d9a5e",
+  "p": "#3a8250",
+  "q": "#2d6a3e",
+  "L": "#56b25a",
+  "l": "#3f9a48",
+  "m": "#2f7a38",
+  "R": "#e0554a",
+  "r": "#c9403a",
+  "e": "#a3322c",
+  "A": "#f6d25a",
+  "a": "#e0b040",
+  "b": "#b88a24",
+  "O": "#f6a84a",
+  "o": "#e0782a",
+  "Q": "#8f4414",
+  "D": "#e4d698",
+  "J": "#d2c280",
+  "E": "#b0a068",
+  "M": "#82623e",
+  "N": "#6c5034",
+  "n": "#645038",
+  "H": "#ffd27a",
+  "h": "#f2a850",
+  "k": "#c97a34",
+  "K": "#5aa850",
+  "G": "#468a40",
+  "B": "#38702f",
+  "U": "#ffffff",
+  "Z": "#f4b6c8",
+  "*": "#5a5e7a"
+ },
+ "season": {
+  "pine": {
+   "spring": [
+    "#4fa062",
+    "#3c8854",
+    "#2f7040"
+   ],
+   "summer": [
+    "#4d9a5e",
+    "#3a8250",
+    "#2d6a3e"
+   ],
+   "autumn": [
+    "#7a9a52",
+    "#5f8240",
+    "#476a2e"
+   ],
+   "winter": [
+    "#9fc4ae",
+    "#6a9a82",
+    "#3f6a56"
+   ]
+  },
+  "leaf": {
+   "spring": [
+    "#5cba62",
+    "#44a24e",
+    "#34823e"
+   ],
+   "summer": [
+    "#56b25a",
+    "#3f9a48",
+    "#2f7a38"
+   ],
+   "autumn": [
+    "#a8b24a",
+    "#8a9a3a",
+    "#6a7a2a"
+   ],
+   "winter": [
+    "#7aa890",
+    "#5e8c78",
+    "#48705e"
+   ]
+  }
+ },
+ "slots": [
+  {
+   "id": "P1",
+   "chip": "path",
+   "size": "S",
+   "open": {
+    "base": 1
+   },
+   "blocked": 0,
+   "ab": [
+    -0.5,
+    2.8
+   ]
+  },
+  {
+   "id": "P2",
+   "chip": "path",
+   "size": "S",
+   "open": {
+    "base": 1
+   },
+   "blocked": 0,
+   "ab": [
+    -0.5,
+    3.73
+   ]
+  },
+  {
+   "id": "P3",
+   "chip": "path",
+   "size": "S",
+   "open": {
+    "base": 1
+   },
+   "blocked": 0,
+   "ab": [
+    -0.5,
+    4.67
+   ]
+  },
+  {
+   "id": "P4",
+   "chip": "path",
+   "size": "S",
+   "open": {
+    "base": 1
+   },
+   "blocked": 0,
+   "ab": [
+    -0.5,
+    5.6
+   ]
+  },
+  {
+   "id": "P5",
+   "chip": "path",
+   "size": "S",
+   "open": {
+    "stage": 2
+   },
+   "blocked": 0,
+   "ab": [
+    -1.5,
+    3.5
+   ]
+  },
+  {
+   "id": "P6",
+   "chip": "path",
+   "size": "S",
+   "open": {
+    "stage": 2
+   },
+   "blocked": 0,
+   "ab": [
+    -1.5,
+    4.5
+   ]
+  },
+  {
+   "id": "P7",
+   "chip": "path",
+   "size": "S",
+   "open": {
+    "stage": 4
+   },
+   "blocked": 0,
+   "ab": [
+    5.5,
+    0.5
+   ]
+  },
+  {
+   "id": "P8",
+   "chip": "path",
+   "size": "S",
+   "open": {
+    "stage": 4
+   },
+   "blocked": 0,
+   "ab": [
+    6.5,
+    0.5
+   ]
+  },
+  {
+   "id": "F1",
+   "chip": "front",
+   "size": "S",
+   "open": {
+    "base": 1
+   },
+   "blocked": 0,
+   "ab": [
+    1,
+    2.75
+   ]
+  },
+  {
+   "id": "F2",
+   "chip": "front",
+   "size": "S",
+   "open": {
+    "lv": 12
+   },
+   "blocked": 1,
+   "ab": [
+    2.5,
+    1.5
+   ]
+  },
+  {
+   "id": "F3",
+   "chip": "front",
+   "size": "S",
+   "open": {
+    "lv": 16
+   },
+   "blocked": 1,
+   "ab": [
+    4.5,
+    1.5
+   ]
+  },
+  {
+   "id": "F4",
+   "chip": "front",
+   "size": "S",
+   "open": {
+    "base": 1
+   },
+   "blocked": 0,
+   "ab": [
+    -1.5,
+    2.5
+   ]
+  },
+  {
+   "id": "F5",
+   "chip": "front",
+   "size": "M",
+   "open": {
+    "lv": 8
+   },
+   "blocked": 0,
+   "ab": [
+    4.5,
+    4.5
+   ]
+  },
+  {
+   "id": "F6",
+   "chip": "front",
+   "size": "S",
+   "open": {
+    "base": 1
+   },
+   "blocked": 0,
+   "ab": [
+    4.5,
+    -0.5
+   ]
+  },
+  {
+   "id": "F7",
+   "chip": "front",
+   "size": "M",
+   "open": {
+    "stage": 4
+   },
+   "blocked": 1,
+   "abLin": [
+    {
+     "k": 1,
+     "c": -2.5
+    },
+    {
+     "k": -1,
+     "c": 3.5
+    }
+   ],
+   "abByStage": [
+    [
+     -2.5,
+     3.5
+    ],
+    [
+     3.5,
+     -2.5
+    ],
+    [
+     3.5,
+     -2.5
+    ],
+    [
+     4.5,
+     -3.5
+    ],
+    [
+     5.5,
+     -4.5
+    ],
+    [
+     5.5,
+     -4.5
+    ],
+    [
+     6.5,
+     -5.5
+    ]
+   ]
+  },
+  {
+   "id": "B1",
+   "chip": "back",
+   "size": "M",
+   "open": {
+    "lv": 8
+   },
+   "blocked": 1,
+   "ab": [
+    -0.5,
+    -3.5
+   ]
+  },
+  {
+   "id": "B2",
+   "chip": "back",
+   "size": "L",
+   "open": {
+    "stage": 6
+   },
+   "blocked": 1,
+   "ab": [
+    -4.5,
+    -3.5
+   ]
+  },
+  {
+   "id": "B3",
+   "chip": "back",
+   "size": "S",
+   "open": {
+    "base": 1
+   },
+   "blocked": 0,
+   "ab": [
+    -1,
+    -4
+   ]
+  },
+  {
+   "id": "B4",
+   "chip": "back",
+   "size": "S",
+   "open": {
+    "lv": 16
+   },
+   "blocked": 1,
+   "ab": [
+    1.5,
+    -4.5
+   ]
+  },
+  {
+   "id": "B5",
+   "chip": "back",
+   "size": "S",
+   "open": {
+    "base": 1
+   },
+   "blocked": 1,
+   "ab": [
+    1,
+    -3.5
+   ]
+  },
+  {
+   "id": "B6",
+   "chip": "back",
+   "size": "M",
+   "open": {
+    "stage": 4
+   },
+   "blocked": 1,
+   "abLin": [
+    {
+     "k": -1,
+     "c": 2.5
+    },
+    {
+     "k": 0,
+     "c": 0.5
+    }
+   ],
+   "abByStage": [
+    [
+     2.5,
+     0.5
+    ],
+    [
+     -3.5,
+     0.5
+    ],
+    [
+     -3.5,
+     0.5
+    ],
+    [
+     -4.5,
+     0.5
+    ],
+    [
+     -5.5,
+     0.5
+    ],
+    [
+     -5.5,
+     0.5
+    ],
+    [
+     -6.5,
+     0.5
+    ]
+   ]
+  },
+  {
+   "id": "SH1",
+   "chip": "shore",
+   "size": "S",
+   "open": {
+    "base": 1
+   },
+   "blocked": 0,
+   "abLin": [
+    {
+     "k": 1,
+     "c": -0.5
+    },
+    {
+     "k": -1,
+     "c": 4.5
+    }
+   ],
+   "abByStage": [
+    [
+     -0.5,
+     4.5
+    ],
+    [
+     5.5,
+     -1.5
+    ],
+    [
+     5.5,
+     -1.5
+    ],
+    [
+     6.5,
+     -2.5
+    ],
+    [
+     7.5,
+     -3.5
+    ],
+    [
+     7.5,
+     -3.5
+    ],
+    [
+     8.5,
+     -4.5
+    ]
+   ]
+  },
+  {
+   "id": "SH2",
+   "chip": "shore",
+   "size": "M",
+   "open": {
+    "base": 1
+   },
+   "blocked": 0,
+   "abLin": [
+    {
+     "k": -1,
+     "c": 0.5
+    },
+    {
+     "k": 1,
+     "c": -3
+    }
+   ],
+   "abByStage": [
+    [
+     0.5,
+     -3
+    ],
+    [
+     -5.5,
+     3
+    ],
+    [
+     -5.5,
+     3
+    ],
+    [
+     -6.5,
+     4
+    ],
+    [
+     -7.5,
+     5
+    ],
+    [
+     -7.5,
+     5
+    ],
+    [
+     -8.5,
+     6
+    ]
+   ]
+  },
+  {
+   "id": "SH3",
+   "chip": "shore",
+   "size": "M",
+   "open": {
+    "lv": 12
+   },
+   "blocked": 0,
+   "abLin": [
+    {
+     "k": -1,
+     "c": 1.5
+    },
+    {
+     "k": 1,
+     "c": -0.5
+    }
+   ],
+   "abByStage": [
+    [
+     1.5,
+     -0.5
+    ],
+    [
+     -4.5,
+     5.5
+    ],
+    [
+     -4.5,
+     5.5
+    ],
+    [
+     -5.5,
+     6.5
+    ],
+    [
+     -6.5,
+     7.5
+    ],
+    [
+     -6.5,
+     7.5
+    ],
+    [
+     -7.5,
+     8.5
+    ]
+   ]
+  },
+  {
+   "id": "SH4",
+   "chip": "shore",
+   "size": "S",
+   "open": {
+    "base": 1
+   },
+   "blocked": 0,
+   "abLin": [
+    {
+     "k": 1,
+     "c": -0.5
+    },
+    {
+     "k": 1,
+     "c": -3.5
+    }
+   ],
+   "abByStage": [
+    [
+     -0.5,
+     -3.5
+    ],
+    [
+     5.5,
+     2.5
+    ],
+    [
+     5.5,
+     2.5
+    ],
+    [
+     6.5,
+     3.5
+    ],
+    [
+     7.5,
+     4.5
+    ],
+    [
+     7.5,
+     4.5
+    ],
+    [
+     8.5,
+     5.5
+    ]
+   ]
+  },
+  {
+   "id": "SH5",
+   "chip": "shore",
+   "size": "M",
+   "open": {
+    "stage": 5
+   },
+   "blocked": 0,
+   "abLin": [
+    {
+     "k": 1,
+     "c": -2.5
+    },
+    {
+     "k": -1,
+     "c": 0.5
+    }
+   ],
+   "abByStage": [
+    [
+     -2.5,
+     0.5
+    ],
+    [
+     3.5,
+     -5.5
+    ],
+    [
+     3.5,
+     -5.5
+    ],
+    [
+     4.5,
+     -6.5
+    ],
+    [
+     5.5,
+     -7.5
+    ],
+    [
+     5.5,
+     -7.5
+    ],
+    [
+     6.5,
+     -8.5
+    ]
+   ]
+  },
+  {
+   "id": "SK1",
+   "chip": "sky",
+   "size": "S",
+   "open": {
+    "stage": 3
+   },
+   "blocked": 0,
+   "xyFn": [
+    {
+     "k": 0.62,
+     "round": true,
+     "neg": true,
+     "c": 0
+    },
+    {
+     "k": 0,
+     "c": -46
+    }
+   ]
+  },
+  {
+   "id": "SK2",
+   "chip": "sky",
+   "size": "S",
+   "open": {
+    "stage": 3
+   },
+   "blocked": 0,
+   "xyFn": [
+    {
+     "k": 0.7,
+     "round": true,
+     "neg": false,
+     "c": 0
+    },
+    {
+     "k": 0,
+     "c": -64
+    }
+   ]
+  }
+ ],
+ "items": [
+  {
+   "id": "path_stone",
+   "phase": "GL",
+   "name": "돌길 조각",
+   "size": "S",
+   "zones": [
+    "path"
+   ],
+   "src": "free",
+   "ax": 4,
+   "ay": 3,
+   "rows": [
+    "...SS...",
+    ".SXSSXS.",
+    "sSSXSSSz",
+    ".ssSSzz.",
+    "...sz..."
+   ]
+  },
+  {
+   "id": "path_shell",
+   "phase": "GL",
+   "name": "조개 깐 길",
+   "size": "S",
+   "zones": [
+    "path"
+   ],
+   "src": "gift",
+   "need": [
+    "shell",
+    20
+   ],
+   "ax": 4,
+   "ay": 3,
+   "rows": [
+    "...DD...",
+    ".DZDDUD.",
+    "JDDDZDDE",
+    ".JJDUEE.",
+    "...JE..."
+   ]
+  },
+  {
+   "id": "fence_wood",
+   "phase": "GL",
+   "name": "나무 울타리",
+   "size": "S",
+   "zones": [
+    "front",
+    "back",
+    "shore"
+   ],
+   "src": "free",
+   "ax": 5,
+   "ay": 8,
+   "ss": 1,
+   "sk": 1,
+   "rows": [
+    ".Ff.Ff.Ff.",
+    ".Ff.Ff.Ff.",
+    "FFFFFFFFFF",
+    "ffffffffff",
+    ".Fg.Fg.Fg.",
+    ".Fg.Fg.Fg.",
+    "FFFFFFFFFF",
+    "gggggggggg",
+    ".fg.fg.fg.",
+    ".fg.fg.fg."
+   ]
+  },
+  {
+   "id": "flower_planter",
+   "phase": "GL",
+   "name": "꽃 화분 상자",
+   "size": "S",
+   "zones": [
+    "front",
+    "back",
+    "shore"
+   ],
+   "src": "free",
+   "ax": 4,
+   "ay": 7,
+   "ss": 1,
+   "sk": 1,
+   "rows": [
+    "........",
+    "..1222..",
+    "...12...",
+    "...W11..",
+    ".WWWWW..",
+    ".wWWWWW.",
+    ".wwwWxx.",
+    "..wwwxx.",
+    "....w..."
+   ]
+  },
+  {
+   "id": "lamp_post",
+   "phase": "GL",
+   "name": "가로등",
+   "size": "S",
+   "zones": [
+    "front",
+    "back",
+    "shore"
+   ],
+   "src": "earn",
+   "need": [
+    "garden",
+    3
+   ],
+   "ax": 3,
+   "ay": 15,
+   "rows": [
+    "......",
+    "..II..",
+    "IIIIII",
+    ".iIIj.",
+    ".yyvv.",
+    ".yyvv.",
+    "..ij..",
+    "..ij..",
+    "..ij..",
+    "..ij..",
+    "..ij..",
+    "..ij..",
+    "..ij..",
+    "..SS..",
+    ".sSSz.",
+    "..sz..",
+    "......"
+   ]
+  },
+  {
+   "id": "tent_small",
+   "phase": "GL",
+   "name": "작은 텐트",
+   "size": "M",
+   "zones": [
+    "front",
+    "back"
+   ],
+   "src": "story",
+   "need": [
+    "swallow",
+    3
+   ],
+   "who": "바다제비 선장",
+   "ax": 7,
+   "ay": 9,
+   "ss": 1,
+   "rows": [
+    "..............",
+    "......Tj......",
+    "....CTCCT.....",
+    "...TTCTTCC....",
+    "..TCCCCCTTd...",
+    ".CCCCCCCCCTT..",
+    ".ccCCCCCCCCC..",
+    ".cc*cCCCCCCCd.",
+    ".cc***cCCCddd.",
+    "...***ccddddd.",
+    ".....*ccdddd..",
+    ".......cdd....",
+    ".............."
+   ]
+  },
+  {
+   "id": "pine_small",
+   "phase": "GL",
+   "name": "소나무",
+   "size": "M",
+   "zones": [
+    "front",
+    "back"
+   ],
+   "src": "earn",
+   "need": [
+    "garden",
+    7
+   ],
+   "ax": 6,
+   "ay": 14,
+   "ss": 1,
+   "rows": [
+    ".....PP.....",
+    ".....pq.....",
+    "....PPPP....",
+    "...ppPPqq...",
+    "...pPPPPq...",
+    "..PPPPPPPP..",
+    "..ppPPPPqq..",
+    "..PPPPPPPP..",
+    "PPPPPPPPPPPP",
+    "ppPPPPPPPPqq",
+    "ppppPPPPqqqq",
+    "ppppppqqqqqq",
+    "..ppppqqqq..",
+    "....wwxx....",
+    "....wwxx...."
+   ]
+  },
+  {
+   "id": "palm_tree",
+   "phase": "GL",
+   "name": "야자나무",
+   "size": "M",
+   "zones": [
+    "shore"
+   ],
+   "src": "earn",
+   "need": [
+    "port",
+    5
+   ],
+   "ax": 5,
+   "ay": 16,
+   "ss": 1,
+   "rows": [
+    "............",
+    ".LL....LL...",
+    "lllLLLLLmLm.",
+    ".lmllLL.lm..",
+    ".LLLmllLL...",
+    ".lm.NnNllLL.",
+    ".Lm.wwx.lLL.",
+    "....wwx..lm.",
+    "....wxx.....",
+    "....wxx.....",
+    "....wxx.....",
+    "....wxx.....",
+    "....wx......",
+    "....wx......",
+    "....wx......",
+    "....wx......",
+    "............"
+   ]
+  },
+  {
+   "id": "pumpkin_pile",
+   "phase": "GL",
+   "name": "호박 더미",
+   "size": "S",
+   "zones": [
+    "front",
+    "back",
+    "shore"
+   ],
+   "src": "season",
+   "need": [
+    "autumn"
+   ],
+   "ax": 5,
+   "ay": 6,
+   "rows": [
+    "...K......",
+    "..OOOO.K..",
+    ".OoOOoOOO.",
+    "O*OOOOoOoO",
+    "OoOOOOoOoQ",
+    "OoOOOOoOQQ",
+    ".QoOOoQQQ.",
+    "..QQQQQQ.."
+   ]
+  },
+  {
+   "id": "cloud_small",
+   "phase": "GL",
+   "name": "작은 구름",
+   "size": "S",
+   "zones": [
+    "sky"
+   ],
+   "src": "free",
+   "ax": 5,
+   "ay": 3,
+   "rows": [
+    "...CCC....",
+    ".CCCCCCCc.",
+    "CCCCCCCCcc",
+    "cccccccccd",
+    ".dddddddd."
+   ]
+  }
+ ]
+}

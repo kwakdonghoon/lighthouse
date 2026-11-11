@@ -1,0 +1,101 @@
+{
+ "source": "D:/Unity/EK_game_create/ek_Project_a9/lighthouse_idle.frozen-unity-m0.html",
+ "md5": "e36a97797597bf77dceae187eacf51a1",
+ "tables": {
+  "GIFTS": 18,
+  "AFFINITY": 18,
+  "SHIP_INFO": 9,
+  "SHIP_MIX": 6,
+  "SEA": 24,
+  "NATURE_LETTERS": 3,
+  "TRACKS": 3,
+  "RANKS": 10,
+  "MILESTONES": 27,
+  "BEAM_COLORS": 7,
+  "DIARY": 43,
+  "REGULARS": 8,
+  "REGULAR_STORIES": "6/6/6/6/6/6/6/6",
+  "SEASON_GUESTS": 4,
+  "ANNIV_LETTERS": 4,
+  "SKINS": 33,
+  "PRODUCTS": 7,
+  "AD_KINDS": 3,
+  "DECOR_ZONES": 5,
+  "DECOR_SLOTS": 28,
+  "DECOR_SLOTS_BLOCKED": 8,
+  "DECOR_SLOTS_OPEN": 20,
+  "DECOR_ITEMS": 10,
+  "ICONS": 68,
+  "FORBID_BRANCHES": 12
+ },
+ "artMissing": [],
+ "expect": {
+  "GIFTS": 18,
+  "SHIP_INFO": 9,
+  "SEA": 24,
+  "REGULARS": 8,
+  "DECOR_SLOTS": 28,
+  "DECOR_SLOTS_BLOCKED": 8,
+  "DECOR_SLOTS_OPEN": 20,
+  "DECOR_ITEMS": 10,
+  "SKINS": 33,
+  "PRODUCTS": 7,
+  "AD_KINDS": 3,
+  "TRACKS": 3,
+  "RANKS": 10,
+  "DECOR_ZONES": 5,
+  "SEASON_GUESTS": 4,
+  "ANNIV_LETTERS": 4
+ },
+ "mismatch": [],
+ "files": {
+  "gifts.json": {
+   "bytes": 2470,
+   "md5": "a4699439a477a88fcbddc74a5336c6f8"
+  },
+  "ships.json": {
+   "bytes": 2211,
+   "md5": "9c764f5c01675ddfcdf4be0a61c6deda"
+  },
+  "sea.json": {
+   "bytes": 5877,
+   "md5": "07f77713afc143bd533f6aeb4ce8df65"
+  },
+  "progression.json": {
+   "bytes": 5716,
+   "md5": "44b42767dc151241cfecd38b76ec506b"
+  },
+  "balance.json": {
+   "bytes": 1792,
+   "md5": "b45e076fa3dbf134a7a8441593ebb03f"
+  },
+  "ko/letters.json": {
+   "bytes": 6716,
+   "md5": "616642e02db5278fdff4270e5ee833e3"
+  },
+  "ko/diary.json": {
+   "bytes": 4976,
+   "md5": "4e8f9aab5710fcc88c21d238e56c077e"
+  },
+  "ko/regulars.json": {
+   "bytes": 19270,
+   "md5": "fa78079ccc89b1dfbe19541cbf5a73ad"
+  },
+  "skins.json": {
+   "bytes": 10360,
+   "md5": "a88a2ecb3e63501fada4cf7492efe9c9"
+  },
+  "decor.json": {
+   "bytes": 12715,
+   "md5": "8562a797f24856c4147a8402a9a43b2b"
+  },
+  "art.json": {
+   "bytes": 28397,
+   "md5": "be308e60ea476906635fa5b232570e78"
+  },
+  "lint/forbid_ko.json": {
+   "bytes": 3651,
+   "md5": "0d4a17e3a87290bf3603ce99fd76e676"
+  }
+ }
+}

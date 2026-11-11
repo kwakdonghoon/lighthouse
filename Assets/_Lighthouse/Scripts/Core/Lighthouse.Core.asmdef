@@ -1,7 +1,7 @@
 {
     "name": "Lighthouse.Core",
     "rootNamespace": "Lighthouse.Core",
-    "references": [],
+    "references": ["Unity.Nuget.Newtonsoft-Json"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

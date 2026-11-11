@@ -1,0 +1,198 @@
+{
+ "ships": [
+  {
+   "id": "fish",
+   "name": "작은 어선",
+   "stage": 1,
+   "st": 1
+  },
+  {
+   "id": "trade",
+   "name": "상선",
+   "stage": 2,
+   "st": 3
+  },
+  {
+   "id": "ferry",
+   "name": "여객선",
+   "stage": 3,
+   "st": 5
+  },
+  {
+   "id": "explorer",
+   "name": "탐험선",
+   "stage": 3,
+   "st": 5
+  },
+  {
+   "id": "rowboat",
+   "name": "나룻배",
+   "stage": 1,
+   "st": 1
+  },
+  {
+   "id": "schooner",
+   "name": "쌍돛 범선",
+   "stage": 1,
+   "st": 2
+  },
+  {
+   "id": "steamer",
+   "name": "증기선",
+   "stage": 2,
+   "st": 4
+  },
+  {
+   "id": "galleon",
+   "name": "대형 범선",
+   "stage": 3,
+   "st": 5
+  },
+  {
+   "id": "cruise",
+   "name": "유람선",
+   "stage": 3,
+   "st": 6
+  }
+ ],
+ "mix": [
+  null,
+  [
+   {
+    "id": "fish",
+    "w": 70
+   },
+   {
+    "id": "rowboat",
+    "w": 30
+   }
+  ],
+  [
+   {
+    "id": "fish",
+    "w": 45
+   },
+   {
+    "id": "rowboat",
+    "w": 20
+   },
+   {
+    "id": "schooner",
+    "w": 35
+   }
+  ],
+  [
+   {
+    "id": "fish",
+    "w": 25
+   },
+   {
+    "id": "rowboat",
+    "w": 10
+   },
+   {
+    "id": "schooner",
+    "w": 25
+   },
+   {
+    "id": "trade",
+    "w": 40
+   }
+  ],
+  [
+   {
+    "id": "fish",
+    "w": 25
+   },
+   {
+    "id": "schooner",
+    "w": 35
+   },
+   {
+    "id": "trade",
+    "w": 20
+   },
+   {
+    "id": "steamer",
+    "w": 20
+   }
+  ],
+  [
+   {
+    "id": "fish",
+    "w": 22
+   },
+   {
+    "id": "schooner",
+    "w": 8
+   },
+   {
+    "id": "trade",
+    "w": 16
+   },
+   {
+    "id": "ferry",
+    "w": 18
+   },
+   {
+    "id": "explorer",
+    "w": 14
+   },
+   {
+    "id": "steamer",
+    "w": 16
+   },
+   {
+    "id": "galleon",
+    "w": 6
+   }
+  ],
+  [
+   {
+    "id": "fish",
+    "w": 22
+   },
+   {
+    "id": "schooner",
+    "w": 8
+   },
+   {
+    "id": "trade",
+    "w": 12
+   },
+   {
+    "id": "ferry",
+    "w": 16
+   },
+   {
+    "id": "explorer",
+    "w": 12
+   },
+   {
+    "id": "steamer",
+    "w": 14
+   },
+   {
+    "id": "galleon",
+    "w": 8
+   },
+   {
+    "id": "cruise",
+    "w": 8
+   }
+  ]
+ ],
+ "big": [
+  "galleon",
+  "cruise"
+ ],
+ "giftKind": {
+  "ferry": "trade",
+  "explorer": "trade",
+  "rowboat": "fish",
+  "schooner": "fish",
+  "steamer": "trade",
+  "galleon": "trade",
+  "cruise": "trade"
+ }
+}

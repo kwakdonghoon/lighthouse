@@ -1,0 +1,232 @@
+{
+ "sea": [
+  {
+   "id": "fish",
+   "name": "뛰는 물고기",
+   "icon": "seaFish",
+   "where": "바다 위",
+   "hint": "바다 위에서 만나요"
+  },
+  {
+   "id": "dolphin",
+   "name": "돌고래",
+   "icon": "seaDolphin",
+   "where": "섬 앞바다",
+   "hint": "섬 앞바다에서 만나요",
+   "count": 1
+  },
+  {
+   "id": "gull",
+   "name": "갈매기",
+   "icon": "seaGull",
+   "where": "등대 위 하늘",
+   "hint": "등대를 눌러 보세요",
+   "count": 1
+  },
+  {
+   "id": "butterfly",
+   "name": "나비",
+   "icon": "seaButterfly",
+   "where": "낮, 섬 위",
+   "hint": "낮, 섬 위에서 만나요"
+  },
+  {
+   "id": "firefly",
+   "name": "반딧불이",
+   "icon": "seaFirefly",
+   "where": "밤, 섬 위",
+   "hint": "밤, 섬 위에서 만나요"
+  },
+  {
+   "id": "whale",
+   "rare": 1,
+   "name": "고래",
+   "icon": "seaWhale",
+   "where": "비운 사이의 일지",
+   "hint": "비운 사이의 일지에서 만나요"
+  },
+  {
+   "id": "meteor",
+   "name": "별똥별",
+   "icon": "seaMeteor",
+   "where": "맑은 밤하늘",
+   "hint": "맑은 밤하늘에서 만나요",
+   "count": 1
+  },
+  {
+   "id": "rainbow",
+   "grp": "sky",
+   "name": "무지개",
+   "icon": "skyRainbow",
+   "where": "비가 갠 낮 하늘",
+   "hint": "비가 갠 낮 하늘에서 만나요"
+  },
+  {
+   "id": "rain",
+   "grp": "sky",
+   "name": "비 오는 날",
+   "icon": "skyRain",
+   "where": "비 오는 날, 섬 위",
+   "hint": "5단계 이후 비 오는 날 만나요"
+  },
+  {
+   "id": "snowflake",
+   "grp": "sky",
+   "name": "눈송이",
+   "icon": "skySnow",
+   "tag": "겨울",
+   "where": "겨울, 내리는 눈",
+   "hint": "겨울 하늘에서 만나요"
+  },
+  {
+   "id": "fog",
+   "grp": "sky",
+   "name": "안개 낀 날",
+   "icon": "skyFog",
+   "where": "안개 낀 바다",
+   "hint": "3단계 이후 안개 낀 날 만나요"
+  },
+  {
+   "id": "petals",
+   "grp": "sky",
+   "name": "벚꽃비",
+   "icon": "skyPetals",
+   "tag": "봄",
+   "where": "봄, 흩날리는 꽃잎",
+   "hint": "봄 하늘에서 만나요"
+  },
+  {
+   "id": "leaves",
+   "grp": "sky",
+   "name": "낙엽비",
+   "icon": "skyLeaves",
+   "tag": "가을",
+   "where": "가을, 떨어지는 낙엽",
+   "hint": "가을 하늘에서 만나요"
+  },
+  {
+   "id": "lantern",
+   "grp": "sky",
+   "name": "하늘 등불",
+   "icon": "skyLantern",
+   "tag": "여름",
+   "where": "여름 밤, 떠오르는 등불",
+   "hint": "여름 밤하늘에서 만나요"
+  },
+  {
+   "id": "firework",
+   "grp": "sky",
+   "name": "불꽃놀이",
+   "icon": "skyFirework",
+   "tag": "여름",
+   "where": "여름 밤하늘",
+   "hint": "여름 밤하늘에서 만나요"
+  },
+  {
+   "id": "aurora",
+   "grp": "sky",
+   "name": "오로라",
+   "icon": "skyAurora",
+   "tag": "겨울",
+   "rare": 1,
+   "where": "겨울 밤하늘",
+   "hint": "겨울 밤하늘에서 만나요"
+  },
+  {
+   "id": "dawnglow",
+   "grp": "sky",
+   "name": "새벽빛",
+   "icon": "skyDawn",
+   "where": "새벽 하늘",
+   "hint": "새벽 하늘에서 만나요"
+  },
+  {
+   "id": "sunset",
+   "grp": "sky",
+   "name": "저녁 노을",
+   "icon": "skySunset",
+   "where": "해질녘 하늘",
+   "hint": "해질녘 하늘에서 만나요"
+  },
+  {
+   "id": "moonpath",
+   "grp": "sky",
+   "name": "달빛 길",
+   "icon": "skyMoonpath",
+   "where": "비운 사이의 밤바다",
+   "hint": "비운 사이의 일지에서 만나요"
+  },
+  {
+   "id": "smallbird",
+   "name": "작은 새",
+   "icon": "seaSmallbird",
+   "where": "낮, 비운 사이의 일지",
+   "hint": "비운 사이의 일지에서 만나요"
+  },
+  {
+   "id": "fishschool",
+   "name": "물고기 떼",
+   "icon": "seaSchool",
+   "where": "낮, 얕은 물",
+   "hint": "비운 사이의 일지에서 만나요"
+  },
+  {
+   "id": "crab",
+   "name": "작은 게",
+   "icon": "seaCrab",
+   "where": "낮, 부두 끝",
+   "hint": "5단계 이후 일지에서 만나요"
+  },
+  {
+   "id": "owl",
+   "name": "올빼미",
+   "icon": "seaOwl",
+   "where": "밤, 등대 난간",
+   "hint": "비운 사이의 일지에서 만나요"
+  },
+  {
+   "id": "cricket",
+   "name": "귀뚜라미",
+   "icon": "seaCricket",
+   "where": "밤, 풀숲",
+   "hint": "비운 사이의 일지에서 만나요"
+  }
+ ],
+ "groups": [
+  {
+   "id": "sky",
+   "name": "하늘·날씨"
+  },
+  {
+   "id": "sea",
+   "name": "바다·섬 친구"
+  }
+ ],
+ "stampHalf": {
+  "sky": true,
+  "sea": false
+ },
+ "natureLetters": [
+  {
+   "key": "0000:sky",
+   "need": "sky",
+   "nm": "하늘 관찰 편지",
+   "text": "등대지기님께. 관리인이에요. 오늘 공책 한 쪽을 하늘로 가득 채웠어요. 무지개가 걸린 낮, 눈송이가 내리던 밤, 노을이 번지던 저녁까지 하나하나 적어 두었더니 하늘이 꽤 다정한 이웃 같아요. 이 섬의 하늘은 날마다 조금씩 달라서, 새 쪽은 앞으로도 계속 생길 거예요.",
+   "sign": "섬 관리인 드림"
+  },
+  {
+   "key": "0000:sea",
+   "need": "sea",
+   "nm": "섬 친구들 소식",
+   "text": "등대지기님께. 바다 우체국이에요. 뛰는 물고기부터 귀뚜라미까지, 이 섬을 찾아온 친구들의 소식이 한 장에 다 모였어요. 낮에는 작은 새와 나비가, 밤에는 올빼미와 반딧불이가 번갈아 들렀나 봐요. 모두 이 섬의 불빛을 편안한 자리로 여기는 것 같아요.",
+   "sign": "바다 우체국 드림"
+  },
+  {
+   "key": "0000:all",
+   "need": "all",
+   "nm": "자연 관찰 공책",
+   "text": "등대지기님께. 관리인이에요. 하늘의 기록과 바다 친구들의 기록이 공책 한 권에 나란히 모였어요. 날마다 달라지던 날씨도, 잠깐 들렀다 간 손님들도 모두 이 섬의 이야기였어요. 오늘 밤에는 공책을 덮고 창가에서 하늘을 한 번 올려다볼까 해요. 같이 보는 기분으로요.",
+   "sign": "섬 관리인 드림"
+  }
+ ]
+}

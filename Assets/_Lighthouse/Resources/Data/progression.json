@@ -1,0 +1,413 @@
+{
+ "saveVer": 10,
+ "isleNs": [
+  0,
+  6,
+  6,
+  7,
+  8,
+  8,
+  9
+ ],
+ "maxStage": 6,
+ "tierOf": [
+  0,
+  1,
+  1,
+  2,
+  2,
+  3,
+  3
+ ],
+ "goal": [
+  0,
+  20,
+  60,
+  400,
+  2500,
+  8000,
+  0
+ ],
+ "dexNeed": [
+  0,
+  0,
+  0,
+  4,
+  10,
+  16,
+  0
+ ],
+ "buildSec": [
+  0,
+  30,
+  45,
+  60,
+  90,
+  120,
+  0
+ ],
+ "stageName": [
+  "",
+  "작은 등불",
+  "바닷가 등대",
+  "해안 등대",
+  "높은 등대",
+  "항로 등대",
+  "큰 바다의 등대"
+ ],
+ "stageRoles": [
+  "",
+  "",
+  "탑이 더 높아졌어요",
+  "암초 경고 · 안개 대응 · 신호",
+  "금빛 띠가 둘러졌어요",
+  "기상 관측 · 구조 · 항구 · 관리인 생활",
+  "튼튼한 밑동, 금빛 지붕, 큰 렌즈"
+ ],
+ "tracks": [
+  {
+   "id": "lens",
+   "name": "렌즈",
+   "desc": "안내가 조금 빨라지고, 빛나는 선물과 별똥별이 더 자주 와요"
+  },
+  {
+   "id": "garden",
+   "name": "정원",
+   "desc": "섬에 꽃과 나무, 반딧불이와 나비가 늘어나요"
+  },
+  {
+   "id": "port",
+   "name": "항구",
+   "desc": "바다에 부이가 늘고 배가 더 자주 들러요"
+  }
+ ],
+ "lvBase": [
+  12,
+  35,
+  70,
+  120
+ ],
+ "lvCap": {
+  "lens": 10,
+  "garden": 6,
+  "port": 6
+ },
+ "ranks": [
+  {
+   "min": 0,
+   "name": "견습 등대지기"
+  },
+  {
+   "min": 3,
+   "name": "바다의 친구"
+  },
+  {
+   "min": 6,
+   "name": "파도의 벗"
+  },
+  {
+   "min": 10,
+   "name": "빛의 수호자"
+  },
+  {
+   "min": 15,
+   "name": "항로의 길잡이"
+  },
+  {
+   "min": 22,
+   "name": "바다의 전설"
+  },
+  {
+   "min": 32,
+   "name": "등대의 별"
+  },
+  {
+   "min": 44,
+   "name": "밤바다의 시인"
+  },
+  {
+   "min": 58,
+   "name": "별빛의 벗"
+  },
+  {
+   "min": 75,
+   "name": "영원의 등대지기"
+  }
+ ],
+ "milestones": [
+  {
+   "k": "lens",
+   "lv": 5,
+   "text": "은빛 빛줄기"
+  },
+  {
+   "k": "lens",
+   "lv": 8,
+   "text": "장밋빛 빛줄기"
+  },
+  {
+   "k": "lens",
+   "lv": 9,
+   "text": "별똥별이 더 자주 지나가요"
+  },
+  {
+   "k": "lens",
+   "lv": 10,
+   "text": "바다빛 등대 외형"
+  },
+  {
+   "k": "lens",
+   "lv": 12,
+   "text": "청록빛 빛줄기"
+  },
+  {
+   "k": "lens",
+   "lv": 14,
+   "text": "별똥별이 아주 자주 지나가요"
+  },
+  {
+   "k": "lens",
+   "lv": 15,
+   "text": "눈꽃빛 등대 외형",
+   "skin": [
+    "tower",
+    "snow"
+   ]
+  },
+  {
+   "k": "lens",
+   "lv": 16,
+   "text": "무지개빛 빛줄기"
+  },
+  {
+   "k": "lens",
+   "lv": 20,
+   "text": "새벽빛 등대 외형",
+   "skin": [
+    "tower",
+    "dawn"
+   ]
+  },
+  {
+   "k": "garden",
+   "lv": 8,
+   "text": "꾸미기 자리 +2"
+  },
+  {
+   "k": "garden",
+   "lv": 10,
+   "text": "벚꽃 섬 외형"
+  },
+  {
+   "k": "garden",
+   "lv": 12,
+   "text": "바닷가 마을 외형"
+  },
+  {
+   "k": "garden",
+   "lv": 12,
+   "text": "꾸미기 자리 +2"
+  },
+  {
+   "k": "garden",
+   "lv": 14,
+   "text": "벚꽃빛 등대 외형",
+   "skin": [
+    "tower",
+    "blossom"
+   ]
+  },
+  {
+   "k": "garden",
+   "lv": 16,
+   "text": "꾸미기 자리 +2"
+  },
+  {
+   "k": "garden",
+   "lv": 18,
+   "text": "줄무늬 띠 등대 외형",
+   "skin": [
+    "tower",
+    "bands"
+   ]
+  },
+  {
+   "k": "garden",
+   "lv": 24,
+   "text": "단풍 섬 외형",
+   "skin": [
+    "isle",
+    "maple"
+   ]
+  },
+  {
+   "k": "port",
+   "lv": 8,
+   "text": "바다에 부이 +2"
+  },
+  {
+   "k": "port",
+   "lv": 10,
+   "text": "노을빛 관리인 옷"
+  },
+  {
+   "k": "port",
+   "lv": 12,
+   "text": "산호빛 배 외형"
+  },
+  {
+   "k": "port",
+   "lv": 12,
+   "text": "바다에 부이 +2"
+  },
+  {
+   "k": "port",
+   "lv": 14,
+   "text": "단풍빛 등대 외형",
+   "skin": [
+    "tower",
+    "maple"
+   ]
+  },
+  {
+   "k": "port",
+   "lv": 16,
+   "text": "바다에 부이 +2"
+  },
+  {
+   "k": "port",
+   "lv": 18,
+   "text": "뾰족 지붕 등대 외형",
+   "skin": [
+    "tower",
+    "spire"
+   ]
+  },
+  {
+   "k": "port",
+   "lv": 20,
+   "text": "바다에 부이 +2"
+  },
+  {
+   "k": "port",
+   "lv": 23,
+   "text": "바다에 부이 +2"
+  },
+  {
+   "k": "port",
+   "lv": 26,
+   "text": "달빛 관리인 옷",
+   "skin": [
+    "keeper",
+    "moonlit"
+   ]
+  }
+ ],
+ "beamColors": [
+  {
+   "id": "gold",
+   "name": "금빛",
+   "lens": 0,
+   "rgb": "255,232,160"
+  },
+  {
+   "id": "silver",
+   "name": "은빛",
+   "lens": 5,
+   "rgb": "226,238,255"
+  },
+  {
+   "id": "rose",
+   "name": "장밋빛",
+   "lens": 8,
+   "rgb": "255,198,214"
+  },
+  {
+   "id": "aqua",
+   "name": "청록빛",
+   "lens": 12,
+   "rgb": "170,240,224"
+  },
+  {
+   "id": "rainbow",
+   "name": "무지개빛",
+   "lens": 16,
+   "rgb": null
+  },
+  {
+   "id": "sunset",
+   "name": "노을빛",
+   "src": "iap",
+   "rgb": "255,176,118"
+  },
+  {
+   "id": "violet",
+   "name": "보랏빛",
+   "src": "iap",
+   "rgb": "204,176,255"
+  }
+ ],
+ "saveDefaults": {
+  "ver": 10,
+  "ads": {
+   "day": "",
+   "used": {
+    "home": 0,
+    "star": 0,
+    "ship": 0
+   },
+   "homeDay": ""
+  },
+  "guided": 0,
+  "seen": false,
+  "gifts": {},
+  "dex": {},
+  "sea": {},
+  "letters": [],
+  "letterId": 1,
+  "dexSeen": 0,
+  "lastSeen": 0,
+  "stage": 1,
+  "growth": {
+   "lens": 0,
+   "garden": 0,
+   "port": 0
+  },
+  "focus": "auto",
+  "isle": {
+   "v": 1,
+   "put": {},
+   "own": {},
+   "news": [],
+   "mig": 0,
+   "tipSeen": 0
+  },
+  "build": null,
+  "stats": {},
+  "clock": "fast",
+  "sound": true,
+  "reg": {},
+  "season": "auto",
+  "found": {},
+  "shiny": {},
+  "offered": 0,
+  "offerTo": "auto",
+  "autoOffer": true,
+  "beam": "gold",
+  "owned": {},
+  "skin": {},
+  "region": "home",
+  "tips": {},
+  "tipsOff": false,
+  "firstBack": false,
+  "lettersTrimmed": false,
+  "startAt": 0,
+  "anniv": {},
+  "seasonLetters": {},
+  "finale": 0,
+  "totals": {
+   "gifts": {}
+  },
+  "diarySeen": {}
+ }
+}

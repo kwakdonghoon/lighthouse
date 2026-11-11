@@ -1,0 +1,1777 @@
+{
+ "ICONS": {
+  "mail8": {
+   "pal": {
+    "d": "#4a3a28",
+    "w": "#f4f0e0",
+    "c": "#c9a878"
+   },
+   "rows": [
+    "dddddddd",
+    "dcddddcd",
+    "dwcddcwd",
+    "dwwccwwd",
+    "dwwwwwwd",
+    "dwwwwwwd",
+    "dddddddd",
+    "........"
+   ]
+  },
+  "book8": {
+   "pal": {
+    "d": "#1a2036",
+    "b": "#3d5a8a",
+    "w": "#f4f0e0",
+    "x": "#a89870"
+   },
+   "rows": [
+    ".ddddddd",
+    "dbbbbbbd",
+    "dbwwwwwd",
+    "dbwxxxwd",
+    "dbwwwwwd",
+    "dbwxxxwd",
+    "dbwwwwwd",
+    ".ddddddd"
+   ]
+  },
+  "shell": {
+   "pal": {
+    "d": "#8a4a56",
+    "c": "#ffd6d6",
+    "b": "#e89aa0"
+   },
+   "rows": [
+    "...dd...",
+    "..dccd..",
+    ".dcbbcd.",
+    "dcbcbcbd",
+    "dcbcbcbd",
+    ".dcbcbd.",
+    "..dbbd..",
+    "...dd..."
+   ]
+  },
+  "starfish": {
+   "pal": {
+    "d": "#9a5a20",
+    "o": "#f0a040"
+   },
+   "rows": [
+    "...dd...",
+    "...oo...",
+    "dooooood",
+    ".dooood.",
+    "..dood..",
+    ".dooood.",
+    ".do..od.",
+    ".dd..dd."
+   ]
+  },
+  "pearl": {
+   "pal": {
+    "d": "#6a6a8a",
+    "w": "#f4f4ff",
+    "h": "#ffffff",
+    "s": "#c8c8e0"
+   },
+   "rows": [
+    "..dddd..",
+    ".dwwwwd.",
+    "dwwhwwwd",
+    "dwhwwwwd",
+    "dwwwwwsd",
+    "dwwwwssd",
+    ".dwssssd",
+    "..dddd.."
+   ]
+  },
+  "bottle": {
+   "pal": {
+    "d": "#3a6a64",
+    "k": "#b88850",
+    "g": "#a8e0d8",
+    "w": "#f4f0e0"
+   },
+   "rows": [
+    "...dd...",
+    "...kk...",
+    "..dggd..",
+    ".dgwwgd.",
+    ".dgwwgd.",
+    ".dgggwd.",
+    ".dgggwd.",
+    "..dddd.."
+   ]
+  },
+  "seed": {
+   "pal": {
+    "d": "#3a2814",
+    "g": "#6fd07a",
+    "b": "#7a5030"
+   },
+   "rows": [
+    "...gg...",
+    "..gggg..",
+    "...g....",
+    "...g....",
+    "..dbbd..",
+    ".dbbbbd.",
+    ".dbbbbd.",
+    "..dddd.."
+   ]
+  },
+  "coral": {
+   "pal": {
+    "d": "#7a2a2a",
+    "r": "#e0605a"
+   },
+   "rows": [
+    "r..r.r..",
+    "rr.rrr.r",
+    ".rrrrrr.",
+    "..rrrr..",
+    "..rrrr..",
+    ".rrrrrr.",
+    ".dddddd.",
+    "........"
+   ]
+  },
+  "anchor": {
+   "pal": {
+    "d": "#3c4258",
+    "b": "#8e9ab8",
+    "h": "#dfe6f4"
+   },
+   "rows": [
+    "..dddd..",
+    "..dhbd..",
+    "..dddd..",
+    "dddbbddd",
+    "..dbbd..",
+    "d.dbbd.d",
+    "dddbbddd",
+    ".dddddd."
+   ]
+  },
+  "coin": {
+   "pal": {
+    "d": "#8a5a20",
+    "y": "#e8b84a",
+    "h": "#fff0a0"
+   },
+   "rows": [
+    "..dddd..",
+    ".dyyyyd.",
+    "dyyhyyyd",
+    "dyyyyyyd",
+    "dyyyyyyd",
+    "dyyyyyyd",
+    ".dyyyyd.",
+    "..dddd.."
+   ]
+  },
+  "sound": {
+   "pal": {
+    "d": "#e6ecff"
+   },
+   "rows": [
+    "....d...",
+    "...dd.d.",
+    "dddddd.d",
+    "dddddd.d",
+    "dddddd.d",
+    "...dd.d.",
+    "....d...",
+    "........"
+   ]
+  },
+  "mute": {
+   "pal": {
+    "d": "#e6ecff",
+    "x": "#e0453e"
+   },
+   "rows": [
+    "....d...",
+    "...dd...",
+    "dddddx.x",
+    "ddddd.x.",
+    "dddddx.x",
+    "...dd...",
+    "....d...",
+    "........"
+   ]
+  },
+  "check": {
+   "pal": {
+    "d": "#1f6674"
+   },
+   "rows": [
+    "........",
+    "......dd",
+    ".....dd.",
+    "d...dd..",
+    "dd.dd...",
+    ".ddd....",
+    "..d.....",
+    "........"
+   ]
+  },
+  "star": {
+   "pal": {
+    "d": "#8a5a20",
+    "y": "#ffd84a",
+    "h": "#fff6b0"
+   },
+   "rows": [
+    "...dd...",
+    "...yy...",
+    "dyyhhyyd",
+    ".dyyyyd.",
+    "..dyyd..",
+    ".dyddyd.",
+    ".dd..dd.",
+    "........"
+   ]
+  },
+  "blossom": {
+   "pal": {
+    "d": "#b8587a",
+    "p": "#f6b8cc",
+    "c": "#ffd86a"
+   },
+   "rows": [
+    "..d..d..",
+    ".dpddpd.",
+    "dppppppd",
+    "dpppcppd",
+    "dppppppd",
+    ".dpddpd.",
+    "..d..d..",
+    "........"
+   ]
+  },
+  "sunflower": {
+   "pal": {
+    "d": "#8a5a12",
+    "y": "#ffd23a",
+    "b": "#6a4220"
+   },
+   "rows": [
+    ".d.dd.d.",
+    "..dyyd..",
+    "dyyyyyyd",
+    "dybbbbyd",
+    "dybbbbyd",
+    "dyyyyyyd",
+    "..dyyd..",
+    ".d.dd.d."
+   ]
+  },
+  "maple": {
+   "pal": {
+    "d": "#8a3414",
+    "r": "#e05a2a",
+    "o": "#f0a030",
+    "b": "#6a3a1a"
+   },
+   "rows": [
+    "...dd...",
+    ".d.dd.d.",
+    ".ddoodd.",
+    "droooord",
+    ".droord.",
+    "..drrd..",
+    "...bb...",
+    "...b...."
+   ]
+  },
+  "snow": {
+   "pal": {
+    "d": "#4f7aa6",
+    "w": "#e8f4ff",
+    "b": "#9cc4e8"
+   },
+   "rows": [
+    "...dd...",
+    "d..dd..d",
+    ".dbwwbd.",
+    "dddwwddd",
+    "dddwwddd",
+    ".dbwwbd.",
+    "d..dd..d",
+    "...dd..."
+   ]
+  },
+  "seaFish": {
+   "pal": {
+    "d": "#2a4a6a",
+    "b": "#6aa8d0",
+    "w": "#e4f4ff",
+    "k": "#14202c"
+   },
+   "rows": [
+    "........",
+    "..dddd..",
+    ".dbbbbd.",
+    "dbbbkbbd",
+    "dwwbbbd.",
+    ".dwwbbd.",
+    "..dddd.d",
+    "......dd"
+   ]
+  },
+  "seaDolphin": {
+   "pal": {
+    "d": "#2f4a6a",
+    "b": "#6a96c4",
+    "w": "#e8f4ff"
+   },
+   "rows": [
+    "......dd",
+    "....ddbd",
+    "..ddbbbd",
+    ".dbbbbd.",
+    "dbbwbbd.",
+    "dd.dwwd.",
+    ".d..dbd.",
+    ".....dd."
+   ]
+  },
+  "seaGull": {
+   "pal": {
+    "d": "#6a7488",
+    "w": "#f4f6fa",
+    "g": "#aab4c4",
+    "o": "#f0a030"
+   },
+   "rows": [
+    "........",
+    "dd....dd",
+    "dgd..dgd",
+    ".dwddwd.",
+    "..dwwwdd",
+    "..dwwwdo",
+    "...dwwd.",
+    "....dd.."
+   ]
+  },
+  "seaButterfly": {
+   "pal": {
+    "d": "#7a3a5a",
+    "p": "#ffb0d0",
+    "q": "#fff0a8",
+    "k": "#3a2a1a"
+   },
+   "rows": [
+    "........",
+    ".dd..dd.",
+    "dppdkpqd",
+    "dppkkppd",
+    ".dpdkdpd",
+    "..dd.dd.",
+    "........",
+    "........"
+   ]
+  },
+  "seaFirefly": {
+   "pal": {
+    "d": "#4a4a2a",
+    "y": "#fff1a0",
+    "g": "#f0d060",
+    "k": "#2a2a1a"
+   },
+   "rows": [
+    "........",
+    "..g..g..",
+    "...yy...",
+    "..dyyd..",
+    ".ddkkdd.",
+    "..dkkd..",
+    "...dd...",
+    "........"
+   ]
+  },
+  "seaWhale": {
+   "pal": {
+    "d": "#2a4268",
+    "b": "#5a82b8",
+    "w": "#e8f4ff",
+    "l": "#a8c8f0"
+   },
+   "rows": [
+    "....w.w.",
+    ".....w..",
+    ".dddd...",
+    "dbbbbddd",
+    "dbbbbbbd",
+    "dlwwwwbd",
+    ".dddddd.",
+    "......dd"
+   ]
+  },
+  "seaMeteor": {
+   "pal": {
+    "d": "#6a5a2a",
+    "y": "#f6d860",
+    "h": "#fff8c8"
+   },
+   "rows": [
+    "......dd",
+    ".....dhd",
+    "....dyhd",
+    "...dyyd.",
+    "..dyyd..",
+    ".dyyd...",
+    "dydd....",
+    "dd......"
+   ]
+  },
+  "skyRainbow": {
+   "pal": {
+    "r": "#e0453e",
+    "o": "#f0a040",
+    "y": "#f0d850",
+    "w": "#f4f8ff",
+    "c": "#9ab4d0"
+   },
+   "rows": [
+    "..rrrr..",
+    ".roooor.",
+    "royyyyor",
+    "roy..yor",
+    "roy..yor",
+    "wwy..yww",
+    "wcw..wcw",
+    ".cc..cc."
+   ]
+  },
+  "skyRain": {
+   "pal": {
+    "h": "#f4f8ff",
+    "w": "#c9d6e6",
+    "c": "#7f95b2",
+    "b": "#3f88d0"
+   },
+   "rows": [
+    "..hhww..",
+    ".hwwwwc.",
+    "hwwwwwwc",
+    ".cccccc.",
+    "..b..b..",
+    ".b..b..b",
+    "..b..b..",
+    ".b..b..."
+   ]
+  },
+  "skySnow": {
+   "pal": {
+    "b": "#5f98d0",
+    "w": "#ffffff",
+    "c": "#8cb8e4"
+   },
+   "rows": [
+    ".c....c.",
+    "cbc.....",
+    ".c...c..",
+    "....cbc.",
+    ".....c.c",
+    "..c.....",
+    ".cbc....",
+    "..c...c."
+   ]
+  },
+  "skyFog": {
+   "pal": {
+    "c": "#7f90a8",
+    "w": "#cfd9e6"
+   },
+   "rows": [
+    ".cccccc.",
+    "cwwwwwwc",
+    "........",
+    "ccccccc.",
+    ".wwwwwwc",
+    "........",
+    ".cccccc.",
+    "cwwwwwwc"
+   ]
+  },
+  "skyPetals": {
+   "pal": {
+    "p": "#f092b4",
+    "q": "#d0608a",
+    "w": "#fcdce8"
+   },
+   "rows": [
+    ".pp.....",
+    "pwpp..p.",
+    ".pq..pwp",
+    "......p.",
+    "..p.....",
+    ".pwp..pp",
+    "..pq.pwp",
+    "......p."
+   ]
+  },
+  "skyLeaves": {
+   "pal": {
+    "o": "#e8782a",
+    "r": "#c0402a",
+    "y": "#e8a82a",
+    "b": "#6a3a14"
+   },
+   "rows": [
+    ".oo...r.",
+    "ooro.rr.",
+    "orro..r.",
+    ".bo.....",
+    "....yy..",
+    "...yoyy.",
+    "...yyoy.",
+    "....by.."
+   ]
+  },
+  "skyLantern": {
+   "pal": {
+    "k": "#a85a20",
+    "o": "#ff9a38",
+    "y": "#ffd070",
+    "h": "#fff0b0"
+   },
+   "rows": [
+    "...kk...",
+    "..kkkk..",
+    ".oyyyyo.",
+    "oyyhhyyo",
+    "oyyhhyyo",
+    ".oyyyyo.",
+    "..kkkk..",
+    "...kk..."
+   ]
+  },
+  "skyFirework": {
+   "pal": {
+    "y": "#e8a010",
+    "b": "#4a9ae0",
+    "p": "#e8508a",
+    "w": "#fff2b0"
+   },
+   "rows": [
+    "b..y..p.",
+    ".b.y.p..",
+    "..byp...",
+    "yyywwyy.",
+    "..pwb...",
+    ".p.y.b..",
+    "p..y..b.",
+    "...y...."
+   ]
+  },
+  "skyAurora": {
+   "pal": {
+    "n": "#40588a",
+    "g": "#5ff0a8",
+    "G": "#2fb878",
+    "v": "#a070ff",
+    "y": "#fff6b0"
+   },
+   "rows": [
+    "nynnnnyn",
+    "nnnggnnn",
+    "nggGGggn",
+    "gGGggGGg",
+    "GggnvGGg",
+    "nnnvvvgn",
+    "nnvvnvvn",
+    "nnnvnnnn"
+   ]
+  },
+  "skyDawn": {
+   "pal": {
+    "p": "#ff8aa0",
+    "o": "#ff9a60",
+    "h": "#fff4c8",
+    "y": "#ffd88a",
+    "b": "#7ab0d8"
+   },
+   "rows": [
+    "p..o..p.",
+    ".p.o.p..",
+    "..hhhh..",
+    ".hyyyyh.",
+    "yyyyyyyy",
+    "bbbhhbbb",
+    "bbbbbbbb",
+    ".bb..bb."
+   ]
+  },
+  "skySunset": {
+   "pal": {
+    "r": "#e8503a",
+    "o": "#f08a40",
+    "y": "#ffc060",
+    "v": "#6a4a8a"
+   },
+   "rows": [
+    "........",
+    "..oooo..",
+    ".oyyyyo.",
+    "oyyyyyyo",
+    "rrrrrrrr",
+    "vvoyyovv",
+    "vvvoovvv",
+    "vvvvvvvv"
+   ]
+  },
+  "skyMoonpath": {
+   "pal": {
+    "n": "#40588a",
+    "m": "#f8f0c0",
+    "s": "#c8d4f0"
+   },
+   "rows": [
+    "nnnnmmnn",
+    "nnnmmmmn",
+    "nnnmmmmn",
+    "nnnnmmnn",
+    "nnnnssnn",
+    "nnnsssnn",
+    "nnsnsssn",
+    "nnssnssn"
+   ]
+  },
+  "seaSmallbird": {
+   "pal": {
+    "d": "#6a4a2a",
+    "b": "#c8884a",
+    "w": "#f8ecd0",
+    "o": "#f0a030",
+    "k": "#2a2a1a",
+    "e": "#8a5a30"
+   },
+   "rows": [
+    "........",
+    "..dddd..",
+    ".dbbbbd.",
+    "dbbkbbdo",
+    "dbbbbbd.",
+    "dewwwbd.",
+    ".dddddd.",
+    "..o..o.."
+   ]
+  },
+  "seaSchool": {
+   "pal": {
+    "b": "#4a86c0",
+    "t": "#2a5a8a",
+    "k": "#14202c",
+    "l": "#a8d0f0"
+   },
+   "rows": [
+    "..bb....",
+    "tbbbk...",
+    "........",
+    ".....bl.",
+    "...tbbbk",
+    "........",
+    "..bb....",
+    "tbbbk..."
+   ]
+  },
+  "seaCrab": {
+   "pal": {
+    "d": "#7a2a22",
+    "r": "#e0604a",
+    "h": "#f8a090",
+    "k": "#14202c"
+   },
+   "rows": [
+    "rr....rr",
+    "rr.kk.rr",
+    ".drrrrd.",
+    "drhrrhrd",
+    "drrrrrrd",
+    ".dddddd.",
+    "d.d..d.d",
+    "d......d"
+   ]
+  },
+  "seaOwl": {
+   "pal": {
+    "d": "#4a3420",
+    "b": "#9a7048",
+    "t": "#d0a878",
+    "y": "#ffd84a",
+    "k": "#14100a",
+    "o": "#f0902a"
+   },
+   "rows": [
+    "db....bd",
+    "dbbbbbbd",
+    "dyybbyyd",
+    "dykbbkyd",
+    "dbboobbd",
+    ".dttttd.",
+    ".dtbbtd.",
+    "..o..o.."
+   ]
+  },
+  "seaCricket": {
+   "pal": {
+    "d": "#3a2a14",
+    "b": "#6a4a28",
+    "g": "#8aa83a",
+    "k": "#14100a"
+   },
+   "rows": [
+    "dd......",
+    ".d......",
+    ".dbbbbd.",
+    "dkbggggd",
+    "dbbggggd",
+    ".dddddd.",
+    ".d.dd.d.",
+    "d.d..dd."
+   ]
+  },
+  "moonshard": {
+   "pal": {
+    "d": "#7a6a3a",
+    "y": "#f2e08a",
+    "h": "#fff8c8",
+    "s": "#c8b45a"
+   },
+   "rows": [
+    "..dddd..",
+    ".dhyyyd.",
+    "dhyydd..",
+    "dyyd....",
+    "dyyd....",
+    "dysyydd.",
+    ".dssssd.",
+    "..dddd.."
+   ]
+  },
+  "dewdrop": {
+   "pal": {
+    "d": "#3a6a9a",
+    "b": "#7ec8f0",
+    "w": "#e8f8ff",
+    "s": "#4a98c8"
+   },
+   "rows": [
+    "...dd...",
+    "..dbbd..",
+    "..dbbd..",
+    ".dbwbbd.",
+    ".dwbbbd.",
+    ".dbbbsd.",
+    "..dssd..",
+    "...dd..."
+   ]
+  },
+  "raindrop": {
+   "pal": {
+    "d": "#34507a",
+    "b": "#5a8ad0",
+    "l": "#a8c8f0",
+    "h": "#ffffff",
+    "s": "#3f64a8"
+   },
+   "rows": [
+    "..dddd..",
+    ".dllbbd.",
+    "dlhbbbbd",
+    "dlbbbbbd",
+    "dbbbbbsd",
+    "dbbbbssd",
+    ".dsssbd.",
+    "..dddd.."
+   ]
+  },
+  "fogwisp": {
+   "pal": {
+    "d": "#7a8aa0",
+    "w": "#eef2f6",
+    "g": "#c4cfdc",
+    "s": "#a0aec0"
+   },
+   "rows": [
+    "...dd...",
+    ".ddwwdd.",
+    "dwwwwwwd",
+    "dwwwggwd",
+    ".dggggd.",
+    "..dddd..",
+    ".ss..ss.",
+    "........"
+   ]
+  },
+  "whalecomb": {
+   "pal": {
+    "d": "#6a5a48",
+    "w": "#f4ecd8",
+    "b": "#d8c8a8",
+    "k": "#4a6a8a"
+   },
+   "rows": [
+    ".ddddddd",
+    ".dwwwwwd",
+    ".dbkkkbd",
+    ".ddddddd",
+    ".dwdwdwd",
+    ".dwdwdwd",
+    ".dbdbdbd",
+    "..d.d.d."
+   ]
+  },
+  "mapscrap": {
+   "pal": {
+    "d": "#6a4a28",
+    "p": "#e8d4a0",
+    "q": "#c9a868",
+    "b": "#5a7aa0",
+    "r": "#c9403a"
+   },
+   "rows": [
+    ".ddddd..",
+    "dpppppd.",
+    "dbbpppdd",
+    "dppprprd",
+    "dpppprpd",
+    "dppprprd",
+    ".dppqdd.",
+    "..dd...."
+   ]
+  },
+  "adMail": {
+   "pal": {
+    "d": "#5a3a28",
+    "r": "#c9503a",
+    "w": "#f4ecd8",
+    "y": "#ffd84a",
+    "k": "#8a5a30"
+   },
+   "rows": [
+    "...dd...",
+    "..drrd..",
+    ".drrrrd.",
+    "drrrrrrd",
+    ".dwwwwd.",
+    ".dyywkd.",
+    ".dyywkd.",
+    ".dddddd."
+   ]
+  },
+  "chipReg": {
+   "pal": {
+    "d": "#8a3a52",
+    "p": "#f08aa8",
+    "s": "#d0607e"
+   },
+   "rows": [
+    "........",
+    ".dd..dd.",
+    "dppddppd",
+    "dpppppsd",
+    ".dpppsd.",
+    "..dpsd..",
+    "...dd...",
+    "........"
+   ]
+  },
+  "chipUp": {
+   "pal": {
+    "d": "#8a5a20",
+    "y": "#ffd84a",
+    "h": "#fff6b0"
+   },
+   "rows": [
+    "...dd...",
+    "..dyhd..",
+    ".dyyyyd.",
+    "dyyyyyyd",
+    "dddyyddd",
+    "..dyyd..",
+    "..dyyd..",
+    "..dddd.."
+   ]
+  },
+  "logbook": {
+   "pal": {
+    "d": "#3a2616",
+    "k": "#8a5a34",
+    "s": "#6a4224",
+    "y": "#e8b84a",
+    "w": "#f4ecd8"
+   },
+   "rows": [
+    ".ddddddd",
+    "dsskkkkd",
+    "dsskkykd",
+    "dsskyyyd",
+    "dsskkykd",
+    "dsskkkkd",
+    "dwwwwwwd",
+    ".dddddd."
+   ]
+  },
+  "menu": {
+   "pal": {
+    "d": "#26304a",
+    "r": "#c2423a",
+    "a": "#ee7a70",
+    "q": "#8a2a24",
+    "w": "#f4f0e0",
+    "h": "#fffdf6",
+    "s": "#c4b898",
+    "y": "#ffd84a",
+    "g": "#8d98ac"
+   },
+   "rows": [
+    ".......dd.......",
+    "......drrd......",
+    ".....drrrrd.....",
+    ".yy..dyhyyd..yy.",
+    ".y...dyyyyd...y.",
+    "...dddddddddd...",
+    ".....darrqd.....",
+    ".....darrqd.....",
+    ".....dhwwsd.....",
+    ".....dhwwsd.....",
+    "....darrrrqd....",
+    "....darrrrqd....",
+    "....dhwddwsd....",
+    "....dhwddwsd....",
+    "..dggggggggggd..",
+    "..dddddddddddd.."
+   ]
+  },
+  "mail": {
+   "pal": {
+    "d": "#4a3a28",
+    "w": "#f8f2e0",
+    "c": "#c9a878",
+    "s": "#d9c9a0",
+    "r": "#c2423a"
+   },
+   "rows": [
+    "................",
+    "................",
+    ".dddddddddddddd.",
+    ".dcwwwwwwwwwwcd.",
+    ".dwcwwwwwwwwcwd.",
+    ".dwwcwwwwwwcwwd.",
+    ".dwwwcwwwwcwwwd.",
+    ".dwwwwcwwcwwwwd.",
+    ".dwwwwwrrwwwwwd.",
+    ".dwwwwwrrwwwwwd.",
+    ".dwwwwwwwwwwwwd.",
+    ".dssssssssssssd.",
+    ".dddddddddddddd.",
+    "................",
+    "................",
+    "................"
+   ]
+  },
+  "book": {
+   "pal": {
+    "d": "#1a2036",
+    "b": "#3d5a8a",
+    "w": "#f4f0e0",
+    "x": "#9a8a62",
+    "s": "#d8cca8"
+   },
+   "rows": [
+    "................",
+    "................",
+    "................",
+    ".dddddd..dddddd.",
+    "dwwwwwsddswwwwwd",
+    "dwxxxwsddswxxxwd",
+    "dwwwwwsddswwwwwd",
+    "dwxxxwsddswxxxwd",
+    "dwwwwwsddswwwwwd",
+    "dwxxxwsddswxxxwd",
+    "dwwwwwsddswwwwwd",
+    "dbbbbbbddbbbbbbd",
+    ".dddddd..dddddd.",
+    "................",
+    "................",
+    "................"
+   ]
+  },
+  "bag": {
+   "pal": {
+    "d": "#5a3a18",
+    "b": "#d9a35c",
+    "h": "#f0c88a",
+    "s": "#a8742e",
+    "k": "#8a5a30",
+    "y": "#ffd84a",
+    "r": "#c2423a"
+   },
+   "rows": [
+    ".....dd..dd.....",
+    "....dkkddkkd....",
+    ".....dkkkkd.....",
+    "....dbbbbbbd....",
+    "....ddbbbbdd....",
+    "...dhbbbbbbsd...",
+    "..dhbbbbbbbbsd..",
+    ".dhbbbbyybbbbsd.",
+    ".dhbbbyyyybbbsd.",
+    ".dbbbbyyryybbsd.",
+    ".dbbbbbyybbbbsd.",
+    ".dbbbbbbbbbbssd.",
+    "..dsbbbbbbbssd..",
+    "...dssssssssd...",
+    "....dddddddd....",
+    "................"
+   ]
+  },
+  "gear": {
+   "pal": {
+    "d": "#2c3a4a",
+    "w": "#c8d2e4",
+    "h": "#f0f4fc",
+    "s": "#9aa8c0"
+   },
+   "rows": [
+    ".......dd.......",
+    "...d..dhhd..d...",
+    "..dhdddhhdddwd..",
+    ".dhhhhhhhhhwwwd.",
+    "..dhhhhhhhwwwd..",
+    "..dhhhhhhwwwwd..",
+    ".ddhhhddddwwwdd.",
+    "dhhhhhd..dwwsssd",
+    "dhhhhhd..dwssssd",
+    ".ddhhwddddsssdd.",
+    "..dhwwwwwssssd..",
+    "..dwwwwwsssssd..",
+    ".dwwwwwsssssssd.",
+    "..dwdddssdddsd..",
+    "...d..dssd..d...",
+    ".......dd......."
+   ]
+  },
+  "sfxOn": {
+   "pal": {
+    "d": "#2c3a4a",
+    "w": "#e8eef4"
+   },
+   "rows": [
+    "................",
+    "................",
+    ".......dd.......",
+    "......dwwd......",
+    ".dddddwwwd..d...",
+    "dwwwwdwwwd...d..",
+    "dwwwwwwwwd.d..d.",
+    "dwwwwwwwwd..d.d.",
+    "dwwwwwwwwd..d.d.",
+    "dwwwwwwwwd.d..d.",
+    "dwwwwdwwwd...d..",
+    ".dddddwwwd..d...",
+    "......dwwd......",
+    ".......dd.......",
+    "................",
+    "................"
+   ]
+  },
+  "sfxOff": {
+   "pal": {
+    "d": "#2c3a4a",
+    "w": "#e8eef4",
+    "x": "#d6453d"
+   },
+   "rows": [
+    "................",
+    "................",
+    ".......dd.......",
+    "......dwwd......",
+    ".dddddwwwd......",
+    "dwwwwdwwwdxx.xx.",
+    "dwwwwwwwwd.xxx..",
+    "dwwwwwwwwd..x...",
+    "dwwwwwwwwd..x...",
+    "dwwwwwwwwd.xxx..",
+    "dwwwwdwwwdxx.xx.",
+    ".dddddwwwd......",
+    "......dwwd......",
+    ".......dd.......",
+    "................",
+    "................"
+   ]
+  },
+  "close": {
+   "pal": {
+    "d": "#0f3a44",
+    "r": "#1f6674",
+    "h": "#5aa6b4"
+   },
+   "rows": [
+    "................",
+    "................",
+    "...dd......dd...",
+    "..dhhd....dhhd..",
+    "...dhhd..dhhd...",
+    "....dhhddhhd....",
+    ".....dhhhhd.....",
+    "......drrd......",
+    ".....drrrrd.....",
+    "....drrddrrd....",
+    "...drrd..drrd...",
+    "..drrd....drrd..",
+    ".drrd......drrd.",
+    "..dd........dd..",
+    "................",
+    "................"
+   ]
+  },
+  "back": {
+   "pal": {
+    "d": "#2c3a4a",
+    "w": "#f4f0e0",
+    "s": "#c4b898"
+   },
+   "rows": [
+    "................",
+    "................",
+    "......d.........",
+    ".....dwd........",
+    "....dwwd........",
+    "...dwwwddddddd..",
+    "..dwwwwwwwwwwwd.",
+    ".dwwwwwwwwwwwwd.",
+    ".dwwwwwwwwwwwsd.",
+    "..dwwwwwwwwsssd.",
+    "...dwwsddddddd..",
+    "....dwsd........",
+    ".....dsd........",
+    "......d.........",
+    "................",
+    "................"
+   ]
+  },
+  "lock": {
+   "pal": {
+    "d": "#4a3410",
+    "g": "#aeb8c8",
+    "y": "#f0c04a",
+    "h": "#fff0a0",
+    "s": "#c08a20",
+    "k": "#6a4a10"
+   },
+   "rows": [
+    "................",
+    ".....dddddd.....",
+    "....dggggggd....",
+    "...dggddddggd...",
+    "...dggd..dggd...",
+    "...dggd..dggd...",
+    "..ddggddddggd...",
+    ".dhyyyyyyyyyyd..",
+    ".dhyyyyyyyyysd..",
+    ".dhyyyykkyyysd..",
+    ".dhyyyykkyyysd..",
+    ".dhyyyyykyyysd..",
+    ".dyyyyyyyyyssd..",
+    ".dssssssssssd...",
+    "..dddddddddd....",
+    "................"
+   ]
+  },
+  "adHome": {
+   "pal": {
+    "d": "#5a3a28",
+    "r": "#c9503a",
+    "q": "#9a3426",
+    "w": "#f4ecd8",
+    "s": "#d8c8a8",
+    "y": "#ffd84a",
+    "k": "#8a5a30",
+    "c": "#a8754a"
+   },
+   "rows": [
+    ".........dd.....",
+    ".......ddccd....",
+    "......drrccd....",
+    ".....drrrrrd....",
+    "....drrrrrrrd...",
+    "...drrrrrrrrrd..",
+    "..drrrrrrrrrrrd.",
+    ".drrrrrrrrrrrrqd",
+    "..dwwwwwwwwwwsd.",
+    "..dwwwwwwwwwwsd.",
+    "..dwwyywwkkwsd..",
+    "..dwwyywwkkwsd..",
+    "..dwwwwwwkkwsd..",
+    "..dwwwwwwkkwsd..",
+    "...dddddddddd...",
+    "................"
+   ]
+  },
+  "adStar": {
+   "pal": {
+    "d": "#8a5a20",
+    "y": "#ffd84a",
+    "h": "#fff6b0",
+    "t": "#f0a830",
+    "u": "#fcd070"
+   },
+   "rows": [
+    "................",
+    ".d..............",
+    "dtd.............",
+    "dttdd...........",
+    ".dtttd..........",
+    ".dtttud...d.....",
+    "..dtuuud.dyd....",
+    "...duuuudyyyddd.",
+    "....duuuyyyyyyyd",
+    ".....dyyyyhyyyd.",
+    "......dyyyyyyd..",
+    "......dyyyyyyd..",
+    ".....dyyyddyyyd.",
+    "....dyyyd..dyyyd",
+    ".....ddd....ddd.",
+    "................"
+   ]
+  },
+  "ship": {
+   "pal": {
+    "d": "#4a3a28",
+    "w": "#f4f0e0",
+    "s": "#c9bfa0",
+    "k": "#5a4228",
+    "r": "#c2423a",
+    "b": "#c9803c",
+    "n": "#e0a060"
+   },
+   "rows": [
+    "........dd......",
+    ".......drrd.....",
+    ".......dkrd.....",
+    "......dwkwd.....",
+    ".....dwwkwwd....",
+    "....dwwwkwwwd...",
+    "...dwwwwkwwwwdd.",
+    "..dwwwwwkwwwwwsd",
+    ".dswwwwwkdwwwwsd",
+    "dwwwwwwwkdwwwwsd",
+    ".dsssssdkdsssssd",
+    "drrrrrrrrrrrrrrd",
+    ".dnbbbbbbbbbbbd.",
+    "..dbbbbbbbbbbd..",
+    "...dddddddddd...",
+    "................"
+   ]
+  },
+  "seed16": {
+   "pal": {
+    "d": "#1f4a2a",
+    "h": "#a8f0a0",
+    "g": "#5fc86e",
+    "k": "#3a9a52",
+    "e": "#3a2814",
+    "u": "#9a6a40",
+    "b": "#7a5030"
+   },
+   "rows": [
+    "................",
+    "..ddd......ddd..",
+    ".dhggd....dggkd.",
+    "dhggggd..dgggkkd",
+    "dhggggkddkgggkkd",
+    ".dgggkkddkkgkkd.",
+    "..dkkkddddkkkd..",
+    "...dddggggddd...",
+    ".....dggggd.....",
+    ".....egggge.....",
+    "...eeuubbbbe....",
+    "..euuubbbbbbe...",
+    ".euubbbbbbbbbe..",
+    ".ebbbbbbbbbbbbe.",
+    "..eeeeeeeeeeee..",
+    "................"
+   ]
+  },
+  "starfish16": {
+   "pal": {
+    "d": "#8a4a1a",
+    "o": "#f0a040",
+    "h": "#ffd08a",
+    "p": "#c96a20"
+   },
+   "rows": [
+    ".......dd.......",
+    "......dood......",
+    ".....dohood.....",
+    ".....dooopd.....",
+    ".ddddooooooddd..",
+    "dhooooooooooood.",
+    ".dooopooopoood..",
+    "..dooooooooood..",
+    "...dooooooopd...",
+    "...dooooooood...",
+    "..dooooddooood..",
+    ".dhoood..dooood.",
+    ".doood....doood.",
+    "doodd......ddood",
+    ".dd..........dd.",
+    "................"
+   ]
+  },
+  "check16": {
+   "pal": {
+    "d": "#14502e",
+    "g": "#5fd08a",
+    "h": "#c8f8d8"
+   },
+   "rows": [
+    "................",
+    "................",
+    "............d...",
+    "...........dhd..",
+    "..........dhggd.",
+    ".........dhggd..",
+    "..d.....dhggd...",
+    ".dhd...dhggd....",
+    ".dggd.dhggd.....",
+    "..dhgdhggd......",
+    "...dhgggd.......",
+    "....dhgd........",
+    ".....dd.........",
+    "................",
+    "................",
+    "................"
+   ]
+  }
+ },
+ "ICON_UNKNOWN": {
+  "pal": {
+   "w": "#c8c8d8",
+   "d": "#6a6a80"
+  },
+  "rows": [
+   "..wwww..",
+   ".ww..ww.",
+   ".dd..ww.",
+   "....ww..",
+   "...ww...",
+   "...dd...",
+   "...ww...",
+   "........"
+  ]
+ },
+ "KEEPER": {
+  "pal": {
+   "c": "#3d5a8a",
+   "s": "#f0c8a0",
+   "b": "#e8b84a",
+   "p": "#2c3a58",
+   "d": "#20140c",
+   "e": "#20140c"
+  },
+  "head": [
+   "..cccc..",
+   ".cccccc.",
+   "..ssss..",
+   "..ssse..",
+   "..ssss..",
+   ".bbbbbb.",
+   "BbbbbbbB",
+   "BbbbbbbB",
+   "sbbbbbbs",
+   ".bbbbbb.",
+   "..pppp.."
+  ],
+  "legs": [
+   [
+    "..pp.pp.",
+    "..pp.pp.",
+    "..dd.dd."
+   ],
+   [
+    "..pppp..",
+    "..pppp..",
+    "..dddd.."
+   ]
+  ]
+ },
+ "BARREL": [
+  "..hhhh..",
+  ".bBBBBb.",
+  ".bBBBBb.",
+  "hhhhhhhh",
+  "bBBBBBBb",
+  "bBBBBBBb",
+  "hhhhhhhh",
+  ".bBBBBb.",
+  "..bbbb.."
+ ],
+ "BARREL_PAL": {
+  "b": "#6a4222",
+  "B": "#9a6a3a",
+  "h": "#4a4a52"
+ },
+ "TIPS": [
+  {
+   "id": "h1",
+   "icon": "star",
+   "at": "sky",
+   "text": "배가 금빛 돛을 달았어요. 등대가 알아서 안내해요."
+  },
+  {
+   "id": "h2",
+   "icon": "shell",
+   "at": "mail",
+   "text": "선물은 알아서 쌓여요. 우체통을 눌러 편지도 읽어 보세요."
+  },
+  {
+   "id": "h3",
+   "icon": "mail8",
+   "at": "menu",
+   "text": "편지가 도착했어요. 오른쪽 위 단추에서 읽을 수 있어요."
+  },
+  {
+   "id": "h4",
+   "icon": "seed",
+   "at": "sky",
+   "text": "곧 등대가 자라요. 아무것도 안 해도 돼요."
+  },
+  {
+   "id": "h5",
+   "icon": "book8",
+   "at": "sky",
+   "text": "닫아 두어도 배는 계속 와요. 돌아오면 소식을 모아 둘게요."
+  },
+  {
+   "id": "h6",
+   "icon": "pearl",
+   "at": "sky",
+   "text": "화면을 눌러 끌면 빛이 손가락을 따라와요. 안 해도 괜찮아요."
+  },
+  {
+   "id": "h8",
+   "icon": "starfish",
+   "at": "panel",
+   "inPanel": "deco",
+   "text": "자리를 누르고 장식을 고르면 바로 놓여요. 되돌리기로 언제든 원래대로 돌릴 수 있어요."
+  }
+ ],
+ "DECO_MSG": {
+  "near": "자리가 가까워요. 아래 칸에서 골라 주세요.",
+  "noSlot": "빈 자리가 없어요.",
+  "noItem": "놓을 수 있는 장식이 더 없어요.",
+  "undo": "되돌렸어요.",
+  "redo": "다시 했어요.",
+  "all": "장식을 모두 치웠어요.",
+  "peek": "섬 모습을 보는 중이에요."
+ },
+ "DECO_DIGITS": [
+  [
+   "###",
+   "#.#",
+   "#.#",
+   "#.#",
+   "###"
+  ],
+  [
+   ".#.",
+   "##.",
+   ".#.",
+   ".#.",
+   "###"
+  ],
+  [
+   "##.",
+   "..#",
+   ".#.",
+   "#..",
+   "###"
+  ],
+  [
+   "##.",
+   "..#",
+   ".#.",
+   "..#",
+   "##."
+  ],
+  [
+   "#.#",
+   "#.#",
+   "###",
+   "..#",
+   "..#"
+  ],
+  [
+   "###",
+   "#..",
+   "##.",
+   "..#",
+   "##."
+  ],
+  [
+   ".##",
+   "#..",
+   "###",
+   "#.#",
+   "###"
+  ],
+  [
+   "###",
+   "..#",
+   ".#.",
+   ".#.",
+   ".#."
+  ],
+  [
+   "###",
+   "#.#",
+   "###",
+   "#.#",
+   "###"
+  ],
+  [
+   "###",
+   "#.#",
+   "###",
+   "..#",
+   "##."
+  ]
+ ],
+ "SEASON_GRASS": {
+  "spring": [
+   "#2f6a3a",
+   "#3c7d45",
+   "#4f9650",
+   "#66ae5e",
+   "#82c474"
+  ],
+  "summer": [
+   "#2a6236",
+   "#336f3f",
+   "#3d8049",
+   "#4a9255",
+   "#5ca963"
+  ],
+  "autumn": [
+   "#5a5a2a",
+   "#6e6a2c",
+   "#847a32",
+   "#9a8a3a",
+   "#b09a48"
+  ],
+  "winter": [
+   "#7a8c98",
+   "#94a6b2",
+   "#aebcc8",
+   "#c8d4de",
+   "#e4ecf4"
+  ]
+ },
+ "TREE_COL": {
+  "spring": [
+   "#e89ab4",
+   "#f4b6c8",
+   "#f4b6c8",
+   "#fbd8e2",
+   "#ffffff"
+  ],
+  "summer": [
+   "#2d6738",
+   "#3a7d46",
+   "#3a7d46",
+   "#4a9455",
+   "#8be096"
+  ],
+  "autumn": [
+   "#b8501e",
+   "#d8742a",
+   "#d8742a",
+   "#e09a30",
+   "#ffd070"
+  ],
+  "winter": [
+   "#5a6a78",
+   "#7a8c9c",
+   "#7a8c9c",
+   "#e4ecf4",
+   "#ffffff"
+  ]
+ },
+ "SKY_N": [
+  "#040818",
+  "#071029",
+  "#0c1838",
+  "#13234c",
+  "#22365f",
+  "#40507a",
+  "#7d6186"
+ ],
+ "SKY_D": [
+  "#3f86c8",
+  "#5b9ad4",
+  "#78b0de",
+  "#98c6e8",
+  "#b8d9ee",
+  "#d8ebf2",
+  "#f6efd8"
+ ],
+ "SEA_N": [
+  "#4d5a82",
+  "#36507a",
+  "#27426a",
+  "#1a3358",
+  "#122846",
+  "#0c1e38",
+  "#08162c"
+ ],
+ "SEA_D": [
+  "#9ccfe4",
+  "#7ebfdc",
+  "#5aa8cf",
+  "#3d92c0",
+  "#2b7bb0",
+  "#1f69a0",
+  "#195a8e"
+ ],
+ "TOWER_PAL": {
+  "stripe": "#c9403a",
+  "wall": "#e8e6dc",
+  "stone": "#9aa0b8",
+  "skirt": "#8c92aa",
+  "door": "#7a4b2a"
+ },
+ "DECOR_PAL": {
+  "wall": "#ece5d0",
+  "wallS": "#cbc3aa",
+  "wallH": "#fff8e4",
+  "roofL": "#d0453e",
+  "roofR": "#a3322c",
+  "roofT": "#6a1e1c",
+  "roofE": "#7e2624",
+  "flowers": [
+   "#f4a0b8",
+   "#ffe070",
+   "#ffffff",
+   "#b8a0f0",
+   "#ff9a70"
+  ],
+  "fence": "#e8e0c8",
+  "flagA": "#e0453e",
+  "flagB": "#c9403a"
+ },
+ "DECO_FLOWER": [
+  "#f4a0b8",
+  "#ffe070",
+  "#ffffff",
+  "#b8a0f0",
+  "#ff9a70"
+ ],
+ "REEFS": [
+  [
+   0.2,
+   280
+  ],
+  [
+   0.8,
+   290
+  ]
+ ],
+ "ROLES": [
+  {
+   "stage": 2,
+   "name": "암초 경고",
+   "desc": "암초 근처를 지나는 배에게 붉은 불빛을 보내 비켜 가게 해요"
+  },
+  {
+   "stage": 2,
+   "name": "안개 대응",
+   "desc": "안개가 끼면 사이렌을 울려 배를 이끌어요"
+  },
+  {
+   "stage": 2,
+   "name": "신호",
+   "desc": "등대를 누르면 지나는 배들이 인사를 보내와요"
+  },
+  {
+   "stage": 3,
+   "name": "기상 관측",
+   "desc": "비가 오기 전에 미리 알려 주고, 갠 뒤에는 무지개와 선물이 와요"
+  },
+  {
+   "stage": 3,
+   "name": "구조",
+   "desc": "표류선이 나타나면 빛을 비춰 구조해요"
+  },
+  {
+   "stage": 3,
+   "name": "항구",
+   "desc": "어떤 배는 섬 앞에 잠시 정박해 보급 선물을 남겨요"
+  },
+  {
+   "stage": 1,
+   "name": "등대지기 일과",
+   "desc": "렌즈 닦기, 마당 쓸기, 우체통 확인, 해질녘 등불 켜기. 등대가 자랄수록 일터가 늘어요"
+  },
+  {
+   "stage": 2,
+   "name": "등대지기 집과 꽃밭",
+   "desc": "꽃밭 물주기, 집에서 쉬기, 벤치와 우물 (3~4단계)"
+  },
+  {
+   "stage": 3,
+   "name": "등대지기 부두와 광장",
+   "desc": "부두 낚시, 갈매기 먹이, 깃발 올리기, 별 보기, 기념비 닦기 (5~6단계)"
+  }
+ ],
+ "SEASON_NAME": {
+  "spring": "봄",
+  "summer": "여름",
+  "autumn": "가을",
+  "winter": "겨울"
+ },
+ "CLOUDS": [
+  {
+   "x": 0.2,
+   "dy": 0.12,
+   "sc": 1.1,
+   "sp": 1.6
+  },
+  {
+   "x": 0.62,
+   "dy": 0.3,
+   "sc": 0.8,
+   "sp": 1.1
+  },
+  {
+   "x": 0.9,
+   "dy": 0.5,
+   "sc": 0.65,
+   "sp": 0.8
+  },
+  {
+   "x": 0.38,
+   "dy": 0.7,
+   "sc": 0.5,
+   "sp": 0.6
+  },
+  {
+   "x": 0.05,
+   "dy": 0.42,
+   "sc": 0.7,
+   "sp": 0.9
+  },
+  {
+   "x": 0.75,
+   "dy": 0.86,
+   "sc": 0.4,
+   "sp": 0.5
+  }
+ ]
+}

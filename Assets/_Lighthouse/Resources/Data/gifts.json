@@ -1,0 +1,179 @@
+{
+ "gifts": [
+  {
+   "id": "shell",
+   "name": "조개껍데기",
+   "w": {
+    "fish": 3,
+    "trade": 1
+   }
+  },
+  {
+   "id": "starfish",
+   "name": "불가사리",
+   "w": {
+    "fish": 3,
+    "trade": 1
+   }
+  },
+  {
+   "id": "coral",
+   "name": "산호 조각",
+   "w": {
+    "fish": 2,
+    "trade": 1
+   }
+  },
+  {
+   "id": "seed",
+   "name": "바다 씨앗",
+   "w": {
+    "fish": 2,
+    "trade": 1
+   }
+  },
+  {
+   "id": "pearl",
+   "name": "진주",
+   "w": {
+    "fish": 1,
+    "trade": 2
+   }
+  },
+  {
+   "id": "bottle",
+   "name": "유리병",
+   "w": {
+    "fish": 1,
+    "trade": 2
+   }
+  },
+  {
+   "id": "anchor",
+   "name": "작은 닻",
+   "w": {
+    "fish": 0.5,
+    "trade": 2
+   }
+  },
+  {
+   "id": "coin",
+   "name": "옛 동전",
+   "w": {
+    "fish": 0.5,
+    "trade": 3
+   }
+  },
+  {
+   "id": "blossom",
+   "name": "벚꽃잎",
+   "season": "spring",
+   "w": {
+    "fish": 1,
+    "trade": 1
+   }
+  },
+  {
+   "id": "sunflower",
+   "name": "해바라기",
+   "season": "summer",
+   "w": {
+    "fish": 1,
+    "trade": 1
+   }
+  },
+  {
+   "id": "maple",
+   "name": "단풍잎",
+   "season": "autumn",
+   "w": {
+    "fish": 1,
+    "trade": 1
+   }
+  },
+  {
+   "id": "snow",
+   "name": "눈꽃",
+   "season": "winter",
+   "w": {
+    "fish": 1,
+    "trade": 1
+   }
+  },
+  {
+   "id": "moonshard",
+   "name": "달조각",
+   "cond": "night",
+   "w": {
+    "fish": 2.5,
+    "trade": 2.5
+   }
+  },
+  {
+   "id": "dewdrop",
+   "name": "이슬방울",
+   "cond": "dawn",
+   "w": {
+    "fish": 2.5,
+    "trade": 2.5
+   }
+  },
+  {
+   "id": "raindrop",
+   "name": "빗방울 구슬",
+   "cond": "rain",
+   "w": {
+    "fish": 2.5,
+    "trade": 2.5
+   }
+  },
+  {
+   "id": "fogwisp",
+   "name": "안개 조각",
+   "cond": "fog",
+   "w": {
+    "fish": 2.5,
+    "trade": 2.5
+   }
+  },
+  {
+   "id": "whalecomb",
+   "name": "고래 수염 빗",
+   "tier": 2,
+   "w": {
+    "fish": 1,
+    "trade": 2
+   }
+  },
+  {
+   "id": "mapscrap",
+   "name": "오래된 지도 조각",
+   "tier": 3,
+   "w": {
+    "fish": 1,
+    "trade": 2
+   }
+  }
+ ],
+ "affinity": {
+  "shell": "port",
+  "starfish": "port",
+  "anchor": "port",
+  "bottle": "port",
+  "pearl": "lens",
+  "coin": "lens",
+  "coral": "garden",
+  "seed": "garden",
+  "blossom": "garden",
+  "sunflower": "garden",
+  "maple": "garden",
+  "snow": "garden",
+  "moonshard": "lens",
+  "dewdrop": "garden",
+  "raindrop": "port",
+  "fogwisp": "lens",
+  "whalecomb": "port",
+  "mapscrap": "lens"
+ },
+ "affinityDefault": "garden"
+}

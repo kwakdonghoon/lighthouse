@@ -1,0 +1,596 @@
+{
+ "layers": [
+  {
+   "id": "tower",
+   "skins": [
+    {
+     "id": "classic",
+     "name": "기본",
+     "src": "free",
+     "pal": {}
+    },
+    {
+     "id": "stonetower",
+     "name": "돌탑",
+     "src": "free",
+     "pal": {
+      "form": "stone",
+      "roof": "#5a3a28",
+      "door": "#4a3220"
+     }
+    },
+    {
+     "id": "cream",
+     "name": "크림 회벽 탑",
+     "src": "free",
+     "pal": {
+      "form": "plaster",
+      "roof": "#b8472f",
+      "door": "#6a4328"
+     }
+    },
+    {
+     "id": "forest",
+     "name": "숲빛 탑",
+     "src": "free",
+     "pal": {
+      "stripe": "#2f6a3a",
+      "wall": "#ece5d0",
+      "roof": "#2f6a3a",
+      "door": "#5a3a28"
+     }
+    },
+    {
+     "id": "blossom",
+     "name": "벚꽃빛 탑",
+     "src": "earn",
+     "need": [
+      "garden",
+      14
+     ],
+     "pal": {
+      "stripe": "#e8809c",
+      "wall": "#fbeff2",
+      "roof": "#d85a7c",
+      "trim": "#f4b6c8",
+      "door": "#6a4328"
+     }
+    },
+    {
+     "id": "maple",
+     "name": "단풍빛 탑",
+     "src": "earn",
+     "need": [
+      "port",
+      14
+     ],
+     "pal": {
+      "stripe": "#d8742a",
+      "wall": "#f0e4c8",
+      "roof": "#b8501e",
+      "trim": "#e09a30",
+      "door": "#5a3a28"
+     }
+    },
+    {
+     "id": "snow",
+     "name": "눈꽃빛 탑",
+     "src": "earn",
+     "need": [
+      "lens",
+      15
+     ],
+     "pal": {
+      "stripe": "#8fb8e0",
+      "wall": "#f4f8ff",
+      "roof": "#7aa0cc",
+      "trim": "#d6e6f6",
+      "door": "#4a5a78"
+     }
+    },
+    {
+     "id": "bands",
+     "name": "줄무늬 띠 탑",
+     "src": "earn",
+     "need": [
+      "garden",
+      18
+     ],
+     "pal": {
+      "form": "bands",
+      "stripe": "#c9403a",
+      "wall": "#f4f0e0",
+      "roof": "#c9403a",
+      "door": "#5a3a28"
+     }
+    },
+    {
+     "id": "spire",
+     "name": "뾰족 지붕 탑",
+     "src": "earn",
+     "need": [
+      "port",
+      18
+     ],
+     "pal": {
+      "form": "spire",
+      "roof": "#3d6aa0",
+      "trim": "#d9a93a",
+      "door": "#5a3a28"
+     }
+    },
+    {
+     "id": "moonlit",
+     "name": "달빛 탑",
+     "src": "iap",
+     "pal": {
+      "stripe": "#8a8fd0",
+      "wall": "#e8eaf8",
+      "roof": "#2f3f7a",
+      "trim": "#c8d0f0",
+      "door": "#3a3f6a"
+     }
+    },
+    {
+     "id": "widelamp",
+     "name": "넓은 램프 탑",
+     "src": "iap",
+     "pal": {
+      "form": "wide",
+      "stripe": "#c9403a",
+      "roof": "#8a5a30",
+      "trim": "#d9a93a",
+      "door": "#5a3a28"
+     }
+    },
+    {
+     "id": "gilded",
+     "name": "황금 줄무늬 탑",
+     "src": "iap",
+     "pal": {
+      "stripe": "#d9a93a",
+      "roof": "#e0b040",
+      "door": "#5a3a28"
+     }
+    },
+    {
+     "id": "sea",
+     "name": "바다빛 탑",
+     "src": "earn",
+     "need": [
+      "lens",
+      10
+     ],
+     "pal": {
+      "stripe": "#2f7f86",
+      "roof": "#2f7f86",
+      "door": "#5a3a28"
+     }
+    },
+    {
+     "id": "dawn",
+     "name": "새벽빛 탑",
+     "src": "earn",
+     "need": [
+      "lens",
+      20
+     ],
+     "pal": {
+      "stripe": "#6a5a9a",
+      "roof": "#6a5a9a",
+      "door": "#5a3a28"
+     }
+    },
+    {
+     "id": "dev",
+     "name": "시험용(청록)",
+     "src": "dev",
+     "pal": {
+      "stripe": "#2f7f86",
+      "roof": "#2f7f86",
+      "door": "#5a3a28"
+     }
+    }
+   ]
+  },
+  {
+   "id": "isle",
+   "skins": [
+    {
+     "id": "classic",
+     "name": "기본",
+     "src": "free",
+     "pal": {}
+    },
+    {
+     "id": "blossom",
+     "name": "벚꽃 섬",
+     "src": "earn",
+     "need": [
+      "garden",
+      10
+     ],
+     "pal": {
+      "grass": [
+       "#2f6a3a",
+       "#3c7d45",
+       "#4f9650",
+       "#66ae5e",
+       "#82c474"
+      ],
+      "tree": [
+       "#e89ab4",
+       "#f4b6c8",
+       "#f4b6c8",
+       "#fbd8e2",
+       "#ffffff"
+      ]
+     }
+    },
+    {
+     "id": "maple",
+     "name": "단풍 섬",
+     "src": "earn",
+     "need": [
+      "garden",
+      24
+     ],
+     "pal": {
+      "grass": [
+       "#5a5a2a",
+       "#6e6a2c",
+       "#847a32",
+       "#9a8a3a",
+       "#b09a48"
+      ],
+      "tree": [
+       "#b8501e",
+       "#d8742a",
+       "#d8742a",
+       "#e09a30",
+       "#ffd070"
+      ]
+     }
+    },
+    {
+     "id": "dev",
+     "name": "시험용(가을 섬)",
+     "src": "dev",
+     "pal": {
+      "grass": [
+       "#5a5a2a",
+       "#6e6a2c",
+       "#847a32",
+       "#9a8a3a",
+       "#b09a48"
+      ],
+      "tree": [
+       "#b8501e",
+       "#d8742a",
+       "#d8742a",
+       "#e09a30",
+       "#ffd070"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "keeper",
+   "skins": [
+    {
+     "id": "classic",
+     "name": "기본",
+     "src": "free",
+     "pal": {}
+    },
+    {
+     "id": "dusk",
+     "name": "노을빛 옷",
+     "src": "earn",
+     "need": [
+      "port",
+      10
+     ],
+     "pal": {
+      "c": "#b4573e",
+      "b": "#e8c86a"
+     }
+    },
+    {
+     "id": "moonlit",
+     "name": "달빛 옷",
+     "src": "earn",
+     "need": [
+      "port",
+      26
+     ],
+     "pal": {
+      "c": "#3f4f86",
+      "b": "#c8d4f0"
+     }
+    },
+    {
+     "id": "sailor",
+     "name": "선원 옷",
+     "src": "iap",
+     "pal": {
+      "c": "#f0f0e8",
+      "b": "#2f4a7a",
+      "p": "#2f4a7a"
+     }
+    },
+    {
+     "id": "dev",
+     "name": "시험용(자주)",
+     "src": "dev",
+     "pal": {
+      "c": "#8a3d5a",
+      "b": "#d8b04a"
+     }
+    }
+   ]
+  },
+  {
+   "id": "decor",
+   "skins": [
+    {
+     "id": "classic",
+     "name": "기본",
+     "src": "free",
+     "pal": {}
+    },
+    {
+     "id": "seaside",
+     "name": "바닷가 마을",
+     "src": "earn",
+     "need": [
+      "garden",
+      12
+     ],
+     "pal": {
+      "wall": "#e4efe9",
+      "wallS": "#bfd3cc",
+      "wallH": "#f6fffb",
+      "roofL": "#2f9aa6",
+      "roofR": "#23737c",
+      "roofT": "#144a50",
+      "roofE": "#1b5a62",
+      "flowers": [
+       "#7fd0e0",
+       "#ffffff",
+       "#a8e0c0",
+       "#f0e08a",
+       "#9ab8f0"
+      ],
+      "fence": "#d8ece6",
+      "flagA": "#38b0bc",
+      "flagB": "#2f8e98"
+     }
+    },
+    {
+     "id": "festival",
+     "name": "축제 마을",
+     "src": "iap",
+     "pal": {
+      "wall": "#f4ead0",
+      "wallS": "#d8c9a0",
+      "roofL": "#e0b040",
+      "roofR": "#b88a24",
+      "roofT": "#7a5a14",
+      "roofE": "#8a6a1c",
+      "flowers": [
+       "#ff9ab0",
+       "#ffe070",
+       "#ffffff",
+       "#ff9a70",
+       "#f0a0e0"
+      ],
+      "fence": "#f4ead0",
+      "flagA": "#f6d25a",
+      "flagB": "#e0b040"
+     }
+    },
+    {
+     "id": "dev",
+     "name": "시험용(황금 지붕)",
+     "src": "dev",
+     "pal": {
+      "roofL": "#e0b040",
+      "roofR": "#b88a24",
+      "roofT": "#7a5a14",
+      "roofE": "#8a6a1c",
+      "flagA": "#f6d25a",
+      "flagB": "#e0b040"
+     }
+    }
+   ]
+  },
+  {
+   "id": "ship",
+   "skins": [
+    {
+     "id": "classic",
+     "name": "기본",
+     "src": "free",
+     "pal": {}
+    },
+    {
+     "id": "coral",
+     "name": "산호빛 배",
+     "src": "earn",
+     "need": [
+      "port",
+      12
+     ],
+     "pal": {
+      "b": "#a8503e",
+      "c": "#7a3426"
+     }
+    },
+    {
+     "id": "friends",
+     "name": "벗들의 배",
+     "src": "story",
+     "story": "finale",
+     "pal": {
+      "b": "#2f7a5a",
+      "c": "#1f523c"
+     }
+    },
+    {
+     "id": "gilded",
+     "name": "금빛 선체",
+     "src": "iap",
+     "pal": {
+      "b": "#c8a040",
+      "c": "#8a6c20"
+     }
+    },
+    {
+     "id": "dev",
+     "name": "시험용(푸른 선체)",
+     "src": "dev",
+     "pal": {
+      "b": "#3f5a7a",
+      "c": "#2a3d58"
+     }
+    }
+   ]
+  }
+ ],
+ "skinLayers": [
+  [
+   "tower",
+   "등대 외형"
+  ],
+  [
+   "isle",
+   "섬 풍경"
+  ],
+  [
+   "decor",
+   "마을 모습"
+  ],
+  [
+   "keeper",
+   "관리인 옷"
+  ],
+  [
+   "ship",
+   "배"
+  ]
+ ],
+ "products": [
+  {
+   "id": "starter",
+   "name": "스타터 패키지",
+   "desc": "황금 줄무늬 탑 + 선원 옷 + 광고 제거",
+   "price": 3300,
+   "grants": [
+    "tower:gilded",
+    "keeper:sailor",
+    "noads"
+   ]
+  },
+  {
+   "id": "noads",
+   "name": "광고 제거",
+   "desc": "보상형 광고를 보지 않아도 같은 선물 보너스를 받아요.",
+   "price": 2200,
+   "grants": [
+    "noads"
+   ]
+  },
+  {
+   "id": "beampack",
+   "name": "빛 색 세트",
+   "desc": "노을빛과 보랏빛 빛줄기",
+   "price": 1650,
+   "grants": [
+    "beam:sunset",
+    "beam:violet"
+   ]
+  },
+  {
+   "id": "goldpack",
+   "name": "황금 외형 팩",
+   "desc": "황금 줄무늬 탑 + 금빛 선체",
+   "price": 2200,
+   "grants": [
+    "tower:gilded",
+    "ship:gilded"
+   ]
+  },
+  {
+   "id": "festpack",
+   "name": "축제 마을 팩",
+   "desc": "축제 분위기의 집·꽃밭·깃발 + 선원 옷",
+   "price": 2200,
+   "grants": [
+    "decor:festival",
+    "keeper:sailor"
+   ]
+  },
+  {
+   "id": "moonpack",
+   "name": "달빛 등대",
+   "desc": "은빛과 푸른 보랏빛 줄무늬 탑. 모양만 바뀌어요.",
+   "price": 1100,
+   "grants": [
+    "tower:moonlit"
+   ]
+  },
+  {
+   "id": "widepack",
+   "name": "넓은 램프 등대",
+   "desc": "램프실이 넓은 탑. 모양만 바뀌고 빛의 세기는 그대로예요.",
+   "price": 1100,
+   "grants": [
+    "tower:widelamp"
+   ]
+  }
+ ],
+ "adKinds": [
+  {
+   "id": "home",
+   "name": "귀향 한 번 더",
+   "desc": "오래 비운 날, 선물을 하나 더 받아요. 빛나는 선물이 꼭 오지는 않고, 평소와 같은 확률이에요.",
+   "limit": 1,
+   "icon": "adHome"
+  },
+  {
+   "id": "star",
+   "name": "별똥별 한 번 더",
+   "desc": "밤에, 별똥별이 남긴 선물을 하나 받아요. 별똥별이 더 지나가지는 않아요.",
+   "limit": 2,
+   "icon": "adStar"
+  },
+  {
+   "id": "ship",
+   "name": "배 환영",
+   "desc": "배를 반갑게 맞이한 기념으로 선물을 하나 받아요. 배가 더 오지는 않아요.",
+   "limit": 3,
+   "icon": "ship"
+  }
+ ],
+ "regions": [
+  {
+   "id": "home",
+   "name": "첫 바다",
+   "src": "free"
+  }
+ ],
+ "itemNames": {
+  "noads": "광고 제거",
+  "tower:gilded": "황금 줄무늬 탑",
+  "keeper:sailor": "선원 옷",
+  "ship:gilded": "금빛 선체",
+  "tower:moonlit": "달빛 탑",
+  "tower:widelamp": "넓은 램프 탑",
+  "decor:festival": "축제 마을 집·꽃밭·깃발",
+  "beam:sunset": "노을빛",
+  "beam:violet": "보랏빛"
+ },
+ "priceStep": 10
+}
