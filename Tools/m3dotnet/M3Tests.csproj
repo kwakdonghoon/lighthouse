@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- M3 UI 모델 검증용(Unity 없이 dotnet test). Core·Data·UIModel 소스와 UI 시험 소스를 그대로 컴파일한다. LangVersion 9 = Unity 6 의 C# -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <IsPackable>false</IsPackable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <RootNamespace>Lighthouse.Tests</RootNamespace>
+    <NoWarn>CS0219;CS0162;CS0168</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Assets\_Lighthouse\Scripts\Core\**\*.cs" />
+    <Compile Include="..\..\Assets\_Lighthouse\Scripts\Data\**\*.cs" />
+    <Compile Include="..\..\Assets\_Lighthouse\Scripts\UIModel\**\*.cs" />
+    <Compile Include="..\..\Assets\_Lighthouse\Tests\Core\M1Fixture.cs" />
+    <Compile Include="..\..\Assets\_Lighthouse\Tests\UI\**\*.cs" Exclude="..\..\Assets\_Lighthouse\Tests\UI\Unity\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+</Project>
