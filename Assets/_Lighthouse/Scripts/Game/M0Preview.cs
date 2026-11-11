@@ -94,8 +94,10 @@ namespace Lighthouse.Game
             var imGo = new GameObject("World", typeof(RectTransform)); imGo.transform.SetParent(cvGo.transform, false);
             var raw = imGo.AddComponent<RawImage>(); raw.texture = Rt; raw.raycastTarget = false;
             var rt = (RectTransform)imGo.transform;
-            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0f); rt.pivot = new Vector2(0.5f, 0f);
-            rt.anchoredPosition = Vector2.zero; rt.sizeDelta = new Vector2(ls.W * ls.Scale, ls.H * ls.Scale);
+            // 왼쪽 아래 기준 + 정수 기기 픽셀 오프셋: 폭 차이가 홀수여도 반 픽셀 어긋나(번짐) 않도록 floor 한다
+            rt.anchorMin = rt.anchorMax = Vector2.zero; rt.pivot = Vector2.zero;
+            rt.anchoredPosition = new Vector2(-Mathf.Floor((ls.W * ls.Scale - ls.DevW) / 2f), 0);
+            rt.sizeDelta = new Vector2(ls.W * ls.Scale, ls.H * ls.Scale);
 
             Last = st;
             return st;
