@@ -19,6 +19,15 @@ namespace Lighthouse.Game
         public int SpriteCount { get; private set; }
 
         GameObject root;
+        /// <summary>동적 스프라이트(배·관리인·연출 층)를 붙이는 부모.</summary>
+        public Transform Root => root != null ? root.transform : null;
+        public const int OrderStep = 200;                // 연산 하나가 쓰는 정렬 폭 (낮 그림 +0, 밤 그림 +1, 사이 약 100 은 배·관리인 같은 동적 스프라이트가 끼어든다)
+        readonly List<(string tag, int order)> tagOrders = new List<(string, int)>();
+        /// <summary>그 태그의 첫 연산 바로 앞 / 마지막 연산 바로 뒤의 정렬 값(동적 스프라이트를 끼워 넣을 자리).</summary>
+        public int OrderBefore(string tag) { foreach (var (t, o) in tagOrders) if (t == tag) return o - 100; return 0; }
+        public int OrderAfter(string tag) { int r = -1; foreach (var (t, o) in tagOrders) if (t == tag) r = o + 100; return r; }
+        public int OrderOfIndex(int opIndex) => opIndex * OrderStep;
+        public int OrderEnd => layers.Count * OrderStep + 100;
         /// <summary>true 이면 Build 에 넘긴 첫 명령(배경)의 낮 그림 텍스처를 프레임마다 다시 쓴다(하늘 장식·바다 물결을 CPU 로 그려 올림).</summary>
         public bool DynamicBg;
         Texture2D dynTex; Bitmap dynSource; uint[] dynFlip;
@@ -65,12 +74,13 @@ namespace Lighthouse.Game
             dynTex = null; dynSource = (ops.Count > 0 && ops[0].Tag == "bg") ? ops[0].D : null;
             root = new GameObject("WorldView") { hideFlags = HideFlags.DontSave };
             root.transform.SetParent(transform, false);
-            int order = 0;
+            int idx = 0; tagOrders.Clear();
             foreach (var op in ops)
             {
-                var d = MakeRenderer(op.D, op, order++);
-                var n = op.N != null ? MakeRenderer(op.N, op, order++) : null;
-                layers.Add((d, n, op));
+                int order = idx * OrderStep; tagOrders.Add((op.Tag, order));
+                var d = MakeRenderer(op.D, op, order);
+                var n = op.N != null ? MakeRenderer(op.N, op, order + 1) : null;
+                layers.Add((d, n, op)); idx++;
             }
             SetDusk(dusk);
 
@@ -136,6 +146,22 @@ namespace Lighthouse.Game
             rt.anchorMin = rt.anchorMax = Vector2.zero; rt.pivot = Vector2.zero;
             rt.anchoredPosition = new Vector2(-Mathf.Floor((ls.W * ls.Scale - ls.DevW) / 2f), 0);
             rt.sizeDelta = new Vector2(ls.W * ls.Scale, ls.H * ls.Scale);
+        }
+
+        public Canvas ScreenCanvas { get; private set; }
+
+        /// <summary>M4 화면: 배율이 반 단계(2.5)일 수 있는 FitView 값으로. UI 캔버스 뒤(sortingOrder)에 깐다.</summary>
+        public void ShowOnScreen(int w, int h, double scale, int devW, int sortingOrder = -10)
+        {
+            var cvGo = new GameObject("Screen", typeof(RectTransform)); cvGo.transform.SetParent(root.transform, false);
+            var cv = cvGo.AddComponent<Canvas>(); cv.renderMode = RenderMode.ScreenSpaceOverlay; cv.sortingOrder = sortingOrder; ScreenCanvas = cv;
+            var cs = cvGo.AddComponent<CanvasScaler>(); cs.uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize; cs.scaleFactor = 1f;
+            var imGo = new GameObject("World", typeof(RectTransform)); imGo.transform.SetParent(cvGo.transform, false);
+            var raw = imGo.AddComponent<RawImage>(); raw.texture = Rt; raw.raycastTarget = false;
+            var rt = (RectTransform)imGo.transform;
+            rt.anchorMin = rt.anchorMax = Vector2.zero; rt.pivot = Vector2.zero;
+            rt.anchoredPosition = new Vector2(-Mathf.Floor((float)((w * scale - devW) / 2f)), 0);
+            rt.sizeDelta = new Vector2((float)(w * scale), (float)(h * scale));
         }
     }
 }

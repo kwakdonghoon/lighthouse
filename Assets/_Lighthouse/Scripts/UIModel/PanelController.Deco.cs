@@ -12,6 +12,19 @@ namespace Lighthouse.UI.Model
         bool decoPeek, decoConfirm, migShow;
         readonly List<List<string[]>> decoUndo = new List<List<string[]>>(), decoRedo = new List<List<string[]>>();     // 한 동작 = [자리, 이전, 이후] 목록
         public string DecoSel => decoSel;
+        /// <summary>M4: 꾸미기 놓기 화면이 열려 있는가(섬을 직접 탭해 자리를 고를 수 있다).</summary>
+        public bool DecoPlaceOpen => Mode == PanelMode.Deco && DecoTab == "place";
+        /// <summary>M4: 지금 구역의 열린 자리 id.</summary>
+        public IReadOnlyList<string> DecoOpenSlotIds() => ZoneOpenIds(DecoZone);
+        /// <summary>M4: 섬 직접 탭(원본 decoTapAt 3933행) 결과를 받는다. c = (거리, 자리 id) 목록(22 CSS px 안의 것만). 두 자리가 8 안쪽으로 가까우면 고르지 않고 안내.</summary>
+        public bool DecoTapPick(List<(double d, string id)> c)
+        {
+            if (c == null || c.Count == 0) return false;
+            c.Sort((a, b) => a.d.CompareTo(b.d)); Host.Sfx("tick");
+            if (c.Count > 1 && c[1].d - c[0].d < 8) decoNote = S_("deco.near");
+            else { decoNote = ""; decoSel = decoSel == c[0].id ? null : c[0].id; decoOpenItem = null; decoConfirm = false; }
+            return true;
+        }
         public bool DecoPeek => decoPeek;
         public int UndoCount => decoUndo.Count;
 

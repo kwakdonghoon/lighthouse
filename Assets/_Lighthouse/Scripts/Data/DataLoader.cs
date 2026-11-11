@@ -112,7 +112,7 @@ namespace Lighthouse.Data
                 T.Diary.Add(new DiaryDef { W = D(o["w"]), Day = B(o["day"]), Night = B(o["night"]), Any = B(o["any"]), Gift = B(o["gift"]), Shiny = B(o["shiny"]), Season = B(o["season"]), NoWinter = B(o["noWinter"]), Stage = o["stage"] != null ? (int)o["stage"] : 0, Nv = S(o["nv"]), Text = S(o["text"]) });
 
             var rg = Read("ko/regulars.json");
-            foreach (JObject o in (JArray)rg["regulars"]) { var d = new RegularDef { Id = S(o["id"]), Ship = S(o["ship"]), Cap = S(o["cap"]), Type = S(o["type"]), Gift = S(o["gift"]), Region = S(o["region"]), Stage = (int)o["stage"], Story = Strs(o["story"]) }; T.Regulars.Add(d); T.RegularById[d.Id] = d; }
+            foreach (JObject o in (JArray)rg["regulars"]) { var d = new RegularDef { Id = S(o["id"]), Ship = S(o["ship"]), Cap = S(o["cap"]), Type = S(o["type"]), Gift = S(o["gift"]), Region = S(o["region"]), Stage = (int)o["stage"], Story = Strs(o["story"]), Sp = o["sp"] != null ? D(o["sp"]) : 1, Lines = o["lines"] != null ? Strs(o["lines"]) : new string[0] }; T.Regulars.Add(d); T.RegularById[d.Id] = d; }
             foreach (JObject o in (JArray)rg["seasonGuests"]) T.SeasonGuests.Add(new SeasonGuestDef { Season = S(o["season"]), Ship = S(o["ship"]), Cap = S(o["cap"]), Text = S(o["text"]) });
             foreach (JObject o in (JArray)rg["annivLetters"]) T.Anniv.Add(new AnnivDef { Day = (int)o["day"], Gift = S(o["gift"]), Ship = S(o["ship"]), Cap = S(o["cap"]), Text = S(o["text"]) });
             foreach (JObject o in (JArray)rg["finaleVoices"]) T.FinaleVoices.Add(new KeyValuePair<string, string>(S(o["id"]), S(o["text"])));

@@ -15,6 +15,8 @@ namespace Lighthouse.UI
     {
         public RectTransform CardRect, Content, TabsRow, ViewportRect;
         public Image Dim, CardImg;
+        /// <summary>M4: 꾸미기 놓기에서 팝업 바깥(섬 쪽) 탭 — 섬 위 자리 고르기로 쓴다(원본 5.2970행). 화면 좌표(픽셀).</summary>
+        public event System.Action<Vector2> DecoDimTapped;
         public TMP_Text Heading;
         public Button Gear, Sound, Close, DimButton;
         public ScrollRect Scroll;
@@ -105,7 +107,7 @@ namespace Lighthouse.UI
             Gear.onClick.RemoveAllListeners(); Gear.onClick.AddListener(() => { ctl.Act("gear"); Refresh(false); });
             Close.onClick.RemoveAllListeners(); Close.onClick.AddListener(() => { ctl.Close(); Refresh(false); });
             Sound.onClick.RemoveAllListeners(); Sound.onClick.AddListener(() => { ctl.Act("snd:" + (ctl.S.Sound ? "off" : "on")); Refresh(true); });
-            DimButton.onClick.RemoveAllListeners(); DimButton.onClick.AddListener(() => { if (ctl.Mode == PanelMode.Deco && ctl.DecoTab == "place") return; ctl.Close(); Refresh(false); });
+            DimButton.onClick.RemoveAllListeners(); DimButton.onClick.AddListener(() => { if (ctl.Mode == PanelMode.Deco && ctl.DecoTab == "place") { DecoDimTapped?.Invoke(Input.mousePosition); return; } ctl.Close(); Refresh(false); });
             Refresh(false);
         }
 

@@ -42,6 +42,7 @@ namespace Lighthouse.Core
     {
         public string Id, Ship, Cap, Type, Gift, Region;
         public int Stage; public string[] Story;
+        public double Sp = 1; public string[] Lines = new string[0];       // M4: 배 속도 배율·말풍선 대사 (원본 r.sp, r.lines; 데이터에는 이미 있었다)
     }
     public sealed class SeasonGuestDef { public string Season, Ship, Cap, Text; }
     public sealed class AnnivDef { public int Day; public string Gift, Ship, Cap, Text; }   // Gift: null | "normal" | "shiny"

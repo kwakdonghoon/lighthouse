@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Lighthouse/Scenes/Main.unity
+    guid: a76dbbc8b39aec74cb1ede16c1403508
+  - enabled: 1
     path: Assets/_Lighthouse/Scenes/M0Preview.unity
     guid: 914c5764eb818f3448db39e5db796a5d
+  - enabled: 1
+    path: Assets/_Lighthouse/Scenes/M2Showcase.unity
+    guid: d4b05de67c0960345beae1130f663376
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

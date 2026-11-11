@@ -31,6 +31,8 @@ namespace Lighthouse.UI
         public bool TitleOpen => Title != null && Title.gameObject.activeSelf;
 
         public event Action<string> WorldDirtyRequested, ViewChanged; public event Action<JObject> SaveImported; public event Action PhotoSaveRequested; public event Action<string> SfxRequested;
+        /// <summary>M4: 월드 연결 지점. 예보 입력(날씨 연출이 채운다)·우체통 화면 위치(캔버스 단위, 없으면 임시 자리)·타이틀을 눌렀다/닫혔다.</summary>
+        public Func<ForecastInput> ForecastSource; public Func<Vector2?> MailAnchor; public event Action TitleTapped, TitleClosed;
         float hudAt; long adShownAt; bool adShownSent; float titleFadeAt = -1f; long clockNow => Ctx != null ? Ctx.Clock.NowMs : 0;
 
         // ================= 만들기 =================
@@ -87,7 +89,7 @@ namespace Lighthouse.UI
             Tip.Off.onClick.RemoveAllListeners(); Tip.Off.onClick.AddListener(() => { Tips.TurnOff(); Tip.Hide(); });
             if (Photo != null) { Photo.Back.onClick.AddListener(() => SetPhoto(false)); Photo.Save.onClick.AddListener(() => { PhotoSaveRequested?.Invoke(); Photo.Msg.text = UiText.Display(str.Get("photo.saved")); }); }
             if (Ad != null) { Ad.Ok.onClick.AddListener(() => AdAdapter.Finish(true)); Ad.Cancel.onClick.AddListener(() => AdAdapter.Finish(false, "closed")); }
-            Title.Tap.onClick.RemoveAllListeners(); Title.Tap.onClick.AddListener(() => { titleFadeAt = Time.realtimeSinceStartup; });
+            Title.Tap.onClick.RemoveAllListeners(); Title.Tap.onClick.AddListener(() => { titleFadeAt = Time.realtimeSinceStartup; TitleTapped?.Invoke(); });
             if (!ManualScreen) Density = Application.isMobilePlatform && Screen.dpi > 0 ? Mathf.Clamp(Screen.dpi / 160f, 1f, 5f) : 0f;
             if (ManualScreen) ApplyScreen(DevW, DevH, Safe); else ApplyScreen(Screen.width, Screen.height, ReadSafe());
             RefreshHud(true);
@@ -143,7 +145,7 @@ namespace Lighthouse.UI
 
         void RefreshHud(bool force)
         {
-            var info = Hud_.Compute(Ctx, Str);
+            var info = Hud_.Compute(Ctx, Str, ForecastSource?.Invoke());
             Hud.Apply(info, Str, !PhotoMode && (Ctx.UnreadCount() > 0 || Ctx.Discovered() > Ctx.S.DexSeen));
         }
 
@@ -153,7 +155,7 @@ namespace Lighthouse.UI
         {
             if (!TitleOpen || titleFadeAt < 0) return;
             float t = (Time.realtimeSinceStartup - titleFadeAt) / 0.7f; Title.Group.alpha = 1f - Mathf.Floor(Mathf.Clamp01(t) * 7f) / 7f;      // steps(7) 와 같은 7단 페이드
-            if (t >= 1f) { Title.gameObject.SetActive(false); Ctx.TitleOpen = false; }
+            if (t >= 1f) { Title.gameObject.SetActive(false); Ctx.TitleOpen = false; TitleClosed?.Invoke(); }
         }
 
         void UpdateAd()
@@ -178,7 +180,7 @@ namespace Lighthouse.UI
         {
             float cx = CanvasW / 2f, top = Mathf.Max(CanvasH * 0.18f, ScreenLayout.HudTop(Safe) + 130f); bool up = false;
             if (t.At == "menu") { var r = Hud.MenuRect; cx = CanvasW - 8 - Safe.R - 24; top = 8 + Safe.T + 48 + 12; up = true; top = Mathf.Max(top, ScreenLayout.HudTop(Safe) + 120f); }
-            else if (t.At == "mail") { cx = CanvasW * 0.62f; top = CanvasH * 0.66f; up = true; }          // 우체통 위치는 월드(M4)가 정한다: 임시로 화면 아래쪽 오른쪽
+            else if (t.At == "mail") { var ma = MailAnchor?.Invoke(); if (ma.HasValue) { cx = ma.Value.x; top = ma.Value.y; } else { cx = CanvasW * 0.62f; top = CanvasH * 0.66f; } up = true; }          // 우체통 위치는 월드(M4)가 알려 준다
             else if (t.At == "panel")
             {
                 var card = Panel.CardRect; float bottom = -card.anchoredPosition.y + card.sizeDelta.y;
@@ -215,7 +217,7 @@ namespace Lighthouse.UI
     /// <summary>모호한 이름 피하기용 별칭.</summary>
     static class Hud_
     {
-        public static HudInfo Compute(GameContext c, UiStrings s) => Hud.Compute(c, s);
+        public static HudInfo Compute(GameContext c, UiStrings s, ForecastInput fc = null) => Hud.Compute(c, s, fc);
         public static string TitleDay(GameContext c, UiStrings s, bool first) => Hud.TitleDay(c, s, first);
     }
 }

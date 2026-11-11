@@ -185,7 +185,7 @@ namespace Lighthouse.Render
         }
 
         /// <summary>밤 불빛 한 벌(섬 불빛·창 불빛·램프 번짐). dusk &gt; 0.4 부터 알파 (dusk-0.4)/0.4 로 서서히 켜진다.</summary>
-        public static void DrawLights(CpuCanvas c, SceneSprites s, double t, double dusk)
+        public static void DrawLights(CpuCanvas c, SceneSprites s, double t, double dusk, int lensLv = 0)
         {
             if (!(dusk > 0.4)) return;
             double ga = Math.Min(1, (dusk - 0.4) / 0.4), cx = s.W / 2.0, oy = s.Oy;
@@ -197,7 +197,7 @@ namespace Lighthouse.Render
                 DrawGlow(c, cx + w.dx, Terrain.CY - w.dz + oy, 4.5, 255, 190, 90, 0.3, ga);
             }
             double ly = Terrain.CY - ((P.Zt * Terrain.VZ + 0.5) + 1.5 + 6 / 2.0), br = 0.5 + 0.5 * Math.Sin(t * 1.3);
-            DrawGlow(c, cx, ly + oy, 12 + Math.Min(4, 0), 255, 205, 115, 0.15 + 0.06 * br, ga);
+            DrawGlow(c, cx, ly + oy, 12 + Math.Min(4, lensLv), 255, 205, 115, 0.15 + 0.06 * br, ga);
             DrawGlow(c, cx, ly + oy, 5, 255, 240, 190, 0.42 + 0.1 * br, ga);
         }
     }

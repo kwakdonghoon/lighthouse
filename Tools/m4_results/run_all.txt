@@ -1,0 +1,30 @@
+﻿test_EditMode: exit code 0
+EditMode: total 106 passed 106 failed 0 skipped 0
+test_PlayMode: exit code 0
+PlayMode: total 4 passed 4 failed 0 skipped 0
+=== 첫 실행 → 플레이 → 저장 → 재시작 복원 (2026-11-11T17:52:45) ===
+논리 화면 216x468 (배율 5, 기기 640x480), 굽기+업로드 47.6 ms
+프레임 간격(에디터 배치, 1배속, 밤 아닐 때 포함): n=230 평균 16.67 ms, p95 16.74 ms, 최대 21.10 ms
+GameApp.Update 전체: n=230 평균 3.04 ms, p95 3.77 ms, 최대 8.81 ms
+연출 층 그리기+업로드: n=230 평균 1.30 ms, p95 2.03 ms, 최대 2.16 ms
+배경(하늘·바다) 그리기+업로드: n=230 평균 1.53 ms, p95 1.94 ms, 최대 2.43 ms
+GameApp.Update 밤(빛줄기·불빛) 구간, 40배속(틱 여러 번 포함): n=126 평균 7.35 ms, p95 13.36 ms, 최대 37.12 ms
+배속 플레이: 안내 40척, 단계 2, 도감 14, 편지 14, 토스트 10, 배 6, 소리 요청 620건(brush,mail,ding,grass,level,build,lamp)
+밤·빛줄기 조준·1배속 GameApp.Update 전체: n=229 평균 7.98 ms, p95 18.94 ms, 최대 21.17 ms
+밤·빛줄기 조준·1배속 연출 층 그리기+업로드: n=229 평균 2.88 ms, p95 3.99 ms, 최대 4.28 ms
+밤·빛줄기 조준·1배속 프레임 간격: n=229 평균 17.89 ms, p95 21.42 ms, 최대 74.46 ms
+밤 240프레임 동안 GC(세대 0) 1회, 관리 힙 변화 -868 KB
+저장 파일 9082 바이트, 백업 True
+재시작 복원: 상태 JSON 동일, 단계 2, 안내 58, 편지 17
+오프라인 복귀(5시간): 배 270척 안내, 안내 58 → 328, 소식 화면 열림
+끝: 예외 로그 없음(LogAssert 가 있으면 실패 처리)
+
+=== 입력·말풍선·승급 연출 ===
+말풍선: "등대가 예쁘네요" 캔버스 위치 (246.03, -720.00)
+승급: 단계 2, 불꽃 144, 갈매기 12
+사진: C:\Users\DHKWAK\AppData\Local\Temp\lh_m4play_74552904daa749b4a582f57283735e29\photos\lighthouse_20261111_175322.png (67713 바이트)
+계절 전환 확인(겨울), 월드 캡처 저장
+
+=== 월드 캡처(상태별) ===
+캡처 7장: day_summer, dusk_evening, night_beam_aim, night_fog, day_rain, day_snow_winter, day_fog (논리 216x468 정수 ×2)
+

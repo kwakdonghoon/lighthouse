@@ -1,0 +1,14 @@
+{
+    "name": "Lighthouse.App",
+    "rootNamespace": "Lighthouse.App",
+    "references": ["Lighthouse.Core","Lighthouse.Data","Lighthouse.Render","Lighthouse.Game","Lighthouse.World","Lighthouse.UI","Lighthouse.UI.Model","UnityEngine.UI","Unity.TextMeshPro","Unity.Nuget.Newtonsoft-Json"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
