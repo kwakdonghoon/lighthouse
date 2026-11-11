@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using Lighthouse.Render;
+using Lighthouse.Render.Verify;
 
 namespace Lighthouse.Tests.M2
 {

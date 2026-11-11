@@ -9,10 +9,10 @@ namespace Lighthouse.Render
     /// 불투명 캔버스 위에 스프라이트·사각형을 알파 합성하는 CPU 합성기 (HTML 의 ctx.drawImage / fillRect 를 premultiplied 8비트 규칙으로 흉내).
     /// 장면 골든 대조와 한 장짜리 미리보기용. 게임 화면은 Unity 스프라이트 렌더(GPU)가 같은 순서로 그린다.
     /// </summary>
-    public sealed class Canvas
+    public sealed class CpuCanvas
     {
         public readonly int W, H; public readonly uint[] D;
-        public Canvas(int w, int h) { W = w; H = h; D = new uint[w * h]; }
+        public CpuCanvas(int w, int h) { W = w; H = h; D = new uint[w * h]; }
 
         public void Copy(Bitmap bg) { Array.Copy(bg.D, D, D.Length); }
 

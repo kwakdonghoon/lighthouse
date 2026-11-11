@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Lighthouse.Tests.M2;
+using Lighthouse.Render.Verify;
 
 // M2 렌더 골든 대조를 Unity 없이 dotnet 으로 돌린다. 사용: dotnet run --project Tools/golden_runner -- [골든 폴더] [세트 이름...]
 static class Program

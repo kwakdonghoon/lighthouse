@@ -88,9 +88,9 @@ namespace Lighthouse.Render
         }
 
         /// <summary>고정된 낮(dusk=0)·밤(dusk=1) 한 장 CPU 합성. 골든 대조와 미리보기용.</summary>
-        public static Canvas Compose(SceneSprites s, double dusk, double t = 0)
+        public static CpuCanvas Compose(SceneSprites s, double dusk, double t = 0)
         {
-            var c = new Canvas(s.W, s.H);
+            var c = new CpuCanvas(s.W, s.H);
             foreach (var op in Ops(s, t))
             {
                 double a = op.AlphaD(dusk);

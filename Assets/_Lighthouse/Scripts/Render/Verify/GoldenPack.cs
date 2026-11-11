@@ -5,7 +5,7 @@ using System.IO.Compression;
 using System.Text;
 using Lighthouse.Render;
 
-namespace Lighthouse.Tests.M2
+namespace Lighthouse.Render.Verify
 {
     /// <summary>M2 골든 묶음(Tools/golden/m2/out/*.bin.gz) 읽기. 형식은 Tools/golden/m2/srv/gx.js 의 Pack 참고. 순수 C# (dotnet 실행기와 Unity 테스트가 같이 쓴다).</summary>
     public sealed class GoldenPack
