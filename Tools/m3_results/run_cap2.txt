@@ -1,0 +1,11 @@
+﻿prefabs: exit code 0
+capture: exit code 0
+캡처 54장, 감사 항목 25539건, 위반 0건
+test_EditMode: exit code 2
+EditMode: total 86 passed 80 failed 6 skipped 0
+  FAILED: EveryScreenFitsWithoutHorizontalOverflowOrSmallTouchTargets(320,568) ::  320x568: 카드 세로가 안전 영역 밖 Expected: True But was: False 
+  FAILED: EveryScreenFitsWithoutHorizontalOverflowOrSmallTouchTargets(360,640) ::  360x640: 카드 가로가 안전 영역 밖 Expected: True But was: False 
+  FAILED: EveryScreenFitsWithoutHorizontalOverflowOrSmallTouchTargets(393,852) ::  393x852: 카드 가로가 안전 영역 밖 Expected: True But was: False 
+  FAILED: EveryScreenFitsWithoutHorizontalOverflowOrSmallTouchTargets(768,1024) ::  768x1024: 카드 가로가 안전 영역 밖 Expected: True But was: False 
+  FAILED: EveryScreenFitsWithoutHorizontalOverflowOrSmallTouchTargets(1024,768) ::  1024x768: 카드 가로가 안전 영역 밖 Expected: True But was: False 
+  FAILED: ViewLayerRoutesInputToCoreOnly :: System.InvalidOperationException : Sequence contains no matching element

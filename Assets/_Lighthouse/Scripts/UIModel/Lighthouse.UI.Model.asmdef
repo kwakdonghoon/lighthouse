@@ -1,0 +1,14 @@
+{
+    "name": "Lighthouse.UI.Model",
+    "rootNamespace": "Lighthouse.UI.Model",
+    "references": ["Lighthouse.Core","Unity.Nuget.Newtonsoft-Json"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

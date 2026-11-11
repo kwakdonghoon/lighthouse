@@ -1,0 +1,4 @@
+System.NullReferenceException: Object reference not set to an instance of an object
+  at Lighthouse.UI.UiRoot.Setup (Lighthouse.Core.GameContext ctx, Lighthouse.UI.Model.UiStrings str, Lighthouse.Core.IPaymentAdapter payment, Lighthouse.UI.Model.TestAdAdapter ads, Lighthouse.Core.SaveCode code, Lighthouse.UI.Model.UiFeatures features) [0x000c7] in D:\Unity\EK_game_create\ek_lighthouse_unity\Assets\_Lighthouse\Scripts\UI\UiRoot.cs:86 
+  at Lighthouse.EditorTools.M3Tools.CaptureOne (Lighthouse.Core.GameTables T, Lighthouse.UI.Model.UiStrings str, System.Int32 devW, System.Int32 devH, System.String state, System.Text.StringBuilder report, System.Collections.Generic.List`1[T] bad, System.Int32& checks) [0x0039a] in D:\Unity\EK_game_create\ek_lighthouse_unity\Assets\_Lighthouse\Scripts\Editor\M3Tools.cs:243 
+  at Lighthouse.EditorTools.M3Tools.Step4_Capture () [0x00212] in D:\Unity\EK_game_create\ek_lighthouse_unity\Assets\_Lighthouse\Scripts\Editor\M3Tools.cs:204 

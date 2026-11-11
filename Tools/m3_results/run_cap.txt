@@ -1,0 +1,12 @@
+﻿capture: exit code 0
+캡처 54장, 감사 항목 25539건, 위반 10건
+  위반: 640x1136 mail: 글 폭 넘침 PopupPanel/card/scroll/viewport/content/letter/top/tt/nm/chip/chip
+  위반: 640x1136 settings: 글 폭 넘침 PopupPanel/card/scroll/viewport/content/card:set/row:tiprow/line/col/t/chip/chip
+  위반: 640x1136 settings: 글 폭 넘침 PopupPanel/card/scroll/viewport/content/card:set/row:tiprow/line/col/t/chip/chip
+  위반: 640x1136 settings: 글 폭 넘침 PopupPanel/card/scroll/viewport/content/card:set/row:tiprow/line/col/t/chip/chip
+  위반: 640x1136 settings: 글 폭 넘침 PopupPanel/card/scroll/viewport/content/card:set/row:tiprow/line/col/t/chip/chip
+  위반: 640x1136 settings: 글 폭 넘침 PopupPanel/card/scroll/viewport/content/card:set/row:tiprow/line/col/t/chip/chip
+  위반: 720x1280 settings: 글 폭 넘침 PopupPanel/card/scroll/viewport/content/card:set/row:tiprow/line/col/t/chip/chip
+  위반: 786x1704 settings: 글 폭 넘침 PopupPanel/card/scroll/viewport/content/card:set/row:tiprow/line/col/t/chip/chip
+  위반: 1536x2048 settings: 글 폭 넘침 PopupPanel/card/scroll/viewport/content/card:set/row:tiprow/line/col/t/chip/chip
+  위반: 2048x1536 settings: 글 폭 넘침 PopupPanel/card/scroll/viewport/content/card:set/row:tiprow/line/col/t/chip/chip

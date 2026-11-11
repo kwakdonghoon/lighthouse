@@ -1,7 +1,7 @@
 {
     "name": "Lighthouse.Editor",
     "rootNamespace": "Lighthouse.Editor",
-    "references": ["Lighthouse.Core","Lighthouse.Data","Lighthouse.Render","Lighthouse.Game","Unity.RenderPipelines.Universal.Runtime","Unity.RenderPipelines.Universal.2D.Runtime"],
+    "references": ["Lighthouse.Core","Lighthouse.Data","Lighthouse.Render","Lighthouse.Game","Lighthouse.UI","Lighthouse.UI.Model","UnityEngine.UI","Unity.TextMeshPro","Unity.Nuget.Newtonsoft-Json","Unity.RenderPipelines.Universal.Runtime","Unity.RenderPipelines.Universal.2D.Runtime"],
     "includePlatforms": ["Editor"],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

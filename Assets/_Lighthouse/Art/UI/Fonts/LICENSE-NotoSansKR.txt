@@ -1,0 +1,11 @@
+Noto Sans KR (Subset) -- 이 폴더의 NotoSansKR-Regular-Subset.ttf / NotoSansKR-Bold-Subset.ttf
+
+원본 글꼴: Noto Sans KR 가변 글꼴 v2.04 (Windows 11 에 설치된 NotoSansKR-VF.ttf, 이름 표 6번 버전 문자열 "Version 2.04;241114210130;non-release")
+저작권 표기(글꼴 name 표 0번): (c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
+디자이너(name 표 9번): Ryoko NISHIZUKA, Paul D. Hunt, Sandoll Communications (hangul elements, letters & syllables).
+라이선스(name 표 13번): This Font Software is licensed under the SIL Open Font License, Version 1.1.
+라이선스 주소(name 표 14번): http://scripts.sil.org/OFL  (전문: https://openfontlicense.org)
+
+수정 내용: Tools/build_ui_fonts.py 로 굵기 400(Regular)·700(Bold) 고정 인스턴스를 만들고, 게임에서 쓰는 글자(약 750자)만 남겼다(글리프 부분집합).
+OFL 1.1 에 따라 수정본은 예약 글꼴 이름 'Source' 를 쓰지 않으며, 이 글꼴을 단독으로 판매하지 않는다.
+출시 전 확인할 것(사람): OFL 전문 파일을 배포물에 함께 넣을지(권장). 이 폴더에는 전문을 옮겨 적지 않았다.

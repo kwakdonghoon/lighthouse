@@ -49,6 +49,8 @@ namespace Lighthouse.Core
         }
 
         void Persist() { StateChanged?.Invoke(); }
+        /// <summary>M3: 화면(UI) 쪽에서 상태를 바꾼 뒤 저장·갱신을 알리는 공개 창구 (원본 persist() 호출과 같은 뜻).</summary>
+        public void NotifyChanged() { Persist(); }
         double Rand() => Rng.NextDouble();
 
         // ================= 기본 조회 =================

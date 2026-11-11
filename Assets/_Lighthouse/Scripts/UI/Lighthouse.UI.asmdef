@@ -1,7 +1,7 @@
 {
     "name": "Lighthouse.UI",
     "rootNamespace": "Lighthouse.UI",
-    "references": ["Lighthouse.Core","Lighthouse.Game","UnityEngine.UI"],
+    "references": ["Lighthouse.Core","Lighthouse.Data","Lighthouse.Render","Lighthouse.Game","Lighthouse.UI.Model","UnityEngine.UI","Unity.TextMeshPro","Unity.Nuget.Newtonsoft-Json"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
