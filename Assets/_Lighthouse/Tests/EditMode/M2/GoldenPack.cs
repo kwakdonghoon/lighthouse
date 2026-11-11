@@ -79,5 +79,26 @@ namespace Lighthouse.Tests.M2
             if (r.OverTol == 0) r.Note = null;
             return r;
         }
+
+        /// <summary>
+        /// 화면 합성 프레임(전부 불투명) 비교. 채널 차이가 tol 이하면 허용. 값이 다른 픽셀 수(ExactDiff)와 허용 초과 수(OverTol), 최대 차이(MaxDelta)를 센다.
+        /// </summary>
+        public static Result DiffOpaque(string set, string name, Bitmap act, GoldenPack.Entry exp, int tol)
+        {
+            var r = new Result { Set = set, Name = name, Pixels = exp.D.Length };
+            if (act.W != exp.W || act.H != exp.H) { r.Note = "크기 다름"; r.OverTol = 1; return r; }
+            for (int i = 0; i < exp.D.Length; i++)
+            {
+                uint e = exp.D[i], a = act.D[i];
+                if (e == a) continue;
+                r.ExactDiff++;
+                int dm = 0;
+                for (int s = 0; s < 24; s += 8) dm = Math.Max(dm, Math.Abs((int)((e >> s) & 255) - (int)((a >> s) & 255)));
+                if (dm > r.MaxDelta) r.MaxDelta = dm;
+                if (dm > tol) { r.OverTol++; if (r.OverTol == 1) r.Note = string.Format("첫 허용 초과 ({0},{1}) 기대 {2:x8} 실제 {3:x8}", i % exp.W, i / exp.W, e, a); }
+            }
+            if (r.OverTol == 0) r.Note = null;
+            return r;
+        }
     }
 }

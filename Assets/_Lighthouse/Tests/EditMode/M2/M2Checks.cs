@@ -139,6 +139,114 @@ namespace Lighthouse.Tests.M2
             return res;
         }
 
+
+        /// <summary>배: 도면 글자 격자(생성 로직) + 스프라이트 외형 5 × 종 9 × 항로 3 × (깃발 뺀 것/도움받은 것) + 밤 사본.</summary>
+        public static List<Result> Ships()
+        {
+            var res = new List<Result>(); var gp = Pack("ships.bin.gz");
+            int rowsBad = 0, rowsN = 0;
+            foreach (var line in File.ReadAllLines(Path.Combine(Dir, "ship_rows.txt")))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                var p = line.Split(';'); rowsN++;
+                var d = ShipBaker.Design(p[0], int.Parse(p[1]));
+                if (d.Ox != int.Parse(p[2]) || d.Oy != int.Parse(p[3]) || string.Join("|", d.Rows) != p[4]) { rowsBad++; res.Add(new Result { Set = "ships", Name = "rows_" + p[0] + "_" + p[1], OverTol = 1, Note = "도면 글자 격자 다름" }); }
+            }
+            res.Add(new Result { Set = "ships", Name = "rows(" + rowsN + ")", Pixels = rowsN, OverTol = rowsBad });
+            foreach (var skin in ShipBaker.SkinIds)
+                foreach (var t in ShipBaker.Types)
+                    for (int lane = 0; lane < 3; lane++)
+                    {
+                        string tag = "ship_" + skin + "_" + t + "_" + lane;
+                        var d = ShipBaker.Sprite(t, lane, skin, false); var h = ShipBaker.Sprite(t, lane, skin, true);
+                        res.Add(Cmp.Diff("ships", tag + "_d", d, gp.Items[tag + "_d"])); res.Add(Cmp.Diff("ships", tag + "_h", h, gp.Items[tag + "_h"]));
+                        if (skin == "classic")
+                        {
+                            res.Add(Cmp.Diff("ships", tag + "_n", Night.Of(d), gp.Items[tag + "_n"], NightTol));
+                            res.Add(Cmp.Diff("ships", tag + "_hn", Night.Of(h, 0.35), gp.Items[tag + "_hn"], NightTol));
+                        }
+                    }
+            return res;
+        }
+
+        /// <summary>아이콘 68종 + 대체 아이콘.</summary>
+        public static List<Result> Icons()
+        {
+            var res = new List<Result>(); var gp = Pack("icons.bin.gz");
+            foreach (var id in IconBaker.Ids) res.Add(Cmp.Diff("icons", "icon_" + id, IconBaker.Bake(id), gp.Items["icon_" + id]));
+            res.Add(Cmp.Diff("icons", "icon_unknown", IconBaker.Bake("__nope__"), gp.Items["icon_unknown"]));
+            res.Add(new Result { Set = "icons", Name = "count", Pixels = IconBaker.Ids.Count, OverTol = IconBaker.Ids.Count == 68 ? 0 : 1, Note = IconBaker.Ids.Count == 68 ? null : "아이콘 수 68 아님" });
+            return res;
+        }
+
+        /// <summary>꾸미기: 굽기(아이템 × 계절 × 마을 외형, 낮·밤)·목록 아이콘·자리 좌표(28×6)·장면 목록(A/B 두 패스 순서).</summary>
+        public static List<Result> Decor()
+        {
+            var res = new List<Result>(); var gp = Pack("decor.bin.gz");
+            foreach (var it in DecorBaker.Items)
+                foreach (var sn in it.Ss ? Palettes.Seasons : new[] { "summer" })
+                    foreach (var sk in it.Sk ? new[] { "classic", "seaside", "festival" } : new[] { "classic" })
+                    {
+                        string tag = it.Id + "_" + sn + "_" + sk; var b = DecorBaker.Bake(it, sn, sk);
+                        res.Add(Cmp.Diff("decor", "decor_" + tag, b, gp.Items["decor_" + tag]));
+                        res.Add(Cmp.Diff("decor", "decorN_" + tag, Night.Of(b), gp.Items["decorN_" + tag], NightTol));
+                    }
+            foreach (var it in DecorBaker.Items) res.Add(Cmp.Diff("decor", "decoicon_" + it.Id, DecorBaker.Icon(it), gp.Items["decoicon_" + it.Id]));
+            // 자리 좌표
+            int posBad = 0, posN = 0;
+            foreach (var line in File.ReadAllLines(Path.Combine(Dir, "decor_pos.txt")))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                var p = line.Split(';'); posN++; int st = int.Parse(p[0]); var sl = DecorBaker.Slot(p[1]);
+                var (x, y) = DecorLayout.Pos(sl, st, 180); double v = DecorLayout.V(sl, st);
+                if (x != int.Parse(p[2]) || y != int.Parse(p[3]) || Math.Abs(v - double.Parse(p[4], CultureInfo.InvariantCulture)) > 1e-9)
+                { posBad++; res.Add(new Result { Set = "decor", Name = "pos_" + p[0] + "_" + p[1], OverTol = 1, Note = string.Format("기대 {0},{1},{2} 실제 {3},{4},{5}", p[2], p[3], p[4], x, y, v) }); }
+            }
+            res.Add(new Result { Set = "decor", Name = "pos(" + posN + ")", Pixels = posN, OverTol = posBad });
+            // 장면 목록
+            var want = File.ReadAllLines(Path.Combine(Dir, "scene_lists.txt")).Where(l => !string.IsNullOrWhiteSpace(l)).GroupBy(l => l.Split(';')[0]).ToDictionary(g => g.Key, g => g.ToList());
+            foreach (var kv in want)
+            {
+                var parts = kv.Key.Split('_'); string season = parts[1]; int st = int.Parse(parts[2].Substring(1)); int w = int.Parse(parts[0].Split('x')[0]);
+                var ir = new IslandBaker(Palettes.IslandEnvFor(season, st, "classic", "classic", 6)).Bake();
+                var L = SceneLists.Build(st, 32, DecorLayout.DevFill(), ir.Pieces.Select(p => p.V).ToList(), w);
+                var got = new List<string>();
+                foreach (var (pass, list) in new[] { ("A", L.A), ("B", L.B), ("S", L.S) })
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        var e = list[i];
+                        got.Add(string.Join(";", kv.Key, pass, i, e.K, Num(e.V), e.X, e.K == 'd' ? e.Y : 0, e.K == 'd' ? e.ItemId : e.K == 'p' ? e.PieceIndex.ToString() : "m"));
+                    }
+                bool same = got.Count == kv.Value.Count; int first = -1;
+                for (int i = 0; same && i < got.Count; i++) if (got[i] != kv.Value[i]) { same = false; first = i; }
+                res.Add(new Result { Set = "decor", Name = "lists_" + kv.Key, Pixels = kv.Value.Count, OverTol = same ? 0 : 1, Note = same ? null : (first >= 0 ? string.Format("항목 {0}: 기대 {1} 실제 {2}", first, kv.Value[first], got[first]) : string.Format("개수 {0} != {1}", got.Count, kv.Value.Count)) });
+            }
+            return res;
+        }
+
+        static string Num(double v) => v.ToString("R", CultureInfo.InvariantCulture);
+
+
+        public static int FrameTol = 1;                // 장면 합성 허용 오차(채널 단계). 실측 뒤 정한다
+
+        /// <summary>장면 합성: 낮·밤 프레임 (배경·물가·섬·조각·꾸미기 풀세트·탑·램프·우체통). 같은 순서로 CPU 합성한 결과를 HTML 캔버스 읽기값과 비교.</summary>
+        public static List<Result> Frames()
+        {
+            var res = new List<Result>(); var gp = Pack("frames.bin.gz");
+            foreach (var line in File.ReadAllLines(Path.Combine(Dir, "frames.meta")))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                var p = line.Split(';'); int w = int.Parse(p[0]), h = int.Parse(p[1]), st = int.Parse(p[3]), gl = int.Parse(p[4]); string sn = p[2];
+                var sp = SceneSprites.Build(w, h, sn, st, gardenLv: gl, slotLv: 32, put: DecorLayout.DevFill());
+                foreach (var d in new[] { 0, 1 })
+                {
+                    string name = "frame_" + w + "x" + h + "_" + sn + "_s" + st + "_" + (d == 1 ? "n" : "d");
+                    res.Add(Cmp.DiffOpaque("frames", name, SceneComposer.Compose(sp, d).ToBitmap(), gp.Items[name], FrameTol));
+                }
+            }
+            return res;
+        }
+
         public static List<Result> RunAll(params string[] only)
         {
             var all = new List<Result>();
@@ -147,6 +255,10 @@ namespace Lighthouse.Tests.M2
             if (On("towers")) all.AddRange(Towers());
             if (On("night")) all.AddRange(Nights());
             if (On("bg")) all.AddRange(Backgrounds());
+            if (On("ships")) all.AddRange(Ships());
+            if (On("icons")) all.AddRange(Icons());
+            if (On("decor")) all.AddRange(Decor());
+            if (On("frames")) all.AddRange(Frames());
             return all;
         }
     }
