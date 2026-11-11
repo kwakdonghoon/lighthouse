@@ -16,14 +16,30 @@ namespace Lighthouse.Game
         public Material SpriteMaterial;
         public int Stage = 6;
         public string Season = "summer", TowerSkin = "classic", IsleSkin = "classic", DecorSkin = "classic";
-        public bool Decor = true, Extras = true, AutoCycle = false;
+        public bool Decor = true, Extras = true, AutoCycle = false, Animate = true;     // Animate: 해·달·별·구름·갈매기·바다 물결(프레임마다 CPU 로 그려 배경에 올림)
         [Range(0f, 1f)] public float Dusk = 0f;
 
         public WorldView View { get; private set; }
         public SceneSprites Sprites { get; private set; }
         public double LastBakeMs { get; private set; }
         public LogicalScreen Screen { get; private set; }
-        bool dirty = true;
+        bool dirty = true; CpuCanvas bg, bgMix; double mixD = -1;
+        public double LastFxMs { get; private set; }
+        /// <summary>한 프레임의 연출(배경 합성+하늘+물결)을 그려 올린다. t: 초(호출하는 쪽이 시각을 정하므로 결정적).</summary>
+        public void AnimateAt(double t)
+        {
+            if (!Animate || bg == null || View == null) return;
+            var sw = Stopwatch.StartNew(); double d = Dusk;
+            if (bgMix == null || mixD != d || bgMix.W != bg.W || bgMix.H != bg.H)       // 낮·밤 섞은 배경은 dusk 가 바뀔 때만 다시 만든다 (섞기가 비싸다)
+            {
+                bgMix = new CpuCanvas(bg.W, bg.H); mixD = d;
+                if (d < 0.999) bgMix.Copy(Sprites.BgD); else bgMix.Copy(Sprites.BgN);
+                if (d > 0.001 && d < 0.999) bgMix.Put(Sprites.BgN, 0, 0, d);
+            }
+            bg.CopyFrom(bgMix);
+            Fx.DrawSkyDeco(bg, Screen.W, Screen.OY, t, d); Fx.DrawSea(bg, Screen.W, Screen.OY, t, d);
+            View.UpdateDynamicBg(bg); LastFxMs = sw.Elapsed.TotalMilliseconds;
+        }
         float shown = -1;
 
         void Start() { View = gameObject.GetComponent<WorldView>() ?? gameObject.AddComponent<WorldView>(); View.SpriteMaterial = SpriteMaterial; }
@@ -45,6 +61,13 @@ namespace Lighthouse.Game
             var put = Decor ? DecorLayout.DevFill() : null;
             Sprites = SceneSprites.Build(Screen.W, Screen.H, Season, Stage, IsleSkin, DecorSkin, TowerSkin, gardenLv: 6, slotLv: 32, put: put);
             var ops = Extras ? SceneExtras.OpsWithExtras(Sprites) : SceneComposer.Ops(Sprites);
+            View.DynamicBg = Animate;
+            if (Animate)
+            {
+                ops[0] = new DrawOp { D = Sprites.BgD, N = null, X = 0, Y = 0, Tag = "bg", AlphaD = k => 1, AlphaN = k => 0 };
+                ops.RemoveAll(o => o.Tag == "cloud");                          // 구름은 하늘 장식이 움직이며 그린다
+                bg = new CpuCanvas(Screen.W, Screen.H); bgMix = null;
+            }
             View.Build(Screen.W, Screen.H, ops, Dusk);
             View.ShowOnScreen(Screen);
             LastBakeMs = sw.Elapsed.TotalMilliseconds; dirty = false; shown = Dusk;
@@ -55,6 +78,7 @@ namespace Lighthouse.Game
             if (AutoCycle) Dusk = (float)DuskFast(Time.realtimeSinceStartupAsDouble * 20);      // 20배속으로 한 바퀴 30초
             if (dirty) Rebuild();
             else if (!Mathf.Approximately(shown, Dusk)) { View.SetDusk(Dusk); shown = Dusk; }
+            AnimateAt(Time.timeAsDouble);
         }
 
         void OnGUI()

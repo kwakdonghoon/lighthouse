@@ -19,6 +19,9 @@ namespace Lighthouse.Game
         public int SpriteCount { get; private set; }
 
         GameObject root;
+        /// <summary>true 이면 Build 에 넘긴 첫 명령(배경)의 낮 그림 텍스처를 프레임마다 다시 쓴다(하늘 장식·바다 물결을 CPU 로 그려 올림).</summary>
+        public bool DynamicBg;
+        Texture2D dynTex; Bitmap dynSource; uint[] dynFlip;
         readonly List<(SpriteRenderer d, SpriteRenderer n, DrawOp op)> layers = new List<(SpriteRenderer, SpriteRenderer, DrawOp)>();
         readonly Dictionary<Bitmap, Sprite> sprites = new Dictionary<Bitmap, Sprite>();
         readonly List<Texture2D> textures = new List<Texture2D>();
@@ -37,7 +40,9 @@ namespace Lighthouse.Game
         Sprite SpriteOf(Bitmap b)
         {
             if (sprites.TryGetValue(b, out var sp)) return sp;
-            var tex = BitmapTexture.ToTexture(b); textures.Add(tex);
+            bool dyn = DynamicBg && dynTex == null && b == dynSource;
+            var tex = BitmapTexture.ToTexture(b, !dyn); textures.Add(tex);
+            if (dyn) dynTex = tex;
             TextureBytes += (long)b.W * b.H * 4;
             return sprites[b] = BitmapTexture.ToSprite(tex);
         }
@@ -57,6 +62,7 @@ namespace Lighthouse.Game
         public void Build(int W, int H, IList<DrawOp> ops, double dusk)
         {
             Clear();
+            dynTex = null; dynSource = (ops.Count > 0 && ops[0].Tag == "bg") ? ops[0].D : null;
             root = new GameObject("WorldView") { hideFlags = HideFlags.DontSave };
             root.transform.SetParent(transform, false);
             int order = 0;
@@ -76,6 +82,15 @@ namespace Lighthouse.Game
             WorldCam.transform.position = new Vector3(W / 2f, -H / 2f, -10f);
             WorldCam.clearFlags = CameraClearFlags.SolidColor; WorldCam.backgroundColor = Color.black;
             WorldCam.targetTexture = Rt; WorldCam.depth = -10;
+        }
+
+        /// <summary>프레임마다 배경 텍스처를 새 그림(CPU 합성 결과, 위 행부터)으로 바꾼다. DynamicBg 일 때만.</summary>
+        public void UpdateDynamicBg(CpuCanvas c)
+        {
+            if (dynTex == null) return;
+            if (dynFlip == null || dynFlip.Length != c.D.Length) dynFlip = new uint[c.D.Length];
+            for (int y = 0; y < c.H; y++) System.Array.Copy(c.D, y * c.W, dynFlip, (c.H - 1 - y) * c.W, c.W);
+            dynTex.SetPixelData(dynFlip, 0); dynTex.Apply(false, false);
         }
 
         /// <summary>dusk(0 낮 ~ 1 밤)에 맞춰 낮·밤 층의 투명도를 바꾼다 (굽기는 다시 하지 않는다).</summary>

@@ -15,6 +15,7 @@ namespace Lighthouse.Render
         public CpuCanvas(int w, int h) { W = w; H = h; D = new uint[w * h]; }
 
         public void Copy(Bitmap bg) { Array.Copy(bg.D, D, D.Length); }
+        public void CopyFrom(CpuCanvas o) { Array.Copy(o.D, D, D.Length); }
 
         static int Ga8(double ga) => (int)JsMath.Round(ga * 255);
 

@@ -1,112 +1,296 @@
 <?xml version="1.0" encoding="utf-8"?>
-<test-run id="2" testcasecount="28" result="Passed" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:31Z" duration="0.9904069">
-  <test-suite type="TestSuite" id="1000" name="Lighthouse" fullname="Lighthouse" runstate="Runnable" testcasecount="28" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:31Z" duration="0.990407" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+<test-run id="2" testcasecount="55" result="Passed" total="55" passed="55" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:51Z" duration="50.5766008">
+  <test-suite type="TestSuite" id="1000" name="Lighthouse" fullname="Lighthouse" runstate="Runnable" testcasecount="55" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:51Z" duration="50.576601" total="55" passed="55" failed="0" inconclusive="0" skipped="0" asserts="0">
     <properties>
       <property name="platform" value="EditMode" />
     </properties>
-    <test-suite type="Assembly" id="1035" name="Lighthouse.Tests.EditMode.dll" fullname="D:/Unity/EK_game_create/ek_lighthouse_unity/Library/ScriptAssemblies/Lighthouse.Tests.EditMode.dll" runstate="Runnable" testcasecount="28" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:31Z" duration="0.984288" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <test-suite type="Assembly" id="1031" name="Lighthouse.Tests.Core.dll" fullname="D:/Unity/EK_game_create/ek_lighthouse_unity/Library/ScriptAssemblies/Lighthouse.Tests.Core.dll" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:50Z" duration="49.576125" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
       <properties>
-        <property name="_PID" value="64180" />
+        <property name="_PID" value="68212" />
         <property name="_APPDOMAIN" value="Unity Child Domain" />
         <property name="platform" value="EditMode" />
         <property name="EditorOnly" value="True" />
       </properties>
-      <test-suite type="TestSuite" id="1036" name="Lighthouse" fullname="Lighthouse" runstate="Runnable" testcasecount="28" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:31Z" duration="0.983196" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <test-suite type="TestSuite" id="1032" name="Lighthouse" fullname="Lighthouse" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:50Z" duration="49.575027" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
         <properties />
-        <test-suite type="TestSuite" id="1037" name="Tests" fullname="Lighthouse.Tests" runstate="Runnable" testcasecount="28" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:31Z" duration="0.982364" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <test-suite type="TestSuite" id="1033" name="Tests" fullname="Lighthouse.Tests" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:50Z" duration="49.574140" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
           <properties />
-          <test-suite type="TestFixture" id="1004" name="BakeGoldenTests" fullname="Lighthouse.Tests.BakeGoldenTests" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.142287" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <test-suite type="TestFixture" id="1001" name="DataAndSaveTests" fullname="Lighthouse.Tests.DataAndSaveTests" classname="Lighthouse.Tests.DataAndSaveTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:01Z" duration="0.265337" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
             <properties />
-            <test-case id="1021" name="Bake_IsDeterministic" fullname="Lighthouse.Tests.BakeGoldenTests.Bake_IsDeterministic" methodname="Bake_IsDeterministic" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1554993180" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.046706" asserts="0">
+            <test-case id="1008" name="ImportKeepsDeviceOwnedAndAds" fullname="Lighthouse.Tests.DataAndSaveTests.ImportKeepsDeviceOwnedAndAds" methodname="ImportKeepsDeviceOwnedAndAds" classname="Lighthouse.Tests.DataAndSaveTests" runstate="Runnable" seed="919151691" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:01Z" duration="0.101911" asserts="0">
               <properties>
                 <property name="retryIteration" value="0" />
                 <property name="repeatIteration" value="0" />
               </properties>
             </test-case>
-            <test-suite type="ParameterizedMethod" id="1011" name="Island_MatchesHtmlGolden" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.068262" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-case id="1007" name="Lhs1ExportMatchesJsAndRoundTrips" fullname="Lighthouse.Tests.DataAndSaveTests.Lhs1ExportMatchesJsAndRoundTrips" methodname="Lhs1ExportMatchesJsAndRoundTrips" classname="Lighthouse.Tests.DataAndSaveTests" runstate="Runnable" seed="1407117246" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:01Z" duration="0.021075" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1004" name="MigrateMatchesJsGolden" fullname="Lighthouse.Tests.DataAndSaveTests.MigrateMatchesJsGolden" methodname="MigrateMatchesJsGolden" classname="Lighthouse.Tests.DataAndSaveTests" runstate="Runnable" seed="640436255" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:01Z" duration="0.048549" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="SanitizeAndParseMatchJsGolden" fullname="Lighthouse.Tests.DataAndSaveTests.SanitizeAndParseMatchJsGolden" methodname="SanitizeAndParseMatchJsGolden" classname="Lighthouse.Tests.DataAndSaveTests" runstate="Runnable" seed="1432945018" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:01Z" duration="0.041701" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1003" name="SaveDefaultsHaveExpectedShape" fullname="Lighthouse.Tests.DataAndSaveTests.SaveDefaultsHaveExpectedShape" methodname="SaveDefaultsHaveExpectedShape" classname="Lighthouse.Tests.DataAndSaveTests" runstate="Runnable" seed="505427368" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:01Z" duration="0.004415" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1002" name="TableCountsMatchManifestAndAppendixA" fullname="Lighthouse.Tests.DataAndSaveTests.TableCountsMatchManifestAndAppendixA" methodname="TableCountsMatchManifestAndAppendixA" classname="Lighthouse.Tests.DataAndSaveTests" runstate="Runnable" seed="1584624632" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:01Z" duration="0.001792" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1005" name="TypedStateRoundTripKeepsMigratedSaves" fullname="Lighthouse.Tests.DataAndSaveTests.TypedStateRoundTripKeepsMigratedSaves" methodname="TypedStateRoundTripKeepsMigratedSaves" classname="Lighthouse.Tests.DataAndSaveTests" runstate="Runnable" seed="658062197" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:01Z" duration="0.032468" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1009" name="FuncAndLintTests" fullname="Lighthouse.Tests.FuncAndLintTests" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:03Z" duration="1.433417" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1019" name="CheckContentCatchesTheSameBreakagesAsJs" fullname="Lighthouse.Tests.FuncAndLintTests.CheckContentCatchesTheSameBreakagesAsJs" methodname="CheckContentCatchesTheSameBreakagesAsJs" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" seed="197958519" result="Passed" start-time="2026-11-11 06:46:01Z" end-time="2026-11-11 06:46:02Z" duration="0.820681" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1018" name="CheckContentHasZeroViolations" fullname="Lighthouse.Tests.FuncAndLintTests.CheckContentHasZeroViolations" methodname="CheckContentHasZeroViolations" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" seed="1106989050" result="Passed" start-time="2026-11-11 06:46:02Z" end-time="2026-11-11 06:46:02Z" duration="0.176737" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1015" name="DayClockMatchesJs" fullname="Lighthouse.Tests.FuncAndLintTests.DayClockMatchesJs" methodname="DayClockMatchesJs" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" seed="1711399721" result="Passed" start-time="2026-11-11 06:46:02Z" end-time="2026-11-11 06:46:02Z" duration="0.009346" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1020" name="DecorSelfCheckAndLayoutRules" fullname="Lighthouse.Tests.FuncAndLintTests.DecorSelfCheckAndLayoutRules" methodname="DecorSelfCheckAndLayoutRules" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" seed="934130493" result="Passed" start-time="2026-11-11 06:46:02Z" end-time="2026-11-11 06:46:02Z" duration="0.005386" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1013" name="DecorSlotsOpenPositionsAndOwnershipMatchJs" fullname="Lighthouse.Tests.FuncAndLintTests.DecorSlotsOpenPositionsAndOwnershipMatchJs" methodname="DecorSlotsOpenPositionsAndOwnershipMatchJs" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" seed="289382868" result="Passed" start-time="2026-11-11 06:46:02Z" end-time="2026-11-11 06:46:02Z" duration="0.029027" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1017" name="ForbiddenPhrasesMatchJsOnSentenceSet" fullname="Lighthouse.Tests.FuncAndLintTests.ForbiddenPhrasesMatchJsOnSentenceSet" methodname="ForbiddenPhrasesMatchJsOnSentenceSet" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" seed="2102577454" result="Passed" start-time="2026-11-11 06:46:02Z" end-time="2026-11-11 06:46:02Z" duration="0.220205" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1014" name="JosaGiftPointsAndTextsMatchJs" fullname="Lighthouse.Tests.FuncAndLintTests.JosaGiftPointsAndTextsMatchJs" methodname="JosaGiftPointsAndTextsMatchJs" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" seed="866585724" result="Passed" start-time="2026-11-11 06:46:02Z" end-time="2026-11-11 06:46:02Z" duration="0.113227" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1010" name="LevelCurveMatchesJs" fullname="Lighthouse.Tests.FuncAndLintTests.LevelCurveMatchesJs" methodname="LevelCurveMatchesJs" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" seed="1460166883" result="Passed" start-time="2026-11-11 06:46:02Z" end-time="2026-11-11 06:46:02Z" duration="0.008466" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1012" name="OfflineShipsAndShipTypeMatchJs" fullname="Lighthouse.Tests.FuncAndLintTests.OfflineShipsAndShipTypeMatchJs" methodname="OfflineShipsAndShipTypeMatchJs" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" seed="659399311" result="Passed" start-time="2026-11-11 06:46:02Z" end-time="2026-11-11 06:46:02Z" duration="0.018336" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1011" name="ProfilesChancesAndLimitsMatchJs" fullname="Lighthouse.Tests.FuncAndLintTests.ProfilesChancesAndLimitsMatchJs" methodname="ProfilesChancesAndLimitsMatchJs" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" seed="1638862635" result="Passed" start-time="2026-11-11 06:46:02Z" end-time="2026-11-11 06:46:02Z" duration="0.009997" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1016" name="ShopDuePriceMatchesJs" fullname="Lighthouse.Tests.FuncAndLintTests.ShopDuePriceMatchesJs" methodname="ShopDuePriceMatchesJs" classname="Lighthouse.Tests.FuncAndLintTests" runstate="Runnable" seed="1143959728" result="Passed" start-time="2026-11-11 06:46:02Z" end-time="2026-11-11 06:46:03Z" duration="0.018217" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1021" name="SaveStoreTests" fullname="Lighthouse.Tests.SaveStoreTests" classname="Lighthouse.Tests.SaveStoreTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-11 06:46:03Z" end-time="2026-11-11 06:46:03Z" duration="0.021812" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1024" name="CorruptMainFallsBackToBackupThenToNew" fullname="Lighthouse.Tests.SaveStoreTests.CorruptMainFallsBackToBackupThenToNew" methodname="CorruptMainFallsBackToBackupThenToNew" classname="Lighthouse.Tests.SaveStoreTests" runstate="Runnable" seed="1700184276" result="Passed" start-time="2026-11-11 06:46:03Z" end-time="2026-11-11 06:46:03Z" duration="0.002605" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1026" name="FileStorageWritesAtomicallyToDisk" fullname="Lighthouse.Tests.SaveStoreTests.FileStorageWritesAtomicallyToDisk" methodname="FileStorageWritesAtomicallyToDisk" classname="Lighthouse.Tests.SaveStoreTests" runstate="Runnable" seed="791739556" result="Passed" start-time="2026-11-11 06:46:03Z" end-time="2026-11-11 06:46:03Z" duration="0.012528" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1022" name="FreshStartCreatesDefaultsWithStartAt" fullname="Lighthouse.Tests.SaveStoreTests.FreshStartCreatesDefaultsWithStartAt" methodname="FreshStartCreatesDefaultsWithStartAt" classname="Lighthouse.Tests.SaveStoreTests" runstate="Runnable" seed="1489101367" result="Passed" start-time="2026-11-11 06:46:03Z" end-time="2026-11-11 06:46:03Z" duration="0.000368" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1027" name="ImportedSaveGetsDeviceOwnedAndNoOfflineReward" fullname="Lighthouse.Tests.SaveStoreTests.ImportedSaveGetsDeviceOwnedAndNoOfflineReward" methodname="ImportedSaveGetsDeviceOwnedAndNoOfflineReward" classname="Lighthouse.Tests.SaveStoreTests" runstate="Runnable" seed="111519355" result="Passed" start-time="2026-11-11 06:46:03Z" end-time="2026-11-11 06:46:03Z" duration="0.002166" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1025" name="OldVersionFileIsMigratedOnLoad" fullname="Lighthouse.Tests.SaveStoreTests.OldVersionFileIsMigratedOnLoad" methodname="OldVersionFileIsMigratedOnLoad" classname="Lighthouse.Tests.SaveStoreTests" runstate="Runnable" seed="1500754856" result="Passed" start-time="2026-11-11 06:46:03Z" end-time="2026-11-11 06:46:03Z" duration="0.000519" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1023" name="SaveLoadRoundTripKeepsEverythingAndBackupFollows" fullname="Lighthouse.Tests.SaveStoreTests.SaveLoadRoundTripKeepsEverythingAndBackupFollows" methodname="SaveLoadRoundTripKeepsEverythingAndBackupFollows" classname="Lighthouse.Tests.SaveStoreTests" runstate="Runnable" seed="1167852098" result="Passed" start-time="2026-11-11 06:46:03Z" end-time="2026-11-11 06:46:03Z" duration="0.001623" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1028" name="ScenarioAndSimTests" fullname="Lighthouse.Tests.ScenarioAndSimTests" classname="Lighthouse.Tests.ScenarioAndSimTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-11 06:46:03Z" end-time="2026-11-11 06:46:50Z" duration="47.851218" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1029" name="SeededScenariosMatchJsExactly" fullname="Lighthouse.Tests.ScenarioAndSimTests.SeededScenariosMatchJsExactly" methodname="SeededScenariosMatchJsExactly" classname="Lighthouse.Tests.ScenarioAndSimTests" runstate="Runnable" seed="1980651510" result="Passed" start-time="2026-11-11 06:46:03Z" end-time="2026-11-11 06:46:03Z" duration="0.434378" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1030" name="SimulatorMatchesJsGolden" fullname="Lighthouse.Tests.ScenarioAndSimTests.SimulatorMatchesJsGolden" methodname="SimulatorMatchesJsGolden" classname="Lighthouse.Tests.ScenarioAndSimTests" runstate="Runnable" seed="183421255" result="Passed" start-time="2026-11-11 06:46:03Z" end-time="2026-11-11 06:46:50Z" duration="47.415863" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[seed 까지 완전 일치: 7/7
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1069" name="Lighthouse.Tests.EditMode.dll" fullname="D:/Unity/EK_game_create/ek_lighthouse_unity/Library/ScriptAssemblies/Lighthouse.Tests.EditMode.dll" runstate="Runnable" testcasecount="29" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:51Z" duration="0.991676" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="68212" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1070" name="Lighthouse" fullname="Lighthouse" runstate="Runnable" testcasecount="29" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:51Z" duration="0.990433" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1071" name="Tests" fullname="Lighthouse.Tests" runstate="Runnable" testcasecount="29" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:51Z" duration="0.990057" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1037" name="BakeGoldenTests" fullname="Lighthouse.Tests.BakeGoldenTests" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.113347" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1054" name="Bake_IsDeterministic" fullname="Lighthouse.Tests.BakeGoldenTests.Bake_IsDeterministic" methodname="Bake_IsDeterministic" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1151985264" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.035668" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1044" name="Island_MatchesHtmlGolden" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.063165" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-case id="1005" name="Island_MatchesHtmlGolden(1)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(1)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1748482851" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.012869" asserts="0">
+              <test-case id="1038" name="Island_MatchesHtmlGolden(1)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(1)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="70049336" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.011278" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1006" name="Island_MatchesHtmlGolden(2)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(2)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="698475942" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.006813" asserts="0">
+              <test-case id="1039" name="Island_MatchesHtmlGolden(2)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(2)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1516596239" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.006962" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1007" name="Island_MatchesHtmlGolden(3)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(3)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="714865965" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.009748" asserts="0">
+              <test-case id="1040" name="Island_MatchesHtmlGolden(3)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(3)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="512000594" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.009041" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1008" name="Island_MatchesHtmlGolden(4)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(4)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1959953726" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.011185" asserts="0">
+              <test-case id="1041" name="Island_MatchesHtmlGolden(4)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(4)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1706422437" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.010873" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1009" name="Island_MatchesHtmlGolden(5)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(5)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="660462661" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.010846" asserts="0">
+              <test-case id="1042" name="Island_MatchesHtmlGolden(5)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(5)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="282087741" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.010222" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1010" name="Island_MatchesHtmlGolden(6)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(6)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1282170378" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.013751" asserts="0">
+              <test-case id="1043" name="Island_MatchesHtmlGolden(6)" fullname="Lighthouse.Tests.BakeGoldenTests.Island_MatchesHtmlGolden(6)" methodname="Island_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1482639597" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.013177" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
             </test-suite>
-            <test-suite type="ParameterizedMethod" id="1020" name="TowerAB_MatchesHtmlGolden" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.015067" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-suite type="ParameterizedMethod" id="1053" name="TowerAB_MatchesHtmlGolden" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.013320" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-case id="1012" name="TowerAB_MatchesHtmlGolden(1,0,&quot;tower_s1_v0&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(1,0,&quot;tower_s1_v0&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="511057321" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.004776" asserts="0">
+              <test-case id="1045" name="TowerAB_MatchesHtmlGolden(1,0,&quot;tower_s1_v0&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(1,0,&quot;tower_s1_v0&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="930652723" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.004547" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1013" name="TowerAB_MatchesHtmlGolden(1,1,&quot;tower_s1_v1&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(1,1,&quot;tower_s1_v1&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1977242355" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.001109" asserts="0">
+              <test-case id="1046" name="TowerAB_MatchesHtmlGolden(1,1,&quot;tower_s1_v1&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(1,1,&quot;tower_s1_v1&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1548787124" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.000919" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1014" name="TowerAB_MatchesHtmlGolden(1,2,&quot;tower_s1_v2&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(1,2,&quot;tower_s1_v2&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="2077646679" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.001161" asserts="0">
+              <test-case id="1047" name="TowerAB_MatchesHtmlGolden(1,2,&quot;tower_s1_v2&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(1,2,&quot;tower_s1_v2&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="445891780" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.000965" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1015" name="TowerAB_MatchesHtmlGolden(2,2,&quot;tower_s2&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(2,2,&quot;tower_s2&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="2127628856" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.001251" asserts="0">
+              <test-case id="1048" name="TowerAB_MatchesHtmlGolden(2,2,&quot;tower_s2&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(2,2,&quot;tower_s2&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="225309905" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.000936" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1016" name="TowerAB_MatchesHtmlGolden(3,2,&quot;tower_s3&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(3,2,&quot;tower_s3&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1920678616" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.000997" asserts="0">
+              <test-case id="1049" name="TowerAB_MatchesHtmlGolden(3,2,&quot;tower_s3&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(3,2,&quot;tower_s3&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1028986712" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.000951" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1017" name="TowerAB_MatchesHtmlGolden(4,2,&quot;tower_s4&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(4,2,&quot;tower_s4&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1735913923" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.001080" asserts="0">
+              <test-case id="1050" name="TowerAB_MatchesHtmlGolden(4,2,&quot;tower_s4&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(4,2,&quot;tower_s4&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1680244311" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.001055" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1018" name="TowerAB_MatchesHtmlGolden(5,2,&quot;tower_s5&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(5,2,&quot;tower_s5&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1299411864" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.001203" asserts="0">
+              <test-case id="1051" name="TowerAB_MatchesHtmlGolden(5,2,&quot;tower_s5&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(5,2,&quot;tower_s5&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1506480740" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.001050" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1019" name="TowerAB_MatchesHtmlGolden(6,2,&quot;tower_s6&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(6,2,&quot;tower_s6&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="286258751" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.001242" asserts="0">
+              <test-case id="1052" name="TowerAB_MatchesHtmlGolden(6,2,&quot;tower_s6&quot;)" fullname="Lighthouse.Tests.BakeGoldenTests.TowerAB_MatchesHtmlGolden(6,2,&quot;tower_s6&quot;)" methodname="TowerAB_MatchesHtmlGolden" classname="Lighthouse.Tests.BakeGoldenTests" runstate="Runnable" seed="1614342055" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.001088" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
@@ -114,89 +298,95 @@
               </test-case>
             </test-suite>
           </test-suite>
-          <test-suite type="TestFixture" id="1001" name="JsMathTests" fullname="Lighthouse.Tests.JsMathTests" classname="Lighthouse.Tests.JsMathTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.006550" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <test-suite type="TestFixture" id="1034" name="JsMathTests" fullname="Lighthouse.Tests.JsMathTests" classname="Lighthouse.Tests.JsMathTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.005356" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
             <properties />
-            <test-case id="1003" name="Hsh_MatchesGoldenGrid" fullname="Lighthouse.Tests.JsMathTests.Hsh_MatchesGoldenGrid" methodname="Hsh_MatchesGoldenGrid" classname="Lighthouse.Tests.JsMathTests" runstate="Runnable" seed="284022265" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.003229" asserts="0">
+            <test-case id="1036" name="Hsh_MatchesGoldenGrid" fullname="Lighthouse.Tests.JsMathTests.Hsh_MatchesGoldenGrid" methodname="Hsh_MatchesGoldenGrid" classname="Lighthouse.Tests.JsMathTests" runstate="Runnable" seed="2081383416" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.002933" asserts="0">
               <properties>
                 <property name="retryIteration" value="0" />
                 <property name="repeatIteration" value="0" />
               </properties>
             </test-case>
-            <test-case id="1002" name="Round_FollowsJsHalfUp" fullname="Lighthouse.Tests.JsMathTests.Round_FollowsJsHalfUp" methodname="Round_FollowsJsHalfUp" classname="Lighthouse.Tests.JsMathTests" runstate="Runnable" seed="1037318943" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.002271" asserts="0">
+            <test-case id="1035" name="Round_FollowsJsHalfUp" fullname="Lighthouse.Tests.JsMathTests.Round_FollowsJsHalfUp" methodname="Round_FollowsJsHalfUp" classname="Lighthouse.Tests.JsMathTests" runstate="Runnable" seed="2144233441" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.001563" asserts="0">
               <properties>
                 <property name="retryIteration" value="0" />
                 <property name="repeatIteration" value="0" />
               </properties>
             </test-case>
           </test-suite>
-          <test-suite type="TestFixture" id="1022" name="LogicalScreenTests" fullname="Lighthouse.Tests.LogicalScreenTests" classname="Lighthouse.Tests.LogicalScreenTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.038114" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <test-suite type="TestFixture" id="1055" name="LogicalScreenTests" fullname="Lighthouse.Tests.LogicalScreenTests" classname="Lighthouse.Tests.LogicalScreenTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:51Z" duration="0.035272" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
             <properties />
-            <test-case id="1023" name="Fit_1080x2340_Is5x" fullname="Lighthouse.Tests.LogicalScreenTests.Fit_1080x2340_Is5x" methodname="Fit_1080x2340_Is5x" classname="Lighthouse.Tests.LogicalScreenTests" runstate="Runnable" seed="751516068" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.000518" asserts="0">
+            <test-case id="1056" name="Fit_1080x2340_Is5x" fullname="Lighthouse.Tests.LogicalScreenTests.Fit_1080x2340_Is5x" methodname="Fit_1080x2340_Is5x" classname="Lighthouse.Tests.LogicalScreenTests" runstate="Runnable" seed="1022829525" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.000261" asserts="0">
               <properties>
                 <property name="retryIteration" value="0" />
                 <property name="repeatIteration" value="0" />
               </properties>
             </test-case>
-            <test-case id="1024" name="Fit_720x1280_Is4x" fullname="Lighthouse.Tests.LogicalScreenTests.Fit_720x1280_Is4x" methodname="Fit_720x1280_Is4x" classname="Lighthouse.Tests.LogicalScreenTests" runstate="Runnable" seed="933039792" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.000196" asserts="0">
+            <test-case id="1057" name="Fit_720x1280_Is4x" fullname="Lighthouse.Tests.LogicalScreenTests.Fit_720x1280_Is4x" methodname="Fit_720x1280_Is4x" classname="Lighthouse.Tests.LogicalScreenTests" runstate="Runnable" seed="1943674391" result="Passed" start-time="2026-11-11 06:46:50Z" end-time="2026-11-11 06:46:50Z" duration="0.000156" asserts="0">
               <properties>
                 <property name="retryIteration" value="0" />
                 <property name="repeatIteration" value="0" />
               </properties>
             </test-case>
-            <test-case id="1025" name="Fit_NeverBelow225LogicalHeight" fullname="Lighthouse.Tests.LogicalScreenTests.Fit_NeverBelow225LogicalHeight" methodname="Fit_NeverBelow225LogicalHeight" classname="Lighthouse.Tests.LogicalScreenTests" runstate="Runnable" seed="2075993648" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.036130" asserts="0">
+            <test-case id="1058" name="Fit_NeverBelow225LogicalHeight" fullname="Lighthouse.Tests.LogicalScreenTests.Fit_NeverBelow225LogicalHeight" methodname="Fit_NeverBelow225LogicalHeight" classname="Lighthouse.Tests.LogicalScreenTests" runstate="Runnable" seed="1692484615" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.033888" asserts="0">
               <properties>
                 <property name="retryIteration" value="0" />
                 <property name="repeatIteration" value="0" />
               </properties>
             </test-case>
           </test-suite>
-          <test-suite type="TestSuite" id="1038" name="M2" fullname="Lighthouse.Tests.M2" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:31Z" duration="0.793882" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <test-suite type="TestSuite" id="1072" name="M2" fullname="Lighthouse.Tests.M2" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.835427" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
             <properties />
-            <test-suite type="TestFixture" id="1026" name="M2GoldenTests" fullname="Lighthouse.Tests.M2.M2GoldenTests" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:31Z" duration="0.793035" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-suite type="TestFixture" id="1059" name="M2GoldenTests" fullname="Lighthouse.Tests.M2.M2GoldenTests" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.834829" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-case id="1030" name="Background_And_Clouds" fullname="Lighthouse.Tests.M2.M2GoldenTests.Background_And_Clouds" methodname="Background_And_Clouds" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1225412732" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.059832" asserts="0">
+              <test-case id="1063" name="Background_And_Clouds" fullname="Lighthouse.Tests.M2.M2GoldenTests.Background_And_Clouds" methodname="Background_And_Clouds" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="413304838" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.019082" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1033" name="Decor" fullname="Lighthouse.Tests.M2.M2GoldenTests.Decor" methodname="Decor" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="30909089" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.090857" asserts="0">
+              <test-case id="1066" name="Decor" fullname="Lighthouse.Tests.M2.M2GoldenTests.Decor" methodname="Decor" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1677634590" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.089580" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1032" name="Icons" fullname="Lighthouse.Tests.M2.M2GoldenTests.Icons" methodname="Icons" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="750982210" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:30Z" duration="0.004338" asserts="0">
+              <test-case id="1068" name="Fx_Sky_Sea_Glow_Fit" fullname="Lighthouse.Tests.M2.M2GoldenTests.Fx_Sky_Sea_Glow_Fit" methodname="Fx_Sky_Sea_Glow_Fit" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1876000100" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.124449" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1027" name="Islands_Seasons_And_Skins" fullname="Lighthouse.Tests.M2.M2GoldenTests.Islands_Seasons_And_Skins" methodname="Islands_Seasons_And_Skins" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1668264830" result="Passed" start-time="2026-11-11 06:21:30Z" end-time="2026-11-11 06:21:31Z" duration="0.205746" asserts="0">
+              <test-case id="1065" name="Icons" fullname="Lighthouse.Tests.M2.M2GoldenTests.Icons" methodname="Icons" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1229350422" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.005031" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1029" name="Night_Copies_Props" fullname="Lighthouse.Tests.M2.M2GoldenTests.Night_Copies_Props" methodname="Night_Copies_Props" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1320371003" result="Passed" start-time="2026-11-11 06:21:31Z" end-time="2026-11-11 06:21:31Z" duration="0.066012" asserts="0">
+              <test-case id="1060" name="Islands_Seasons_And_Skins" fullname="Lighthouse.Tests.M2.M2GoldenTests.Islands_Seasons_And_Skins" methodname="Islands_Seasons_And_Skins" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1882084003" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.200814" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1034" name="Scene_Frames_Cpu" fullname="Lighthouse.Tests.M2.M2GoldenTests.Scene_Frames_Cpu" methodname="Scene_Frames_Cpu" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="712856556" result="Passed" start-time="2026-11-11 06:21:31Z" end-time="2026-11-11 06:21:31Z" duration="0.227902" asserts="0">
+              <test-case id="1062" name="Night_Copies_Props" fullname="Lighthouse.Tests.M2.M2GoldenTests.Night_Copies_Props" methodname="Night_Copies_Props" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1141505322" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.046024" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1031" name="Ships" fullname="Lighthouse.Tests.M2.M2GoldenTests.Ships" methodname="Ships" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1847771407" result="Passed" start-time="2026-11-11 06:21:31Z" end-time="2026-11-11 06:21:31Z" duration="0.092290" asserts="0">
+              <test-case id="1067" name="Scene_Frames_Cpu" fullname="Lighthouse.Tests.M2.M2GoldenTests.Scene_Frames_Cpu" methodname="Scene_Frames_Cpu" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1776254840" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.218064" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1028" name="Tower_Skins_And_Lamps" fullname="Lighthouse.Tests.M2.M2GoldenTests.Tower_Skins_And_Lamps" methodname="Tower_Skins_And_Lamps" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="309064875" result="Passed" start-time="2026-11-11 06:21:31Z" end-time="2026-11-11 06:21:31Z" duration="0.042084" asserts="0">
+              <test-case id="1064" name="Ships" fullname="Lighthouse.Tests.M2.M2GoldenTests.Ships" methodname="Ships" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1245305022" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.089237" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1061" name="Tower_Skins_And_Lamps" fullname="Lighthouse.Tests.M2.M2GoldenTests.Tower_Skins_And_Lamps" methodname="Tower_Skins_And_Lamps" classname="Lighthouse.Tests.M2.M2GoldenTests" runstate="Runnable" seed="1994935144" result="Passed" start-time="2026-11-11 06:46:51Z" end-time="2026-11-11 06:46:51Z" duration="0.039224" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />

@@ -116,6 +116,17 @@ namespace Lighthouse.EditorTools
             sc.Decor = false; sc.Extras = false; sc.Stage = 3; sc.Season = "winter"; sc.TowerSkin = "snow"; sc.Dusk = 1f; sc.Rebuild(720, 1280);
             sb.AppendLine($"[M2Showcase 다른 설정 720x1280: 논리 {sc.Screen.W}x{sc.Screen.H} 배율 {sc.Screen.Scale}, 스프라이트 {sc.View.SpriteCount}개, {F(sc.LastBakeMs)} ms]");
             File.WriteAllBytes(Path.Combine(dir, "m2_showcase_winter_s3_night_720x1280.png"), ToPng(sc.View.Capture(), 2));
+            // 연출: 하늘 장식·바다 물결을 프레임마다 CPU 로 그려 배경 텍스처에 올리는 비용 (60프레임 평균), 시각 고정 캡처
+            sc.Decor = true; sc.Extras = true; sc.Stage = 6; sc.Season = "summer"; sc.TowerSkin = "classic"; sc.Animate = true;
+            foreach (var (tt, dd) in new[] { (0.0, 0f), (137.3, 1f), (30.0, 0.5f) })
+            {
+                sc.Dusk = dd; sc.Rebuild(1080, 2340); sc.AnimateAt(tt);
+                var times = new List<double>(); var sw2 = Stopwatch.StartNew();
+                for (int i = 0; i < 60; i++) { sc.AnimateAt(tt + i / 30.0); times.Add(sc.LastFxMs); }
+                sb.AppendLine($"[연출 프레임 dusk={dd}] 배경 합성+하늘+물결+업로드: 평균 {F(times.Average())} ms, 최대 {F(times.Max())} ms (216x468, 에디터 Mono 디버그, 60프레임)");
+                sc.AnimateAt(tt);
+                File.WriteAllBytes(Path.Combine(dir, $"m2_animate_t{tt}_dusk{dd}.png"), ToPng(sc.View.Capture(), 2));
+            }
             sc.View.Clear(); UnityEngine.Object.DestroyImmediate(go);
         }
 

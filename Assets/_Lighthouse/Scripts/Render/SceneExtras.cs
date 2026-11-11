@@ -17,10 +17,10 @@ namespace Lighthouse.Render
         };
         public static readonly double[] LaneY = { 176, 282, 308 };      // SHIP_LANES
 
-        static Bitmap Half(Bitmap b)                                     // 0.5 배율: 홀수 열·행을 뽑는다 (최근접)
+        static Bitmap Half(Bitmap b)                                     // 0.5 배율: 짝수 열·행을 뽑는다 (최근접, 골든 실측)
         {
             var o = new Bitmap(b.Ax / 2, b.Ay / 2, b.W / 2, b.H / 2);
-            for (int y = 0; y < o.H; y++) for (int x = 0; x < o.W; x++) o.D[y * o.W + x] = b.D[(2 * y + 1) * b.W + 2 * x + 1];
+            for (int y = 0; y < o.H; y++) for (int x = 0; x < o.W; x++) o.D[y * o.W + x] = b.D[(2 * y) * b.W + 2 * x];
             return o;
         }
 

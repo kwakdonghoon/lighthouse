@@ -28,5 +28,6 @@ namespace Lighthouse.Tests.M2
         [Test] public void Icons() => Expect(M2Checks.Icons());
         [Test] public void Decor() => Expect(M2Checks.Decor());
         [Test] public void Scene_Frames_Cpu() => Expect(M2Checks.Frames());
+        [Test] public void Fx_Sky_Sea_Glow_Fit() => Expect(M2Checks.Fx());
     }
 }

@@ -248,6 +248,48 @@ namespace Lighthouse.Tests.M2
             return res;
         }
 
+
+        public static int FxTol = 2;                   // 연출(하늘·물결·번짐) 합성 허용 오차(채널 단계). 실측 뒤 정한다
+
+        /// <summary>연출: 하늘 장식+바다 물결(t·dusk 고정 6프레임), 불빛 번짐 6프레임, fit() 배율 표(반 단계 포함).</summary>
+        public static List<Result> Fx()
+        {
+            var res = new List<Result>(); var gp = Pack("fx.bin.gz");
+            var inv = CultureInfo.InvariantCulture;
+            foreach (var (t, d) in new[] { (0.0, 0.0), (12.5, 0.0), (250.0, 1.0), (137.3, 1.0), (30.0, 0.5), (102.5, 1.0) })
+            {
+                var c = new CpuCanvas(216, 468);
+                if (d < 0.999) c.Copy(BgBaker.MakeBg(false, 216, 468, 148));
+                if (d > 0.001) { if (d >= 0.999) c.Copy(BgBaker.MakeBg(true, 216, 468, 148)); else c.Put(BgBaker.MakeBg(true, 216, 468, 148), 0, 0, d); }
+                Lighthouse.Render.Fx.DrawSkyDeco(c, 216, 148, t, d); Lighthouse.Render.Fx.DrawSea(c, 216, 148, t, d);
+                string name = "sky_" + t.ToString("R", inv) + "_" + d.ToString("R", inv);
+                res.Add(Cmp.DiffOpaque("fx_sky", name, c.ToBitmap(), gp.Items[name], FxTol));
+            }
+            foreach (var line in File.ReadAllLines(Path.Combine(Dir, "fx.meta")))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                var p = line.Split(';'); int st = int.Parse(p[1]); double t = double.Parse(p[2], inv), d = double.Parse(p[3], inv);
+                var sp = SceneSprites.Build(216, 468, "summer", st);
+                var c = new CpuCanvas(216, 468); c.Copy(sp.BgN);
+                Lighthouse.Render.Fx.DrawLights(c, sp, t, d);
+                res.Add(Cmp.DiffOpaque("fx_glow", p[0], c.ToBitmap(), gp.Items[p[0]], FxTol));
+            }
+            int bad = 0, n = 0;
+            foreach (var line in File.ReadAllLines(Path.Combine(Dir, "fit.txt")))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                var p = line.Split(';'); n++;
+                double dpr = double.Parse(p[2], inv); int devW = (int)Math.Round(int.Parse(p[0]) * dpr * 1.0), devH = (int)Math.Round(int.Parse(p[1]) * dpr);
+                // HTML: devW = innerWidth*dpr (실수 그대로). 정수 반올림이 영향을 주는지 보려고 실수 입력 경로도 쓴다
+                var v = p[3] == "near" ? FitView.View.Near : p[3] == "wide" ? FitView.View.Wide : FitView.View.Normal;
+                var f = new FitView(int.Parse(p[0]) * dpr, int.Parse(p[1]) * dpr, v);
+                if (Math.Abs(f.Scale - double.Parse(p[4], inv)) > 1e-5 || f.W != int.Parse(p[5]) || f.H != int.Parse(p[6]) || f.OY != int.Parse(p[7]))
+                { bad++; res.Add(new Result { Set = "fx_fit", Name = string.Join("_", p.Take(4)), OverTol = 1, Note = string.Format("기대 s={0} {1}x{2} OY={3} 실제 s={4} {5}x{6} OY={7}", p[4], p[5], p[6], p[7], f.Scale, f.W, f.H, f.OY) }); }
+            }
+            res.Add(new Result { Set = "fx_fit", Name = "fit(" + n + ")", Pixels = n, OverTol = bad });
+            return res;
+        }
+
         public static List<Result> RunAll(params string[] only)
         {
             var all = new List<Result>();
@@ -260,6 +302,7 @@ namespace Lighthouse.Tests.M2
             if (On("icons")) all.AddRange(Icons());
             if (On("decor")) all.AddRange(Decor());
             if (On("frames")) all.AddRange(Frames());
+            if (On("fx")) all.AddRange(Fx());
             return all;
         }
     }
