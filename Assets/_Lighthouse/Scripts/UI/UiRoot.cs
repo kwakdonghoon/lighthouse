@@ -97,7 +97,7 @@ namespace Lighthouse.UI
 
         public void ShowTitle(bool first)
         {
-            Title.Apply(Str, Hud_.TitleDay(Ctx, Str, first)); Title.gameObject.SetActive(true); Title.Group.alpha = 1f; titleFadeAt = -1f; Ctx.TitleOpen = true; Title.transform.SetAsLastSibling();
+            Title.Apply(Str, Hud_.TitleDay(Ctx, Str, first), first); Title.gameObject.SetActive(true); Title.Group.alpha = 1f; titleFadeAt = -1f; Ctx.TitleOpen = true; Title.transform.SetAsLastSibling();
         }
         public void ShowHint(bool on) { if (Hint != null) { Hint.gameObject.SetActive(on); Hint.Layout(CanvasW, CanvasH); LayoutRebuilder.ForceRebuildLayoutImmediate(Hint.Box); } }
 
@@ -117,7 +117,7 @@ namespace Lighthouse.UI
             CurrentDot = ScreenLayout.DotUnits(Scale, out _);
             foreach (var m in GetComponentsInChildren<MonoBehaviour>(true)) if (m is IDotScaled d) d.ApplyDot(CurrentDot);
             foreach (var ic in GetComponentsInChildren<UiIcon>(true)) ic.Apply();
-            Hud.Layout(safe); Panel.Layout(safe); Toast.Layout(CanvasH); if (Hint != null) Hint.Layout(CanvasW, CanvasH); if (Photo != null) Photo.Layout(CanvasW, safe); Title.Layout(safe);
+            Hud.Layout(safe); Panel.Layout(safe); Toast.Layout(CanvasH); if (Hint != null) Hint.Layout(CanvasW, CanvasH); if (Photo != null) Photo.Layout(CanvasW, safe); Title.Layout(safe, devW, devH, Scale);
             if (Ctl != null) { Panel.Refresh(true); RefreshHud(true); }
             Canvas.ForceUpdateCanvases();
         }

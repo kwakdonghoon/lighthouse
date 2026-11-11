@@ -108,6 +108,10 @@ namespace Lighthouse.Render
             S.Box(a - 0.35, b - 0.35, 3.5, 0.7, 0.7, 0.5, lm2);
         }
 
+        /// <summary>타이틀 장면(TitleSprites)이 같은 나무·집 그림을 쓰도록 여는 문. 굽는 내용은 그대로(M0~M2 골든이 지킨다).</summary>
+        public void TitleTree(VShift S, double a, double b) => VTree(S, a, b);
+        public void TitleHut(VShift S, double a, double b) => VHut(S, a, b);
+
         static void VRock(VShift S, double a, double b, double s = 1, double z = 0)
         {
             var m = Vmat.Make("#8a90ae", new VmatOpts { G = 0.05, Tx = Tex.Stone });

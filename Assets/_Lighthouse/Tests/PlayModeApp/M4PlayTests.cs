@@ -129,6 +129,59 @@ namespace Lighthouse.Tests
             report.AppendLine("끝: 예외 로그 없음(LogAssert 가 있으면 실패 처리)\n");
         }
 
+        /// <summary>
+        /// 타이틀 그림: 메인 씬을 켜면 타이틀이 Visible 이고 별빛 장면 텍스처(포인트 필터, 정수 배율)가 올라가 있으며 화면을 덮고,
+        /// 시간이 지나면 그림이 움직이고(빛줄기·물결), 여러 화면 비율에서도 잘리지 않게 놓인다. 장면 PNG 와 화면 전체 PNG 를 Tools/m4_results/title/ 에 남긴다.
+        /// </summary>
+        [UnityTest, Timeout(300000)]
+        public IEnumerator TitleShowsSceneImage()
+        {
+            report.AppendLine("=== 타이틀 그림 ===");
+            string outDir = Path.Combine(Application.dataPath, "..", "Tools", "m4_results", "title"); Directory.CreateDirectory(outDir);
+            foreach (var sz in new[] { new[] { 640, 1136 }, new[] { 1080, 2340 }, new[] { 1536, 2048 }, new[] { 2048, 1536 } })
+            {
+                GameApp.ForceW = sz[0]; GameApp.ForceH = sz[1];
+                yield return LoadMain(); var app = GameApp.Instance; yield return null; yield return null;
+                Assert.IsTrue(app.Ui.TitleOpen, "타이틀이 떠 있다 " + sz[0] + "x" + sz[1]);
+                var tv = app.Ui.Title; Assert.IsTrue(tv.gameObject.activeInHierarchy, "타이틀 Visible"); Assert.AreEqual(1f, tv.Group.alpha, 0.001f);
+                Assert.NotNull(tv.Scene, "장면 칸"); Assert.NotNull(tv.Scene.texture, "그림 텍스처가 null 이 아니다"); Assert.IsTrue(tv.Scene.enabled);
+                var tex = tv.Scene.texture as Texture2D; Assert.NotNull(tex);
+                Assert.AreEqual(FilterMode.Point, tex.filterMode, "포인트 필터"); Assert.AreEqual(tv.Renderer.Lw, tex.width); Assert.AreEqual(tv.Renderer.Lh, tex.height);
+                Assert.GreaterOrEqual(tv.Renderer.Size.Sx, 2, "정수 배율"); Assert.IsFalse(tv.Name.gameObject.activeSelf, "예전 글자 텍스트는 숨겨져 있다");
+                var rt = tv.Scene.rectTransform; float sc = app.Ui.Scale;
+                Assert.GreaterOrEqual(rt.sizeDelta.x * sc + 0.5f, sz[0], "그림이 가로를 덮는다"); Assert.GreaterOrEqual(rt.sizeDelta.y * sc + 0.5f, sz[1], "그림이 세로를 덮는다");
+                Assert.AreEqual(tv.Renderer.Lw * tv.Renderer.Size.Sx, rt.sizeDelta.x * sc, 0.6f, "정수 배율로 늘어난다");
+                Assert.LessOrEqual(tv.Renderer.LogoTotalWidth, tv.Renderer.Lw, "글자가 잘리지 않는다");
+                var colors = new HashSet<uint>(tv.Renderer.Pixels); Assert.Greater(colors.Count, 200, "단색이 아니라 그림이다 (색 " + colors.Count + "가지)");
+                uint[] before = (uint[])tv.Renderer.Pixels.Clone(); for (int i = 0; i < 30; i++) yield return null;
+                int moved = 0; for (int i = 0; i < before.Length; i++) if (before[i] != tv.Renderer.Pixels[i]) moved++;
+                Assert.Greater(moved, 50, "시간이 지나면 그림이 움직인다(글자 내려앉기·별 반짝임·빛줄기)");
+                string tag = sz[0] + "x" + sz[1];
+                Lighthouse.Render.Verify.PngLite.Save(Path.Combine(outDir, "play_scene_" + tag + ".png"), tv.Renderer.Pixels, tv.Renderer.Lw, tv.Renderer.Lh, 2);
+                report.AppendLine("타이틀 " + tag + ": 그림 " + tv.Renderer.Lw + "x" + tv.Renderer.Lh + " 도트 x" + tv.Renderer.Size.Sx + ", 색 " + colors.Count + "가지, 30프레임 뒤 바뀐 점 " + moved + ", 부제 " + tv.Tagline.text + " / " + tv.Day.text);
+                yield return CaptureUi(app, Path.Combine(outDir, "play_title_" + tag + ".png"), sz[0], sz[1]);
+            }
+            GameApp.ForceW = GameApp.ForceH = 0;
+        }
+
+        /// <summary>UI 전체(글자 포함)를 기기 크기 그림으로 한 장. 오버레이 캔버스를 잠깐 카메라 캔버스로 바꿔 RenderTexture 에 그린다. 실패해도 시험은 실패시키지 않는다.</summary>
+        static IEnumerator CaptureUi(GameApp app, string path, int w, int h)
+        {
+            yield return new WaitForEndOfFrame();
+            GameObject cg = null; RenderTexture rt = null;
+            try
+            {
+                cg = new GameObject("titleCapCam"); var cam = cg.AddComponent<Camera>(); cam.orthographic = true; cam.clearFlags = CameraClearFlags.SolidColor; cam.backgroundColor = Color.black; cam.cullingMask = 1 << 5;
+                rt = new RenderTexture(w, h, 0, RenderTextureFormat.ARGB32); cam.targetTexture = rt;
+                var canvas = app.Ui.Canvas; var mode = canvas.renderMode; canvas.renderMode = RenderMode.ScreenSpaceCamera; canvas.worldCamera = cam; canvas.planeDistance = 1f;
+                Canvas.ForceUpdateCanvases(); cam.Render();
+                var prev = RenderTexture.active; RenderTexture.active = rt; var tex = new Texture2D(w, h, TextureFormat.RGB24, false); tex.ReadPixels(new Rect(0, 0, w, h), 0, 0); tex.Apply(); RenderTexture.active = prev;
+                File.WriteAllBytes(path, ImageConversion.EncodeToPNG(tex)); UnityEngine.Object.Destroy(tex); canvas.renderMode = mode;
+            }
+            catch (Exception e) { UnityEngine.Debug.LogWarning("타이틀 전체 캡처 실패(무시): " + e.Message); }
+            finally { if (rt != null) { rt.Release(); UnityEngine.Object.Destroy(rt); } if (cg != null) UnityEngine.Object.Destroy(cg); }
+        }
+
         [UnityTest, Timeout(300000)]
         public IEnumerator TapsAndInputReachWorld()
         {
