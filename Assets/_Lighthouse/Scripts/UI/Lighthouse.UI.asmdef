@@ -1,0 +1,14 @@
+{
+    "name": "Lighthouse.UI",
+    "rootNamespace": "Lighthouse.UI",
+    "references": ["Lighthouse.Core","Lighthouse.Game","UnityEngine.UI"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

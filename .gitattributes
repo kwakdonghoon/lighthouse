@@ -1,0 +1,6 @@
+* text=auto
+*.rgba binary
+*.u32 binary
+*.png binary
+*.csv text eol=lf
+*.ps1 text eol=crlf
