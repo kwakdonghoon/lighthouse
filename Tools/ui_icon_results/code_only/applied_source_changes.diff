@@ -1,0 +1,116 @@
+diff --git a/Assets/_Lighthouse/Scripts/Editor/M3Tools.cs b/Assets/_Lighthouse/Scripts/Editor/M3Tools.cs
+index 9a637cf..bee77f1 100644
+--- a/Assets/_Lighthouse/Scripts/Editor/M3Tools.cs
++++ b/Assets/_Lighthouse/Scripts/Editor/M3Tools.cs
+@@ -202,8 +202,8 @@ namespace Lighthouse.EditorTools
+                 if (fonts[0] == null) throw new Exception("글꼴 에셋 없음(Step2 먼저)");
+                 foreach (var res in resolutions)
+                 {
+-                    float dpr = 2f; int devW = (int)(res.DpW * dpr), devH = (int)(res.DpH * dpr);
+-                    foreach (var st in res.States)
++                    float dpr = float.Parse(Arg("-m3Dpr", "2"), System.Globalization.CultureInfo.InvariantCulture); int devW = (int)(res.DpW * dpr), devH = (int)(res.DpH * dpr);
++                    foreach (var st in res.States.Where(x => Arg("-m3States", "") == "" || Arg("-m3States", "").Split(',').Contains(x)))
+                     {
+                         var rig = CaptureOne(T, str, devW, devH, dpr, st, report, bad, ref checks);
+                         string file = Path.Combine(outDir, $"m3_{res.Name}_{st}.png");
+diff --git a/Assets/_Lighthouse/Scripts/UI/FocusKit.cs b/Assets/_Lighthouse/Scripts/UI/FocusKit.cs
+index 27e0e8e..9e2fc35 100644
+--- a/Assets/_Lighthouse/Scripts/UI/FocusKit.cs
++++ b/Assets/_Lighthouse/Scripts/UI/FocusKit.cs
+@@ -29,7 +29,7 @@ namespace Lighthouse.UI
+             if (!gameObject.activeSelf) gameObject.SetActive(true);
+             transform.SetAsLastSibling();
+             var cs = new Vector3[4]; t.GetWorldCorners(cs); var a = canvasRect.InverseTransformPoint(cs[0]); var b = canvasRect.InverseTransformPoint(cs[2]); var cr = canvasRect.rect;
+-            float pad = 1f, th = Mathf.Max(2f, UiRoot.CurrentDot);
++            float pad = UiRoot.CurrentDot * 0.5f, th = UiRoot.CurrentDot;      // 둘 다 정수 기기 픽셀이 되도록 도트 단위(2f·1f 고정은 배율 2.75 에서 5.5px·2.75px)
+             float l = a.x - cr.xMin - pad, r = b.x - cr.xMin + pad, tp = cr.yMax - b.y - pad, bt = cr.yMax - a.y + pad;
+             box.anchoredPosition = new Vector2(l, -tp); box.sizeDelta = new Vector2(r - l, bt - tp);
+             Bar(bars[0], 0, 1, 1, 1, 0, -th, 0, 0);       // 위
+diff --git a/Assets/_Lighthouse/Scripts/UI/PanelView.cs b/Assets/_Lighthouse/Scripts/UI/PanelView.cs
+index 66ffdb8..ae32d43 100644
+--- a/Assets/_Lighthouse/Scripts/UI/PanelView.cs
++++ b/Assets/_Lighthouse/Scripts/UI/PanelView.cs
+@@ -31,7 +31,7 @@ namespace Lighthouse.UI
+ 
+         static readonly string[] TabIds = { "mail", "dex", "growth", "deco", "shop" };
+         public static string[] TabIdList => TabIds;
+-        static readonly string[] TabIcons = { "mail", "book", "star", "starfish", "bag" };
++        static readonly string[] TabIcons = { "mail", "book", "seed16", "starfish16", "bag" };      // 원본 TAB_ICON(2752행): 탭 아이콘은 모두 16x16 그림 (8x8 star/starfish 를 쓰면 절반 크기로 보여 글자 줄도 어긋난다)
+ 
+         // ---------- 뼈대 ----------
+         public static PanelView Create(Transform parent)
+@@ -64,7 +64,8 @@ namespace Lighthouse.UI
+                 // 아이콘은 라벨 앞에
+                 var ic = Kit.IconImage(b.transform, TabIcons[Array.IndexOf(TabIds, id)]); ic.transform.SetSiblingIndex(0);
+                 var ds = ic.GetComponent<DotSize>(); ds.Mult = 1; ds.ApplyDot(UiRoot.CurrentDot);
+-                Kit.Elem(b.gameObject, flexW: 1, minW: 40f, minH: 52f, prefH: 52f);
++                Kit.Elem(b.gameObject, flexW: 1, minW: 40f, minH: 30f * UiRoot.CurrentDot);      // 원본 #ptabs button min-height 30칸. 높이를 52 로 고정하면 16칸 아이콘 + 글자가 넘쳐 겹친다(내용 높이가 이기게 둔다)
++                var tdl = b.GetComponent<DotLayout>(); tdl.Elem = b.GetComponent<LayoutElement>(); tdl.MinHeightDots = 30; tdl.PadDots = new Vector4(1, 3, 1, 2); tdl.ApplyDot(UiRoot.CurrentDot);
+                 var badge = Kit.Solid(b.transform, UiTheme.Red, "badge"); var br = badge.rectTransform;
+                 br.anchorMin = br.anchorMax = new Vector2(1, 1); br.pivot = new Vector2(0.5f, 0.5f); br.sizeDelta = new Vector2(12, 12); br.anchoredPosition = new Vector2(-6, -6);
+                 badge.gameObject.AddComponent<LayoutElement>().ignoreLayout = true; badge.gameObject.SetActive(false);
+@@ -86,7 +87,7 @@ namespace Lighthouse.UI
+             // 머리 단추(톱니·소리·닫기): 카드 오른쪽 위에 겹쳐 둔다(리본이 그 폭을 비워 둔다)
+             pv.HeaderButtons = Kit.HBox(pv.CardRect, "head buttons", Vector4.zero, 1, TextAnchor.UpperRight, false).GetComponent<RectTransform>();
+             pv.HeaderButtons.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;
+-            pv.Gear = HeadButton(pv.HeaderButtons, "gear", "gear"); pv.Sound = HeadButton(pv.HeaderButtons, "sound", "sound"); pv.Close = HeadButton(pv.HeaderButtons, "close", "close");
++            pv.Gear = HeadButton(pv.HeaderButtons, "gear", "gear"); pv.Sound = HeadButton(pv.HeaderButtons, "sound", "sfxOn"); pv.Close = HeadButton(pv.HeaderButtons, "close", "close");
+             return pv;
+         }
+ 
+@@ -126,7 +127,7 @@ namespace Lighthouse.UI
+             HeaderButtons.gameObject.SetActive(true);
+             Gear.gameObject.SetActive(m.ShowGear); Sound.gameObject.SetActive(true);
+             Gear.GetComponent<Image>().sprite = UiTheme.Frame(m.GearOn ? "hbtn_on" : "hbtn");
+-            Sound.transform.GetChild(0).GetComponent<UiIcon>().Set(Ctl.S.Sound ? "sound" : "mute");
++            Sound.transform.GetChild(0).GetComponent<UiIcon>().Set(Ctl.S.Sound ? "sfxOn" : "sfxOff");      // 원본 psnd(4815행): 머리줄 소리 단추는 어두운 윤곽의 16x16 sfxOn/sfxOff (8x8 sound/mute 는 HUD 소리 단추용 연한 색)
+             foreach (var t in m.Tabs)
+             {
+                 int i = Array.IndexOf(TabIds, t.Id); if (i < 0) continue;
+@@ -190,7 +191,7 @@ namespace Lighthouse.UI
+             var m = Model; bool deco = m != null && m.Mode == PanelMode.Deco;
+             var r = ScreenLayout.PanelCard(UiRoot.CanvasW, UiRoot.CanvasH, safe, deco, m != null && m.Peek, 110f);
+             CardRect.anchorMin = CardRect.anchorMax = new Vector2(0, 1); CardRect.pivot = new Vector2(0, 1);
+-            CardRect.anchoredPosition = new Vector2(r.X, -r.Y); CardRect.sizeDelta = new Vector2(r.W, r.H);
++            CardRect.anchoredPosition = new Vector2(UiRoot.SnapPx(r.X), -UiRoot.SnapPx(r.Y)); CardRect.sizeDelta = new Vector2(UiRoot.SnapPx(r.W), UiRoot.SnapPx(r.H));      // 기기 픽셀 정수에 맞춘다(배율 2.75 에서 X=27.5px 같은 반픽셀 방지)
+             // 머리 단추: 카드 오른쪽 위
+             var hb = HeaderButtons; hb.anchorMin = new Vector2(1, 1); hb.anchorMax = new Vector2(1, 1); hb.pivot = new Vector2(1, 1);
+             float d = UiRoot.CurrentDot; hb.anchoredPosition = new Vector2(-4 * d, -3 * d); hb.sizeDelta = new Vector2(3 * 44f + 2f, 44f);
+diff --git a/Assets/_Lighthouse/Scripts/UI/UiRoot.cs b/Assets/_Lighthouse/Scripts/UI/UiRoot.cs
+index 56c96e2..da4f317 100644
+--- a/Assets/_Lighthouse/Scripts/UI/UiRoot.cs
++++ b/Assets/_Lighthouse/Scripts/UI/UiRoot.cs
+@@ -16,7 +16,7 @@ namespace Lighthouse.UI
+     /// </summary>
+     public sealed class UiRoot : MonoBehaviour, IUiHostRegion, IUiHost, IUiHostFilePicker
+     {
+-        public static float CurrentDot = 2.25f, CanvasW = 360f, CanvasH = 640f;
++        public static float CurrentDot = 2.25f, CanvasW = 360f, CanvasH = 640f, CurrentScale = 1f;
+         public const string PrefabPath = "UI/Prefabs/UiRoot";
+ 
+         public Canvas Canvas; public RectTransform CanvasRect; public RawImage Backdrop;
+@@ -62,11 +62,15 @@ namespace Lighthouse.UI
+             return root;
+         }
+ 
++        /// <summary>캔버스 단위 길이를 기기 픽셀 정수가 되게 반올림한다(위치·크기용). 도트 한 칸은 이미 정수 픽셀이다.</summary>
++        public static float SnapPx(float units) { var s = Mathf.Max(0.01f, CurrentScale); return Mathf.Round(units * s) / s; }
++
+         public void PrepareCanvas(Camera cam)
+         {
+             Canvas = Canvas != null ? Canvas : GetComponent<Canvas>(); CanvasRect = (RectTransform)transform;
+             if (cam != null) { Canvas.renderMode = RenderMode.ScreenSpaceCamera; Canvas.worldCamera = cam; Canvas.planeDistance = 1f; }
+             else Canvas.renderMode = RenderMode.ScreenSpaceOverlay;
++            Canvas.pixelPerfect = true;      // 그림(Image)의 사각형을 기기 픽셀 정수로 맞춘다 — 비정수 배율에서 도트가 번지거나 선 굵기가 들쭉날쭉해지는 것을 막는다
+             var scaler = GetComponent<CanvasScaler>(); if (scaler != null) scaler.enabled = false;      // 같은 식을 ApplyScreen 이 직접 쓴다
+             if (FindFirstObjectByType<EventSystem>() == null && Application.isPlaying) { var es = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule)); }
+         }
+@@ -130,7 +134,7 @@ namespace Lighthouse.UI
+         public void ApplyScreen(int devW, int devH, Insets safe)
+         {
+             DevW = devW; DevH = devH; Safe = safe;
+-            Scale = ScreenLayout.Scale(devW, devH, Density); Canvas.scaleFactor = Scale;
++            Scale = ScreenLayout.Scale(devW, devH, Density); Canvas.scaleFactor = Scale; CurrentScale = Scale;
+             ScreenLayout.CanvasSize(devW, devH, out CanvasW, out CanvasH, Density);
+             CurrentDot = ScreenLayout.DotUnits(Scale, out _);
+             foreach (var m in GetComponentsInChildren<MonoBehaviour>(true)) if (m is IDotScaled d) d.ApplyDot(CurrentDot);

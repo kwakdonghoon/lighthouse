@@ -202,8 +202,8 @@ namespace Lighthouse.EditorTools
                 if (fonts[0] == null) throw new Exception("글꼴 에셋 없음(Step2 먼저)");
                 foreach (var res in resolutions)
                 {
-                    float dpr = 2f; int devW = (int)(res.DpW * dpr), devH = (int)(res.DpH * dpr);
-                    foreach (var st in res.States)
+                    float dpr = float.Parse(Arg("-m3Dpr", "2"), System.Globalization.CultureInfo.InvariantCulture); int devW = (int)(res.DpW * dpr), devH = (int)(res.DpH * dpr);
+                    foreach (var st in res.States.Where(x => Arg("-m3States", "") == "" || Arg("-m3States", "").Split(',').Contains(x)))
                     {
                         var rig = CaptureOne(T, str, devW, devH, dpr, st, report, bad, ref checks);
                         string file = Path.Combine(outDir, $"m3_{res.Name}_{st}.png");

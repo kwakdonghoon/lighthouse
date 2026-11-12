@@ -1,0 +1,13 @@
+﻿  복원할 프로젝트를 확인하는 중...
+  복원할 모든 프로젝트가 최신 상태입니다.
+  M1Tests -> D:\Unity\EK_game_create\ek_lighthouse_unity\Tools\m1dotnet\bin\Debug\net9.0\M1Tests.dll
+D:\Unity\EK_game_create\ek_lighthouse_unity\Tools\m1dotnet\bin\Debug\net9.0\M1Tests.dll(.NETCoreApp,Version=v9.0)에 대한 테스트 실행
+VSTest 버전 17.14.1 (x64)
+
+테스트 실행을 시작하는 중입니다. 잠시 기다려 주세요...
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+seed 까지 완전 일치: 7/7
+
+
+통과!  - 실패:     0, 통과:    26, 건너뜀:     0, 전체:    26, 기간: 15 s - M1Tests.dll (net9.0)
+
