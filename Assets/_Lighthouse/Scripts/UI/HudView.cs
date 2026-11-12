@@ -55,7 +55,7 @@ namespace Lighthouse.UI
             MenuRect.anchoredPosition = new Vector2(-(8 + sa.R), -(8 + sa.T));
         }
 
-        public void Apply(HudInfo i, UiStrings s, bool menuBadge)
+        public void Apply(HudInfo i, UiStrings s, string menuBadge)      // menuBadge: 배지 글자(편지 수·99+·N), 빈 글이면 숨김
         {
             string k = i.StageText + "|" + i.Count + "|" + Mathf.RoundToInt(i.Pct) + "|" + i.Label + "|" + i.Forecast + "|" + i.ForecastKind + "|" + menuBadge;
             if (k == key) return; key = k;
@@ -71,7 +71,7 @@ namespace Lighthouse.UI
                 string f = i.ForecastKind == "fog" ? "hud_fog" : i.ForecastKind == "rain" ? "hud_rain" : i.ForecastKind == "rainbow" ? "hud_rainbow" : "hud";
                 ForecastImg.sprite = UiTheme.Frame(f);
             }
-            MenuBadge.gameObject.SetActive(menuBadge);
+            Kit.SetBadge(MenuBadge.gameObject, menuBadge);
             LayoutRebuilder.ForceRebuildLayoutImmediate(Pill);
         }
     }

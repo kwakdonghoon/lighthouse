@@ -18,6 +18,9 @@ namespace Lighthouse.World
         double sinceWrite, sinceSeen; bool dirty;
         public int Writes { get; private set; }
         public event Action<Exception> SaveFailed;
+        /// <summary>플레이어에게 알릴 저장 실패: 연달아 실패해도 FailNoticeEverySec 초에 한 번만 불린다(2초마다 다시 시도하므로). 한 번 성공하면 다음 실패는 곧바로 알린다.</summary>
+        public event Action SaveFailedNotice;
+        public double FailNoticeEverySec = 30; double sinceNotice = 1e9;
 
         public SaveService(SaveStore store, GameContext ctx, IClock clock)
         {
@@ -27,7 +30,7 @@ namespace Lighthouse.World
 
         public void Tick(double dt)
         {
-            sinceWrite += dt; sinceSeen += dt;
+            sinceWrite += dt; sinceSeen += dt; sinceNotice += dt;
             if (sinceSeen >= LastSeenEverySec) { sinceSeen = 0; ctx.S.LastSeen = clock.NowMs; dirty = true; }
             if (dirty && sinceWrite >= MinGapSec) Write();
         }
@@ -38,8 +41,12 @@ namespace Lighthouse.World
         void Write()
         {
             dirty = false; sinceWrite = 0;
-            try { store.Save(ctx.S); Writes++; }
-            catch (Exception e) { dirty = true; SaveFailed?.Invoke(e); }
+            try { store.Save(ctx.S); Writes++; sinceNotice = 1e9; }
+            catch (Exception e)
+            {
+                dirty = true; SaveFailed?.Invoke(e);
+                if (sinceNotice >= FailNoticeEverySec) { sinceNotice = 0; SaveFailedNotice?.Invoke(); }
+            }
         }
     }
 }

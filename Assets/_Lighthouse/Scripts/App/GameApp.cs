@@ -72,6 +72,7 @@ namespace Lighthouse.App
             state.LastSeen = now;
             Loop = new GameLoop(Ctx, str, ManualClockMode ? (IRng)new Mulberry32(777) : new SystemRng());
             Save = new SaveService(store, Ctx, Clock); Save.SaveFailed += e => UnityEngine.Debug.LogWarning("저장 실패: " + e.Message);
+            Save.SaveFailedNotice += () => { if (Ui != null) Ui.ShowToast(str.Get("world.saveFailed"), str.Get("world.saveFailedSub")); };      // 플레이어에게도 알린다(30초에 한 번)
             Save.Flush();
             ApplyExtras();
 
@@ -93,6 +94,7 @@ namespace Lighthouse.App
             Ui.MailAnchor = () => { var mp = Loop.MailboxPos(); return new Vector2?(World.ToCanvas(mp.x, mp.y - 10, Ui.Scale)); };
             Loop.Rebuild += _ => rebuildPending = true;
             Loop.Toast += (a, b) => Ui.ShowToast(a, b);
+            Loop.UiBusy = () => Ui.Ctl.Mode != PanelMode.None || Ui.TitleOpen || Ui.PhotoMode || Ui.ToastState.Visible || Ui.Tips.Current != null;      // 처음 만난 것 알림이 기다리는 때
             Loop.OpenMail += () => { Ui.Ctl.Open(PanelMode.Mail); Ui.Panel.Refresh(false); };
             Loop.Boot();
             pendingNews = LastNews != null && !LastNews.Quiet ? LastNews : null;

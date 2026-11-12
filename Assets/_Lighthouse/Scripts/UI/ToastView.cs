@@ -29,9 +29,17 @@ namespace Lighthouse.UI
             bool vis = m.Visible; gameObject.SetActive(vis); if (!vis) return;
             Title.text = UiText.Display(m.Title); Sub.text = UiText.Display(m.Sub ?? ""); Sub.gameObject.SetActive(!string.IsNullOrEmpty(m.Sub));
             Group.alpha = m.Alpha(now);
-            Title.rectTransform.sizeDelta = new Vector2(Mathf.Min(UiRoot.CanvasW - 40f, 320f), 0);
-            var le = Title.GetComponent<LayoutElement>(); le.preferredWidth = Mathf.Min(UiRoot.CanvasW - 48f, Mathf.Max(120f, Title.GetPreferredValues(Title.text).x));
+            // 원본 #toast: max-width calc(100vw - 16px), word-break keep-all → 긴 제목·부제는 줄을 바꾸고 화면(캔버스) 폭 밖으로 나가지 않는다 (콘텐츠 검토 F-01~F-04)
+            float maxW = ScreenLayout.ToastTextMaxW(UiRoot.CanvasW, UiRoot.CurrentDot);
+            FitWidth(Title, maxW, 120f); FitWidth(Sub, maxW, 0f);
             LayoutRebuilder.ForceRebuildLayoutImmediate(Box);
+        }
+
+        static void FitWidth(TMP_Text t, float maxW, float minW)
+        {
+            var le = t.GetComponent<LayoutElement>(); if (le == null) le = t.gameObject.AddComponent<LayoutElement>();
+            t.enableWordWrapping = true;
+            le.preferredWidth = Mathf.Min(maxW, Mathf.Max(minW, t.GetPreferredValues(t.text).x + 1f));     // +1: 부동소수 오차로 한 줄 글이 줄바꿈되지 않게 // 한 줄에 들어가면 한 줄 폭, 넘으면 한도 폭(줄바꿈)
         }
     }
 }

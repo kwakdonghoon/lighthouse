@@ -55,7 +55,7 @@ namespace Lighthouse.UI.Model
     }
 
     /// <summary>팝업 위쪽 탭 한 칸.</summary>
-    public sealed class TabInfo { public string Id, Label; public bool On, Badge; }
+    public sealed class TabInfo { public string Id, Label, BadgeText = ""; public bool On, Badge; }
 
     /// <summary>팝업 한 장의 화면 모델: 머리글·탭·본문 블록.</summary>
     public sealed class PanelModel

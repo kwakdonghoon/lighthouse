@@ -292,7 +292,7 @@ namespace Lighthouse.Core
                 }
                 MkGuestLetter(a.Ship, a.Cap, a.Text, false, now, "anniv", gift, shiny); count++;
             }
-            if (count > 0) Persist();
+            if (count > 0) { Persist(); if (!quiet) LettersArrived?.Invoke(count); }
             return count;
         }
 
@@ -303,6 +303,7 @@ namespace Lighthouse.Core
             S.Finale = Clock.NowMs;
             AddLetter(new Letter { Id = S.LetterId++, Ship = "바다의 벗들", Cap = "단골 일동", Nm = T.Finale.Nm, Gift = null, T = S.Finale, Read = false, Region = "home", Keep = new Newtonsoft.Json.Linq.JValue("finale"), Text = FinaleText(MetRegulars()).Trim(), Sign = T.Finale.Sign });
             Persist();
+            if (!quiet) LettersArrived?.Invoke(1);
             return true;
         }
 

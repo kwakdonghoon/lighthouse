@@ -46,6 +46,16 @@ namespace Lighthouse.UI
             img.sprite = UiTheme.White1; img.color = c; img.raycastTarget = false; return img;
         }
 
+        /// <summary>배지(붉은 알약)에 글자를 넣는다. 빈 글이면 숨기고, 있으면 글자 폭에 맞춰 늘인다(원본 min-width 11칸·높이 11칸). 글자 칸은 처음 쓸 때 만든다(옛 프리팹에도 통한다).</summary>
+        public static void SetBadge(GameObject badge, string text)
+        {
+            bool on = !string.IsNullOrEmpty(text); badge.SetActive(on); if (!on) return;
+            var t = badge.transform.Find("t") != null ? badge.transform.Find("t").GetComponent<TMP_Text>() : null;
+            if (t == null) { t = Text(badge.transform, "", 10f, Color.white, true, TextAlignmentOptions.Center, "t"); t.enableWordWrapping = false; Stretch(t.rectTransform); }
+            t.text = text; var rt = (RectTransform)badge.transform;
+            rt.sizeDelta = new Vector2(Mathf.Max(14f, t.GetPreferredValues(text).x + 6f), 14f);
+        }
+
         public static TextMeshProUGUI Text(Transform parent, string text, float size, Color color, bool bold = false, TextAlignmentOptions align = TextAlignmentOptions.TopLeft, string name = "text")
         {
             var r = Rect(name, parent); var t = r.gameObject.AddComponent<TextMeshProUGUI>();

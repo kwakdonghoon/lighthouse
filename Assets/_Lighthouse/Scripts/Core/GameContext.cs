@@ -40,6 +40,8 @@ namespace Lighthouse.Core
         // ----- 알림(렌더·UI 가 구독) -----
         public event Action<string, string> FirstMet;          // (종류, id)
         public event Action<Letter> LetterAdded;
+        public event Action<string> ShinyFound;                // 빛나는 선물을 알릴 때 (선물 id) — 원본 addGift 의 토스트 자리. Quiet·Sim 에서는 안 불린다
+        public event Action<int> LettersArrived;               // 손님·기념일·완결 편지가 도착했을 때(통수) — 원본 deliverGuests·deliverFinale 의 토스트 자리. quiet 에서는 안 불린다
         public event Action<string> GrowthChanged;             // 갈래 id
         public event Action StateChanged;                      // 원본 persist() 지점
 
@@ -210,6 +212,7 @@ namespace Lighthouse.Core
             S.Found[g] = 1;
             if (firstGift && !o.Quiet && !Sim) QueueFirst("gift", g);
             Inc(S.Totals, g);
+            if (shiny && !o.Quiet && !Sim) ShinyFound?.Invoke(g);
             return shiny;
         }
 

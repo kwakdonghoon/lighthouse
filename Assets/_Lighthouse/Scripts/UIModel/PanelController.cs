@@ -120,7 +120,8 @@ namespace Lighthouse.UI.Model
             {
                 if (id == "shop" && !ShopTabOn()) continue;
                 var pm = TabMode(id);
-                m.Tabs.Add(new TabInfo { Id = id, Label = S_("tab." + id), On = pm == Mode, Badge = id == "mail" ? Ctx.UnreadCount() > 0 : id == "dex" && Ctx.Discovered() > S.DexSeen });
+                string bt = id == "mail" ? Badges.Count(Ctx.UnreadCount()) : id == "dex" && Ctx.Discovered() > S.DexSeen ? Badges.NewText : "";      // 원본 updateBadges: 편지 수(99+)·도감 N
+                m.Tabs.Add(new TabInfo { Id = id, Label = S_("tab." + id), On = pm == Mode, Badge = bt != "", BadgeText = bt });
             }
             m.Heading = S_("heading." + (news ? "news" : Mode.ToString().ToLowerInvariant()));
             List<Block> body;

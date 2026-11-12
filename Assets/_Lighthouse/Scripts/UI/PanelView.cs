@@ -133,7 +133,7 @@ namespace Lighthouse.UI
                 var img = TabButtons[i].GetComponent<Image>(); img.sprite = UiTheme.Frame(t.On ? "gold" : "main");
                 var st = TabButtons[i].spriteState; st.pressedSprite = UiTheme.Frame(t.On ? "gold_p" : "main_p"); st.highlightedSprite = img.sprite; st.selectedSprite = img.sprite; TabButtons[i].spriteState = st;
                 var lab = TabButtons[i].transform.Find("label").GetComponent<TMP_Text>(); lab.text = UiText.Display(t.Label); lab.color = t.On ? UiTheme.OnGold : Color.white;
-                TabBadges[i].SetActive(t.Badge);
+                Kit.SetBadge(TabBadges[i], t.Badge ? (string.IsNullOrEmpty(t.BadgeText) ? Badges.NewText : t.BadgeText) : "");
             }
             for (int i = 0; i < TabIds.Length; i++) if (!m.Tabs.Exists(t => t.Id == TabIds[i])) TabButtons[i].gameObject.SetActive(false);
             Dim.color = m.Light ? UiTheme.DimLight : UiTheme.Dim;

@@ -73,6 +73,8 @@ namespace Lighthouse.UI.Model
 
         /// <summary>토스트 위치: 가로 가운데, 위에서 22%.</summary>
         public static float ToastTop(float ch) => ch * 0.22f;
+        /// <summary>토스트 글 최대 폭: 원본 #toast max-width calc(100vw - 16px) 에서 좌우 안쪽 여백(8칸씩, 칸 = dot)을 뺀 값. 이보다 긴 문장은 줄을 바꾼다.</summary>
+        public static float ToastTextMaxW(float canvasW, float dot) => Math.Max(80f, canvasW - 16f - 2f * 8f * dot);
         /// <summary>HUD 알약 위쪽: 10 + 안전 영역.</summary>
         public static float HudTop(Insets sa) => 10f + sa.T;
     }
@@ -81,6 +83,15 @@ namespace Lighthouse.UI.Model
     public static class UiText
     {
         public static string Display(string s) => s == null ? null : s.Replace('✦', '★');
+    }
+
+    /// <summary>탭·메뉴 배지에 쓰는 글자(원본 updateBadges·menuBadge): 안 읽은 편지 수(100 이상은 99+), 도감 새 항목은 N.</summary>
+    public static class Badges
+    {
+        public const string NewText = "N", OverText = "99+";
+        public static string Count(int n) => n <= 0 ? "" : n >= 100 ? OverText : n.ToString();
+        /// <summary>메뉴 단추: 안 읽은 편지 수, 없으면 도감 새 항목 N, 둘 다 없으면 빈 글.</summary>
+        public static string Menu(int unread, bool dexNew) => unread > 0 ? Count(unread) : dexNew ? NewText : "";
     }
 
     /// <summary>한글 글리프 수집: 데이터·UI 문구 어디에서 쓰든 폰트 아틀라스에 미리 채울 글자 모음 (설계서 R5).</summary>
@@ -101,7 +112,7 @@ namespace Lighthouse.UI.Model
             foreach (var m in T.Milestones) Add(m.Text);
             foreach (var r in T.Ranks) Add(r.Name);
             foreach (var d in T.Diary) Add(d.Text);
-            foreach (var r in T.Regulars) { Add(r.Ship); Add(r.Cap); if (r.Story != null) foreach (var s in r.Story) Add(s); }
+            foreach (var r in T.Regulars) { Add(r.Ship); Add(r.Cap); if (r.Story != null) foreach (var s in r.Story) Add(s); if (r.Lines != null) foreach (var s in r.Lines) Add(s); }      // Lines = 말풍선 대사(M4 에서 늘어난 필드; 빠뜨리면 꿈·닌·죠 글리프가 비었다)
             foreach (var s in T.SeasonGuests) { Add(s.Cap); Add(s.Text); }
             foreach (var a in T.Anniv) { Add(a.Cap); Add(a.Text); }
             Add(T.Finale.Nm); Add(T.Finale.Sign); Add(T.Finale.Head); Add(T.Finale.None); Add(T.Finale.SomeSuffix); Add(T.Finale.Tail);
@@ -121,6 +132,7 @@ namespace Lighthouse.UI.Model
             foreach (var kv in T.Bal.CondName) Add(kv.Value); foreach (var kv in T.Bal.CondShort) Add(kv.Value);
             foreach (var kv in T.Lint.DecoMsg) Add(kv.Value); foreach (var kv in T.Lint.SeasonName) Add(kv.Value);
             foreach (var kv in T.DecorLetters) Add(kv.Value);
+            Add(Badges.NewText); Add(Badges.OverText);        // 탭·메뉴 배지 글자(N, 99+)
             if (ui != null) foreach (var s in ui.AllTexts()) Add(s);
             Add("0123456789 .,:;!?()[]{}<>+-×÷=%/·…~'\"가나다"); Add("▶◀▲▼★♥♡₩←→"); set.Add((char)160); Add("오늘어제그제자정새벽오전낮오후시쯤월일년분초간번째회척개종곳명통점레벨단계");      // 코드가 만드는 글(WhenParts·FmtAway 등)
             return set;

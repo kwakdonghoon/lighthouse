@@ -129,7 +129,9 @@
   "world.act.flag": "오늘도 깃발을 올려요|바람에 펄럭이면 기분 좋아요", "world.act.anchor": "기념비가 반짝반짝해요|닻을 닦으면 마음이 맑아져요", "world.act.gild": "금빛 등불도 잘 있네요|등불을 하나하나 살펴봐요",
   "world.act.rest": "별이 예쁜 밤이에요|오늘도 바다가 평온해요",
   "deco.near": "자리가 가까워요. 아래 칸에서 골라 주세요.",
-  "world.letterToast": "우체통에 편지가 도착했어요", "world.letterToastSub": "천천히 읽어 보세요",
+  "world.letterToast": "우체통에 편지가 도착했어요", "world.letterToastSub": "천천히 읽어 보세요", "world.letterToastMany": "{0}통이 와 있어요",
+  "world.shiny": "빛나는 선물을 찾았어요", "world.shinySub": "반짝이는 {0}{이/가} 왔어요",
+  "toast.firstSky": "새 하늘 기록, {0}", "toast.firstSkyRare": "드문 하늘 기록, {0}", "toast.firstSea": "새 바다 친구, {0}", "toast.firstSeaRare": "드문 바다 친구, {0}", "toast.firstShip": "처음 만난 배, {0}", "toast.firstGift": "처음 받은 선물, {0}", "toast.firstSub": "도감에 남겨 뒀어요",
   "world.saveFailed": "저장하지 못했어요", "world.saveFailedSub": "저장 공간을 확인해 주세요"
  },
  "roles": [

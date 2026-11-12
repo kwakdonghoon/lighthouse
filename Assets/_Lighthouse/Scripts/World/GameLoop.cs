@@ -56,6 +56,35 @@ namespace Lighthouse.World
             Ctx.RegularOnSea = id => Ships.Any(s => s.Reg == id);
             LastSeason = Ctx.CurSeason(); Ctx.Wx = "clear";
             SetKeeperSpots();
+            // 규칙 쪽이 알리는 일을 토스트로 잇는다 (원본 addGift·deliverGuests·deliverFinale 안의 showToast)
+            Ctx.ShinyFound += g => { Say("level"); SendToast(Str.Get("world.shiny"), GameContext.FixJosa(Str.F("world.shinySub", GiftName(g)))); };
+            Ctx.LettersArrived += n => { MailAlertUntil = Perf + 4000; Say("mail"); SendToast(Str.Get("world.letterToast"), n > 1 ? Str.F("world.letterToastMany", n) : Str.Get("world.letterToastSub")); };
+        }
+
+        // ================= 처음 만난 것 알림 (원본 pumpFirst 3144행) =================
+        /// <summary>팝업·타이틀·다른 토스트·안내 카드가 떠 있으면 true — 화면(GameApp)이 채운다. 없으면 막지 않는다.</summary>
+        public Func<bool> UiBusy;
+        double firstLast; int firstShown;
+
+        /// <summary>
+        /// 처음 만난 것 알림: 6초 간격, 켠 동안 3번까지. 팝업·타이틀·다른 알림·안내 카드·공사 중에는 기다린다. 놓쳐도 도감에 남는다.
+        /// 대기열(Ctx.FirstQ)은 규칙 쪽 QueueFirst(= FirstMet 이벤트와 같은 지점)가 채우고, 여기서 한 개씩 꺼낸다.
+        /// </summary>
+        void PumpFirst()
+        {
+            var q = Ctx.FirstQ; if (q.Count == 0) return;
+            if (firstShown >= 3) { q.Clear(); return; }
+            if (Perf - firstLast < 6000 || (UiBusy != null && UiBusy()) || Ctx.S.Build != null) return;
+            var e = q[0]; q.RemoveAt(0); firstLast = Perf; firstShown++;
+            string kind = e[0], id = e[1];
+            if (kind == "letter") { MailAlertUntil = Perf + 4000; Say("mail"); SendToast(Str.Get("world.letterToast"), Str.Get("world.letterToastSub")); return; }      // 자연 관찰 편지
+            string nm = null; SeaDef sea = null;
+            if (kind == "sea") { if (Ctx.T.SeaById.TryGetValue(id, out sea)) nm = sea.Name; }
+            else if (kind == "ship") { if (Ctx.T.ShipById.TryGetValue(id, out var sd)) nm = sd.Name; }
+            else if (Ctx.T.GiftById.TryGetValue(id, out var gd)) nm = gd.Name;
+            if (string.IsNullOrEmpty(nm)) return;
+            string key = kind == "sea" ? (sea.Grp == "sky" ? (sea.Rare ? "toast.firstSkyRare" : "toast.firstSky") : sea.Rare ? "toast.firstSeaRare" : "toast.firstSea") : kind == "ship" ? "toast.firstShip" : "toast.firstGift";
+            SendToast(Str.F(key, nm), Str.Get("toast.firstSub")); Say("tick");
         }
 
         double R() => fx.NextDouble();
@@ -98,6 +127,7 @@ namespace Lighthouse.World
             if (Ctx.NeedRebuild) { Ctx.NeedRebuild = false; Rebuild?.Invoke("garden"); }
             if (Ctx.GrowthEvent != null) { SendToast(Str.Get("world.growth"), Ctx.GrowthEvent); Say("level"); Ctx.GrowthEvent = null; }
             UpdateBuild(now);
+            PumpFirst();
             if (Bubble != null && Perf > Bubble.Until) { Bubble = null; BubbleChanged?.Invoke(null); }
         }
 

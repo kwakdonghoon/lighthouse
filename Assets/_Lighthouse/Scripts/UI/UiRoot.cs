@@ -146,7 +146,7 @@ namespace Lighthouse.UI
         void RefreshHud(bool force)
         {
             var info = Hud_.Compute(Ctx, Str, ForecastSource?.Invoke());
-            Hud.Apply(info, Str, !PhotoMode && (Ctx.UnreadCount() > 0 || Ctx.Discovered() > Ctx.S.DexSeen));
+            Hud.Apply(info, Str, PhotoMode ? "" : Badges.Menu(Ctx.UnreadCount(), Ctx.Discovered() > Ctx.S.DexSeen));
         }
 
         void UpdateToast() { if (ToastState.Tick(clockNow)) Toast.Apply(ToastState, clockNow); else if (ToastState.Visible) Toast.Apply(ToastState, clockNow); else if (Toast.gameObject.activeSelf) Toast.gameObject.SetActive(false); }
