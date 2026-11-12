@@ -11,7 +11,7 @@
     },
     {
      "id": "stonetower",
-     "name": "돌탑",
+     "name": "돌 등대",
      "src": "free",
      "pal": {
       "form": "stone",
@@ -21,7 +21,7 @@
     },
     {
      "id": "cream",
-     "name": "크림 회벽 탑",
+     "name": "크림 회벽 등대",
      "src": "free",
      "pal": {
       "form": "plaster",
@@ -31,7 +31,7 @@
     },
     {
      "id": "forest",
-     "name": "숲빛 탑",
+     "name": "숲빛 등대",
      "src": "free",
      "pal": {
       "stripe": "#2f6a3a",
@@ -42,7 +42,7 @@
     },
     {
      "id": "blossom",
-     "name": "벚꽃빛 탑",
+     "name": "벚꽃빛 등대",
      "src": "earn",
      "need": [
       "garden",
@@ -58,7 +58,7 @@
     },
     {
      "id": "maple",
-     "name": "단풍빛 탑",
+     "name": "단풍빛 등대",
      "src": "earn",
      "need": [
       "port",
@@ -74,7 +74,7 @@
     },
     {
      "id": "snow",
-     "name": "눈꽃빛 탑",
+     "name": "눈꽃빛 등대",
      "src": "earn",
      "need": [
       "lens",
@@ -90,7 +90,7 @@
     },
     {
      "id": "bands",
-     "name": "줄무늬 띠 탑",
+     "name": "줄무늬 띠 등대",
      "src": "earn",
      "need": [
       "garden",
@@ -106,7 +106,7 @@
     },
     {
      "id": "spire",
-     "name": "뾰족 지붕 탑",
+     "name": "뾰족 지붕 등대",
      "src": "earn",
      "need": [
       "port",
@@ -121,7 +121,7 @@
     },
     {
      "id": "moonlit",
-     "name": "달빛 탑",
+     "name": "달빛 등대",
      "src": "iap",
      "pal": {
       "stripe": "#8a8fd0",
@@ -133,7 +133,7 @@
     },
     {
      "id": "widelamp",
-     "name": "넓은 램프 탑",
+     "name": "넓은 램프 등대",
      "src": "iap",
      "pal": {
       "form": "wide",
@@ -145,7 +145,7 @@
     },
     {
      "id": "gilded",
-     "name": "황금 줄무늬 탑",
+     "name": "황금 줄무늬 등대",
      "src": "iap",
      "pal": {
       "stripe": "#d9a93a",
@@ -155,7 +155,7 @@
     },
     {
      "id": "sea",
-     "name": "바다빛 탑",
+     "name": "바다빛 등대",
      "src": "earn",
      "need": [
       "lens",
@@ -169,7 +169,7 @@
     },
     {
      "id": "dawn",
-     "name": "새벽빛 탑",
+     "name": "새벽빛 등대",
      "src": "earn",
      "need": [
       "lens",
@@ -485,7 +485,7 @@
   {
    "id": "starter",
    "name": "스타터 패키지",
-   "desc": "황금 줄무늬 탑 + 선원 옷 + 광고 제거",
+   "desc": "황금 줄무늬 등대 + 선원 옷 + 광고 제거",
    "price": 3300,
    "grants": [
     "tower:gilded",
@@ -496,7 +496,7 @@
   {
    "id": "noads",
    "name": "광고 제거",
-   "desc": "보상형 광고를 보지 않아도 같은 선물 보너스를 받아요.",
+   "desc": "광고 없이 같은 선물을 바로 받아요.",
    "price": 2200,
    "grants": [
     "noads"
@@ -515,7 +515,7 @@
   {
    "id": "goldpack",
    "name": "황금 외형 팩",
-   "desc": "황금 줄무늬 탑 + 금빛 선체",
+   "desc": "황금 줄무늬 등대 + 금빛 선체",
    "price": 2200,
    "grants": [
     "tower:gilded",
@@ -535,7 +535,7 @@
   {
    "id": "moonpack",
    "name": "달빛 등대",
-   "desc": "은빛과 푸른 보랏빛 줄무늬 탑. 모양만 바뀌어요.",
+   "desc": "은빛과 푸른 보랏빛 줄무늬 등대. 겉모습만 바뀌어요.",
    "price": 1100,
    "grants": [
     "tower:moonlit"
@@ -544,7 +544,7 @@
   {
    "id": "widepack",
    "name": "넓은 램프 등대",
-   "desc": "램프실이 넓은 탑. 모양만 바뀌고 빛의 세기는 그대로예요.",
+   "desc": "램프실이 넓은 등대. 모양만 바뀌고 빛의 세기는 그대로예요.",
    "price": 1100,
    "grants": [
     "tower:widelamp"
@@ -583,11 +583,11 @@
  ],
  "itemNames": {
   "noads": "광고 제거",
-  "tower:gilded": "황금 줄무늬 탑",
+  "tower:gilded": "황금 줄무늬 등대",
   "keeper:sailor": "선원 옷",
   "ship:gilded": "금빛 선체",
-  "tower:moonlit": "달빛 탑",
-  "tower:widelamp": "넓은 램프 탑",
+  "tower:moonlit": "달빛 등대",
+  "tower:widelamp": "넓은 램프 등대",
   "decor:festival": "축제 마을 집·꽃밭·깃발",
   "beam:sunset": "노을빛",
   "beam:violet": "보랏빛"

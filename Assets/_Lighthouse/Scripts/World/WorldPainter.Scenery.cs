@@ -430,13 +430,28 @@ namespace Lighthouse.World
         /// <summary>slotNum(id): 자리 id 의 숫자 부분(원본 +id.replace(/\D/g, '')).</summary>
         public static int SlotNum(string id) { int n = 0; foreach (char ch in id ?? "") if (ch >= '0' && ch <= '9') n = n * 10 + (ch - '0'); return n; }
 
-        /// <summary>자리 번호 배지(3×5 도트 숫자): 원본은 숫자 표를 0~9 만 가져 10번 이상은 0 모양이 나온다(원본 그대로).</summary>
+        /// <summary>자리 번호 배지(3×5 도트 숫자). U1: 원본은 숫자 표가 0~9 뿐이라 10번 이상이 전부 0 모양이었다 — 두 자리 이상은 숫자를 자릿수대로 그린다.
+        /// 한 자리(0~9)는 원본과 픽셀이 같다(골든 배지 프레임). 두 자리는 글자 사이 1칸, 배지 중심은 한 자리 때와 같은 곳(m.X-1.5)이다.</summary>
         void PaintDecoBadge(DecoMarker m)
         {
-            var d = m.Num >= 0 && m.Num < DecoDigits.Length ? DecoDigits[m.Num] : DecoDigits[0]; double bx = m.X - 3, by = m.Y + 3;
-            OvQ(bx - 1, by - 1, 5, 7, Hx(m.Sel ? "#7e4a06" : "#20304e")); OvQ(bx, by, 3, 5, Hx("#20304e"));
+            string s = (m.Num > 0 ? m.Num : 0).ToString(System.Globalization.CultureInfo.InvariantCulture); int n = s.Length, w = n * 4 - 1;
+            double bx = m.X - 3 - (w - 3) / 2, by = m.Y + 3;
+            OvQ(bx - 1, by - 1, w + 2, 7, Hx(m.Sel ? "#7e4a06" : "#20304e")); OvQ(bx, by, w, 5, Hx("#20304e"));
             var ink = Hx(m.Sel ? "#ffe98a" : "#ffffff");
-            for (int j = 0; j < 5; j++) for (int i = 0; i < 3; i++) if (d[j][i] == '#') OvQ(bx + i, by + j, 1, 1, ink);
+            for (int k = 0; k < n; k++)
+            {
+                var d = DecoDigits[s[k] - '0']; double dx = bx + k * 4;
+                for (int j = 0; j < 5; j++) for (int i = 0; i < 3; i++) if (d[j][i] == '#') OvQ(dx + i, by + j, 1, 1, ink);
+            }
+        }
+
+        /// <summary>시험용: 번호 배지 한 개를 그린 도트 격자('#'=글자, 'o'=바탕, '.'=없음). 가로 (자릿수×4+1)·세로 7.</summary>
+        public static string[] BadgeDots(int num)
+        {
+            string s = (num > 0 ? num : 0).ToString(System.Globalization.CultureInfo.InvariantCulture); int n = s.Length, w = n * 4 - 1;
+            var rows = new string[5];
+            for (int j = 0; j < 5; j++) { var sb = new System.Text.StringBuilder(); for (int k = 0; k < n; k++) { if (k > 0) sb.Append('.'); sb.Append(DecoDigits[s[k] - '0'][j]); } rows[j] = sb.ToString(); }
+            return rows;
         }
     }
 }

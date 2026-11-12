@@ -1,51 +1,72 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!28 &-150748695121468984
-Texture2D:
+--- !u!21 &-6712296115081374809
+Material:
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NotoSansKR-Bold SDF Atlas
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 4
-  m_Width: 1
-  m_Height: 1
-  m_CompleteImageSize: 1
-  m_MipsStripped: 0
-  m_TextureFormat: 1
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IsPreProcessed: 0
-  m_IgnoreMipmapLimit: 1
-  m_MipmapLimitGroupName: 
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_VTOnly: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 0
-  m_PlatformBlob: 
-  image data: 1
-  _typelessdata: 00
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
+  m_Name: NotoSansKR-Bold SDF Material
+  m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 6912480169924313345}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _FaceDilate: 0
+    - _GradientScale: 7
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _ScaleRatioA: 0.85714287
+    - _ScaleRatioB: 1
+    - _ScaleRatioC: 0.6964286
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 2048
+    - _TextureWidth: 2048
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +102,7 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 2
     m_TabWidth: 9
-  m_Material: {fileID: 8298714893207947369}
+  m_Material: {fileID: -6712296115081374809}
   m_SourceFontFileGUID: 9619efd3904db944a9bd7dcf40b277bc
   m_CreationSettings:
     sourceFontFileName: 
@@ -109,7 +130,7 @@ MonoBehaviour:
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
-  - {fileID: -150748695121468984}
+  - {fileID: 6912480169924313345}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 1
   m_GetFontFeatures: 1
@@ -128,11 +149,11 @@ MonoBehaviour:
     m_MultipleSubstitutionRecords: []
     m_LigatureSubstitutionRecords:
     - m_ComponentGlyphIDs: 2a0000002a0000002c000000
-      m_LigatureGlyphID: 741
-    - m_ComponentGlyphIDs: 2a0000002a000000
-      m_LigatureGlyphID: 739
-    - m_ComponentGlyphIDs: 2a0000002c000000
       m_LigatureGlyphID: 740
+    - m_ComponentGlyphIDs: 2a0000002a000000
+      m_LigatureGlyphID: 738
+    - m_ComponentGlyphIDs: 2a0000002c000000
+      m_LigatureGlyphID: 739
     m_GlyphPairAdjustmentRecords:
     - m_FirstAdjustmentRecord:
         m_GlyphIndex: 58
@@ -337,7 +358,7 @@ MonoBehaviour:
           m_XAdvance: -0.71999997
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 739
+        m_GlyphIndex: 738
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -352,7 +373,7 @@ MonoBehaviour:
           m_XAdvance: -0.71999997
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 740
+        m_GlyphIndex: 739
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -622,7 +643,7 @@ MonoBehaviour:
           m_XAdvance: -1.5999999
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 770
+        m_GlyphIndex: 769
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -1087,7 +1108,7 @@ MonoBehaviour:
           m_XAdvance: -6
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 770
+        m_GlyphIndex: 769
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -1222,7 +1243,7 @@ MonoBehaviour:
           m_XAdvance: -6
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 770
+        m_GlyphIndex: 769
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -1387,7 +1408,7 @@ MonoBehaviour:
           m_XAdvance: -0.68
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 770
+        m_GlyphIndex: 769
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -1417,7 +1438,7 @@ MonoBehaviour:
           m_XAdvance: -0.39999998
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 739
+        m_GlyphIndex: 738
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -1432,7 +1453,7 @@ MonoBehaviour:
           m_XAdvance: -0.39999998
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 740
+        m_GlyphIndex: 739
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -1762,7 +1783,7 @@ MonoBehaviour:
           m_XAdvance: -0.39999998
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 739
+        m_GlyphIndex: 738
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -1777,7 +1798,7 @@ MonoBehaviour:
           m_XAdvance: -0.39999998
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 740
+        m_GlyphIndex: 739
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -2017,7 +2038,7 @@ MonoBehaviour:
           m_XAdvance: -2.96
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 770
+        m_GlyphIndex: 769
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -2497,7 +2518,7 @@ MonoBehaviour:
           m_XAdvance: -0.68
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 770
+        m_GlyphIndex: 769
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -2527,7 +2548,7 @@ MonoBehaviour:
           m_XAdvance: -0.39999998
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 739
+        m_GlyphIndex: 738
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -2542,7 +2563,7 @@ MonoBehaviour:
           m_XAdvance: -0.39999998
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 740
+        m_GlyphIndex: 739
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -2722,7 +2743,7 @@ MonoBehaviour:
           m_XAdvance: -0.68
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 770
+        m_GlyphIndex: 769
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -2752,7 +2773,7 @@ MonoBehaviour:
           m_XAdvance: -0.39999998
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 739
+        m_GlyphIndex: 738
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -2767,7 +2788,7 @@ MonoBehaviour:
           m_XAdvance: -0.39999998
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 740
+        m_GlyphIndex: 739
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -3007,7 +3028,7 @@ MonoBehaviour:
           m_XAdvance: -3.72
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 770
+        m_GlyphIndex: 769
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -3307,7 +3328,7 @@ MonoBehaviour:
           m_XAdvance: -0.52
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 770
+        m_GlyphIndex: 769
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -3562,7 +3583,7 @@ MonoBehaviour:
           m_XAdvance: -3.28
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
-        m_GlyphIndex: 770
+        m_GlyphIndex: 769
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -3643,70 +3664,49 @@ MonoBehaviour:
     kerningPairs: []
   fallbackFontAssets: []
   atlas: {fileID: 0}
---- !u!21 &8298714893207947369
-Material:
-  serializedVersion: 8
+--- !u!28 &6912480169924313345
+Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NotoSansKR-Bold SDF Material
-  m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: -150748695121468984}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _CullMode: 0
-    - _FaceDilate: 0
-    - _GradientScale: 7
-    - _MaskSoftnessX: 0
-    - _MaskSoftnessY: 0
-    - _OutlineSoftness: 0
-    - _OutlineWidth: 0
-    - _PerspectiveFilter: 0.875
-    - _ScaleRatioA: 0.85714287
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 0.6964286
-    - _ScaleX: 1
-    - _ScaleY: 1
-    - _ShaderFlags: 0
-    - _Sharpness: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _TextureHeight: 2048
-    - _TextureWidth: 2048
-    - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
-    - _UnderlaySoftness: 0
-    - _VertexOffsetX: 0
-    - _VertexOffsetY: 0
-    - _WeightBold: 0.75
-    - _WeightNormal: 0
-    m_Colors:
-    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
+  m_Name: NotoSansKR-Bold SDF Atlas
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 4
+  m_Width: 1
+  m_Height: 1
+  m_CompleteImageSize: 1
+  m_MipsStripped: 0
+  m_TextureFormat: 1
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 1
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 0
+  m_PlatformBlob: 
+  image data: 1
+  _typelessdata: 00
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
