@@ -40,9 +40,21 @@ namespace Lighthouse.App
         public readonly List<double> FrameMs = new List<double>();
 
         UiStrings str; SaveStore store; SaveMigrator mig; BubbleView bubble; OfflineResult pendingNews;
-        bool rebuildPending = true; int lastW, lastH, lastDecorRev = -1; long hiddenAtMs; float hintUntil;
+        bool rebuildPending = true; int lastW, lastH, lastDecorRev = -1; long hiddenAtMs;
         bool pressing, moved; Vector2 pressStart; float pressT; bool booted;
-        string lastSkinKey; bool restarting;
+        string lastSkinKey; bool restarting; LoadNotice pendingNotice; Lighthouse.Platform.ScreenReaderBridge a11y;
+        public ITextTransfer Transfer { get; private set; }
+        public SaveStore Store => store;
+#if LIGHTHOUSE_DEV
+        // ----- 개발용 훅 (Lighthouse.Dev 의 DevPanel 이 쓴다. LIGHTHOUSE_DEV 가 없으면 컴파일에서 빠진다) -----
+        public static DevClock DevClockRef;
+        public static float DevTimeMul = 1;             // 1 이면 실제 속도. 2 이상이면 시계와 루프를 함께 빠르게 돌린다
+        public bool DevSuppressSave;                    // true 이면 자동 저장을 멈춘다(시뮬레이터가 상태를 빌려 쓰는 동안)
+        public UiStrings DevStr => str;
+        public SaveMigrator DevMig => mig;
+        public void DevRebuild() { rebuildPending = true; }
+        public void DevReboot() { Restart(); }
+#endif
 
         void Awake()
         {
@@ -62,9 +74,12 @@ namespace Lighthouse.App
             var src = new ResourcesDataSource();
             T = DataLoader.Load(src); str = UiStrings.Parse(src.ReadText("ko/ui.json"));
             Clock = ManualClockMode ? (IClock)new ManualClock(ManualStartMs > 0 ? ManualStartMs : new SystemClock().NowMs, new SystemClock().OffsetMinutes(new SystemClock().NowMs)) : new SystemClock();
+#if LIGHTHOUSE_DEV
+            if (!ManualClockMode) { DevClockRef = new DevClock(new SystemClock(), DevClockRef != null ? DevClockRef.ExtraMs : 0); Clock = DevClockRef; }      // 개발용: 배속·시간 건너뛰기(출시 빌드에는 이 줄이 없다)
+#endif
             SaveDir = !string.IsNullOrEmpty(SaveDirOverride) ? SaveDirOverride : Application.persistentDataPath;
             mig = new SaveMigrator(T, Clock); store = new SaveStore(new FileStorage(SaveDir), mig, Clock);
-            var state = store.Load(); LoadedFrom = store.LoadedFrom;
+            var state = store.Load(); LoadedFrom = store.LoadedFrom; pendingNotice = store.Notice;
             bool first = LoadedFrom == "new";
             Ctx = new GameContext(T, state, ManualClockMode ? (IRng)new Mulberry32(12345) : new SystemRng(), Clock);
             long now = Clock.NowMs;
@@ -81,6 +96,10 @@ namespace Lighthouse.App
             Ui = UiRoot.Create(null, false); Ui.Canvas.sortingOrder = 10;
             if (ForceW > 0) { Ui.ManualScreen = true; Ui.DevW = ForceW; Ui.DevH = ForceH; Ui.Density = ForceDensity; Ui.Safe = new Insets(0, 24, 0, 16); }
             Ui.Setup(Ctx, str, null, null, new SaveCode(T, mig), null);
+            Transfer = new Lighthouse.Platform.PlatformTextTransfer(Path.Combine(SaveDir, "exports")); Ui.Transfer = Transfer;     // 코드 복사·파일 내보내기·파일 열기(플랫폼별)
+            Lighthouse.Platform.PlatformAccess.Init();                                                                              // 움직임 줄이기 OS 설정, 스크린 리더 다리
+            if (a11y == null) a11y = gameObject.AddComponent<Lighthouse.Platform.ScreenReaderBridge>();
+            a11y.Bind(Ui.Canvas);
             Ui.ForecastSource = () => Loop.Forecast();
             bubble = BubbleView.Create(Ui.transform);
             Ui.WorldDirtyRequested += _ => rebuildPending = true;
@@ -123,6 +142,13 @@ namespace Lighthouse.App
 
         void OnTitleClosed()
         {
+            if (pendingNotice != LoadNotice.None)
+            {
+                // 저장 파일이 깨져 있었다는 안내(원본에는 없는 문구: 이식 중 새로 쓴 것)
+                if (pendingNotice == LoadNotice.RestoredBackup) Ui.ShowToast(str.Get("world.saveRestored"), str.Get("world.saveRestoredSub"));
+                else Ui.ShowToast(str.Get("world.saveFresh"), str.Get("world.saveFreshSub"));
+                pendingNotice = LoadNotice.None;
+            }
             if (pendingNews != null) { Ui.Ctl.OpenNews(new OfferNews(pendingNews)); Ui.Panel.Refresh(false); pendingNews = null; }
         }
 
@@ -143,12 +169,20 @@ namespace Lighthouse.App
 
         void OnSaveImported(JObject data)
         {
+            if (restarting) return;
             try
             {
-                var st = GameState.FromJson(mig.Migrate(data)); st.LastSeen = Clock.NowMs;           // 가져온 순간부터 다시 센다 (비운 시간 보상은 없다)
-                store.Save(st); restarting = true; Invoke(nameof(Restart), 0f);
+                // 원본 importAct: 이 기기의 구매(owned)·광고 횟수(ads)는 그대로, lastSeen=지금 (SaveImport.Apply)
+                var st = SaveImport.Apply(Ctx.S, data, mig, Clock.NowMs);
+                restarting = true;                                  // 이 순간부터 자동 저장·일시정지 저장이 옛 상태로 덮어쓰지 못한다 (Update/Pause/Quit 이 이 값을 본다)
+                store.KeepBeforeImport(); store.Save(st);
+                Invoke(nameof(Restart), 0f);
             }
-            catch (Exception e) { UnityEngine.Debug.LogWarning("가져오기 실패: " + e.Message); }
+            catch (Exception e)
+            {
+                restarting = false; UnityEngine.Debug.LogWarning("가져오기 실패: " + e.Message);
+                if (Ui != null) Ui.ShowToast(str.Get("world.saveFailed"), str.Get("world.saveFailedSub"));
+            }
         }
 
         /// <summary>저장 파일을 다시 읽어 처음부터 다시 시작(가져오기 뒤).</summary>
@@ -176,7 +210,7 @@ namespace Lighthouse.App
         // ================= 앱 생명주기 =================
         void OnApplicationPause(bool pause)
         {
-            if (!booted) return;
+            if (!booted || restarting) return;           // 가져오기 직후 재시작을 기다리는 동안 옛 상태로 저장하지 않는다
             if (pause) { hiddenAtMs = Clock.NowMs; Save.Flush(); return; }
             if (hiddenAtMs == 0) return;
             double away = (Clock.NowMs - hiddenAtMs) / 1000.0; hiddenAtMs = 0;           // 앱을 켜 둔 채 다른 앱에 다녀온 경우에도 보상
@@ -184,7 +218,7 @@ namespace Lighthouse.App
             if (news != null && !news.Quiet) { LastNews = news; Ui.Ctl.OpenNews(new OfferNews(news)); Ui.Panel.Refresh(false); }
         }
 
-        void OnApplicationQuit() { if (booted && Save != null) Save.Flush(); }
+        void OnApplicationQuit() { if (booted && !restarting && Save != null) Save.Flush(); }
 
         /// <summary>시험: 지금 즉시 저장(앱이 가려질 때와 같다).</summary>
         public void FlushNow() { Save.Flush(); }
@@ -192,9 +226,19 @@ namespace Lighthouse.App
         // ================= 매 프레임 =================
         void Update()
         {
-            if (!booted) return;
+            if (!booted || restarting) return;
             var sw = Stopwatch.StartNew();
             float rdt = Mathf.Min(0.1f, Time.unscaledDeltaTime);
+#if LIGHTHOUSE_DEV
+            if (!ManualClockMode && DevTimeMul > 1.001f && DevClockRef != null)
+            {
+                // 개발용 배속: 시계를 (배속-1)×dt 만큼 더 보내고 루프를 배속×dt 로 0.1초씩 나눠 돌린다 (ManualClockMode 와 같은 방식)
+                double sim = rdt * DevTimeMul; int n = Mathf.Max(1, Mathf.CeilToInt((float)(sim / 0.1))); double step = sim / n;
+                DevClockRef.AddExtraSec(rdt * (DevTimeMul - 1));
+                for (int i = 0; i < n; i++) { Loop.Tick(step); if (!DevSuppressSave) Save.Tick(step); HandleInput(); }
+            }
+            else
+#endif
             if (ManualClockMode)
             {
                 double sim = rdt * TimeMul; int n = Mathf.Max(1, Mathf.CeilToInt((float)(sim / 0.1))); double step = sim / n;

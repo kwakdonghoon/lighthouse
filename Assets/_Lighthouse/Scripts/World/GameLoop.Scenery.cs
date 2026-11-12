@@ -25,8 +25,10 @@ namespace Lighthouse.World
         static readonly int[] FireworkCols = { 0, 1, 2, 3 };       // SparkCols 의 앞 네 색(원본 '#ffe08a'·'#ff9bb8'·'#a8d4ff'·'#8be096')
 
         /// <summary>개발 도구(원본 개발 단추 '별똥별'·'불꽃놀이'): 밤이면 곧 별똥별이 흐르게 / 불꽃 한 발.</summary>
+#if LIGHTHOUSE_DEV      // 출시 구성에는 이 두 훅이 없다(DevTools 의 바이너리 검사가 이름으로 확인)
         public void DevMeteorSoon() { nextMeteor = 0; }
         public void DevFirework() { Firework(); }
+#endif
 
         /// <summary>렌즈가 자랄수록 별똥별이 자주 흐른다 (원본 meteorMul 1955행, EC-06). 성장 화면 "별똥별 ×N" 과 같은 식.</summary>
         public double MeteorMul() { int L = Ctx.LvlOf("lens"); return (1 + 0.03 * Math.Min(L, 16)) * (L >= 14 ? 2.2 : L >= 9 ? 1.43 : 1); }

@@ -134,7 +134,10 @@
   "world.letterToast": "우체통에 편지가 도착했어요", "world.letterToastSub": "천천히 읽어 보세요", "world.letterToastMany": "{0}통이 와 있어요",
   "world.shiny": "빛나는 선물을 찾았어요", "world.shinySub": "반짝이는 {0}{이/가} 왔어요",
   "toast.firstSky": "새 하늘 기록, {0}", "toast.firstSkyRare": "드문 하늘 기록, {0}", "toast.firstSea": "새 바다 친구, {0}", "toast.firstSeaRare": "드문 바다 친구, {0}", "toast.firstShip": "처음 만난 배, {0}", "toast.firstGift": "처음 받은 선물, {0}", "toast.firstSub": "도감에 남겨 뒀어요",
-  "world.saveFailed": "저장하지 못했어요", "world.saveFailedSub": "저장 공간을 확인해 주세요"
+  "world.saveFailed": "저장하지 못했어요", "world.saveFailedSub": "저장 공간을 확인해 주세요",
+  "set.fileFail": "파일을 읽지 못했어요.",
+  "world.saveRestored": "저장 파일을 읽지 못했어요", "world.saveRestoredSub": "직전 기록으로 이어서 해요",
+  "world.saveFresh": "저장 파일을 읽지 못했어요", "world.saveFreshSub": "새로 시작해요. 이전 파일은 따로 남겨 뒀어요"
  },
  "roles": [
   { "stage": 2, "name": "암초 경고", "desc": "암초 근처를 지나는 배에게 붉은 불빛을 보내 비켜 가게 해요" },

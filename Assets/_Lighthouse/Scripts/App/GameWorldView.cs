@@ -145,7 +145,7 @@ namespace Lighthouse.App
             UpdateShips(dusk);
             UpdateKeeper();
             var sw2 = Stopwatch.StartNew();
-            painter.ReduceMotion = ReduceMotion; painter.Paint(loop, Sprites); painter.Merge(ovBuf, true);
+            painter.ReduceMotion = ReduceMotion || Lighthouse.Core.MotionPref.Reduce; painter.Paint(loop, Sprites); painter.Merge(ovBuf, true);      // ReduceMotion: 직접 켠 값 또는 OS 설정(MotionPref, Platform 이 채움)
             ovTex.SetPixelData(ovBuf, 0); ovTex.Apply(false, false);
             UploadLayer(painter.Back, backTex, backSr); UploadLayer(painter.Mid, midTex, midSr);
             LastPaintMs = sw2.Elapsed.TotalMilliseconds;
@@ -307,7 +307,7 @@ namespace Lighthouse.App
         /// <summary>월드 한 장(연출 포함, UI 제외)을 정수 배율로 키운 PNG 바이트.</summary>
         public byte[] CapturePng(int mult)
         {
-            var big = new RenderTexture(W * mult, H * mult, 0, RenderTextureFormat.ARGB32) { filterMode = FilterMode.Point };
+            var big = new RenderTexture(W * mult, H * mult, 24, RenderTextureFormat.ARGB32) { filterMode = FilterMode.Point };
             View.WorldCam.Render();
             Graphics.Blit(View.Rt, big);
             var prev = RenderTexture.active; RenderTexture.active = big;

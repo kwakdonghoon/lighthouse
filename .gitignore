@@ -43,3 +43,7 @@
 # Logs
 *.log
 *.tmp
+
+# dotnet test build outputs (Tools/*dotnet)
+Tools/*dotnet/bin/
+Tools/*dotnet/obj/

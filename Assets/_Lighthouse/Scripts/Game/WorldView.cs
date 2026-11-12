@@ -84,7 +84,7 @@ namespace Lighthouse.Game
             }
             SetDusk(dusk);
 
-            Rt = new RenderTexture(W, H, 0, RenderTextureFormat.ARGB32) { filterMode = FilterMode.Point, name = "LogicalRT", useMipMap = false };
+            Rt = new RenderTexture(W, H, 24, RenderTextureFormat.ARGB32) { filterMode = FilterMode.Point, name = "LogicalRT", useMipMap = false };      // 깊이 24: URP 렌더 그래프는 깊이 버퍼 없는 출력 RT 에 프레임마다 경고를 쏟는다(2D 스프라이트는 깊이 시험을 하지 않아 그림은 같다)
             Rt.Create();
             var camGo = new GameObject("WorldCam"); camGo.transform.SetParent(root.transform, false);
             WorldCam = camGo.AddComponent<Camera>();

@@ -204,7 +204,7 @@ namespace Lighthouse.UI.Model
                 case "autooffer": S.AutoOffer = v == "on"; Ctx.NotifyChanged(); if (S.AutoOffer) Ctx.AutoOfferAll(); break;
                 case "beam": { var bc = T.BeamColors.FirstOrDefault(x => x.Id == v); if (bc != null && BeamUsable(bc)) { S.Beam = v; Ctx.NotifyChanged(); Host.WorldDirty(); } break; }
                 case "exp": ExportAct(v); break;
-                case "imp": ImportAct(); break;
+                case "imp": if (v == "file") { if (Host is IUiHostFilePicker fp) fp.PickTextFile(); else ImportFileNone(); } else ImportAct(); break;      // "파일 열기"는 가져오기 확정이 아니다(이전에는 둘 다 ImportAct 로 갔다)
                 default:
                     if (!DecoAct(k, v)) return false;
                     break;

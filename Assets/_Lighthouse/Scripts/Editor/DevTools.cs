@@ -63,7 +63,7 @@ namespace Lighthouse.EditorTools
             if (rep.summary.result != BuildResult.Succeeded) { File.WriteAllText(Path.Combine(outDir, "dev_exclusion.txt"), sb.ToString()); EditorApplication.Exit(1); return; }
 
             string managed = Path.Combine(outDir, "Lighthouse_Data", "Managed");
-            string[] needles = { "DevClock", "DevTimeMul", "DevPanel", "DevCommands", "DevChecks", "DevRebuild", "DevReboot", "DevSuppressSave" };
+            string[] needles = { "DevClock", "DevTimeMul", "DevPanel", "DevCommands", "DevChecks", "DevRebuild", "DevReboot", "DevSuppressSave", "DevMeteorSoon", "DevFirework" };
             var hits = new System.Collections.Generic.List<string>();
             var dlls = Directory.GetFiles(managed, "Lighthouse*.dll");
             sb.AppendLine("훑은 DLL: " + string.Join(", ", dlls.Select(Path.GetFileName)));

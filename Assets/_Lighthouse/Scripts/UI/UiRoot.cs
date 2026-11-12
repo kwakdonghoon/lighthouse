@@ -14,7 +14,7 @@ namespace Lighthouse.UI
     /// UI 의 뿌리: 캔버스·화면 크기(CanvasScaler 와 같은 식)·안전 영역·도트 크기, 그리고 화면들(HUD·팝업·토스트·안내·타이틀·사진 모드·테스트 광고).
     /// Core 상태를 읽어 보여 주고 입력을 PanelController 로 넘기는 얇은 계층이다. 월드(WorldView)는 모르고, 바뀐 일은 이벤트로 알린다.
     /// </summary>
-    public sealed class UiRoot : MonoBehaviour, IUiHost
+    public sealed class UiRoot : MonoBehaviour, IUiHostRegion, IUiHost, IUiHostFilePicker
     {
         public static float CurrentDot = 2.25f, CanvasW = 360f, CanvasH = 640f;
         public const string PrefabPath = "UI/Prefabs/UiRoot";
@@ -350,9 +350,21 @@ namespace Lighthouse.UI
         public void ApplyView(string view) { ViewChanged?.Invoke(view); }
         public void ApplyWake(bool on) { Screen.sleepTimeout = on ? SleepTimeout.NeverSleep : SleepTimeout.SystemSetting; }
         public bool WakeSupported => Application.isMobilePlatform || Application.isEditor;
-        void IUiHost.Toast(string title, string sub) { ToastState.Show(title, sub, clockNow); Toast.Apply(ToastState, clockNow); }
-        public void CopyText(string text) { GUIUtility.systemCopyBuffer = text; }
-        public void SaveTextFile(string name, string text) { try { File.WriteAllText(Path.Combine(Application.persistentDataPath, name), text); } catch (Exception) { } }
+        void IUiHost.Toast(string title, string sub) { ToastState.Show(title, sub, clockNow); if (!PhotoMode) Toast.Apply(ToastState, clockNow); }
+        /// <summary>코드 복사·파일 내보내기·파일 열기의 플랫폼 구현(GameApp 이 Platform 의 구현을 넣는다). 없으면 예전 기본 동작.</summary>
+        public ITextTransfer Transfer;
+        public void CopyText(string text) { if (Transfer != null) Transfer.CopyText(text); else GUIUtility.systemCopyBuffer = text; }
+        public void SaveTextFile(string name, string text)
+        {
+            if (Transfer != null) { Transfer.SaveTextFile(name, text); return; }
+            try { File.WriteAllText(Path.Combine(Application.persistentDataPath, name), text); } catch (Exception) { }
+        }
+        /// <summary>"파일 열기"(imp:file): 찾은 텍스트는 가져올 칸에 넣고, 못 찾으면 안내 글. 콜백은 동기로 불리므로 곧 이어지는 화면 갱신에 반영된다.</summary>
+        public void PickTextFile()
+        {
+            if (Transfer == null) { Ctl.ImportFileNone(); return; }
+            Transfer.PickTextFile(t => { if (string.IsNullOrEmpty(t)) Ctl.ImportFileNone(); else Ctl.ImportFileRead(t); });
+        }
         public void ImportSave(JObject data) { SaveImported?.Invoke(data); }
         public void ClosePanelRequested() { Panel.Refresh(false); }
 

@@ -308,6 +308,9 @@ namespace Lighthouse.UI.Model
             else { impText = c; Host.CopyText(c); impMsg = S_("set.copied"); }
         }
         public void ImportFileRead(string text) { impText = (text ?? "").Trim(); impArmed = false; impMsg = S_("set.fileRead"); }
+        /// <summary>"파일 열기"에서 읽을 파일을 못 찾았을 때 — 원본의 파일 읽기 실패 안내(2968행)와 같은 글.</summary>
+        public void ImportFileNone() { impArmed = false; impMsg = S_("set.fileFail"); }
+        public string ImpMsg => impMsg; public bool ImpArmed => impArmed;
         void ImportAct()
         {
             if (code == null) return;

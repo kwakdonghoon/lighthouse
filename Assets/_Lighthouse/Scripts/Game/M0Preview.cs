@@ -76,7 +76,7 @@ namespace Lighthouse.Game
             for (; pi < isl.Pieces.Count; pi++) Place(isl.Pieces[pi].Spr, X, cy + isleY, ref order, st);                                // 탑 앞(B 패스)
             st.UploadMs = sw.Elapsed.TotalMilliseconds;
 
-            Rt = new RenderTexture(ls.W, ls.H, 0, RenderTextureFormat.ARGB32) { filterMode = FilterMode.Point, name = "LogicalRT", useMipMap = false };
+            Rt = new RenderTexture(ls.W, ls.H, 24, RenderTextureFormat.ARGB32) { filterMode = FilterMode.Point, name = "LogicalRT", useMipMap = false };      // 깊이 24: URP 렌더 그래프는 깊이 버퍼 없는 출력 RT 에 프레임마다 경고를 쏟는다(2D 스프라이트는 깊이 시험을 하지 않아 그림은 같다)
             Rt.Create();
             st.RtBytes = (long)ls.W * ls.H * 4;
 

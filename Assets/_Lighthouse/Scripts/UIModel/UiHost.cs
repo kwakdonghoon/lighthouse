@@ -21,6 +21,9 @@ namespace Lighthouse.UI.Model
         void ClosePanelRequested();
     }
 
+    /// <summary>"파일 열기"(원본 input[type=file]): 호스트가 가져올 텍스트를 찾아 ImportFileRead(찾음) 또는 ImportFileNone(없음)을 부른다(동기). 선택 사항이라 IUiHost 와 따로 둔다.</summary>
+    public interface IUiHostFilePicker { void PickTextFile(); }
+
     public sealed class UiFeatures
     {
         public bool Shop = true, Ads = true;    // 원본 FEATURES (결제·광고 테스트 단계)
@@ -28,9 +31,12 @@ namespace Lighthouse.UI.Model
     }
 
     /// <summary>시험·미리보기용 호스트: 부른 기록만 남긴다.</summary>
-    public sealed class RecordingHost : IUiHost
+    public sealed class RecordingHost : IUiHost, IUiHostFilePicker
     {
         public readonly List<string> Log = new List<string>();
+        /// <summary>시험: "파일 열기"가 돌려줄 텍스트(null 이면 못 찾음). 컨트롤러를 연결해 두면 실제 흐름과 같게 부른다.</summary>
+        public string PickResult; public Lighthouse.UI.Model.PanelController PickTarget;
+        public void PickTextFile() { Log.Add("pick"); if (PickTarget != null) { if (string.IsNullOrEmpty(PickResult)) PickTarget.ImportFileNone(); else PickTarget.ImportFileRead(PickResult); } }
         public bool Wake;
         public string View = "normal", LastCopy;
         public JObject Imported;

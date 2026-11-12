@@ -71,6 +71,11 @@ namespace Lighthouse.Dev
             if (GUILayout.Button("안개")) DevCommands.StartWeather(loop, "fog");
             if (GUILayout.Button("비")) DevCommands.StartWeather(loop, "rain");
             GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("별똥별")) { loop.DevMeteorSoon(); Log("밤이면 곧 별똥별이 흘러요"); }
+            if (GUILayout.Button("불꽃놀이")) { loop.DevFirework(); Log("불꽃 한 발"); }
+            if (GUILayout.Button(MotionPref.Reduce ? "[움직임 줄이기]" : "움직임 줄이기")) { MotionPref.Reduce = !MotionPref.Reduce; Log("움직임 줄이기 " + (MotionPref.Reduce ? "켬" : "끔")); }
+            GUILayout.EndHorizontal();
 
             Head("등대 단계 (보기만 / 저장까지)");
             GUILayout.BeginHorizontal();
