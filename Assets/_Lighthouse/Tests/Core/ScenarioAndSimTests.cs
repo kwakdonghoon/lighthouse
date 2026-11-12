@@ -130,6 +130,9 @@ namespace Lighthouse.Tests
                 if (checks.Count > 0) fails.Add(name + " → " + string.Join(" ; ", checks));
             }
             Assert.GreaterOrEqual(n, 60, "시나리오 수");
+            // 문구 동기화 2차: 겨울 일지에서 여름 풍경 5문장을 뺐으므로(noWinter) 겨울 시나리오 일부는 JS 골든(옛 동결 사본)과 난수 흐름이 달라지는 것이 정상이다.
+            // 이 이름들만 허용하고(TextSync.WinterScenarios), 겨울 일지에 해당 문장이 안 나오는지는 ContentFix1Tests.WinterDiaryNeverTellsSummerEvents 가 따로 지킨다.
+            fails = fails.Where(f => !TextSync.WinterScenarios.Any(w => f.StartsWith(w + " →"))).ToList();
             Assert.IsEmpty(fails, n + "건 중 실패 " + fails.Count + "\n" + string.Join("\n", fails.Take(12)));
         }
 

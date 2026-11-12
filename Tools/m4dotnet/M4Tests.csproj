@@ -16,6 +16,7 @@
     <Compile Include="..\..\Assets\_Lighthouse\Scripts\UIModel\**\*.cs" />
     <Compile Include="..\..\Assets\_Lighthouse\Scripts\World\**\*.cs" />
     <Compile Include="..\..\Assets\_Lighthouse\Tests\Core\M1Fixture.cs" />
+    <Compile Include="..\..\Assets\_Lighthouse\Tests\Core\TextSync.cs" />
     <Compile Include="..\..\Assets\_Lighthouse\Tests\World\**\*.cs" />
   </ItemGroup>
   <ItemGroup>

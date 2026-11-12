@@ -14,6 +14,7 @@
     <Compile Include="..\..\Assets\_Lighthouse\Scripts\Data\**\*.cs" />
     <Compile Include="..\..\Assets\_Lighthouse\Scripts\UIModel\**\*.cs" />
     <Compile Include="..\..\Assets\_Lighthouse\Tests\Core\M1Fixture.cs" />
+    <Compile Include="..\..\Assets\_Lighthouse\Tests\Core\TextSync.cs" />
     <Compile Include="..\..\Assets\_Lighthouse\Tests\UI\**\*.cs" Exclude="..\..\Assets\_Lighthouse\Tests\UI\Unity\**" />
   </ItemGroup>
   <ItemGroup>

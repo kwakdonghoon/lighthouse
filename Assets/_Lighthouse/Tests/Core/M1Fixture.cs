@@ -29,7 +29,7 @@ namespace Lighthouse.Tests
         public static string DataDir => Path.Combine(Root, "Assets", "_Lighthouse", "Resources", "Data");
         public static GameTables Tables => tables ?? (tables = DataLoader.Load(new FolderDataSource(DataDir)));
 
-        public static JObject Golden(string name) => (JObject)Js.Parse(File.ReadAllText(Path.Combine(Root, "Tools", "golden", "m1", name), new System.Text.UTF8Encoding(false)));
+        public static JObject Golden(string name) => (JObject)Js.Parse(TextSync.Apply(File.ReadAllText(Path.Combine(Root, "Tools", "golden", "m1", name), new System.Text.UTF8Encoding(false))));      // 문구만 바뀐 곳은 새 문구로(TextSync)
 
         static JObject FuncGolden => funcGolden ?? (funcGolden = Golden("func.json"));
         /// <summary>골든이 쓴 고정 시각(2026-11-11 03:30 UTC)과 시간대 오프셋(한국 +540).</summary>

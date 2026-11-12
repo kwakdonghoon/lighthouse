@@ -46,6 +46,26 @@ namespace Lighthouse.Tests
         }
 
         [Test]
+        public void WinterDiaryNeverTellsSummerEvents()
+        {
+            var T = M1Fixture.Tables; var banned = T.Diary.Where(e => e.NoWinter).Select(e => e.Text).ToList();
+            Assert.GreaterOrEqual(banned.Count, 6, "noWinter 표시: 나비·꽃 이름·반딧불이·귀뚜라미·박쥐·무지개");
+            foreach (var w in new[] { "나비 한 마리가 부두 끝까지 날아갔어요", "관리인이 새로 핀 꽃 이름을 공책에 적었어요", "반딧불이가 섬 위를 한참 맴돌았어요", "귀뚜라미들이 번갈아 노래했어요", "박쥐 한 마리가 등대 둘레를 맴돌다 갔어요", "무지개가 걸렸다가 사라졌어요" }) CollectionAssert.Contains(banned, w);
+            int winterHits = 0, summerHits = 0;
+            for (int seed = 1; seed <= 300; seed++)
+            {
+                foreach (var season in new[] { "winter", "summer" })
+                {
+                    var c = UiFixture.Make(6, 260, 6, false, null, seed).Ctx;
+                    var list = c.MakeDiary(14 * 3600, new DiaryOpts { Rnd = new Mulberry32(seed), Season = season, Tier = 6, Week = false, NoGift = true, Seen = new System.Collections.Generic.Dictionary<string, double>() });
+                    foreach (var e in list) if (banned.Contains(e.Text)) { if (season == "winter") winterHits++; else summerHits++; }
+                }
+            }
+            Assert.AreEqual(0, winterHits, "겨울 일지에는 겨울에 없는 풍경이 나오면 안 된다");
+            Assert.Greater(summerHits, 0, "시험 전제: 여름에는 같은 문장이 실제로 나온다(대조군)");
+        }
+
+        [Test]
         public void NewToastKeysExistAndKeepOriginalWording()
         {
             var s = UiFixture.Strings();
