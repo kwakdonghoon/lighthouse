@@ -18,6 +18,12 @@ namespace Lighthouse.UI
         public Image Bg; public TMP_Text Name, Tagline, Day; public Button Tap; public CanvasGroup Group; public RectTransform Block; public RawImage Scene;
         public TitleRenderer Renderer; public Texture2D SceneTex;
         static TitleSprites sprites;
+        /// <summary>첫 실행 인트로(약 9초 + 글자 연출, 원본 INTRO)를 보이는 중. 켜진 순간부터의 시각 t 로 글자·날짜 줄이 차례로 나타난다.</summary>
+        public bool Intro { get; private set; }
+        /// <summary>장면이 내는 소리 요청(블록이 내려앉는 stone·build·lamp). UiRoot 가 Sfx 로 넘긴다.</summary>
+        public event Action<string> SfxRequested;
+        /// <summary>true 이면 처음 그릴 때부터 섬 조각(인트로용)까지 굽는다(첫 실행이 곧 올 때 한 번만 굽게). 앱이 타이틀을 만들기 전에 정한다.</summary>
+        public static bool WantPieces;
         float startAt; bool first; int lastW, lastH; uint[] flip; float scale = 1f, canvasW = 360f, canvasH = 640f;
 
         public static TitleView Create(Transform parent)
@@ -50,15 +56,22 @@ namespace Lighthouse.UI
             if (Name != null) Name.gameObject.SetActive(false);                                                          // 글자는 그림으로 보인다(스크린 리더용 이름만 남김)
             var v = Block.GetComponent<VerticalLayoutGroup>(); if (v != null) { v.enabled = false; Destroy(v); }
             Kit.Anchor(Block, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0.5f, 1), new Vector2(0, -150), new Vector2(0, 40));
-            var tr = Tagline.rectTransform; tr.SetParent(Block, false); Kit.Stretch(tr); Tagline.alignment = TextAlignmentOptions.Top; Tagline.characterSpacing = 4f; Tagline.enableWordWrapping = true;
+            var tr = Tagline.rectTransform; tr.SetParent(Block, false); Kit.Stretch(tr); Tagline.alignment = TextAlignmentOptions.Top; Tagline.characterSpacing = 4f; Tagline.textWrappingMode = TextWrappingModes.Normal;
             Tagline.color = new Color(0.96f, 0.94f, 0.82f, 0.85f); Tagline.raycastTarget = false; Day.raycastTarget = false;
             Day.color = new Color(0.87f, 0.89f, 0.96f, 0.62f); Day.alignment = TextAlignmentOptions.Center;
             Scene.transform.SetSiblingIndex(Bg != null ? Bg.transform.GetSiblingIndex() + 1 : 0);
         }
 
-        public void Apply(UiStrings s, string dayText, bool firstRun = false)
+        /// <summary>움직임 줄이기(원본 prefers-reduced-motion): 켜져 있으면 인트로 없이 정지 장면 한 장(Draw(-1)). 값은 기기 설정에서 읽은 Core 의 MotionPref.</summary>
+        public bool Calm => Lighthouse.Core.MotionPref.Reduce;
+
+        public void Apply(UiStrings s, string dayText, bool firstRun = false, bool intro = false)
         {
             Name.text = UiText.Display(s.Get("title.name")); Tagline.text = UiText.Display(s.Get("title.tagline")); Day.text = UiText.Display(dayText); first = firstRun;
+            Intro = intro && !Calm; startAt = Time.realtimeSinceStartup;
+            if (lastW > 0) Build(lastW, lastH);
+            if (Renderer != null) Renderer.Intro = Intro;
+            SetTextAlpha(0f);
         }
 
         /// <summary>화면 크기(기기 픽셀)·배율(기기 픽셀/캔버스 단위)·안전 영역이 바뀔 때 부른다: 장면 크기·배율과 글자 아래 부제 위치를 다시 정한다.</summary>
@@ -73,10 +86,11 @@ namespace Lighthouse.UI
         void Build(int devW, int devH)
         {
             if (devW <= 0 || devH <= 0) return;
-            if (sprites == null) sprites = TitleSprites.Build();
+            bool needPieces = Intro || WantPieces;
+            if (sprites == null || (needPieces && sprites.Pieces == null)) { sprites = TitleSprites.Build(needPieces); Renderer = null; }       // 인트로는 섬 조각(pieces)도 굽는다
             if (Renderer == null || lastW != devW || lastH != devH)
             {
-                lastW = devW; lastH = devH; Renderer = new TitleRenderer(sprites, devW, devH);
+                lastW = devW; lastH = devH; Renderer = new TitleRenderer(sprites, devW, devH) { Intro = Intro }; Renderer.Sfx += n => SfxRequested?.Invoke(n);
                 if (SceneTex != null) Destroy(SceneTex);
                 SceneTex = new Texture2D(Renderer.Lw, Renderer.Lh, TextureFormat.RGBA32, false, false) { filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp, name = "titleScene" };
                 flip = new uint[Renderer.Lw * Renderer.Lh]; Scene.texture = SceneTex; Redraw(0);
@@ -88,12 +102,27 @@ namespace Lighthouse.UI
 
         void OnEnable() { startAt = Time.realtimeSinceStartup; }
 
+        /// <summary>켜진 뒤 지난 초(장면 시각).</summary>
+        public float Elapsed => Time.realtimeSinceStartup - startAt;
+        public float? ForcedT;           // 시험·캡처: 장면 시각을 고정한다
+
         void Update()
         {
             if (Renderer == null) return;
-            float t = Time.realtimeSinceStartup - startAt; Redraw(t);
-            if (first) { var c = Day.color; c.a = 0.62f * Mathf.Lerp(0.45f, 1f, 0.5f - 0.5f * Mathf.Cos(t / 2.6f * Mathf.PI * 2f)); Day.color = c; }
+            float t = ForcedT ?? Elapsed; Redraw(Calm ? -1f : t);
+            SetTextAlpha(t);
         }
+
+        /// <summary>부제·날짜 줄의 나타남(원본 CSS 5523~5533): 인트로는 부제 9.6초·날짜 10.8초에 0.4초 4단계로 나타나고, 아니면 처음부터 보인다. 첫 실행 날짜 줄은 2.6초 주기로 깜빡인다.</summary>
+        public void SetTextAlpha(float t)
+        {
+            float ts = Intro ? IntroTiming.Steps(t, IntroTiming.TaglineAt) : 1f, td = Intro ? IntroTiming.Steps(t, IntroTiming.DayAt) : 1f;
+            var c1 = Tagline.color; c1.a = 0.85f * ts; Tagline.color = c1;
+            float a = 0.62f * td; if (first) a *= Mathf.Lerp(0.45f, 1f, 0.5f - 0.5f * Mathf.Cos(t / 2.6f * Mathf.PI * 2f)); var c = Day.color; c.a = a; Day.color = c;
+        }
+
+        /// <summary>자동으로 닫히는 시각(켜진 뒤 초, 원본 5603행): 인트로 15.6 · 첫 실행(인트로 없음) 6.4 · 그 밖 3.6.</summary>
+        public float AutoCloseSec => IntroTiming.AutoCloseSec(Intro, first);
 
         /// <summary>t 초째 장면을 그려 올린다(테스트·캡처도 이 함수로).</summary>
         public void Redraw(float t)

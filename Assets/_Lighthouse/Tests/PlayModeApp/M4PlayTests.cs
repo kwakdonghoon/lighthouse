@@ -152,6 +152,7 @@ namespace Lighthouse.Tests
                 Assert.GreaterOrEqual(rt.sizeDelta.x * sc + 0.5f, sz[0], "그림이 가로를 덮는다"); Assert.GreaterOrEqual(rt.sizeDelta.y * sc + 0.5f, sz[1], "그림이 세로를 덮는다");
                 Assert.AreEqual(tv.Renderer.Lw * tv.Renderer.Size.Sx, rt.sizeDelta.x * sc, 0.6f, "정수 배율로 늘어난다");
                 Assert.LessOrEqual(tv.Renderer.LogoTotalWidth, tv.Renderer.Lw, "글자가 잘리지 않는다");
+                tv.Redraw(13f);      // 첫 실행은 인트로가 막 시작한 하늘뿐인 장면이라, 인트로가 끝난 시각(13초)의 장면으로 색 가짓수를 센다
                 var colors = new HashSet<uint>(tv.Renderer.Pixels); Assert.Greater(colors.Count, 200, "단색이 아니라 그림이다 (색 " + colors.Count + "가지)");
                 uint[] before = (uint[])tv.Renderer.Pixels.Clone(); for (int i = 0; i < 30; i++) yield return null;
                 int moved = 0; for (int i = 0; i < before.Length; i++) if (before[i] != tv.Renderer.Pixels[i]) moved++;

@@ -97,12 +97,12 @@ namespace Lighthouse.UI.Model
         public void OpenSettings()
         {
             if (Mode == PanelMode.None || Mode == PanelMode.News || Mode == PanelMode.Settings) return;
-            settingsFrom = Mode; gate = null; adMsg = null; Host.Sfx("tick"); Mode = PanelMode.Settings;
+            settingsFrom = Mode; gate = null; adMsg = null; Host.Sfx("tick"); Mode = PanelMode.Settings; Req = new FocusRequest("setback");      // 설정에 들어오면 "돌아가기"에 초점
         }
         public void LeaveSettings()
         {
             if (Mode != PanelMode.Settings) return;
-            Host.Sfx("tick"); tipsOpen = false; moreOpen = false; impArmed = false; Mode = Normalize(settingsFrom);
+            Host.Sfx("tick"); tipsOpen = false; moreOpen = false; impArmed = false; Mode = Normalize(settingsFrom); Req = new FocusRequest("gear");      // 돌아가면 머리의 톱니에 초점
         }
         public void ToggleSettings() { if (Mode == PanelMode.Settings) LeaveSettings(); else OpenSettings(); }
 
@@ -174,7 +174,7 @@ namespace Lighthouse.UI.Model
                 case "skin": ActSkin(v); break;
                 case "skinprev": ClearPreview(); break;
                 case "skinshop": Open(PanelMode.Shop); break;
-                case "rolebox": roleOpen = !roleOpen; break;
+                case "rolebox": roleOpen = !roleOpen; Req = new FocusRequest(a); break;                     // 접이식을 키보드로 눌렀으면 다시 그린 뒤에도 그 단추에 초점(원본 refocus)
                 case "buy": BuyAct(v); break;
                 case "gate": GateAct(v); break;
                 case "gatex": gate = null; break;
@@ -182,16 +182,17 @@ namespace Lighthouse.UI.Model
                 case "unbuy": Unbuy(v); break;
                 case "restore": RestoreAct(); break;
                 case "clock": S.Clock = v; Ctx.NotifyChanged(); break;
+                case "region": SwitchRegionAct(v); break;
                 case "season": S.Season = v; Ctx.NotifyChanged(); Host.WorldDirty(); break;
                 case "view": SetExtra("view", v); Ctx.NotifyChanged(); Host.ApplyView(v); break;
                 case "wake": SetExtra("wake", v == "on"); Ctx.NotifyChanged(); Host.ApplyWake(v == "on"); break;
                 case "readall": foreach (var l in S.Letters) l.Read = true; Ctx.NotifyChanged(); break;
                 case "letter": ToggleLetter(v); break;
                 case "gomail": GoMail(v); break;
-                case "tips": tipsOpen = !tipsOpen; break;
-                case "setmore": moreOpen = !moreOpen; break;
-                case "adtoggle": shopAdOpen = !shopAdOpen; break;
-                case "trk": trkOpen[v] = !(trkOpen.TryGetValue(v, out bool o) && o); break;
+                case "tips": tipsOpen = !tipsOpen; Req = new FocusRequest(a); break;
+                case "setmore": moreOpen = !moreOpen; Req = new FocusRequest(a); break;
+                case "adtoggle": shopAdOpen = !shopAdOpen; Req = new FocusRequest(a); break;
+                case "trk": trkOpen[v] = !(trkOpen.TryGetValue(v, out bool o) && o); Req = new FocusRequest(a); break;
                 case "regread": if (T.RegularById.ContainsKey(v)) { if (!openRegs.Remove(v)) openRegs.Add(v); } break;
                 case "dex": DexSub = v; break;
                 case "dexrg": if (RegionUsable(v)) dexRg = v; break;

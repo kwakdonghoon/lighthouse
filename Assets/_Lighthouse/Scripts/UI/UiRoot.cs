@@ -28,12 +28,16 @@ namespace Lighthouse.UI
         public bool ManualScreen;           // 캡처·시험: 화면 크기를 직접 넣는다
         public Insets Safe = Insets.None; public float Scale = 1f; public int DevW = 360, DevH = 640; public float Density;      // 기기 픽셀 / dp (0 이면 CanvasScaler 식)
         public bool PhotoMode { get; private set; }
+        Rect lastSafeRect;
+        public RegionFogView Fog;
+        public FocusRing Ring; bool navMode; GameObject lastSel;      // 키보드·게임패드 초점 고리
+        public bool TitleHold;           // 시험·캡처: 자동으로 닫지 않는다 (원본 ?at=)
         public bool TitleOpen => Title != null && Title.gameObject.activeSelf;
 
         public event Action<string> WorldDirtyRequested, ViewChanged; public event Action<JObject> SaveImported; public event Action PhotoSaveRequested; public event Action<string> SfxRequested;
         /// <summary>M4: 월드 연결 지점. 예보 입력(날씨 연출이 채운다)·우체통 화면 위치(캔버스 단위, 없으면 임시 자리)·타이틀을 눌렀다/닫혔다.</summary>
         public Func<ForecastInput> ForecastSource; public Func<Vector2?> MailAnchor; public event Action TitleTapped, TitleClosed;
-        float hudAt; long adShownAt; bool adShownSent; float titleFadeAt = -1f; long clockNow => Ctx != null ? Ctx.Clock.NowMs : 0;
+        float hudAt; float titleShownAt; bool titlePanelWasOpen; long adShownAt; bool adShownSent; float titleFadeAt = -1f; long clockNow => Ctx != null ? Ctx.Clock.NowMs : 0;
 
         // ================= 만들기 =================
         /// <summary>프리팹(Resources/UI/Prefabs/UiRoot)이 있으면 그것을, 없으면 코드로 같은 계층을 만든다.</summary>
@@ -87,18 +91,32 @@ namespace Lighthouse.UI
             Hud.Menu.onClick.RemoveAllListeners(); Hud.Menu.onClick.AddListener(() => { Ctl.Open(Ctl.MenuTarget()); Panel.Refresh(false); });
             Tip.Body.onClick.RemoveAllListeners(); Tip.Body.onClick.AddListener(() => { Tips.Hide(clockNow); Tip.Hide(); });
             Tip.Off.onClick.RemoveAllListeners(); Tip.Off.onClick.AddListener(() => { Tips.TurnOff(); Tip.Hide(); });
-            if (Photo != null) { Photo.Back.onClick.AddListener(() => SetPhoto(false)); Photo.Save.onClick.AddListener(() => { PhotoSaveRequested?.Invoke(); Photo.Msg.text = UiText.Display(str.Get("photo.saved")); }); }
+            if (Photo != null) { Photo.Back.onClick.AddListener(() => SetPhoto(false)); Photo.Save.onClick.AddListener(() => { if (PhotoSaveRequested != null) PhotoSaveRequested(); else SetPhotoMessage("photo.saved"); }); }      // 저장 결과 글은 저장한 쪽(GameApp)이 SetPhotoMessage 로 알린다
             if (Ad != null) { Ad.Ok.onClick.AddListener(() => AdAdapter.Finish(true)); Ad.Cancel.onClick.AddListener(() => AdAdapter.Finish(false, "closed")); }
-            Title.Tap.onClick.RemoveAllListeners(); Title.Tap.onClick.AddListener(() => { titleFadeAt = Time.realtimeSinceStartup; TitleTapped?.Invoke(); });
+            if (Ring == null) Ring = FocusRing.Create(transform);
+            Ctl.ScreenH = CanvasH;
+            Title.Tap.onClick.RemoveAllListeners(); Title.Tap.onClick.AddListener(CloseTitle);
+            Title.SfxRequested += Sfx;      // 인트로 효과음(stone x5·build·lamp)은 UiRoot.Sfx 로(AudioBridge 가 받아 재생)
             if (!ManualScreen) Density = Application.isMobilePlatform && Screen.dpi > 0 ? Mathf.Clamp(Screen.dpi / 160f, 1f, 5f) : 0f;
             if (ManualScreen) ApplyScreen(DevW, DevH, Safe); else ApplyScreen(Screen.width, Screen.height, ReadSafe());
             RefreshHud(true);
         }
 
-        public void ShowTitle(bool first)
+        /// <summary>타이틀을 연다. first = 첫 실행(원본: 안내한 배 0 이고 편지 없음). intro = 약 9초 인트로(첫 실행이고 움직임 줄이기가 아닐 때, 시험·캡처는 강제로 켤 수 있다).</summary>
+        public void ShowTitle(bool first, bool? intro = null)
         {
-            Title.Apply(Str, Hud_.TitleDay(Ctx, Str, first), first); Title.gameObject.SetActive(true); Title.Group.alpha = 1f; titleFadeAt = -1f; Ctx.TitleOpen = true; Title.transform.SetAsLastSibling();
+            Title.Apply(Str, Hud_.TitleDay(Ctx, Str, first), first, intro ?? first); Title.gameObject.SetActive(true); Title.Group.alpha = 1f; titleFadeAt = -1f; Ctx.TitleOpen = true; Title.transform.SetAsLastSibling();
+            titleShownAt = Time.realtimeSinceStartup; titlePanelWasOpen = Ctl != null && Ctl.Mode != PanelMode.None;
         }
+
+        /// <summary>타이틀을 닫기 시작한다(누름·키·자동·창 열림 어느 쪽이든 한 번만). 7단 페이드 뒤 TitleClosed.</summary>
+        public void CloseTitle()
+        {
+            if (!TitleOpen || titleFadeAt >= 0) return;
+            titleFadeAt = Time.realtimeSinceStartup; TitleTapped?.Invoke();
+        }
+        /// <summary>첫 실행 안내를 흘려 보낸다(1.2초 뒤 나타나 10초 동안). 타이틀 아래에서 이미 지나가기 시작한다(원본과 같다).</summary>
+        public void PlayHint() { if (Hint != null) { Hint.Layout(CanvasW, CanvasH); Hint.Play(); LayoutRebuilder.ForceRebuildLayoutImmediate(Hint.Box); } }
         public void ShowHint(bool on) { if (Hint != null) { Hint.gameObject.SetActive(on); Hint.Layout(CanvasW, CanvasH); LayoutRebuilder.ForceRebuildLayoutImmediate(Hint.Box); } }
 
         // ================= 화면 크기 =================
@@ -118,7 +136,7 @@ namespace Lighthouse.UI
             foreach (var m in GetComponentsInChildren<MonoBehaviour>(true)) if (m is IDotScaled d) d.ApplyDot(CurrentDot);
             foreach (var ic in GetComponentsInChildren<UiIcon>(true)) ic.Apply();
             Hud.Layout(safe); Panel.Layout(safe); Toast.Layout(CanvasH); if (Hint != null) Hint.Layout(CanvasW, CanvasH); if (Photo != null) Photo.Layout(CanvasW, safe); Title.Layout(safe, devW, devH, Scale);
-            if (Ctl != null) { Panel.Refresh(true); RefreshHud(true); }
+            if (Ctl != null) { Ctl.ScreenH = CanvasH; Panel.Refresh(true); RefreshHud(true); }
             Canvas.ForceUpdateCanvases();
         }
 
@@ -128,15 +146,106 @@ namespace Lighthouse.UI
         void Update()
         {
             if (Ctx == null) return;
-            if (!ManualScreen && (Screen.width != DevW || Screen.height != DevH)) ApplyScreen(Screen.width, Screen.height, ReadSafe());
+            if (!ManualScreen && (Screen.width != DevW || Screen.height != DevH || Screen.safeArea != lastSafeRect)) { lastSafeRect = Screen.safeArea; ApplyScreen(Screen.width, Screen.height, ReadSafe()); }      // 안전 영역(노치·제스처 막대)은 크기가 같아도 바뀔 수 있다
             if (Ctl.Tick()) Panel.Refresh(true);
             UpdateAd(); UpdateToast(); UpdateTitle();
             if (Time.unscaledTime >= hudAt) { hudAt = Time.unscaledTime + 0.25f; RefreshHud(false); UpdateTips(); }
-            if (Input.GetKeyDown(KeyCode.Escape)) OnBack();
+            UpdateInput();
+        }
+
+        // ================= 키보드·게임패드·뒤로 가기 =================
+        void UpdateInput()
+        {
+            // 안드로이드 뒤로 가기: 열린 것(사진 모드·팝업·광고·타이틀)이 있으면 앱을 나가지 않고 그것만 닫는다(원본 popstate 2975행). 없으면 평소처럼 앱을 나간다.
+            Input.backButtonLeavesApp = !(PhotoMode || Ctl.Mode != PanelMode.None || (AdAdapter != null && AdAdapter.Showing) || TitleOpen);
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1)) OnBack();          // 취소 = Esc · 뒤로 가기 · 게임패드 B
+            HandleTab(); HandleDecoKeys(); UpdateFocus(); KeepInputAboveKeyboard();
+        }
+
+        readonly Vector3[] kbCorners = new Vector3[4];
+        /// <summary>폰의 화상 키보드가 올라와 저장 코드 칸을 가리면, 칸이 키보드 위에 오도록 팝업 본문을 밀어 올린다(원본: 브라우저가 입력 칸을 자동으로 보이게 한다). 실기기 미확인.</summary>
+        void KeepInputAboveKeyboard()
+        {
+            if (Panel == null || !Panel.IsOpen || Panel.Scroll == null || !TouchScreenKeyboard.visible) return;
+            var es = EventSystem.current; var go = es != null ? es.currentSelectedGameObject : null; var inp = go != null ? go.GetComponent<TMPro.TMP_InputField>() : null; if (inp == null) return;
+            float kb = TouchScreenKeyboard.area.height; if (kb <= 0f) return;
+            ((RectTransform)inp.transform).GetWorldCorners(kbCorners); float bottomPx = kbCorners[0].y;      // 오버레이 캔버스의 세계 좌표 = 화면 픽셀(아래가 0)
+            float need = (kb + 12f * Scale - bottomPx) / Mathf.Max(0.01f, Scale); if (need < 1f) return;
+            var content = Panel.Scroll.content; float max = Mathf.Max(0f, content.rect.height - Panel.Scroll.viewport.rect.height);
+            var p = content.anchoredPosition; p.y = Mathf.Clamp(p.y + need, 0f, max); content.anchoredPosition = p;
+        }
+
+        /// <summary>초점이 돌아다닐 수 있는 범위(원본의 포커스 가두기): 광고 화면 > 사진 막대 > 팝업 > 표시 줄. 타이틀 중에는 없다.</summary>
+        Transform FocusScope() => AdAdapter != null && AdAdapter.Showing && Ad != null ? Ad.transform : PhotoMode && Photo != null ? Photo.transform : Ctl.Mode != PanelMode.None ? Panel.transform : TitleOpen ? null : Hud.transform;
+
+        static bool Usable(Selectable s) => s != null && s.IsInteractable() && s.gameObject.activeInHierarchy && s.gameObject.name != "dim";
+
+        GameObject FocusFallback()
+        {
+            if (AdAdapter != null && AdAdapter.Showing && Ad != null) return Ad.Ok.interactable ? Ad.Ok.gameObject : Ad.Cancel.gameObject;
+            if (PhotoMode && Photo != null) return Photo.Save.gameObject;
+            if (Ctl.Mode != PanelMode.None)
+            {
+                for (int i = 0; i < Panel.TabButtons.Count; i++) if (Panel.Model != null && Panel.Model.Tabs.Exists(t => t.On && System.Array.IndexOf(PanelView.TabIdList, t.Id) == i) && Usable(Panel.TabButtons[i])) return Panel.TabButtons[i].gameObject;
+                return Panel.Close.gameObject;
+            }
+            return Hud.Menu.gameObject;
+        }
+
+        /// <summary>Tab / Shift+Tab: 범위 안의 단추를 차례로(광고 화면은 [끝내고 받기]와 [그만두기]를 번갈아, 원본 1815행).</summary>
+        void HandleTab()
+        {
+            if (!Input.GetKeyDown(KeyCode.Tab)) return;
+            var scope = FocusScope(); var es = EventSystem.current; if (scope == null || es == null) return;
+            bool back = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+            var list = new List<Selectable>(); foreach (var s in scope.GetComponentsInChildren<Selectable>(false)) if (Usable(s)) list.Add(s);
+            if (list.Count == 0) return;
+            var cur = es.currentSelectedGameObject != null ? es.currentSelectedGameObject.GetComponent<Selectable>() : null; int i = list.IndexOf(cur);
+            i = i < 0 ? (back ? list.Count - 1 : 0) : (i + (back ? -1 : 1) + list.Count) % list.Count;
+            es.SetSelectedGameObject(list[i].gameObject);
+        }
+
+        /// <summary>꾸미기 놓기의 키: Ctrl/Cmd+Z 되돌리기(+Shift 다시), 구역 칩 ←→·Home·End 로 옮기며 바로 고르기, 자리 격자 화살표로 칸 옮기기(원본 3946~3961행).</summary>
+        void HandleDecoKeys()
+        {
+            if (Ctl.Mode != PanelMode.Deco || Ctl.DecoTab != "place" || PhotoMode || (AdAdapter != null && AdAdapter.Showing)) return;
+            bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand);
+            if (ctrl && Input.GetKeyDown(KeyCode.Z)) { bool shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift); Ctl.Act(shift ? "redo" : "undo"); Panel.Refresh(true); return; }
+            var es = EventSystem.current; var go = es != null ? es.currentSelectedGameObject : null; var tag = go != null ? go.GetComponent<ActTag>() : null; if (tag == null || tag.Act == null) return;
+            bool right = Input.GetKeyDown(KeyCode.RightArrow), left = Input.GetKeyDown(KeyCode.LeftArrow), home = Input.GetKeyDown(KeyCode.Home), end = Input.GetKeyDown(KeyCode.End), up = Input.GetKeyDown(KeyCode.UpArrow), down = Input.GetKeyDown(KeyCode.DownArrow);
+            if (tag.Act.StartsWith("zone:") && (right || left || home || end))
+            {
+                var zs = new List<ActTag>(); foreach (var t in tag.transform.parent.GetComponentsInChildren<ActTag>(false)) if (t.Act != null && t.Act.StartsWith("zone:")) zs.Add(t);
+                int i = zs.IndexOf(tag), n = home ? 0 : end ? zs.Count - 1 : (i + (right ? 1 : -1) + zs.Count) % zs.Count;
+                Ctl.Act(zs[n].Act); Panel.Refresh(true);
+            }
+            else if ((tag.Act.StartsWith("slot:") || tag.Act.StartsWith("slotlock:")) && (right || left || up || down))
+            {
+                var gs = new List<ActTag>(); foreach (var t in tag.transform.parent.GetComponentsInChildren<ActTag>(false)) if (t.Act != null && (t.Act.StartsWith("slot:") || t.Act.StartsWith("slotlock:"))) gs.Add(t);
+                var fc = tag.transform.parent.GetComponent<FixedColumnsLayout>(); int cols = fc != null ? Mathf.Max(1, fc.Columns) : 4;
+                int i = gs.IndexOf(tag), j = i + (right ? 1 : left ? -1 : down ? cols : -cols);
+                if (j >= 0 && j < gs.Count) es.SetSelectedGameObject(gs[j].gameObject);
+            }
+        }
+
+        /// <summary>마우스·터치 말고 키·게임패드로 움직이는 중이면 초점 고리를 보이고, 초점을 잃었으면 범위 안의 알맞은 단추로 되돌린다(원본 :focus-visible).</summary>
+        void UpdateFocus()
+        {
+            var es = EventSystem.current; if (es == null || Ring == null) return;
+            bool pointer = Input.GetMouseButtonDown(0) || Input.touchCount > 0;
+            bool keyNav = Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(2);
+            bool axisNav = Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.5f || Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.5f;
+            if (pointer) navMode = false; else if (keyNav || axisNav) navMode = true;
+            var sel = es.currentSelectedGameObject; var scope = FocusScope();
+            if (navMode && scope != null && (sel == null || !sel.activeInHierarchy || !sel.transform.IsChildOf(scope))) { var f = FocusFallback(); if (f != null) { es.SetSelectedGameObject(f); sel = f; } }
+            if (sel != lastSel) { lastSel = sel; if (navMode && sel != null && Panel != null && sel.transform.IsChildOf(Panel.Content)) ScrollKit.IntoView(Panel.Scroll, (RectTransform)sel.transform); }
+            Ring.Show(navMode && scope != null && sel != null ? sel.transform as RectTransform : null, CanvasRect);
         }
 
         public void OnBack()
         {
+            if (AdAdapter != null && AdAdapter.Showing) { AdAdapter.Finish(false, "closed"); return; }          // 광고 화면: 뒤로 가기·Esc = 그만두기(원본 1814행)
+            if (TitleOpen) return;
             if (PhotoMode) { SetPhoto(false); return; }
             if (Ctl.Mode == PanelMode.None) return;
             if (Ctl.Mode == PanelMode.Settings) Ctl.LeaveSettings(); else if (!Ctl.DecoEsc()) Ctl.Close();
@@ -149,10 +258,22 @@ namespace Lighthouse.UI
             Hud.Apply(info, Str, PhotoMode ? "" : Badges.Menu(Ctx.UnreadCount(), Ctx.Discovered() > Ctx.S.DexSeen));
         }
 
-        void UpdateToast() { if (ToastState.Tick(clockNow)) Toast.Apply(ToastState, clockNow); else if (ToastState.Visible) Toast.Apply(ToastState, clockNow); else if (Toast.gameObject.activeSelf) Toast.gameObject.SetActive(false); }
+        /// <summary>사진 막대의 글(원본 photomsg): 키는 ui.json 의 photo.* (hidden·saved·shared·notSaved·failed).</summary>
+        public void SetPhotoMessage(string key) { if (Photo != null) Photo.Msg.text = UiText.Display(Str.Get(key)); }
+
+        void UpdateToast() { if (PhotoMode) { ToastState.Tick(clockNow); if (Toast.gameObject.activeSelf) Toast.gameObject.SetActive(false); return; }      // 사진 모드에서는 토스트가 뜨지 않는다(원본 body.photo #toast)
+            if (ToastState.Tick(clockNow)) Toast.Apply(ToastState, clockNow); else if (ToastState.Visible) Toast.Apply(ToastState, clockNow); else if (Toast.gameObject.activeSelf) Toast.gameObject.SetActive(false); }
 
         void UpdateTitle()
         {
+            if (TitleOpen && titleFadeAt < 0)
+            {
+                // 원본 5602~5605행: 누름·키·자동(인트로 15.6초 · 첫 실행 6.4초 · 그 밖 3.6초)·창이 열리면 닫힌다
+                bool key = Input.anyKeyDown || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space);
+                bool auto = !TitleHold && Time.realtimeSinceStartup - titleShownAt >= Title.AutoCloseSec;
+                bool opened = Ctl != null && Ctl.Mode != PanelMode.None && !titlePanelWasOpen;
+                if (key || auto || opened) CloseTitle();
+            }
             if (!TitleOpen || titleFadeAt < 0) return;
             float t = (Time.realtimeSinceStartup - titleFadeAt) / 0.7f; Title.Group.alpha = 1f - Mathf.Floor(Mathf.Clamp01(t) * 7f) / 7f;      // steps(7) 와 같은 7단 페이드
             if (t >= 1f) { Title.gameObject.SetActive(false); Ctx.TitleOpen = false; TitleClosed?.Invoke(); }
@@ -161,7 +282,7 @@ namespace Lighthouse.UI
         void UpdateAd()
         {
             if (Ad == null) return;
-            bool show = AdAdapter.Showing; if (show != Ad.gameObject.activeSelf) { Ad.gameObject.SetActive(show); if (show) { adShownAt = DateTime.UtcNow.Ticks; adShownSent = false; Ad.transform.SetAsLastSibling(); } }
+            bool show = AdAdapter.Showing; if (show != Ad.gameObject.activeSelf) { Ad.gameObject.SetActive(show); if (show) { adShownAt = DateTime.UtcNow.Ticks; adShownSent = false; Ad.transform.SetAsLastSibling(); if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(Ad.Cancel.gameObject); } }
             if (!show) return;
             if (!adShownSent) { Ctl.AdShown(); adShownSent = true; }
             double sec = (DateTime.UtcNow.Ticks - adShownAt) / 1e7; int left = Mathf.Max(0, 3 - (int)sec); Ad.SetReady(left <= 0, left, Str);
@@ -190,11 +311,36 @@ namespace Lighthouse.UI
             Tip.Show(t, Str, cx, top, up, CanvasW);
         }
 
+        // ================= 말풍선이 피할 화면 요소 =================
+        readonly Vector3[] corners = new Vector3[4];
+        /// <summary>말풍선이 비켜 가야 할 보이는 요소(표시 줄·메뉴 단추·안내 카드·토스트)의 사각형을 캔버스 단위(왼쪽 위 원점)로 담는다(원본 5312행의 uis).</summary>
+        public void CollectAvoidRects(List<UiRectF> list)
+        {
+            list.Clear();
+            void Add(Component c, bool on)
+            {
+                if (c == null || !on || !c.gameObject.activeInHierarchy) return;
+                var rt = (RectTransform)c.transform; if (rt.rect.width <= 0.5f || rt.rect.height <= 0.5f) return;
+                rt.GetWorldCorners(corners); var a = CanvasRect.InverseTransformPoint(corners[0]); var b = CanvasRect.InverseTransformPoint(corners[2]); var cr = CanvasRect.rect;
+                list.Add(new UiRectF(a.x - cr.xMin, cr.yMax - b.y, b.x - cr.xMin, cr.yMax - a.y));
+            }
+            if (Hud != null) { Add(Hud.Pill, !PhotoMode); Add(Hud.MenuRect, !PhotoMode); }
+            if (Tip != null) Add(Tip.Box, Tip.gameObject.activeSelf);
+            if (Toast != null) Add(Toast.Box, ToastState.Visible);
+        }
+
         // ================= 사진 모드 =================
         public void SetPhoto(bool on)
         {
-            PhotoMode = on; if (Photo != null) { Photo.gameObject.SetActive(on); if (on) Photo.Msg.text = UiText.Display(Str.Get("photo.hidden")); }
+            PhotoMode = on; if (Photo != null) { Photo.gameObject.SetActive(on); if (on) { Photo.Msg.text = UiText.Display(Str.Get("photo.hidden")); if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(Photo.Save.gameObject); } }      // 원본 3161행: 저장하기 단추에 초점
             Hud.gameObject.SetActive(!on); if (on) { Tip.Hide(); ToastState.Visible = false; Toast.gameObject.SetActive(false); Panel.gameObject.SetActive(false); }
+        }
+
+        /// <summary>바다 전환(원본 switchRegion): 어두운 물안개가 덮이는 동안 바다를 바꾸고(팝업 닫기 포함) 걷히면 도착을 알린다.</summary>
+        public void SwitchRegion(string id, string name, Action commit, Action arrive)
+        {
+            if (Fog == null) Fog = RegionFogView.Create(transform);
+            Fog.Play(name, Str.Get("region.sailing"), Lighthouse.Core.MotionPref.Reduce, () => { commit(); Panel.Refresh(false); }, arrive);
         }
 
         // ================= IUiHost =================

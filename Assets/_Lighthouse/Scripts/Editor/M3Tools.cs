@@ -219,10 +219,13 @@ namespace Lighthouse.EditorTools
             EditorApplication.Exit(0);
         }
 
+        public static GameTables TablesPublic() => Tables(); public static UiStrings StringsPublic() => Strings();
+        public static byte[] CaptureOnePublic(GameTables T, UiStrings str, int devW, int devH, float dprUsed, string state, StringBuilder report, List<string> bad, ref int checks) => CaptureOne(T, str, devW, devH, dprUsed, state, report, bad, ref checks);
+
         static byte[] CaptureOne(GameTables T, UiStrings str, int devW, int devH, float dprUsed, string state, StringBuilder report, List<string> bad, ref int checks)
         {
             // 상태
-            int stage = state == "dexsea" || state == "growth" || state == "offer" || state == "deco" || state == "skin" ? 6 : state == "shop" ? 4 : 3;
+            int stage = state.StartsWith("a2_") ? 4 : state == "dexsea" || state == "growth" || state == "offer" || state == "deco" || state == "skin" ? 6 : state == "shop" ? 4 : 3;
             bool night = state == "main" && false;
             var ctx = SampleState.Make(T, Clock(), 11, stage, stage == 6 ? 260 : stage == 4 ? 150 : 70, stage >= 4 ? 4 : 1, night);
             ctx.S.Found["shell"] = Math.Max(1, ctx.S.Found.ContainsKey("shell") ? ctx.S.Found["shell"] : 1);
@@ -299,6 +302,7 @@ namespace Lighthouse.EditorTools
         static void ApplyState(UiRoot ui, GameContext ctx, string state)
         {
             var c = ui.Ctl; var P = ui.Panel;
+            if (state.StartsWith("a2_")) { A2Tools.ApplyState(ui, ctx, state); return; }
             switch (state)
             {
                 case "main":
@@ -326,7 +330,7 @@ namespace Lighthouse.EditorTools
                         foreach (var ch in new[] { '꿈', '닌', '죠' })
                         {
                             var line = ctx.T.Regulars.SelectMany(r => r.Lines).FirstOrDefault(l => l.IndexOf(ch) >= 0); if (line == null) continue;
-                            var b = Lighthouse.App.BubbleView.Create(ui.transform); b.gameObject.SetActive(true); b.SetText(line); b.Place(UiRoot.CanvasW / 2f, 140f + 90f * k, UiRoot.CanvasW, UiRoot.CanvasH, 0f); k++;
+                            var b = Lighthouse.App.BubbleView.Create(ui.transform); b.gameObject.SetActive(true); b.SetText(line); b.Place(UiRoot.CanvasW / 2f, 140f + 90f * k, UiRoot.CanvasW, UiRoot.CanvasH, new System.Collections.Generic.List<UiRectF>()); k++;
                         }
                         CfToast(ui, ui.Str.Get("world.sos"), ui.Str.Get("world.sosSub"));      // '둬' 가 들어 있는 문장
                         break;
@@ -365,7 +369,7 @@ namespace Lighthouse.EditorTools
                     if (!t.isActiveAndEnabled || string.IsNullOrEmpty(t.text)) continue; checks++;
                     t.ForceMeshUpdate(); var rr = R(t.rectTransform);
                     if (t.preferredHeight > rr.height + 1.5f) bad.Add($"{tag}: 글이 칸보다 큼 {PathOf(t.transform, ui.transform)} 글 {t.preferredHeight:F1} 칸 {rr.height:F1} '{Short(t.text)}'");
-                    if (t.preferredWidth > rr.width + 1.5f && !t.enableWordWrapping) bad.Add($"{tag}: 글 폭 넘침 {PathOf(t.transform, ui.transform)}");
+                    if (t.preferredWidth > rr.width + 1.5f && t.textWrappingMode == TextWrappingModes.NoWrap) bad.Add($"{tag}: 글 폭 넘침 {PathOf(t.transform, ui.transform)}");
                 }
                 // 보이는 부분의 터치 크기: 뷰포트 안에 보이는 단추 중 44 단위 미만
                 foreach (var b in ui.Panel.GetComponentsInChildren<Button>(false))

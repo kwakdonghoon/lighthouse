@@ -105,6 +105,7 @@
   "hud.building": "{0}로 공사 중 · {1}:{2}", "hud.buildingSuffix": " · 공사 중",
   "hud.fogNow": "안개가 낀 중 · 사이렌이 울려요", "hud.rainNow": "{0}{이/가} 내리는 중", "hud.rainbow": "무지개가 떴어요", "hud.forecast": "{0} 예보 · {1}:{2}", "hud.fogWord": "안개",
   "title.name": "등대지기", "title.tagline": "켜 두면 등대가 배를 안내해요", "title.start": "화면을 눌러 시작하세요", "title.day": "함께한 {0}번째 날의 바다",
+  "region.sailing": "배가 새 바다로 향해요", "photo.shared": "사진을 보냈어요", "photo.notSaved": "저장하지 않았어요", "mail.broken": "이 편지는 읽을 수 없어요",
   "hint.1": "켜 두기만 하세요", "hint.2": "등대가 알아서 배를 안내해요", "hint.3": "화면을 눌러 끌면 빛이 따라오고, 배와 등대를 눌러 볼 수도 있어요", "hint.4": "소리가 안 나면 화면을 한 번 눌러 주세요",
   "tip.off": "안내 끄기",
   "photo.hidden": "글자와 단추를 숨겼어요", "photo.save": "저장하기", "photo.back": "돌아가기", "photo.saved": "사진을 저장했어요", "photo.failed": "저장하지 못했어요",

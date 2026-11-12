@@ -22,7 +22,7 @@ namespace Lighthouse.UI.Model
             if (c == null || c.Count == 0) return false;
             c.Sort((a, b) => a.d.CompareTo(b.d)); Host.Sfx("tick");
             if (c.Count > 1 && c[1].d - c[0].d < 8) decoNote = S_("deco.near");
-            else { decoNote = ""; decoSel = decoSel == c[0].id ? null : c[0].id; decoOpenItem = null; decoConfirm = false; }
+            else { decoNote = ""; decoSel = decoSel == c[0].id ? null : c[0].id; decoOpenItem = null; decoConfirm = false; Req = decoSel != null ? new FocusRequest(scroll: "ph") : null; }
             return true;
         }
         public bool DecoPeek => decoPeek;
@@ -115,16 +115,17 @@ namespace Lighthouse.UI.Model
             decoNote = ""; decoLive = "";
             if (k != "decoopen") decoOpenItem = null;
             if (k != "clearall") decoConfirm = false;
+            if (LowScreen && S.Isle.TipSeen == 0 && (k == "zone" || k == "slot")) { S.Isle.TipSeen = 1; Ctx.NotifyChanged(); }      // 낮은 화면은 안내 한 줄을 한 번 본 뒤 접어 본문 높이를 번다
             switch (k)
             {
                 case "zone":
                     if (!T.DecorZones.Any(z => z.Id == v) || ZoneOpenIds(v).Count == 0) return true;
-                    DecoZone = v; decoSel = null; Host.Sfx("tick"); break;
+                    DecoZone = v; decoSel = null; Req = new FocusRequest("zone.on", "zones"); Host.Sfx("tick"); break;
                 case "slot":
                     if (!T.DecorSlotById.ContainsKey(v) || !SlotNowOpen(v)) return true;
-                    decoSel = decoSel == v ? null : v; Host.Sfx("tick"); break;
+                    decoSel = decoSel == v ? null : v; Req = decoSel != null ? new FocusRequest("slot:" + v, "ph") : new FocusRequest("slot:" + v); Host.Sfx("tick"); break;
                 case "slotlock":
-                    if (T.DecorSlotById.TryGetValue(v, out var sl) && !SlotNowOpen(v) && !sl.Blocked) { decoNote = DecorSlotNeed(v, true); Host.Sfx("tick"); }
+                    if (T.DecorSlotById.TryGetValue(v, out var sl) && !SlotNowOpen(v) && !sl.Blocked) { decoNote = DecorSlotNeed(v, true); Req = new FocusRequest("slot:" + v); Host.Sfx("tick"); }
                     break;
                 case "put":
                     {
@@ -132,16 +133,16 @@ namespace Lighthouse.UI.Model
                         if (id == null || !T.DecorItemById.TryGetValue(v, out var item) || !item.Zones.Contains(T.DecorSlotById[id].Chip) || DecorRules.State(T, S, v, id, GardenLv) != "ok") return true;
                         if (DecoDo(new List<string[]> { new[] { id, PutOf(id), v } })) { Host.Sfx("pick"); decoLive = FixJosa(F_("deco.placed", item.Name)); }
                         var list = ZoneOpenIds(T.DecorSlotById[id].Chip); string next = list.Skip(list.IndexOf(id) + 1).FirstOrDefault(s => PutOf(s) == null);
-                        decoSel = next;
+                        decoSel = next; Req = next != null ? new FocusRequest("ph") : new FocusRequest("slot:" + id);      // 다음 빈 자리가 있으면 시트에, 없으면 방금 놓은 칸에
                         break;
                     }
                 case "clear":
                     {
                         string id = decoSel, cur = id != null ? PutOf(id) : null;
-                        if (cur != null && DecoDo(new List<string[]> { new[] { id, cur, null } })) { Host.Sfx("tick"); decoLive = FixJosa(F_("deco.cleared", T.DecorItemById[cur].Name)); }
+                        if (cur != null && DecoDo(new List<string[]> { new[] { id, cur, null } })) { Host.Sfx("tick"); decoLive = FixJosa(F_("deco.cleared", T.DecorItemById[cur].Name)); Req = new FocusRequest("ph"); }
                         break;
                     }
-                case "phclose": decoSel = null; break;
+                case "phclose": { string was = decoSel; decoSel = null; Req = was != null ? new FocusRequest("slot:" + was) : null; break; }
                 case "undo":
                 case "redo":
                     {
@@ -151,27 +152,30 @@ namespace Lighthouse.UI.Model
                             var c = from[from.Count - 1]; from.RemoveAt(from.Count - 1);
                             DecoApply(c, k == "undo" ? -1 : 1); to.Add(c); Host.Sfx("tick");
                             decoLive = k == "undo" ? T.Lint.DecoMsg["undo"] : T.Lint.DecoMsg["redo"];
+                            Req = new FocusRequest(from.Count > 0 ? k : "zone.on", near: c[0][0]);      // 바뀐 자리 칸이 화면 밖이면 보이는 곳까지만 스크롤
                         }
                         break;
                     }
                 case "auto":
                     {
                         var au = DecoAutoPlan();
-                        if (au.Can && DecoDo(au.Changes)) { decoNote = F_("deco.auto", au.Changes.Count); Host.Sfx("pick"); decoLive = decoNote; }
+                        if (au.Can && DecoDo(au.Changes)) { decoNote = F_("deco.auto", au.Changes.Count); Host.Sfx("pick"); decoLive = decoNote; Req = new FocusRequest("auto"); }
                         break;
                     }
                 case "clearall":
                     decoConfirm = false;
-                    if (v == "ask") { if (PlacedTotal() > 0) decoConfirm = true; }
+                    if (v == "ask") { if (PlacedTotal() > 0) { decoConfirm = true; Req = new FocusRequest("clearall:no"); } }
+                    else if (v == "no") Req = new FocusRequest("clearall:ask");
                     else if (v == "yes")
                     {
                         var ch = S.Isle.Put.Keys.Where(id => T.DecorSlotById.ContainsKey(id) && PutOf(id) != null && SlotNowOpen(id)).Select(id => new[] { id, S.Isle.Put[id], (string)null }).ToList();
                         if (ch.Count > 0 && DecoDo(ch)) { Host.Sfx("tick"); decoLive = T.Lint.DecoMsg["all"]; }
-                        decoSel = null;
+                        decoSel = null; Req = new FocusRequest("zone.on");
                     }
                     break;
-                case "peek": decoPeek = v == "on"; Host.Sfx("tick"); break;
+                case "peek": decoPeek = v == "on"; Req = new FocusRequest(decoPeek ? "peek:off" : "peek:on"); Host.Sfx("tick"); break;
                 case "decoopen":
+                    Req = new FocusRequest("decoopen:" + v);
                     if (DecorRules.State(T, S, v, decoSel ?? "F1", GardenLv) == "lock" || !DecorRules.Owned(T, S, v, GardenLv)) decoOpenItem = decoOpenItem == v ? null : v;
                     break;
             }
@@ -215,7 +219,7 @@ namespace Lighthouse.UI.Model
             if (S.Isle.Mig != 0 && !migShow) { migShow = true; S.Isle.Mig = 0; S.Tips["h8"] = 1; Ctx.NotifyChanged(); }
             r.Add(DecoSeg());
             if (migShow) r.Add(Block.N(S_("deco.migNote"), "status"));
-            r.Add(Block.N(S_("deco.intro")));
+            if (!(LowScreen && S.Isle.TipSeen != 0)) r.Add(Block.N(S_("deco.intro")));      // 낮은 화면은 한 번 본 뒤 접는다(원본 3846행)
             var zones = new Block(BK.Seg) { Style = "zones" };
             foreach (var z in zs)
             {

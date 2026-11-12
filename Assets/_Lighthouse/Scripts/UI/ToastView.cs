@@ -18,7 +18,7 @@ namespace Lighthouse.UI
             var dl = f.gameObject.AddComponent<DotLayout>(); dl.Group = v; dl.PadDots = new Vector4(8, 3, 8, 5); dl.ApplyDot(UiRoot.CurrentDot);
             f.gameObject.AddComponent<ContentSizeFitter>().horizontalFit = ContentSizeFitter.FitMode.PreferredSize; f.gameObject.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
             t.Title = Kit.Text(f.transform, "", 15f, UiTheme.Teal2, true, TextAlignmentOptions.Center, "title"); t.Sub = Kit.Text(f.transform, "", 13f, UiTheme.Soft, false, TextAlignmentOptions.Center, "sub");
-            var le = t.Title.gameObject.AddComponent<LayoutElement>(); le.preferredWidth = -1; t.Title.enableWordWrapping = true;
+            var le = t.Title.gameObject.AddComponent<LayoutElement>(); le.preferredWidth = -1; t.Title.textWrappingMode = TextWrappingModes.Normal;
             t.Box.anchorMin = t.Box.anchorMax = new Vector2(0.5f, 1); t.Box.pivot = new Vector2(0.5f, 1);
             t.gameObject.SetActive(false);
             return t;
@@ -38,7 +38,7 @@ namespace Lighthouse.UI
         static void FitWidth(TMP_Text t, float maxW, float minW)
         {
             var le = t.GetComponent<LayoutElement>(); if (le == null) le = t.gameObject.AddComponent<LayoutElement>();
-            t.enableWordWrapping = true;
+            t.textWrappingMode = TextWrappingModes.Normal;
             le.preferredWidth = Mathf.Min(maxW, Mathf.Max(minW, t.GetPreferredValues(t.text).x + 1f));     // +1: 부동소수 오차로 한 줄 글이 줄바꿈되지 않게 // 한 줄에 들어가면 한 줄 폭, 넘으면 한도 폭(줄바꿈)
         }
     }

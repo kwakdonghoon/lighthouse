@@ -100,7 +100,7 @@ namespace Lighthouse.UI
                 var btn = r.gameObject.AddComponent<Button>(); btn.targetGraphic = img; btn.transition = Selectable.Transition.None;
                 var le = r.gameObject.AddComponent<LayoutElement>(); le.minHeight = 44f;
                 var t = Kit.Text(r, b.Text, 14f, UiTheme.Teal2, true, TextAlignmentOptions.Center, "label"); t.fontStyle = FontStyles.Underline; Kit.Stretch(t.rectTransform);
-                if (b.Act != null) { string a = b.Act; btn.onClick.AddListener(() => onAct(a)); }
+                if (b.Act != null) { string a = b.Act; btn.onClick.AddListener(() => onAct(a)); r.gameObject.AddComponent<ActTag>().Act = a; }
                 return new Selectable_ { Btn = btn, Rect = r };
             }
             string label = b.Text; string sub = inSeg ? b.Sub : null;
@@ -109,9 +109,11 @@ namespace Lighthouse.UI
             if (b.Locked && !b.On) g.color = new Color(1, 1, 1, 0.78f);
             if (!string.IsNullOrEmpty(sub)) Kit.Text(button.transform, sub, 11f, b.On ? UiTheme.OnGold : UiTheme.Soft, false, TextAlignmentOptions.Center, "sub");
             if (b.Disabled) button.interactable = false;
-            else if (b.Act != null) { string a = b.Act; button.onClick.AddListener(() => onAct(a)); }
+            else if (b.Act != null) { string a = b.Act; button.onClick.AddListener(() => onAct(a)); button.gameObject.AddComponent<ActTag>().Act = a; NavNone(button, a); }
             return new Selectable_ { Btn = button, Rect = (RectTransform)button.transform };
         }
+        /// <summary>구역 칩·자리 칸은 화살표를 UiRoot 가 직접 처리한다(원본 3946행: 칩은 ←→ 로 옮기며 고르고, 칸은 격자대로). 자동 이동은 끈다.</summary>
+        static void NavNone(Selectable s, string act) { if (act.StartsWith("zone:") || act.StartsWith("slot:") || act.StartsWith("slotlock:")) { var n = s.navigation; n.mode = Navigation.Mode.None; s.navigation = n; } }
         struct Selectable_ { public Button Btn; public RectTransform Rect; }
 
         void ButtonRow(Transform p, Block b)
@@ -142,7 +144,7 @@ namespace Lighthouse.UI
             var dl = card.gameObject.AddComponent<DotLayout>(); dl.Group = box; dl.PadDots = new Vector4(5, 4, 5, 6); dl.SpacingDots = 1; dl.ApplyDot(UiRoot.CurrentDot);
             if (!string.IsNullOrEmpty(b.Extra)) Kit.Text(card.transform, b.Extra, 14f, UiTheme.GoldTx, true);
             var top = Kit.HBox(card.transform, "top", Vector4.zero, 3, TextAnchor.LowerLeft, false);
-            var big = Kit.Text(top.transform, b.Text, 26f, Ink, true); big.enableWordWrapping = false; Kit.Elem(big.gameObject, flexW: 0);
+            var big = Kit.Text(top.transform, b.Text, 26f, Ink, true); big.textWrappingMode = TextWrappingModes.NoWrap; Kit.Elem(big.gameObject, flexW: 0);
             Kit.Elem(Kit.Text(top.transform, b.Sub, 13f, UiTheme.Soft).gameObject, flexW: 1);
             if (b.Value >= 0) Bar(card.transform, b.Value, false);
             if (b.Kids != null) foreach (var k in b.Kids) Add(card.transform, k);
@@ -152,7 +154,7 @@ namespace Lighthouse.UI
         {
             string frame = b.Style == "confirm" ? "plate_focus" : b.Style != null && b.Style.StartsWith("stage") ? "plate_gold" : b.Style != null && b.Style.StartsWith("pv") ? "plate_focus" : b.Style == "adsec" ? "plate_ad" : b.Kind == BK.Pick ? "tray" : "plate";
             if (b.Locked) frame = "plate_off";
-            var card = Kit.Frame(p, frame, null, "card:" + (b.Style ?? "plain")); card.raycastTarget = false;
+            var card = Kit.Frame(p, frame, null, b.Kind == BK.Pick ? "pick" : b.Kind == BK.Gate ? "gate" : "card:" + (b.Style ?? "plain")); card.raycastTarget = false;
             var box = card.gameObject.AddComponent<VerticalLayoutGroup>(); box.childControlWidth = true; box.childControlHeight = true; box.childForceExpandWidth = true; box.childForceExpandHeight = false;
             var dl = card.gameObject.AddComponent<DotLayout>(); dl.Group = box; dl.PadDots = new Vector4(5, 4, 5, 6); dl.SpacingDots = 2; dl.ApplyDot(UiRoot.CurrentDot);
             bool clickable = b.Act != null && (b.Style == "rolecard" || b.Style == "adsec");
@@ -162,7 +164,7 @@ namespace Lighthouse.UI
                 if (clickable)
                 {
                     var hb = Kit.Rect("head", card.transform); var img = hb.gameObject.AddComponent<Image>(); img.color = new Color(0, 0, 0, 0);
-                    var btn = hb.gameObject.AddComponent<Button>(); btn.targetGraphic = img; btn.transition = Selectable.Transition.None; string a = b.Act; btn.onClick.AddListener(() => onAct(a));
+                    var btn = hb.gameObject.AddComponent<Button>(); btn.targetGraphic = img; btn.transition = Selectable.Transition.None; string a = b.Act; btn.onClick.AddListener(() => onAct(a)); hb.gameObject.AddComponent<ActTag>().Act = a;
                     var v = hb.gameObject.AddComponent<VerticalLayoutGroup>(); v.childControlWidth = v.childControlHeight = true; v.childForceExpandWidth = true; v.childForceExpandHeight = false;
                     Kit.Elem(hb.gameObject, minH: 44f);
                     head = hb;
@@ -197,7 +199,7 @@ namespace Lighthouse.UI
             var c = Kit.Frame(p, "plate_gold", null, "chip"); c.raycastTarget = false;
             var h = c.gameObject.AddComponent<HorizontalLayoutGroup>(); h.childControlWidth = h.childControlHeight = true; h.childForceExpandWidth = false; h.childAlignment = TextAnchor.MiddleCenter;
             var dl = c.gameObject.AddComponent<DotLayout>(); dl.Group = h; dl.PadDots = new Vector4(3, 1, 3, 2); dl.ApplyDot(UiRoot.CurrentDot);
-            var ct = Kit.Text(c.transform, text, 11f, UiTheme.GoldTx, true, TextAlignmentOptions.Center, "chip"); ct.enableWordWrapping = false; Kit.Elem(ct.gameObject, minW: ct.GetPreferredValues(ct.text).x + 1f); Kit.Elem(c.gameObject, minW: ct.GetPreferredValues(ct.text).x + 7f * UiRoot.CurrentDot, flexW: 0);
+            var ct = Kit.Text(c.transform, text, 11f, UiTheme.GoldTx, true, TextAlignmentOptions.Center, "chip"); ct.textWrappingMode = TextWrappingModes.NoWrap; Kit.Elem(ct.gameObject, minW: ct.GetPreferredValues(ct.text).x + 1f); Kit.Elem(c.gameObject, minW: ct.GetPreferredValues(ct.text).x + 7f * UiRoot.CurrentDot, flexW: 0);
         }
 
         void Stats(Transform p, Block b)
@@ -229,7 +231,7 @@ namespace Lighthouse.UI
             var cell = Kit.Frame(p, frame, null, "cell:" + (b.Act ?? b.Text)); cell.raycastTarget = b.Act != null;
             if (b.Act != null && !b.Disabled)
             {
-                var btn = cell.gameObject.AddComponent<Button>(); btn.targetGraphic = cell; btn.transition = Selectable.Transition.None; string a = b.Act; btn.onClick.AddListener(() => onAct(a));
+                var btn = cell.gameObject.AddComponent<Button>(); btn.targetGraphic = cell; btn.transition = Selectable.Transition.None; string a = b.Act; btn.onClick.AddListener(() => onAct(a)); cell.gameObject.AddComponent<ActTag>().Act = a; NavNone(btn, a);
             }
             if (item || (listRow && b.Icon != null))
             {
@@ -310,7 +312,7 @@ namespace Lighthouse.UI
             var v = card.gameObject.AddComponent<VerticalLayoutGroup>(); v.childControlWidth = v.childControlHeight = true; v.childForceExpandWidth = true; v.childForceExpandHeight = false;
             var dl = card.gameObject.AddComponent<DotLayout>(); dl.Group = v; dl.PadDots = new Vector4(4, 3, 4, 5); dl.SpacingDots = 2; dl.ApplyDot(UiRoot.CurrentDot);
             var headRect = Kit.Rect("top", card.transform); var himg = headRect.gameObject.AddComponent<Image>(); himg.color = new Color(0, 0, 0, 0);
-            var btn = headRect.gameObject.AddComponent<Button>(); btn.targetGraphic = himg; btn.transition = Selectable.Transition.None; string act = b.Act; btn.onClick.AddListener(() => onAct(act));
+            var btn = headRect.gameObject.AddComponent<Button>(); btn.targetGraphic = himg; btn.transition = Selectable.Transition.None; string act = b.Act; btn.onClick.AddListener(() => onAct(act)); headRect.gameObject.AddComponent<ActTag>().Act = act;
             var hv = headRect.gameObject.AddComponent<HorizontalLayoutGroup>(); hv.childAlignment = TextAnchor.MiddleLeft; hv.childControlWidth = hv.childControlHeight = true; hv.childForceExpandWidth = false; hv.childForceExpandHeight = false; hv.spacing = 6;
             Kit.Elem(headRect.gameObject, minH: 44f);
             var seal = Kit.Rect("seal", headRect); var simg = seal.gameObject.AddComponent<Image>(); simg.sprite = UiTheme.Frame("seal"); simg.preserveAspect = true; simg.raycastTarget = false; var sd = seal.gameObject.AddComponent<DotSize>(); sd.Elem = seal.gameObject.AddComponent<LayoutElement>(); sd.Px = simg.sprite.texture != UiTheme.White1.texture ? Mathf.Max(simg.sprite.texture.width, simg.sprite.texture.height) : 6; sd.Mult = 1; sd.ApplyDot(UiRoot.CurrentDot);
@@ -320,7 +322,7 @@ namespace Lighthouse.UI
             if (!string.IsNullOrEmpty(b.Tag)) Chip(nl.transform, b.Tag, "#14172b");
             Kit.Elem(Kit.Text(nl.transform, b.Text, 14f, Ink, true).gameObject, flexW: 1);
             if (!b.Open && !string.IsNullOrEmpty(b.Sub)) Kit.Text(col.transform, b.Sub, 12.5f, UiTheme.Soft);
-            if (!string.IsNullOrEmpty(b.Date)) { var dt = Kit.Text(headRect, b.Date, 12f, UiTheme.Soft, false, TextAlignmentOptions.TopRight); dt.enableWordWrapping = false; Kit.Elem(dt.gameObject, minW: 54f, flexW: 0); }
+            if (!string.IsNullOrEmpty(b.Date)) { var dt = Kit.Text(headRect, b.Date, 12f, UiTheme.Soft, false, TextAlignmentOptions.TopRight); dt.textWrappingMode = TextWrappingModes.NoWrap; Kit.Elem(dt.gameObject, minW: 54f, flexW: 0); }
             if (b.Open)
             {
                 var body = Kit.VBox(card.transform, "body", new Vector4(2, 2, 2, 2), 2);

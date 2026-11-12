@@ -30,6 +30,7 @@ namespace Lighthouse.UI
         public event Action Changed;
 
         static readonly string[] TabIds = { "mail", "dex", "growth", "deco", "shop" };
+        public static string[] TabIdList => TabIds;
         static readonly string[] TabIcons = { "mail", "book", "star", "starfish", "bag" };
 
         // ---------- 뼈대 ----------
@@ -59,7 +60,7 @@ namespace Lighthouse.UI
             foreach (var id in TabIds)
             {
                 var b = Kit.FrameButton(pv.TabsRow, "main", "main_p", "", 12.5f, Color.white, null, "tab:" + id, true, 50f, 1f);
-                var lab = b.transform.Find("label").GetComponent<TMP_Text>(); lab.fontSize = 12.5f; lab.enableWordWrapping = false;
+                var lab = b.transform.Find("label").GetComponent<TMP_Text>(); lab.fontSize = 12.5f; lab.textWrappingMode = TextWrappingModes.NoWrap;
                 // 아이콘은 라벨 앞에
                 var ic = Kit.IconImage(b.transform, TabIcons[Array.IndexOf(TabIds, id)]); ic.transform.SetSiblingIndex(0);
                 var ds = ic.GetComponent<DotSize>(); ds.Mult = 1; ds.ApplyDot(UiRoot.CurrentDot);
@@ -143,7 +144,39 @@ namespace Lighthouse.UI
             Scroll.verticalNormalizedPosition = sameScreen && keepScroll ? Mathf.Clamp01(scrollPos) : 1f;
             lastMode = m.Mode; lastSub = sub;
             ApplyLayoutRect();
+            ApplyReq(Ctl.TakeReq());
             Changed?.Invoke();
+        }
+
+        // ---------- 스크롤·초점 요청(원본 decoAfter 3914행·refocus 4046행) ----------
+        ActTag FindTag(string act)
+        {
+            if (string.IsNullOrEmpty(act)) return null;
+            foreach (var t in Content.GetComponentsInChildren<ActTag>(false)) if (t.Act == act) return t;
+            return null;
+        }
+        static Transform FindNamed(Transform root, string name)
+        {
+            foreach (Transform c in root) { if (c.name == name) return c; var d = FindNamed(c, name); if (d != null) return d; }
+            return null;
+        }
+        Selectable ResolveFocus(string f)
+        {
+            if (f == "gear") return Gear;
+            if (f == "zone.on") { var z = FindTag("zone:" + Ctl.DecoZone); return z != null ? z.GetComponent<Selectable>() : null; }
+            if (f == "ph" || f == "gate") { var box = FindNamed(Content, f == "ph" ? "pick" : "gate"); return box != null ? box.GetComponentInChildren<Selectable>(false) : null; }
+            var tag = FindTag(f); return tag != null ? tag.GetComponent<Selectable>() : null;
+        }
+        /// <summary>마지막으로 그린 뒤의 요청을 적용한다: 스크롤(구역 칩 줄을 위로 · 고르기 시트가 보이게 · 바뀐 자리 칸이 보이게)과 초점. 단추가 없으면(사라졌으면) 조용히 넘어간다.</summary>
+        public void ApplyReq(FocusRequest r)
+        {
+            if (r == null || Scroll == null) return;
+            Canvas.ForceUpdateCanvases();
+            if (r.Scroll == "zones") { var z = FindTag("zone:" + Ctl.DecoZone); if (z != null && z.transform.parent != null) ScrollKit.IntoView(Scroll, (RectTransform)z.transform.parent, true); }
+            var sel = ResolveFocus(r.Focus);
+            if (sel != null && UnityEngine.EventSystems.EventSystem.current != null) UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(sel.gameObject);
+            if (r.Scroll == "ph") { var box = FindNamed(Content, "pick"); if (box != null) ScrollKit.IntoView(Scroll, (RectTransform)box); }
+            if (!string.IsNullOrEmpty(r.Near)) { var c = FindTag("slot:" + r.Near); if (c != null) ScrollKit.IntoView(Scroll, (RectTransform)c.transform); }
         }
 
         string SubKey(PanelModel m) => m.Mode + "|" + Ctl.GrowSub + "|" + Ctl.DexSub + "|" + Ctl.DecoTab + "|" + Ctl.DecoZone;

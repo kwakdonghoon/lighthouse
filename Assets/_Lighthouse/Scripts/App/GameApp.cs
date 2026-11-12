@@ -76,6 +76,7 @@ namespace Lighthouse.App
             Save.Flush();
             ApplyExtras();
 
+            Lighthouse.UI.TitleView.WantPieces = Ctx.S.Guided == 0 && Ctx.S.Letters.Count == 0 && !Lighthouse.Core.MotionPref.Reduce;      // 첫 실행이면 인트로용 섬 조각을 처음부터 함께 굽는다
             UiRoot.BootStrings = str;
             Ui = UiRoot.Create(null, false); Ui.Canvas.sortingOrder = 10;
             if (ForceW > 0) { Ui.ManualScreen = true; Ui.DevW = ForceW; Ui.DevH = ForceH; Ui.Density = ForceDensity; Ui.Safe = new Insets(0, 24, 0, 16); }
@@ -99,7 +100,9 @@ namespace Lighthouse.App
             Loop.Boot();
             AudioBridge.Attach(this);                                                     // M6: 소리 요청·장면을 소리 엔진에 잇는다(배치 모드에서는 만들지 않음)
             pendingNews = LastNews != null && !LastNews.Quiet ? LastNews : null;
-            Ui.ShowTitle(first);
+            bool firstRun = Ctx.S.Guided == 0 && Ctx.S.Letters.Count == 0;                    // 원본 5595행: 안내한 배도 편지도 없으면 첫 실행(약 9초 인트로)
+            Ui.ShowTitle(firstRun);
+            if (!Ctx.S.Seen) { Ctx.S.Seen = true; Ctx.NotifyChanged(); Ui.PlayHint(); }          // 원본 5575행: 첫 실행에만 안내 한 줄(1.2초 뒤 나타나 10초 동안)
             booted = true;
         }
 
@@ -115,7 +118,7 @@ namespace Lighthouse.App
         // ================= 이벤트 =================
         void OnTitleTapped()
         {
-            if (!Ctx.S.Seen) { Ctx.S.Seen = true; Ctx.NotifyChanged(); Ui.ShowHint(true); hintUntil = Time.unscaledTime + 10f; }
+            // 첫 실행 안내(hint)는 시작할 때부터 흐른다(원본: 타이틀 아래에서 이미 지나가기 시작). 여기서 할 일은 없다.
         }
 
         void OnTitleClosed()
@@ -125,16 +128,17 @@ namespace Lighthouse.App
 
         void OnPhoto()
         {
+            PhotoOutcome res;
             try
             {
-                int mult = Mathf.Max(2, Mathf.CeilToInt(1080f / World.W));
-                var png = World.CapturePng(mult);
-                string dir = Path.Combine(SaveDir, "photos"); Directory.CreateDirectory(dir);
-                string path = Path.Combine(dir, "lighthouse_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png");
-                File.WriteAllBytes(path, png); LastPhotoPath = path;
+                var png = World.CapturePng(PhotoSink.Factor(World.W));                                 // 원본 3168행: 화면 도트 그림을 정수 배율(1080/폭, 1~8)로 키워 번지지 않게
+                res = PhotoSink.Save(png, PhotoSink.FileName(DateTime.Now), SaveDir); LastPhotoPath = PhotoSink.LastPath;
             }
-            catch (Exception e) { UnityEngine.Debug.LogWarning("사진 저장 실패: " + e.Message); if (Ui.Photo != null) Ui.Photo.Msg.text = UiText.Display(str.Get("photo.failed")); }
+            catch (Exception e) { UnityEngine.Debug.LogWarning("사진 저장 실패: " + e.Message); res = PhotoOutcome.Failed; }
+            LastPhotoOutcome = res;
+            Ui.SetPhotoMessage(res == PhotoOutcome.Saved ? "photo.saved" : res == PhotoOutcome.Shared ? "photo.shared" : res == PhotoOutcome.Cancelled ? "photo.notSaved" : "photo.failed");
         }
+        public PhotoOutcome LastPhotoOutcome;
         public string LastPhotoPath;
 
         void OnSaveImported(JObject data)
@@ -159,13 +163,13 @@ namespace Lighthouse.App
         {
             if (World == null || !Ui.Ctl.DecoPlaceOpen) return;
             var d = World.ToDesign(px); double css = World.Fit.Scale / Ui.Scale;          // 설계 1칸 = 캔버스 단위(dp) 몇 개
-            var c = new List<(double d, string id)>();
+            var slots = new List<(string id, double sx, double sy)>();
             foreach (var id in Ui.Ctl.DecoOpenSlotIds())
             {
                 var sl = DecorBaker.Slots.FirstOrDefault(s => s.Id == id); if (sl == null) continue;
-                var p = DecorLayout.Pos(sl, Ctx.Stage, World.W); double dd = Math.Sqrt((d.x - p.x) * (d.x - p.x) + (d.y - (p.y - 3)) * (d.y - (p.y - 3))) * css;
-                if (dd <= 22) c.Add((dd, id));
+                var p = DecorLayout.Pos(sl, Ctx.Stage, World.W); slots.Add((id, p.x, p.y));
             }
+            var c = DecoTapAim.Candidates(d.x, d.y, slots, css);                                    // 22 안쪽의 자리만 (원본 decoTapAt)
             if (Ui.Ctl.DecoTapPick(c)) Ui.Panel.Refresh(true);
         }
 
@@ -198,7 +202,6 @@ namespace Lighthouse.App
                 for (int i = 0; i < n; i++) { mc.AdvanceSec(step); Loop.Tick(step); Save.Tick(step); HandleInput(); }
             }
             else { Loop.Tick(rdt); Save.Tick(rdt); HandleInput(); }
-            if (hintUntil > 0 && Time.unscaledTime > hintUntil) { Ui.ShowHint(false); hintUntil = 0; }
 
             // 월드 다시 굽기: 화면 크기·단계·계절·외형·장식이 바뀌었을 때
             if (ScreenW != lastW || ScreenH != lastH) rebuildPending = true;
@@ -256,16 +259,18 @@ namespace Lighthouse.App
             }
         }
 
+        readonly List<UiRectF> avoid = new List<UiRectF>();
         void UpdateBubble()
         {
-            var b = Loop.Bubble; if (b == null) { if (bubble.gameObject.activeSelf) bubble.Hide(); return; }
+            var b = Loop.Bubble; if (b == null || Ui.PhotoMode) {          // 사진 모드에서는 말풍선도 숨긴다(원본 body.photo #bubble 471행)
+                if (bubble.gameObject.activeSelf) bubble.Hide(); return; }
             double bx, by;
             if (b.Ship != null) { double ls = Lanes.S[b.Ship.Lane]; bx = b.Ship.X; by = Lanes.Y[b.Ship.Lane] - 40 * ls; }
             else { var kp = Loop.KeeperPos(); bx = kp.x; by = kp.y - 19; }
             if (!bubble.gameObject.activeSelf) bubble.gameObject.SetActive(true);
             bubble.SetText(b.Text);
             var cpos = World.ToCanvas(bx, by, Ui.Scale);
-            bubble.Place(cpos.x, cpos.y, UiRoot.CanvasW, UiRoot.CanvasH, ScreenLayout.HudTop(Ui.Safe) + 36f);
+            Ui.CollectAvoidRects(avoid); bubble.Place(cpos.x, cpos.y, UiRoot.CanvasW, UiRoot.CanvasH, avoid);
         }
     }
 }

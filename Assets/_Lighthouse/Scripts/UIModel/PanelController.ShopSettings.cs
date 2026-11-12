@@ -131,7 +131,7 @@ namespace Lighthouse.UI.Model
             // 보기 순서 섞기(원본 sort(() => random - 0.5) 와 같은 느낌의 단순 섞기)
             for (int i = set.Count - 1; i > 0; i--) { int j = (int)Math.Floor(Ctx.Rng.NextDouble() * (i + 1)); var t = set[i]; set[i] = set[j]; set[j] = t; }
             gate = new GateState { Type = type, Id = id, A = a, B = b, Right = right, Choices = set };
-            SetShopMsg(""); adMsg = null;
+            SetShopMsg(""); adMsg = null; Req = new FocusRequest("gate");                              // 보호자 확인이 열리면 첫 보기로 초점(원본 1870행)
         }
 
         void BuyAct(string id)
@@ -219,6 +219,7 @@ namespace Lighthouse.UI.Model
                 }
             }
             else adMsg = new[] { k, r.Reason == "closed" ? S_("shop.adClosed") : S_("shop.adError") };
+            if (Mode == PanelMode.Shop) Req = new FocusRequest("ad:" + k);                                 // 결과를 보고도 같은 단추에서 이어 가게(원본 1789행)
             if (Mode != PanelMode.Shop && adMsg != null) { Host.Toast(adMsg[1], null); adMsg = null; }
         }
 

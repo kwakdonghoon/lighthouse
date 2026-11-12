@@ -40,6 +40,25 @@ namespace Lighthouse.UI
             return img;
         }
 
+        /// <summary>
+        /// 단색 도트 상자(원본 CSS: border var(--d) solid + box-shadow inset): 바탕색 Image 에 테두리 한 줄(d)·왼쪽 위 밝은 선·오른쪽 아래 어두운 선을 자식으로 얹는다. 9-slice 틀 그림이 없는 사진 막대용.
+        /// 자식은 모두 레이아웃에서 빠진다(ignoreLayout). dot = 도트 한 칸(캔버스 단위).
+        /// </summary>
+        public static Image PixelBox(Transform parent, Color border, Color fill, Color hi, Color lo, float dot, string name = "pixelbox")
+        {
+            var img = Solid(parent, fill, name); img.raycastTarget = true; var rt = img.rectTransform;
+            void Bar(string n, Color c, float ax0, float ay0, float ax1, float ay1, float ox0, float oy0, float ox1, float oy1)
+            {
+                var b = Solid(rt, c, n); b.gameObject.AddComponent<LayoutElement>().ignoreLayout = true; var r = b.rectTransform;
+                r.anchorMin = new Vector2(ax0, ay0); r.anchorMax = new Vector2(ax1, ay1); r.offsetMin = new Vector2(ox0, oy0); r.offsetMax = new Vector2(ox1, oy1);
+            }
+            float d = Mathf.Max(1f, dot);
+            if (hi.a > 0) { Bar("hi top", hi, 0, 1, 1, 1, d, -2 * d, -d, -d); Bar("hi left", hi, 0, 0, 0, 1, d, d, 2 * d, -d); }       // inset d d 0 hi : 안쪽 위·왼쪽
+            if (lo.a > 0) { Bar("lo bottom", lo, 0, 0, 1, 0, d, d, -d, 2 * d); Bar("lo right", lo, 1, 0, 1, 1, -2 * d, d, -d, -d); }    // inset -d -d 0 lo : 안쪽 아래·오른쪽
+            Bar("b top", border, 0, 1, 1, 1, 0, -d, 0, 0); Bar("b bottom", border, 0, 0, 1, 0, 0, 0, 0, d); Bar("b left", border, 0, 0, 0, 1, 0, 0, d, 0); Bar("b right", border, 1, 0, 1, 1, -d, 0, 0, 0);
+            return img;
+        }
+
         public static Image Solid(Transform parent, Color c, string name = "solid")
         {
             var r = Rect(name, parent); var img = r.gameObject.AddComponent<Image>();
@@ -51,7 +70,7 @@ namespace Lighthouse.UI
         {
             bool on = !string.IsNullOrEmpty(text); badge.SetActive(on); if (!on) return;
             var t = badge.transform.Find("t") != null ? badge.transform.Find("t").GetComponent<TMP_Text>() : null;
-            if (t == null) { t = Text(badge.transform, "", 10f, Color.white, true, TextAlignmentOptions.Center, "t"); t.enableWordWrapping = false; Stretch(t.rectTransform); }
+            if (t == null) { t = Text(badge.transform, "", 10f, Color.white, true, TextAlignmentOptions.Center, "t"); t.textWrappingMode = TextWrappingModes.NoWrap; Stretch(t.rectTransform); }
             t.text = text; var rt = (RectTransform)badge.transform;
             if (rt.pivot != Vector2.one) { var corner = rt.anchoredPosition + new Vector2(rt.sizeDelta.x * (1f - rt.pivot.x), rt.sizeDelta.y * (1f - rt.pivot.y)); rt.pivot = Vector2.one; rt.anchoredPosition = corner; }      // 오른쪽 위 모서리를 고정해 글이 길어지면 왼쪽으로 자란다(화면 가장자리에 붙지 않게)
             rt.sizeDelta = new Vector2(Mathf.Max(14f, t.GetPreferredValues(text).x + 6f), 14f);
@@ -61,7 +80,7 @@ namespace Lighthouse.UI
         {
             var r = Rect(name, parent); var t = r.gameObject.AddComponent<TextMeshProUGUI>();
             t.font = bold ? UiTheme.FontBold : UiTheme.FontRegular; t.fontSize = size; t.color = color; t.alignment = align;
-            t.enableWordWrapping = true; t.overflowMode = TextOverflowModes.Overflow; t.raycastTarget = false; t.richText = false; t.extraPadding = false;
+            t.textWrappingMode = TextWrappingModes.Normal; t.overflowMode = TextOverflowModes.Overflow; t.raycastTarget = false; t.richText = false; t.extraPadding = false;
             t.lineSpacing = 0f; t.margin = Vector4.zero;
             t.text = Lighthouse.UI.Model.UiText.Display(text ?? "");
             return t;

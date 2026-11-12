@@ -48,7 +48,11 @@ namespace Lighthouse.UI.Model
             var sum = new Block(BK.Summary) { Text = MailN(letters.Count), Sub = S_("mail.unit") + MailMore(letters.Count) + (un > 0 ? " · " + S_("mail.unread") + " " + MailN(un) + S_("mail.unit") + MailMore(un) : " · " + S_("mail.allRead")) };
             if (un > 0) sum.Add(Block.Btn(S_("mail.readAll"), "readall"));
             r.Add(sum);
-            foreach (var l in letters) r.Add(LetterBlock(l));
+            foreach (var l in letters)
+            {
+                try { r.Add(LetterBlock(l)); }
+                catch (Exception) { r.Add(new Block(BK.Letter) { Text = S_("mail.broken"), Icon = "mail", Act = "letter:" + l.Id.ToString("0", CultureInfo.InvariantCulture), New = false, Open = false }); }      // 한 통을 그리다 예외가 나도 그 편지만 대체 줄로(원본 QA-402)
+            }
             if (S.LettersTrimmed) r.Add(Block.N(S_("mail.trimmed"), "qnote"));
             return r;
         }
