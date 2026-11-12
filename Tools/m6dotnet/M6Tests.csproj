@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- M6 사운드 검증용(Unity 없이 dotnet test). Core(Rng)·Audio/Synth 순수 C# 소스와 Audio 시험 소스를 그대로 컴파일한다. LangVersion 9 = Unity 6 의 C# -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <IsPackable>false</IsPackable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <RootNamespace>Lighthouse.Tests</RootNamespace>
+    <NoWarn>CS0219;CS0162;CS0168</NoWarn>
+    <DefineConstants>$(DefineConstants);LH_DOTNET</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Assets\_Lighthouse\Scripts\Core\Rng.cs" />
+    <Compile Include="..\..\Assets\_Lighthouse\Scripts\Audio\Synth\**\*.cs" />
+    <Compile Include="..\..\Assets\_Lighthouse\Tests\Audio\**\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+  </ItemGroup>
+</Project>

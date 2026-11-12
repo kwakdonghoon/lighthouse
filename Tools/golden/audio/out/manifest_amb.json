@@ -1,0 +1,84 @@
+{
+ "sr": 44100,
+ "S0": 20260101,
+ "S1": 5000,
+ "tickFrames": 8832,
+ "items": [
+  {
+   "name": "amb_spring_day",
+   "frames": 352800,
+   "ch": 2,
+   "sr": 44100,
+   "warm": 0,
+   "peak": 0.126608,
+   "rms": 0.023379,
+   "kind": "amb",
+   "season": "spring",
+   "dusk": 0.1,
+   "wx": {
+    "kind": "clear",
+    "amt": 0
+   },
+   "stage": 3,
+   "build": false,
+   "seed": 5300
+  },
+  {
+   "name": "amb_summer_night",
+   "frames": 352800,
+   "ch": 2,
+   "sr": 44100,
+   "warm": 0,
+   "peak": 0.135113,
+   "rms": 0.022753,
+   "kind": "amb",
+   "season": "summer",
+   "dusk": 0.9,
+   "wx": {
+    "kind": "clear",
+    "amt": 0
+   },
+   "stage": 2,
+   "build": false,
+   "seed": 5301
+  },
+  {
+   "name": "amb_autumn_rain_build",
+   "frames": 352800,
+   "ch": 2,
+   "sr": 44100,
+   "warm": 0,
+   "peak": 0.229019,
+   "rms": 0.046536,
+   "kind": "amb",
+   "season": "autumn",
+   "dusk": 0.3,
+   "wx": {
+    "kind": "rain",
+    "amt": 0.8
+   },
+   "stage": 4,
+   "build": true,
+   "seed": 5302
+  },
+  {
+   "name": "amb_winter_fog",
+   "frames": 352800,
+   "ch": 2,
+   "sr": 44100,
+   "warm": 0,
+   "peak": 0.110291,
+   "rms": 0.021131,
+   "kind": "amb",
+   "season": "winter",
+   "dusk": 0.2,
+   "wx": {
+    "kind": "fog",
+    "amt": 0.8
+   },
+   "stage": 1,
+   "build": false,
+   "seed": 5303
+  }
+ ]
+}

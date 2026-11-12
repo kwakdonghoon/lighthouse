@@ -1,0 +1,68 @@
+{
+ "sr": 44100,
+ "S0": 20260101,
+ "S1": 5000,
+ "tickFrames": 8832,
+ "items": [
+  {
+   "name": "music_spring_day",
+   "frames": 617400,
+   "ch": 2,
+   "sr": 44100,
+   "warm": 44160,
+   "peak": 0.030741,
+   "rms": 0.004753,
+   "kind": "music",
+   "season": "spring",
+   "dusk": 0.1,
+   "storm": 0,
+   "seed": 5200,
+   "phraseLen": 2.3850866091382388
+  },
+  {
+   "name": "music_summer_night",
+   "frames": 617400,
+   "ch": 2,
+   "sr": 44100,
+   "warm": 44160,
+   "peak": 0.031079,
+   "rms": 0.00502,
+   "kind": "music",
+   "season": "summer",
+   "dusk": 0.9,
+   "storm": 0,
+   "seed": 5201,
+   "phraseLen": 3.504254489539411
+  },
+  {
+   "name": "music_winter_day_storm",
+   "frames": 617400,
+   "ch": 2,
+   "sr": 44100,
+   "warm": 44160,
+   "peak": 0.032551,
+   "rms": 0.005477,
+   "kind": "music",
+   "season": "winter",
+   "dusk": 0.1,
+   "storm": 0.5,
+   "seed": 5202,
+   "phraseLen": 3.1694374717402556
+  },
+  {
+   "name": "music_autumn_day",
+   "frames": 617400,
+   "ch": 2,
+   "sr": 44100,
+   "warm": 44160,
+   "peak": 0.03712,
+   "rms": 0.005486,
+   "kind": "music",
+   "season": "autumn",
+   "dusk": 0.1,
+   "storm": 0,
+   "seed": 5203,
+   "phraseLen": 3.2356451112706717
+  }
+ ]
+}

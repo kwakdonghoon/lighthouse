@@ -97,6 +97,7 @@ namespace Lighthouse.App
             Loop.UiBusy = () => Ui.Ctl.Mode != PanelMode.None || Ui.TitleOpen || Ui.PhotoMode || Ui.ToastState.Visible || Ui.Tips.Current != null;      // 처음 만난 것 알림이 기다리는 때
             Loop.OpenMail += () => { Ui.Ctl.Open(PanelMode.Mail); Ui.Panel.Refresh(false); };
             Loop.Boot();
+            AudioBridge.Attach(this);                                                     // M6: 소리 요청·장면을 소리 엔진에 잇는다(배치 모드에서는 만들지 않음)
             pendingNews = LastNews != null && !LastNews.Quiet ? LastNews : null;
             Ui.ShowTitle(first);
             booted = true;
