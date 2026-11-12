@@ -53,19 +53,29 @@ namespace Lighthouse.Render
             {
                 D = s.LampD, N = s.LampN, X = cx, Y = cyTower, Tag = "lamp",
                 AlphaD = k => 1,
-                AlphaN = k => { if (!(k > 0.01)) return 0; double fl = k >= 0.5 ? 0.92 + 0.08 * Math.Sin(t * 11) * Math.Sin(t * 3.7) : 0.75; return Math.Min(1, k * 1.2) * Math.Min(1, fl); }
+                AlphaN = k => LampNightAlpha(k, t)
             });
             ops.Add(DN(s.TowerB, s.TowerBN, cx, cyTower, "towerB"));
             pass(s.Lists.B); pass(s.Lists.S);
             return ops;
         }
 
+        /// <summary>램프 밤 그림의 투명도(원본 drawLamp 1235행): dusk(k)×1.2 와 깜빡임 fl(밤이면 0.92+0.08·sin(t·11)·sin(t·3.7), 아니면 0.75). 게임은 매 프레임 t 로 다시 부른다(M2 는 t=0 으로 굳었다).</summary>
+        public static double LampNightAlpha(double k, double t)
+        {
+            if (!(k > 0.01)) return 0;
+            double fl = k >= 0.5 ? 0.92 + 0.08 * Math.Sin(t * 11) * Math.Sin(t * 3.7) : 0.75; return Math.Min(1, k * 1.2) * Math.Min(1, fl);
+        }
+
         static readonly Col FoamA = Col.Hex("#eaf6fc"), FoamB = Col.Hex("#b4dcf0");
 
         /// <summary>섬 둘레 블록 물거품 (drawShore 1270~1281행): 가장자리를 따라 깜빡이는 점들을 투명 비트맵 한 장(좌표는 캔버스 그대로)으로.</summary>
-        static Bitmap Foam(SceneSprites s, double cx, double cy, double t, bool night)
+        static Bitmap Foam(SceneSprites s, double cx, double cy, double t, bool night) => Foam(s.Stage, cx, cy, t, night);
+
+        /// <summary>t 시점의 물거품 한 장(구워 두는 용도는 t=0). 게임에서는 FoamLayer 가 매 프레임 같은 값을 다시 채운다 — 시험이 둘을 맞춰 본다.</summary>
+        public static Bitmap Foam(int stage, double cx, double cy, double t, bool night)
         {
-            var px = new List<(int x, int y, uint c)>(); int N = Terrain.N(s.Stage), i = 0;
+            var px = new List<(int x, int y, uint c)>(); int N = Terrain.N(stage), i = 0;
             Action<double, double, double, double, Col, double> rect = (x, y, w, h, c, ga) =>
             {
                 int x0 = (int)JsMath.Round(x), y0 = (int)JsMath.Round(y), w0 = (int)Math.Max(1, JsMath.Round(w)), h0 = (int)Math.Max(1, JsMath.Round(h)), g8 = (int)JsMath.Round(ga * 255);

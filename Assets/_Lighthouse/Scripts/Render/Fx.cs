@@ -127,7 +127,7 @@ namespace Lighthouse.Render
 
         // ---- glow: 점을 흩뿌린 디더링 원(사각 3겹, 겹치면 알파 누적) 한 번 굽고 'lighter'(가산) 로 얹는다 ----
         sealed class GlowSpr { public int Ax, Ay, W; public int[] R, G, B, A; }   // premultiplied 8비트
-        static readonly Dictionary<string, GlowSpr> glowCache = new Dictionary<string, GlowSpr>();
+        static readonly Dictionary<long, GlowSpr> glowCache = new Dictionary<long, GlowSpr>();       // 키: 반지름·색 채널(문자열을 만들면 호출마다 쓰레기가 쌓인다)
 
         static GlowSpr BakeGlow(int r, int cr, int cg, int cb)
         {
@@ -151,7 +151,7 @@ namespace Lighthouse.Render
         /// <summary>glow(x, y, r, col, a) — 'lighter' 합성(가산, 255 에서 멈춤). groupAlpha: 바깥에서 건 globalAlpha.</summary>
         public static void DrawGlow(CpuCanvas c, double x, double y, double r, int cr, int cg, int cb, double a, double groupAlpha = 1)
         {
-            int ri = (int)Math.Max(2, JsMath.Round(r)); string key = ri + "|" + cr + "," + cg + "," + cb;
+            int ri = (int)Math.Max(2, JsMath.Round(r)); long key = ((long)ri << 24) | ((long)(cr & 255) << 16) | ((long)(cg & 255) << 8) | (long)(cb & 255);
             if (!glowCache.TryGetValue(key, out var s)) glowCache[key] = s = BakeGlow(ri, cr, cg, cb);
             int ga8 = (int)JsMath.Round(Math.Min(1, a * 1.1) * groupAlpha * 255);
             int ox = (int)JsMath.Round(JsMath.Round(x) + s.Ax), oy = (int)JsMath.Round(JsMath.Round(y) + s.Ay);

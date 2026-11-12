@@ -114,6 +114,13 @@ namespace Lighthouse.Game
             }
         }
 
+        /// <summary>램프 밤 그림의 깜빡임(원본 drawLamp): 정적 층을 한 번 굽고 SetDusk 로 알파를 정하면 t=0 으로 굳으므로, 매 프레임 시각 t 로 이 층 알파만 다시 정한다.</summary>
+        public void SetLampFlicker(double t, double dusk)
+        {
+            foreach (var (d, n, op) in layers)
+                if (n != null && op.Tag == "lamp") { double an = SceneComposer.LampNightAlpha(dusk, t); n.enabled = an > 0; n.color = new Color(1, 1, 1, (float)an); }
+        }
+
         /// <summary>한 번 그려 ARGB 픽셀(위 행부터)을 돌려준다 — 골든 대조용.</summary>
         public Bitmap Capture()
         {

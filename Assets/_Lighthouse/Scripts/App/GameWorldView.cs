@@ -34,6 +34,7 @@ namespace Lighthouse.App
         WorldPainter painter; Texture2D ovTex; uint[] ovBuf; SpriteRenderer ovSr; Sprite ovSprite;
         // A1: 스프라이트 사이에 끼는 뒤 층(먼 섬·표류물)·중간 층(불빛 번짐·부이·뒤쪽 배 물보라)
         Texture2D backTex, midTex; SpriteRenderer backSr, midSr; string keeperSkin = "classic";
+        FoamLayer foam; Texture2D foamTex; SpriteRenderer foamSr; uint[] foamFlip; double foamCx, foamCy;       // 섬 둘레 물거품: 매 프레임 다시 채우는 작은 층(M2 는 t=0 으로 굳어 있었다)
         public double LastLayersMs;
         CpuCanvas bg, bgMix; double mixD = -1; double shownDusk = -1;
         string shipSkin = "classic";
@@ -79,6 +80,7 @@ namespace Lighthouse.App
                 }
             }
             ops[0] = new DrawOp { D = Sprites.BgD, N = null, X = 0, Y = 0, Tag = "bg", AlphaD = k => 1, AlphaN = k => 0 };       // 배경은 동적: 낮·밤 섞기를 CPU 가 한다
+            int foamAt = ops.FindIndex(o => o.Tag == "foam"); if (foamAt >= 0) { ops[foamAt].AlphaD = k => 0; ops[foamAt].AlphaN = k => 0; }      // 구워 둔 t=0 물거품은 끄고 아래 FoamLayer 가 그린다
             bg = new CpuCanvas(W, H); bgMix = null; mixD = -1;
             ships.Clear(); spriteCache.Clear(); DropExtra(); keeperSr = null; keeperShadowSr = null;
             View.DynamicBg = true;
@@ -96,7 +98,20 @@ namespace Lighthouse.App
             // 뒤 층(먼 섬·표류물: 뒤쪽 항로 배 아래)·중간 층(물가 뒤·섬 앞: 불빛 번짐·부이·뒤쪽 배 물보라)
             backTex = NewLayerTex("layerBack"); midTex = NewLayerTex("layerMid");
             backSr = NewLayerSr("layerBack", backTex, backOrder - 50); midSr = NewLayerSr("layerMid", midTex, View.OrderBefore("island") - 10);
+            // 섬 둘레 물거품(원본 drawShore): 물가 그림 바로 위(구워 둔 거품이 있던 자리)에 매 프레임 다시 채운다
+            foamCx = W / 2.0; foamCy = Lighthouse.Render.Terrain.CY + Lighthouse.Render.Terrain.IsleY + OY; foam = new FoamLayer(c.Stage, foamCx, foamCy); foamFlip = new uint[foam.W * foam.H];
+            foamTex = new Texture2D(foam.W, foam.H, TextureFormat.RGBA32, false, false) { filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp, name = "foam" }; extraTex.Add(foamTex);
+            foamSr = NewLayerSr("foam", foamTex, foamAt >= 0 ? View.OrderOfIndex(foamAt) + 50 : backOrder + 50); foamSr.sharedMaterial = SpriteMat; foamSr.enabled = true;
+            foamSr.transform.position = new Vector3(foam.Ax, -foam.Ay, 0);
             LastBakeMs = sw.Elapsed.TotalMilliseconds;
+        }
+
+        void UpdateFoam(double t, double dusk)
+        {
+            if (foam == null) return;
+            foam.Paint(ctx.Stage, foamCx, foamCy, t, dusk >= 0.5);
+            for (int y = 0; y < foam.H; y++) System.Array.Copy(foam.D, y * foam.W, foamFlip, (foam.H - 1 - y) * foam.W, foam.W);       // Texture2D 는 아래 행부터
+            foamTex.SetPixelData(foamFlip, 0); foamTex.Apply(false, false);
         }
 
         Texture2D NewLayerTex(string name) { var t = new Texture2D(W, H, TextureFormat.RGBA32, false, false) { filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp, name = name }; extraTex.Add(t); return t; }
@@ -124,6 +139,7 @@ namespace Lighthouse.App
             var sw = Stopwatch.StartNew();
             double dusk = loop.Dusk;
             if (shownDusk != dusk) { View.SetDusk(dusk); shownDusk = dusk; }
+            View.SetLampFlicker(loop.T, dusk); UpdateFoam(loop.T, dusk);          // 램프 밤 그림의 깜빡임, 섬 둘레 물거품
             AnimateBg(loop.T, dusk);
             LastBgMs = sw.Elapsed.TotalMilliseconds;
             UpdateShips(dusk);

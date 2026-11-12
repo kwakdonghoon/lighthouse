@@ -403,8 +403,10 @@ namespace Lighthouse.World
         /// <summary>구조 요청의 느낌표, 정박 중인 배의 닻, 단골 손님 별 (drawShipMarks 4241행). 깃발·등불도 여기서.</summary>
         public void PaintShipMarks(GameLoop L, double t)
         {
-            foreach (var sh in L.Ships.OrderBy(s => Lanes.Y[s.Lane]))
+            for (int lane = 0; lane < 3; lane++)                                           // 항로 y 순서(뒤→앞), 같은 항로에서는 목록 순서 — OrderBy 와 같은 순서, 쓰레기 없이
+            foreach (var sh in L.Ships)
             {
+                if (sh.Lane != lane) continue;
                 double ls = Lanes.S[sh.Lane], fy = Lanes.Y[sh.Lane] + sh.Yo, x = JsMath.Round(sh.X);
                 PaintShipFlag(L, sh, t);
                 if (L.Dusk > 0.35) PaintShipLantern(L, sh, t);

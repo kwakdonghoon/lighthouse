@@ -200,6 +200,24 @@ namespace Lighthouse.Tests
             Assert.Greater(n, 100, "먼 섬 픽셀이 있다"); Assert.AreEqual(0, diff, "뒤 층(뒤집힌 한 장)과 직접 그린 결과가 같다");
         }
 
+        /// <summary>프레임마다 쌓이는 쓰레기(관리 메모리)가 작은지: Tick+Paint+Merge 가 한 프레임에 할당하는 바이트를 낮·밤·겨울 밤에서 잰다(폰의 GC 끊김을 막는 근거).</summary>
+        [Test]
+        public void SceneryAllocatesLittlePerFrame()
+        {
+            foreach (var (name, season, night) in new[] { ("낮·여름", "summer", false), ("밤·여름", "summer", true), ("밤·겨울", "winter", true) })
+            {
+                var r = Rig.Make(51, 6, season, night); var L = r.Loop; var p = new WorldPainter(216, 468, 148); var buf = new uint[216 * 468];
+                L.Ships.Add(new Ship { Id = 1, Type = "fish", Lane = 2, Dir = 1, X = 60, Ph = 1, Need = 1, Guide = 0.4, Wave = 9 }); L.Ships.Add(new Ship { Id = 2, Type = "galleon", Lane = 0, Dir = -1, X = 140, Ph = 2, Need = 1, Done = true, Wave = 9 });
+                L.Drift.Add(new DriftItem { X = 50, Y = 280, Vx = 3, Gift = "shell" });
+                for (int i = 0; i < 90; i++) { r.Clock.AdvanceSec(0.016); L.Tick(0.016); p.Paint(L, null); p.Merge(buf, true); }
+                long a0 = GC.GetAllocatedBytesForCurrentThread();
+                for (int i = 0; i < 300; i++) { r.Clock.AdvanceSec(0.016); L.Tick(0.016); p.Paint(L, null); p.Merge(buf, true); }
+                long perFrame = (GC.GetAllocatedBytesForCurrentThread() - a0) / 300;
+                TestContext.Out.WriteLine(name + ": 한 프레임 할당 " + perFrame + " 바이트 (Tick+Paint+Merge)");
+                Assert.Less(perFrame, 8000, name + ": 프레임마다 쌓이는 쓰레기가 작아야 한다");
+            }
+        }
+
         /// <summary>연출 층 그리기(Paint+Merge, 뒤·중간 층 포함)의 CPU 비용을 A1 켠 것/끈 것으로 잰다. dotnet(JIT) 값이라 Unity 에디터·폰과 다르다 — 참고용 + 터무니없이 커지지 않았는지만 단언한다.</summary>
         [Test]
         public void PaintCostReport()
@@ -223,6 +241,39 @@ namespace Lighthouse.Tests
                 TestContext.Out.WriteLine(name + ": Tick+Paint+Merge 평균 A1 끔 " + avg[0].ToString("F2") + " ms, 켬 " + avg[1].ToString("F2") + " ms (dotnet)");
                 Assert.Less(avg[1], 15, name + ": A1 를 켠 연출 층 한 프레임이 터무니없이 크지 않다");
             }
+        }
+
+        [Test]
+        public void FoamLayerMatchesBakedFoamAtAnyTime()
+        {
+            // 매 프레임 다시 채우는 물거품 층이 M2 골든으로 맞춰 둔 SceneComposer.Foam 과 같은 값(어느 t 에서나)이어야 한다 — t=0 은 HTML 골든(M2)과 곧 같은 것.
+            int checkedCases = 0;
+            foreach (int stage in new[] { 1, 3, 6 })
+                foreach (double t in new[] { 0.0, 0.7, 3.37, 11.9, 25.1 })
+                    foreach (bool night in new[] { false, true })
+                    {
+                        double cx = 108, cy = Terrain.CY + Terrain.IsleY + 148; var layer = new FoamLayer(stage, cx, cy); layer.Paint(stage, cx, cy, t, night);
+                        var baked = SceneComposer.Foam(stage, cx, cy, t, night); int nonzeroBaked = 0, mismatch = 0;
+                        for (int y = 0; y < baked.H; y++) for (int x = 0; x < baked.W; x++)
+                        {
+                            uint b = baked.D[y * baked.W + x]; if (b == 0) continue; nonzeroBaked++;
+                            int lx = baked.Ax + x - layer.Ax, ly = baked.Ay + y - layer.Ay;
+                            if (lx < 0 || ly < 0 || lx >= layer.W || ly >= layer.H || layer.D[ly * layer.W + lx] != b) mismatch++;
+                        }
+                        int nonzeroLayer = layer.D.Count(v => v != 0);
+                        Assert.AreEqual(0, mismatch, "stage " + stage + " t " + t + " night " + night); Assert.AreEqual(nonzeroBaked, nonzeroLayer, "층에 남는 점이 없다 stage " + stage + " t " + t); checkedCases++;
+                    }
+            TestContext.Out.WriteLine("물거품 층 = 구운 물거품: " + checkedCases + "건 일치");
+            var a = new FoamLayer(6, 108, 224 + 10 + 148); a.Paint(6, 108, 382, 1.0, false); var b2 = new FoamLayer(6, 108, 382); b2.Paint(6, 108, 382, 2.0, false);
+            Assert.AreNotEqual(a.D.Count(v => v != 0), 0); Assert.IsFalse(a.D.SequenceEqual(b2.D), "시간이 지나면 물거품이 달라진다(움직인다)");
+        }
+
+        [Test]
+        public void LampFlickerFollowsTimeAndMatchesOps()
+        {
+            double lo = 9, hi = 0; for (int i = 0; i < 2000; i++) { double a = SceneComposer.LampNightAlpha(1, i * 0.037); lo = Math.Min(lo, a); hi = Math.Max(hi, a); }
+            Assert.Less(lo, 0.95, "램프 밤 그림이 깜빡인다"); Assert.GreaterOrEqual(lo, 0.84 - 1e-9); Assert.LessOrEqual(hi, 1.0);
+            Assert.AreEqual(0, SceneComposer.LampNightAlpha(0, 3), "낮에는 밤 램프가 없다"); Assert.AreEqual(Math.Min(1, 0.3 * 1.2) * 0.75, SceneComposer.LampNightAlpha(0.3, 5), 1e-12, "해질녘 dusk<0.5 는 fl=0.75");
         }
 
         [Test]
