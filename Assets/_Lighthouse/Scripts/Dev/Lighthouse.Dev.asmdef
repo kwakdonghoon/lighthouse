@@ -1,0 +1,14 @@
+{
+    "name": "Lighthouse.Dev",
+    "rootNamespace": "Lighthouse.Dev",
+    "references": ["Lighthouse.Core","Lighthouse.Data","Lighthouse.Render","Lighthouse.World","Lighthouse.App","Lighthouse.UI","Lighthouse.UI.Model","Lighthouse.Platform","Unity.Nuget.Newtonsoft-Json"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": ["LIGHTHOUSE_DEV"],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

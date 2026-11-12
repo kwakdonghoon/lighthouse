@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Skipped:Ignored" total="5" passed="4" failed="0" inconclusive="0" skipped="1" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-12 04:08:33Z" end-time="2026-11-12 04:08:34Z" duration="0.3044526">
+  <test-suite type="TestSuite" id="1000" name="Lighthouse" fullname="Lighthouse" runstate="Runnable" testcasecount="278" result="Skipped" label="Ignored" start-time="2026-11-12 04:08:33Z" end-time="2026-11-12 04:08:34Z" duration="0.304453" total="5" passed="4" failed="0" inconclusive="0" skipped="1" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <reason>
+      <message><![CDATA[One or more child tests were ignored]]></message>
+    </reason>
+    <test-suite type="Assembly" id="1192" name="Lighthouse.Tests.Safety.dll" fullname="D:/Unity/EK_game_create/ek_lighthouse_unity/Library/ScriptAssemblies/Lighthouse.Tests.Safety.dll" runstate="Runnable" testcasecount="55" result="Skipped" label="Ignored" start-time="2026-11-12 04:08:33Z" end-time="2026-11-12 04:08:34Z" duration="0.288434" total="5" passed="4" failed="0" inconclusive="0" skipped="1" asserts="0">
+      <properties>
+        <property name="_PID" value="30408" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <reason>
+        <message><![CDATA[One or more child tests were ignored]]></message>
+      </reason>
+      <test-suite type="TestSuite" id="1193" name="Lighthouse" fullname="Lighthouse" runstate="Runnable" testcasecount="55" result="Skipped" label="Ignored" start-time="2026-11-12 04:08:33Z" end-time="2026-11-12 04:08:34Z" duration="0.286331" total="5" passed="4" failed="0" inconclusive="0" skipped="1" asserts="0">
+        <properties />
+        <reason>
+          <message><![CDATA[One or more child tests were ignored]]></message>
+        </reason>
+        <test-suite type="TestSuite" id="1194" name="Tests" fullname="Lighthouse.Tests" runstate="Runnable" testcasecount="55" result="Skipped" label="Ignored" start-time="2026-11-12 04:08:33Z" end-time="2026-11-12 04:08:34Z" duration="0.284438" total="5" passed="4" failed="0" inconclusive="0" skipped="1" asserts="0">
+          <properties />
+          <reason>
+            <message><![CDATA[One or more child tests were ignored]]></message>
+          </reason>
+          <test-suite type="TestFixture" id="1164" name="ReleaseAndPlatformTests" fullname="Lighthouse.Tests.ReleaseAndPlatformTests" classname="Lighthouse.Tests.ReleaseAndPlatformTests" runstate="Runnable" testcasecount="5" result="Skipped" label="Ignored" start-time="2026-11-12 04:08:33Z" end-time="2026-11-12 04:08:34Z" duration="0.282278" total="5" passed="4" failed="0" inconclusive="0" skipped="1" asserts="0">
+            <properties />
+            <reason>
+              <message><![CDATA[One or more child tests were ignored]]></message>
+            </reason>
+            <test-case id="1166" name="DevAssemblyDefinitionIsGatedBySymbol" fullname="Lighthouse.Tests.ReleaseAndPlatformTests.DevAssemblyDefinitionIsGatedBySymbol" methodname="DevAssemblyDefinitionIsGatedBySymbol" classname="Lighthouse.Tests.ReleaseAndPlatformTests" runstate="Runnable" seed="1118201572" result="Passed" start-time="2026-11-12 04:08:33Z" end-time="2026-11-12 04:08:33Z" duration="0.024646" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1165" name="DevCodeIsPresentOnlyWhenSymbolIsDefined" fullname="Lighthouse.Tests.ReleaseAndPlatformTests.DevCodeIsPresentOnlyWhenSymbolIsDefined" methodname="DevCodeIsPresentOnlyWhenSymbolIsDefined" classname="Lighthouse.Tests.ReleaseAndPlatformTests" runstate="Runnable" seed="2049653541" result="Passed" start-time="2026-11-12 04:08:33Z" end-time="2026-11-12 04:08:33Z" duration="0.002394" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1167" name="FindNewestCodePrefersNewestValidFileThenClipboard" fullname="Lighthouse.Tests.ReleaseAndPlatformTests.FindNewestCodePrefersNewestValidFileThenClipboard" methodname="FindNewestCodePrefersNewestValidFileThenClipboard" classname="Lighthouse.Tests.ReleaseAndPlatformTests" runstate="Runnable" seed="687818861" result="Skipped" label="Ignored" start-time="2026-11-12 04:08:33Z" end-time="2026-11-12 04:08:33Z" duration="0.120455" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <reason>
+                <message><![CDATA[배치 모드(-nographics)에서는 클립보드가 저장되지 않는다]]></message>
+              </reason>
+            </test-case>
+            <test-case id="1169" name="LooksLikeCodeRules" fullname="Lighthouse.Tests.ReleaseAndPlatformTests.LooksLikeCodeRules" methodname="LooksLikeCodeRules" classname="Lighthouse.Tests.ReleaseAndPlatformTests" runstate="Runnable" seed="1567298815" result="Passed" start-time="2026-11-12 04:08:33Z" end-time="2026-11-12 04:08:33Z" duration="0.001334" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1168" name="OversizedFileIsIgnored" fullname="Lighthouse.Tests.ReleaseAndPlatformTests.OversizedFileIsIgnored" methodname="OversizedFileIsIgnored" classname="Lighthouse.Tests.ReleaseAndPlatformTests" runstate="Runnable" seed="1766658602" result="Passed" start-time="2026-11-12 04:08:33Z" end-time="2026-11-12 04:08:34Z" duration="0.119574" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/DHKWAK/AppData/LocalLow/EK Games/Lighthouse\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

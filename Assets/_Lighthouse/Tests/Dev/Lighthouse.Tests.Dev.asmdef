@@ -1,0 +1,14 @@
+{
+    "name": "Lighthouse.Tests.Dev",
+    "rootNamespace": "Lighthouse.Tests",
+    "references": ["Lighthouse.Core","Lighthouse.Data","Lighthouse.Render","Lighthouse.UI.Model","Lighthouse.World","Lighthouse.Dev","Lighthouse.Tests.Core","UnityEngine.TestRunner","UnityEditor.TestRunner"],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": ["nunit.framework.dll","Newtonsoft.Json.dll"],
+    "autoReferenced": false,
+    "defineConstraints": ["UNITY_INCLUDE_TESTS", "LIGHTHOUSE_DEV"],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

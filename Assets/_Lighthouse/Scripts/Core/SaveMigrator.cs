@@ -9,7 +9,7 @@ namespace Lighthouse.Core
     /// 저장 마이그레이션(원본 MIGRATIONS 2~10 + migrate + cleanLetters/cleanIsle/cleanChoices, HTML 1491~1617행).
     /// 필드 이름·구조를 바꾸지 않고 JObject 위에서 JS 의 암묵 규칙(형 불일치→기본값, 진리값, typeof)까지 그대로 옮겼다.
     /// 번호 9 는 의도적으로 결번(원본 1490행). 더 새 빌드가 만든 저장은 번호를 낮추지 않는다.
-    /// 알려진 차이(의도): totals 가 null 이면 JS 는 TypeError 로 불러오기를 포기하지만 여기서는 기본값으로 바꾼다.
+    /// totals 가 null 이면 JS 는 TypeError 로 불러오기를 포기한다 — 여기서도 같게 System.IO.InvalidDataException(2026-11 에 "기본값으로 바꾼다"에서 되돌림, 사유는 package-unity-c.md).
     /// </summary>
     public sealed class SaveMigrator
     {
@@ -69,7 +69,9 @@ namespace Lighthouse.Core
                     || (a.Type == JTokenType.Null && b.Type != JTokenType.Null && Js.TypeOf(b) != "object");
                 if (replace) s[p.Name] = a.DeepClone();
             }
-            // totals 안쪽 칸도 형태가 어긋나면 비운다 (null 이면 JS 는 예외 → 여기서는 기본값)
+            // totals 안쪽 칸도 형태가 어긋나면 비운다. totals 자체가 null 이면 원본(1608행 s.totals.gifts)처럼 불러오기를 포기한다 —
+            // 예외를 던지면 SaveStore 가 다음 후보(직전 백업)로 넘어간다 (원본은 새 저장으로 시작, 여기서는 백업이 한 단계 더 있다). 2026-11 결정: 원본과 같게.
+            if (s["totals"] != null && s["totals"].Type == JTokenType.Null) throw new System.IO.InvalidDataException("totals is null");
             if (!(s["totals"] is JObject totals)) { totals = new JObject(); s["totals"] = totals; }
             if (!(totals["gifts"] is JObject)) totals["gifts"] = new JObject();
             foreach (var k in new[] { "startAt", "lastSeen", "finale" })
