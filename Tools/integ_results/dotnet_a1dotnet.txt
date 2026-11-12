@@ -1,0 +1,236 @@
+  복원할 프로젝트를 확인하는 중...
+  복원할 모든 프로젝트가 최신 상태입니다.
+  A1Tests -> D:\Unity\EK_game_create\ek_lighthouse_unity\Tools\a1dotnet\bin\Debug\net9.0\A1Tests.dll
+D:\Unity\EK_game_create\ek_lighthouse_unity\Tools\a1dotnet\bin\Debug\net9.0\A1Tests.dll(.NETCoreApp,Version=v9.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+OK   a1/far_d0_t1: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/far_d1_on: px=101088 diff=84 overTol=0 maxD=1
+OK   a1/far_d1_off: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/buoy_s6_p4_d0_t2.3: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/buoy_s6_p12_d1_t5.1: px=101088 diff=178 overTol=0 maxD=1
+OK   a1/buoy_s6_p23_d1_t7.7: px=101088 diff=298 overTol=0 maxD=1
+OK   a1/buoy_s3_p8_d0.7_t3.3: px=101088 diff=19751 overTol=0 maxD=1
+OK   a1/buoy_s1_p0_d1_t0.4: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/drift_d0_t4.2: px=101088 diff=152 overTol=0 maxD=14
+OK   a1/drift_d1_t9.7: px=101088 diff=108 overTol=0 maxD=6
+OK   a1/scaffold_s6_d0_t3.37: px=101088 diff=12 overTol=0 maxD=1
+OK   a1/scaffold_s3_d1_t7.9: px=101088 diff=12 overTol=0 maxD=1
+OK   a1/scaffold_s1_d0_t1.9: px=101088 diff=12 overTol=0 maxD=1
+OK   a1/scaffold_s5_d0.55_t12.2: px=101088 diff=5138 overTol=0 maxD=1
+OK   a1/life_day_g0_t6.3: px=101088 diff=1 overTol=0 maxD=1
+OK   a1/life_day_g40000_t6.9: px=101088 diff=14 overTol=0 maxD=1
+OK   a1/life_day_g40000_t2.0: px=101088 diff=14 overTol=0 maxD=1
+OK   a1/life_night_g0_t13.4: px=101088 diff=26 overTol=0 maxD=1
+OK   a1/life_night_g40000_t27.8: px=101088 diff=34 overTol=0 maxD=1
+OK   a1/life_night_g40000_t30.55: px=101088 diff=67 overTol=0 maxD=1
+OK   a1/sfx_spring_d0: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/sfx_autumn_d0: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/sfx_winter_d1: px=101088 diff=926 overTol=0 maxD=1
+OK   a1/sfx_winter_d0.7: px=101088 diff=18867 overTol=0 maxD=1
+OK   a1/sfx_summer_d1: px=101088 diff=64 overTol=0 maxD=2
+OK   a1/gulls_d0_t5.3: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/gulls_d1_t6.1: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/marks_d0_t3.37: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/marks_d1_t3.37: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/marks_d0.6_t7.1: px=101088 diff=25 overTol=0 maxD=1
+OK   a1/marks_d1_t1.9: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/spray_d0_t3.37: px=101088 diff=57 overTol=0 maxD=1
+OK   a1/spray_d1_t6.2: px=101088 diff=84 overTol=0 maxD=2
+OK   a1/sailor_d0_t3.37: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/sailor_d1_t5.5: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/badges_front_d0_t2.6: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/badges_path_d0_t2.6: px=101088 diff=1 overTol=0 maxD=1
+OK   a1/badges_shore_d0_t2.6: px=101088 diff=1 overTol=0 maxD=1
+OK   a1/badges_back_d0_t2.6: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/shadows_d0: px=101088 diff=0 overTol=0 maxD=0
+OK   a1/shadows_d1: px=101088 diff=0 overTol=0 maxD=0
+허용 오차 ±3: 프레임 41장, 완전 일치 17장, 허용 초과 0장, 최대 채널 차 14
+
+OK   a1/keeper_classic_1_0: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_classic_1_1: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_classic_-1_0: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_classic_-1_1: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_dusk_1_0: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_dusk_1_1: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_dusk_-1_0: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_dusk_-1_1: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_moonlit_1_0: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_moonlit_1_1: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_moonlit_-1_0: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_moonlit_-1_1: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_sailor_1_0: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_sailor_1_1: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_sailor_-1_0: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_sailor_-1_1: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_dev_1_0: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_dev_1_1: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_dev_-1_0: px=112 diff=0 overTol=0 maxD=0
+OK   a1/keeper_dev_-1_1: px=112 diff=0 overTol=0 maxD=0
+
+물거품 층 = 구운 물거품: 30건 일치
+
+summer 낮: 480프레임 확인, 층 건너뜀 527회 (최대 960)
+summer 밤: 480프레임 확인, 층 건너뜀 521회 (최대 960)
+winter 밤: 480프레임 확인, 층 건너뜀 522회 (최대 960)
+
+첫 별똥별 12초
+
+낮·여름: Tick+Paint+Merge 평균 A1 끔 0.05 ms, 켬 0.36 ms (dotnet)
+밤·여름: Tick+Paint+Merge 평균 A1 끔 4.45 ms, 켬 5.10 ms (dotnet)
+밤·겨울: Tick+Paint+Merge 평균 A1 끔 4.93 ms, 켬 5.07 ms (dotnet)
+
+낮·여름: 한 프레임 할당 1506 바이트 (Tick+Paint+Merge)
+밤·여름: 한 프레임 할당 1594 바이트 (Tick+Paint+Merge)
+밤·겨울: 한 프레임 할당 1595 바이트 (Tick+Paint+Merge)
+
+spring: 입자 80
+summer: 입자 0
+autumn: 입자 80
+winter: 입자 80
+
+OK   fx4/beam_gold_idle_d1: px=101088 diff=156 overTol=0 maxD=1
+OK   fx4/beam_gold_spin_d1: px=101088 diff=156 overTol=0 maxD=1
+OK   fx4/beam_gold_d0.6: px=101088 diff=5064 overTol=0 maxD=3
+OK   fx4/beam_day_aim_d0: px=101088 diff=0 overTol=0 maxD=0
+OK   fx4/beam_rainbow_d1: px=101088 diff=0 overTol=0 maxD=0
+OK   fx4/tint_p0.43: px=101088 diff=7560 overTol=0 maxD=1
+OK   fx4/tint_p0.47: px=101088 diff=5400 overTol=0 maxD=1
+OK   fx4/tint_p0.93: px=101088 diff=5400 overTol=0 maxD=1
+OK   fx4/tint_p0.97: px=101088 diff=7560 overTol=0 maxD=1
+OK   fx4/wx_fog_1_t7.3_d0: px=101088 diff=13626 overTol=0 maxD=1
+FAIL fx4/wx_fog_0.6_t41.9_d1: px=101088 diff=14849 overTol=2130 maxD=89 첫 허용 초과 (4,284) 기대 ff815a63 실제 ffb49b9d
+OK   fx4/wx_rain_1_t7.3_d0: px=101088 diff=118 overTol=0 maxD=1
+OK   fx4/wx_rain_0.5_t13.1_d1: px=101088 diff=100993 overTol=0 maxD=1
+OK   fx4/wx_snow_1_t41.9_d0: px=101088 diff=194 overTol=0 maxD=1
+OK   fx4/wx_fogphase_2.04_d0: px=101088 diff=13800 overTol=0 maxD=1
+OK   fx4/wx_fogphase_4.74_d0: px=101088 diff=13728 overTol=0 maxD=1
+OK   fx4/wx_fogphase_8.18_d0: px=101088 diff=13602 overTol=0 maxD=1
+OK   fx4/wx_fogphase_11.06_d0: px=101088 diff=13668 overTol=0 maxD=1
+OK   fx4/wx_fogphase_20.31_d0: px=101088 diff=13622 overTol=0 maxD=1
+OK   fx4/wx_fogphase_33.77_d0: px=101088 diff=13602 overTol=0 maxD=1
+OK   fx4/rainbow_f1_d0: px=101088 diff=436 overTol=0 maxD=1
+OK   fx4/rainbow_f0.4_d0: px=101088 diff=531 overTol=0 maxD=2
+OK   fx4/rings_a_d0: px=101088 diff=18 overTol=0 maxD=1
+OK   fx4/role_warn_d1: px=101088 diff=64 overTol=0 maxD=1
+OK   fx4/role_signal_d1: px=101088 diff=9 overTol=0 maxD=1
+OK   fx4/role_siren_d1: px=101088 diff=0 overTol=0 maxD=0
+OK   fx4/lamp_pulse_0.6_d1: px=101088 diff=24 overTol=0 maxD=1
+OK   fx4/lamp_pulse_0.2_d1: px=101088 diff=152 overTol=0 maxD=1
+OK   fx4/dolphins_a_d0: px=101088 diff=0 overTol=0 maxD=0
+OK   fx4/particles_a_d0: px=101088 diff=3 overTol=0 maxD=2
+OK   fx4/kact_wave_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_wave_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_sweep_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_sweep_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_polish_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_polish_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_anchor_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_anchor_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_gild_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_gild_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_mail_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_mail_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_water_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_water_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_fish_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_fish_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_lamp_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_lamp_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_well_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_well_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_flag_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_flag_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_rest_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_rest_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_feed_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_feed_-1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_stars_1: px=9600 diff=0 overTol=0 maxD=0
+OK   fx4/kact_stars_-1: px=9600 diff=0 overTol=0 maxD=0
+허용 오차 ±3: 프레임 58장, 완전 일치 32장, 허용 초과 1장, 최대 채널 차 89
+
+OK   title/320x568d2/t0.4: px=45440 diff=41 overTol=0 maxD=3
+FAIL title/320x568d2/t1.5: px=45440 diff=24 overTol=2 maxD=37 첫 허용 초과 (50,152) 기대 ff2b3e7e 실제 ff3b59a3
+FAIL title/320x568d2/t5: px=45440 diff=518 overTol=2 maxD=37 첫 허용 초과 (58,150) 기대 ff354c9d 실제 ff4567c2
+FAIL title/320x568d2/t12.7: px=45440 diff=525 overTol=2 maxD=37 첫 허용 초과 (75,150) 기대 ff31488c 실제 ff4163b1
+FAIL title/320x568d2/t3.494: px=45440 diff=525 overTol=2 maxD=37 첫 허용 초과 (55,151) 기대 ff31429b 실제 ff415dc0
+FAIL title/320x568d2/t2.394: px=45440 diff=526 overTol=2 maxD=37 첫 허용 초과 (52,152) 기대 ff314494 실제 ff415fb9
+FAIL title/320x568d2/t20.3: px=45440 diff=546 overTol=2 maxD=37 첫 허용 초과 (92,150) 기대 ff437769 실제 ff53928e
+OK   title/375x812d2/t0.4: px=33875 diff=36 overTol=0 maxD=3
+FAIL title/375x812d2/t1.5: px=33875 diff=49 overTol=2 maxD=37 첫 허용 초과 (33,145) 기대 ff2b3e7e 실제 ff3b59a3
+FAIL title/375x812d2/t5: px=33875 diff=552 overTol=2 maxD=37 첫 허용 초과 (41,143) 기대 ff3851a1 실제 ff486cc6
+FAIL title/375x812d2/t12.7: px=33875 diff=557 overTol=2 maxD=37 첫 허용 초과 (57,143) 기대 ff31488c 실제 ff4163b1
+FAIL title/375x812d2/t3.67: px=33875 diff=553 overTol=2 maxD=37 첫 허용 초과 (38,144) 기대 ff31429b 실제 ff415dc0
+FAIL title/375x812d2/t2.57: px=33875 diff=557 overTol=2 maxD=37 첫 허용 초과 (35,145) 기대 ff304292 실제 ff405db7
+FAIL title/375x812d2/t20.3: px=33875 diff=571 overTol=2 maxD=37 첫 허용 초과 (74,143) 기대 ff437769 실제 ff53928e
+OK   title/768x1024d1/t0.4: px=87552 diff=45 overTol=0 maxD=3
+FAIL title/768x1024d1/t1.5: px=87552 diff=33 overTol=2 maxD=37 첫 허용 초과 (98,187) 기대 ff2b3e7e 실제 ff3b59a3
+FAIL title/768x1024d1/t5: px=87552 diff=510 overTol=2 maxD=37 첫 허용 초과 (106,185) 기대 ff354c9d 실제 ff4567c2
+FAIL title/768x1024d1/t12.7: px=87552 diff=522 overTol=2 maxD=37 첫 허용 초과 (123,185) 기대 ff31488c 실제 ff4163b1
+FAIL title/768x1024d1/t3.409: px=87552 diff=516 overTol=2 maxD=37 첫 허용 초과 (102,186) 기대 ff2d3d8c 실제 ff3d58b1
+FAIL title/768x1024d1/t2.309: px=87552 diff=520 overTol=2 maxD=37 첫 허용 초과 (100,187) 기대 ff314494 실제 ff415fb9
+FAIL title/768x1024d1/t20.3: px=87552 diff=528 overTol=2 maxD=37 첫 허용 초과 (140,185) 기대 ff437769 실제 ff53928e
+OK   title/1024x768d1/t0.4: px=87552 diff=44 overTol=0 maxD=3
+FAIL title/1024x768d1/t1.5: px=87552 diff=29 overTol=2 maxD=37 첫 허용 초과 (141,136) 기대 ff2b3e7e 실제 ff3b59a3
+FAIL title/1024x768d1/t5: px=87552 diff=575 overTol=2 maxD=37 첫 허용 초과 (149,134) 기대 ff3851a1 실제 ff486cc6
+FAIL title/1024x768d1/t12.7: px=87552 diff=584 overTol=2 maxD=37 첫 허용 초과 (166,134) 기대 ff2d4183 실제 ff3d5ca8
+FAIL title/1024x768d1/t3.409: px=87552 diff=580 overTol=2 maxD=37 첫 허용 초과 (145,135) 기대 ff2d3d8c 실제 ff3d58b1
+FAIL title/1024x768d1/t2.309: px=87552 diff=580 overTol=2 maxD=37 첫 허용 초과 (143,136) 기대 ff314494 실제 ff415fb9
+FAIL title/1024x768d1/t20.3: px=87552 diff=592 overTol=2 maxD=37 첫 허용 초과 (183,134) 기대 ff437769 실제 ff53928e
+
+  건너뜀 TitleDeviceViewsDump [8 ms]
+  건너뜀 IntroFramesDump [< 1 ms]
+OK   titleI/320x568d2/t0.2: px=45440 diff=367 overTol=0 maxD=1
+OK   titleI/320x568d2/t1.2: px=45440 diff=15 overTol=0 maxD=1
+OK   titleI/320x568d2/t2.4: px=45440 diff=518 overTol=0 maxD=2
+OK   titleI/320x568d2/t3.3: px=45440 diff=515 overTol=0 maxD=2
+OK   titleI/320x568d2/t4.5: px=45440 diff=517 overTol=0 maxD=2
+OK   titleI/320x568d2/t5: px=45440 diff=513 overTol=0 maxD=2
+OK   titleI/320x568d2/t6: px=45440 diff=520 overTol=0 maxD=2
+OK   titleI/320x568d2/t6.5: px=45440 diff=520 overTol=0 maxD=2
+OK   titleI/320x568d2/t7.2: px=45440 diff=520 overTol=0 maxD=2
+FAIL titleI/320x568d2/t8: px=45440 diff=523 overTol=2 maxD=37 첫 허용 초과 (65,151) 기대 ff253049 실제 ff354b6e
+FAIL titleI/320x568d2/t9.3: px=45440 diff=524 overTol=2 maxD=37 첫 허용 초과 (67,152) 기대 ff314494 실제 ff415fb9
+FAIL titleI/320x568d2/t12: px=45440 diff=523 overTol=2 maxD=37 첫 허용 초과 (73,151) 기대 ff2c3a83 실제 ff3c55a8
+OK   titleI/375x812d2/t0.2: px=33875 diff=322 overTol=0 maxD=1
+OK   titleI/375x812d2/t1.2: px=33875 diff=18 overTol=0 maxD=1
+OK   titleI/375x812d2/t2.4: px=33875 diff=547 overTol=0 maxD=2
+OK   titleI/375x812d2/t3.3: px=33875 diff=546 overTol=0 maxD=2
+OK   titleI/375x812d2/t4.5: px=33875 diff=547 overTol=0 maxD=2
+OK   titleI/375x812d2/t5: px=33875 diff=545 overTol=0 maxD=2
+OK   titleI/375x812d2/t6: px=33875 diff=546 overTol=0 maxD=2
+OK   titleI/375x812d2/t6.5: px=33875 diff=547 overTol=0 maxD=2
+OK   titleI/375x812d2/t7.2: px=33875 diff=545 overTol=0 maxD=2
+FAIL titleI/375x812d2/t8: px=33875 diff=552 overTol=2 maxD=37 첫 허용 초과 (47,144) 기대 ff283853 실제 ff385378
+FAIL titleI/375x812d2/t9.3: px=33875 diff=553 overTol=2 maxD=37 첫 허용 초과 (50,145) 기대 ff2e3f8f 실제 ff3e5ab4
+FAIL titleI/375x812d2/t12: px=33875 diff=557 overTol=2 maxD=37 첫 허용 초과 (56,144) 기대 ff2e3f89 실제 ff3e5aae
+OK   titleI/768x1024d1/t0.2: px=87552 diff=367 overTol=0 maxD=1
+OK   titleI/768x1024d1/t1.2: px=87552 diff=15 overTol=0 maxD=1
+OK   titleI/768x1024d1/t2.4: px=87552 diff=509 overTol=0 maxD=2
+OK   titleI/768x1024d1/t3.3: px=87552 diff=507 overTol=0 maxD=2
+OK   titleI/768x1024d1/t4.5: px=87552 diff=502 overTol=0 maxD=2
+OK   titleI/768x1024d1/t5: px=87552 diff=503 overTol=0 maxD=2
+OK   titleI/768x1024d1/t6: px=87552 diff=507 overTol=0 maxD=2
+OK   titleI/768x1024d1/t6.5: px=87552 diff=511 overTol=0 maxD=2
+OK   titleI/768x1024d1/t7.2: px=87552 diff=511 overTol=0 maxD=2
+FAIL titleI/768x1024d1/t8: px=87552 diff=516 overTol=2 maxD=37 첫 허용 초과 (113,186) 기대 ff293851 실제 ff395376
+FAIL titleI/768x1024d1/t9.3: px=87552 diff=520 overTol=2 maxD=37 첫 허용 초과 (115,187) 기대 ff314494 실제 ff415fb9
+FAIL titleI/768x1024d1/t12: px=87552 diff=516 overTol=2 maxD=37 첫 허용 초과 (121,186) 기대 ff2c3a83 실제 ff3c55a8
+
+저장 쓰기 356번, 안내 141
+
+일: sweep,mail,pass,fish,well,sit,flag,water,feed,enter,polish 걸음 1503
+
+JS 골든과 seed 까지 완전 일치: 7/7
+
+가속 구동 vs Simulator: 7건 비교, 불일치 0
+
+Tick 평균 1.6 µs (dotnet, 릴리스 아님)
+
+밤·안개: 밝은 픽셀 40210, 알파 픽셀 39216
+
+3시간: 안내 850척, 단계 4, 도감 24, 편지 100, 토스트 246
+
+토스트: 안개가 끼기 시작했어요 / 등대가 사이렌을 울려 배를 이끌어요 | 안개가 걷혔어요 / 사이렌이 멀리까지 울렸어요 · 안개 조각을 받았어요
+
+
+통과!  - 실패:     0, 통과:    57, 건너뜀:     2, 전체:    59, 기간: 43 s - A1Tests.dll (net9.0)

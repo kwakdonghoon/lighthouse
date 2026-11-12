@@ -1,0 +1,74 @@
+  복원할 프로젝트를 확인하는 중...
+  복원할 모든 프로젝트가 최신 상태입니다.
+  M6Tests -> D:\Unity\EK_game_create\ek_lighthouse_unity\Tools\m6dotnet\bin\Debug\net9.0\M6Tests.dll
+D:\Unity\EK_game_create\ek_lighthouse_unity\Tools\m6dotnet\bin\Debug\net9.0\M6Tests.dll(.NETCoreApp,Version=v9.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+amb_spring_day relErr 0.0892 (lag 0: 0.0883)  peak +0.00dB  rms +0.09dB  band 0.93dB  env 0.9981  lsqGain -0.13dB scaledErr 0.0880
+
+amb_summer_night relErr 0.0935 (lag 0: 0.0926)  peak -0.07dB  rms +0.10dB  band 0.87dB  env 0.9980  lsqGain -0.14dB scaledErr 0.0921
+
+amb_autumn_rain_build relErr 0.2811 (lag 0: 0.2809)  peak -0.45dB  rms -0.65dB  band 1.34dB  env 0.9965  lsqGain +0.29dB scaledErr 0.2793
+
+amb_winter_fog relErr 0.0955 (lag 0: 0.0969)  peak +0.05dB  rms +0.13dB  band 0.66dB  env 0.9945  lsqGain -0.17dB scaledErr 0.0934
+
+music_spring_day relErr 0.0177 (lag 0: 0.0173)  peak -0.04dB  rms -+0.00dB  band 0.01dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0177
+
+music_summer_night relErr 0.0057 (lag 0: 0.0058)  peak +0.01dB  rms -0.01dB  band 0.01dB  env 1.0000  lsqGain +0.00dB scaledErr 0.0057
+
+music_winter_day_storm relErr 0.0247 (lag 0: 0.0230)  peak -0.02dB  rms -0.02dB  band 0.04dB  env 1.0000  lsqGain +0.02dB scaledErr 0.0246
+
+music_autumn_day relErr 0.0124 (lag 0: 0.0146)  peak -0.01dB  rms -0.01dB  band 0.02dB  env 1.0000  lsqGain +0.01dB scaledErr 0.0123
+
+tick     relErr 0.0015 (lag 0: 0.0015)  peak -+0.00dB  rms +0.00dB  band 0.02dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0015
+click    relErr 0.0018 (lag 0: 0.0018)  peak +0.01dB  rms -+0.00dB  band 0.01dB  env 1.0000  lsqGain +0.00dB scaledErr 0.0018
+ding     relErr 0.0022 (lag 0: 0.0023)  peak -+0.00dB  rms -0.01dB  band 0.01dB  env 1.0000  lsqGain +0.01dB scaledErr 0.0019
+pick     relErr 0.0026 (lag 0: 0.0033)  peak +0.00dB  rms -0.01dB  band 0.01dB  env 1.0000  lsqGain +0.01dB scaledErr 0.0024
+hello    relErr 0.0027 (lag 0: 0.0029)  peak -0.01dB  rms -0.01dB  band 0.01dB  env 1.0000  lsqGain +0.01dB scaledErr 0.0025
+bell     relErr 0.0028 (lag 0: 0.0028)  peak -0.01dB  rms -0.02dB  band 0.02dB  env 1.0000  lsqGain +0.02dB scaledErr 0.0021
+mail     relErr 0.0027 (lag 0: 0.0027)  peak +0.00dB  rms -0.01dB  band 0.01dB  env 1.0000  lsqGain +0.01dB scaledErr 0.0025
+firework relErr 0.0026 (lag 0: 0.0026)  peak +0.00dB  rms +0.00dB  band 0.01dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0026
+level    relErr 0.0027 (lag 0: 0.0032)  peak -0.01dB  rms -0.01dB  band 0.02dB  env 1.0000  lsqGain +0.01dB scaledErr 0.0024
+fanfare  relErr 0.0026 (lag 0: 0.0027)  peak -+0.00dB  rms -0.01dB  band 0.01dB  env 1.0000  lsqGain +0.01dB scaledErr 0.0025
+hammer   relErr 0.0013 (lag 0: 0.0013)  peak -0.01dB  rms -+0.00dB  band 0.00dB  env 1.0000  lsqGain +0.00dB scaledErr 0.0012
+horn     relErr 0.0026 (lag 0: 0.0025)  peak -+0.00dB  rms -0.01dB  band 0.02dB  env 1.0000  lsqGain +0.01dB scaledErr 0.0025
+warn     relErr 0.0012 (lag 0: 0.0012)  peak +0.00dB  rms +0.00dB  band 0.00dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0012
+sos      relErr 0.0013 (lag 0: 0.0013)  peak +0.00dB  rms +0.00dB  band 0.00dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0013
+wood     relErr 0.0012 (lag 0: 0.0012)  peak -+0.00dB  rms -+0.00dB  band 0.00dB  env 1.0000  lsqGain +0.00dB scaledErr 0.0012
+stone    relErr 0.0014 (lag 0: 0.0014)  peak +0.01dB  rms +0.01dB  band 0.02dB  env 1.0000  lsqGain -0.01dB scaledErr 0.0012
+grass    relErr 0.0015 (lag 0: 0.0015)  peak -+0.00dB  rms +0.00dB  band 0.02dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0015
+gravel   relErr 0.0013 (lag 0: 0.0013)  peak -+0.00dB  rms +0.00dB  band 0.06dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0013
+plank    relErr 0.0016 (lag 0: 0.0016)  peak -0.01dB  rms -+0.00dB  band 0.00dB  env 1.0000  lsqGain +0.00dB scaledErr 0.0016
+place    relErr 0.0030 (lag 0: 0.0032)  peak -+0.00dB  rms -0.01dB  band 0.01dB  env 1.0000  lsqGain +0.01dB scaledErr 0.0028
+build    relErr 0.0257 (lag 0: 0.0257)  peak -+0.00dB  rms +0.01dB  band 0.29dB  env 1.0000  lsqGain -0.01dB scaledErr 0.0256
+door     relErr 0.0433 (lag 0: 0.0433)  peak +0.00dB  rms -0.01dB  band 0.16dB  env 0.9988  lsqGain -+0.00dB scaledErr 0.0433
+creak    relErr 0.0286 (lag 0: 0.0286)  peak -0.27dB  rms +0.01dB  band 0.01dB  env 1.0000  lsqGain -0.01dB scaledErr 0.0285
+pull     relErr 0.0025 (lag 0: 0.0025)  peak -+0.00dB  rms +0.00dB  band 0.02dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0024
+sit      relErr 0.0014 (lag 0: 0.0014)  peak -+0.00dB  rms +0.00dB  band 0.00dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0014
+brush    relErr 0.0009 (lag 0: 0.0009)  peak +0.00dB  rms +0.00dB  band 0.00dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0009
+lamp     relErr 0.0027 (lag 0: 0.0027)  peak +0.00dB  rms -0.01dB  band 0.02dB  env 1.0000  lsqGain +0.01dB scaledErr 0.0025
+pour     relErr 0.0016 (lag 0: 0.0016)  peak -+0.00dB  rms +0.00dB  band 0.00dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0016
+bloop    relErr 0.0013 (lag 0: 0.0013)  peak +0.00dB  rms +0.00dB  band 0.00dB  env 1.0000  lsqGain -+0.00dB scaledErr 0.0013
+gull     relErr 0.0113 (lag 0: 0.0114)  peak -0.02dB  rms -0.01dB  band 0.01dB  env 1.0000  lsqGain +0.01dB scaledErr 0.0113
+
+
+BAKED sfx30 stereo16 total 4.72MB (mono 이면 절반, Vorbis 약 1/8)
+
+  건너뜀 ExportWavs [< 1 ms]
+FOOTPRINT 엔진 초기화 42ms, 엔진 메모리 9.0MB (+고정 퀀텀 버퍼 외 렌더 버퍼는 호출자 몫), 30초 비 오는 낮 장면 렌더 2875ms = 실시간의 10.4배, 효과음 30종 동시 6초 렌더 858ms
+
+엔진 초기화 40ms, 30초 장면 렌더 2624ms (실시간 대비 11.4배)
+
+  실패 ThreadSafety_ConcurrentRequestsWhileRendering [571 ms]
+  오류 메시지:
+     렌더가 돌았다
+  Expected: greater than 44100
+  But was:  32768
+
+  스택 추적:
+     at Lighthouse.Tests.AudioSmokeTests.ThreadSafety_ConcurrentRequestsWhileRendering() in D:\Unity\EK_game_create\ek_lighthouse_unity\Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs:line 152
+
+1)    at Lighthouse.Tests.AudioSmokeTests.ThreadSafety_ConcurrentRequestsWhileRendering() in D:\Unity\EK_game_create\ek_lighthouse_unity\Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs:line 152
+
+
+
+실패!  - 실패:     1, 통과:    36, 건너뜀:     0, 전체:    37, 기간: 2 m - M6Tests.dll (net9.0)

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="10" result="Passed" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:41:20Z" duration="85.8028586">
+  <test-suite type="TestSuite" id="1024" name="Lighthouse" fullname="Lighthouse" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:41:20Z" duration="85.802859" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1003" name="Lighthouse.Tests.PlayMode.dll" fullname="D:/Unity/EK_game_create/ek_lighthouse_unity/Library/ScriptAssemblies/Lighthouse.Tests.PlayMode.dll" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:39:54Z" duration="0.016452" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="46336" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1004" name="Lighthouse" fullname="Lighthouse" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:39:54Z" duration="0.015943" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1005" name="Tests" fullname="Lighthouse.Tests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:39:54Z" duration="0.015619" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="PlayModeSmokeTests" fullname="Lighthouse.Tests.PlayModeSmokeTests" classname="Lighthouse.Tests.PlayModeSmokeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:39:54Z" duration="0.014819" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1002" name="Placeholder" fullname="Lighthouse.Tests.PlayModeSmokeTests.Placeholder" methodname="Placeholder" classname="Lighthouse.Tests.PlayModeSmokeTests" runstate="Runnable" seed="261223740" result="Passed" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:39:54Z" duration="0.006054" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <reason>
+                <message><![CDATA[]]></message>
+              </reason>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1018" name="Lighthouse.Tests.PlayModeApp.dll" fullname="D:/Unity/EK_game_create/ek_lighthouse_unity/Library/ScriptAssemblies/Lighthouse.Tests.PlayModeApp.dll" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:41:20Z" duration="85.780200" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="46336" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1019" name="Lighthouse" fullname="Lighthouse" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:41:20Z" duration="85.779581" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1020" name="Tests" fullname="Lighthouse.Tests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:41:20Z" duration="85.779218" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1006" name="A1PlayTests" fullname="Lighthouse.Tests.A1PlayTests" classname="Lighthouse.Tests.A1PlayTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:40:30Z" duration="36.450450" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1008" name="FrameCostWithAndWithoutA1" fullname="Lighthouse.Tests.A1PlayTests.FrameCostWithAndWithoutA1" methodname="FrameCostWithAndWithoutA1" classname="Lighthouse.Tests.A1PlayTests" runstate="Runnable" seed="535364546" result="Passed" start-time="2026-11-12 04:39:54Z" end-time="2026-11-12 04:40:23Z" duration="28.954571" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="600000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="ScenesDrawAndCapture" fullname="Lighthouse.Tests.A1PlayTests.ScenesDrawAndCapture" methodname="ScenesDrawAndCapture" classname="Lighthouse.Tests.A1PlayTests" runstate="Runnable" seed="887314219" result="Passed" start-time="2026-11-12 04:40:23Z" end-time="2026-11-12 04:40:30Z" duration="7.493720" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="600000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1009" name="M4PlayTests" fullname="Lighthouse.Tests.M4PlayTests" classname="Lighthouse.Tests.M4PlayTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-12 04:40:30Z" end-time="2026-11-12 04:41:17Z" duration="46.416300" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1010" name="FirstRunPlaySaveRestartRestore" fullname="Lighthouse.Tests.M4PlayTests.FirstRunPlaySaveRestartRestore" methodname="FirstRunPlaySaveRestartRestore" classname="Lighthouse.Tests.M4PlayTests" runstate="Runnable" seed="714643980" result="Passed" start-time="2026-11-12 04:40:30Z" end-time="2026-11-12 04:41:04Z" duration="34.044231" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="600000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Releasing render texture that is set to be RenderTexture.active!
+]]></output>
+            </test-case>
+            <test-case id="1012" name="TapsAndInputReachWorld" fullname="Lighthouse.Tests.M4PlayTests.TapsAndInputReachWorld" methodname="TapsAndInputReachWorld" classname="Lighthouse.Tests.M4PlayTests" runstate="Runnable" seed="928021880" result="Passed" start-time="2026-11-12 04:41:04Z" end-time="2026-11-12 04:41:07Z" duration="2.935310" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="300000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+]]></output>
+            </test-case>
+            <test-case id="1011" name="TitleShowsSceneImage" fullname="Lighthouse.Tests.M4PlayTests.TitleShowsSceneImage" methodname="TitleShowsSceneImage" classname="Lighthouse.Tests.M4PlayTests" runstate="Runnable" seed="1764254057" result="Passed" start-time="2026-11-12 04:41:07Z" end-time="2026-11-12 04:41:11Z" duration="3.338586" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="300000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1013" name="WorldCapturesLookRight" fullname="Lighthouse.Tests.M4PlayTests.WorldCapturesLookRight" methodname="WorldCapturesLookRight" classname="Lighthouse.Tests.M4PlayTests" runstate="Runnable" seed="1831195169" result="Passed" start-time="2026-11-12 04:41:11Z" end-time="2026-11-12 04:41:17Z" duration="6.059025" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="300000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+Releasing render texture that is set to be RenderTexture.active!
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1014" name="M7PlayTests" fullname="Lighthouse.Tests.M7PlayTests" classname="Lighthouse.Tests.M7PlayTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-12 04:41:17Z" end-time="2026-11-12 04:41:20Z" duration="2.911438" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1017" name="CorruptMainStartsFromBackupAndTellsThePlayer" fullname="Lighthouse.Tests.M7PlayTests.CorruptMainStartsFromBackupAndTellsThePlayer" methodname="CorruptMainStartsFromBackupAndTellsThePlayer" classname="Lighthouse.Tests.M7PlayTests" runstate="Runnable" seed="491354515" result="Passed" start-time="2026-11-12 04:41:17Z" end-time="2026-11-12 04:41:18Z" duration="1.083828" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="300000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[저장 실패: Could not find a part of the path "C:\Users\DHKWAK\AppData\Local\Temp\lh_m4play_a0c5ce5d429e435ea4fac97b765c6d85\save.json.tmp".
+]]></output>
+            </test-case>
+            <test-case id="1016" name="FailedImportKeepsTheGameRunning" fullname="Lighthouse.Tests.M7PlayTests.FailedImportKeepsTheGameRunning" methodname="FailedImportKeepsTheGameRunning" classname="Lighthouse.Tests.M7PlayTests" runstate="Runnable" seed="1216360742" result="Passed" start-time="2026-11-12 04:41:18Z" end-time="2026-11-12 04:41:19Z" duration="0.634372" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="300000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[가져오기 실패: totals is null
+]]></output>
+            </test-case>
+            <test-case id="1015" name="ImportThenRestartKeepsDeviceOwnedAndAdsAndNothingOverwritesIt" fullname="Lighthouse.Tests.M7PlayTests.ImportThenRestartKeepsDeviceOwnedAndAdsAndNothingOverwritesIt" methodname="ImportThenRestartKeepsDeviceOwnedAndAdsAndNothingOverwritesIt" classname="Lighthouse.Tests.M7PlayTests" runstate="Runnable" seed="1132740567" result="Passed" start-time="2026-11-12 04:41:19Z" end-time="2026-11-12 04:41:20Z" duration="1.152420" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="300000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/DHKWAK/AppData/LocalLow/EK Games/Lighthouse\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

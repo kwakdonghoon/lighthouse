@@ -1,0 +1,15 @@
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,189): error CS1009: Unrecognized escape sequence
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,211): error CS1009: Unrecognized escape sequence
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,223): error CS1009: Unrecognized escape sequence
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,228): error CS1009: Unrecognized escape sequence
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,233): error CS1009: Unrecognized escape sequence
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,189): error CS1009: Unrecognized escape sequence
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,211): error CS1009: Unrecognized escape sequence
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,223): error CS1009: Unrecognized escape sequence
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,228): error CS1009: Unrecognized escape sequence
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,233): error CS1009: Unrecognized escape sequence
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,189): error CS1009: Unrecognized escape sequence
+  compile error: Assets\_Lighthouse\Tests\Audio\AudioSmokeTests.cs(149,211): error CS1009: Unrecognized escape sequence
+test_EditMode: exit code 1
+EditMode: no result file (compile error?)
+done
