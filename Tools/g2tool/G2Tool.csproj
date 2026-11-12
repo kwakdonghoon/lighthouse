@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- G2' 개발 도구(Unity 없이 dotnet run): 꾸미기 자리 좌표 탐색·해금 시뮬. Core·Data·Render 소스를 그대로 컴파일한다. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <RootNamespace>Lighthouse.G2Tool</RootNamespace>
+    <NoWarn>CS0219;CS0162;CS0168</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Assets\_Lighthouse\Scripts\Core\**\*.cs" />
+    <Compile Include="..\..\Assets\_Lighthouse\Scripts\Data\**\*.cs" />
+    <Compile Include="..\..\Assets\_Lighthouse\Scripts\Render\**\*.cs" />
+    <Compile Include="Program.cs" /><Compile Include="Cmds.cs" /><Compile Include="Search.cs" /><Compile Include="Patch.cs" /><Compile Include="Scene.cs" /><Compile Include="Unlock.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+</Project>

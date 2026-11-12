@@ -15,11 +15,11 @@ namespace Lighthouse.Render
 
     public sealed class DecorSlot
     {
-        public string Id, Chip, Size, OpenKind; public bool Xy, Blocked; public double Ka, Ca, Kb, Cb; public int OpenVal;
+        public string Id, Chip, Size, OpenKind; public bool Xy, Blocked; public double Ka, Ca, Kb, Cb; public int OpenVal; public int MinStage = 1;     // MinStage: 정원 레벨로 열리는 자리도 이 섬 단계 이상이어야 열린다(G2')
         public int Num => int.Parse(new string(Id.Where(char.IsDigit).ToArray()));
         public double[] AB(int N) => new[] { Ka * N + Ca, Kb * N + Cb };
         /// <summary>HTML slotOpenS: 막힘이 아니고(base 처음부터 / stage 단계 이상 / lv 정원 레벨 이상).</summary>
-        public bool OpenAt(int stage, int gardenLv) => !Blocked && (OpenKind == "base" || (OpenKind == "stage" && stage >= OpenVal) || (OpenKind == "lv" && gardenLv >= OpenVal));
+        public bool OpenAt(int stage, int gardenLv) => !Blocked && stage >= MinStage && (OpenKind == "base" || (OpenKind == "stage" && stage >= OpenVal) || (OpenKind == "lv" && gardenLv >= OpenVal));
     }
 
     /// <summary>꾸미기 장식(HTML 3221~3365행): 격자 → 도트 → 윤곽 처리(voxelIcon) → 바닥 그림자. 아이템 10종 × 계절 4 × 마을 외형.</summary>
@@ -35,7 +35,7 @@ namespace Lighthouse.Render
         public static readonly List<DecorSlot> Slots = RenderData.DecorSlots.Select(l =>
         {
             var p = l.Split(';'); Func<string, double> d = s => double.Parse(s, CultureInfo.InvariantCulture);
-            return new DecorSlot { Id = p[0], Chip = p[1], Size = p[2], Xy = p[3] == "xy", Ka = d(p[4]), Ca = d(p[5]), Kb = d(p[6]), Cb = d(p[7]), OpenKind = p[8], OpenVal = int.Parse(p[9]), Blocked = p[10] == "1" };
+            return new DecorSlot { Id = p[0], Chip = p[1], Size = p[2], Xy = p[3] == "xy", Ka = d(p[4]), Ca = d(p[5]), Kb = d(p[6]), Cb = d(p[7]), OpenKind = p[8], OpenVal = int.Parse(p[9]), Blocked = p[10] == "1", MinStage = p.Length > 11 ? int.Parse(p[11]) : 1 };
         }).ToList();
 
         public static DecorItem Item(string id) => Items.First(i => i.Id == id);

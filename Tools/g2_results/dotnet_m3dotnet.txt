@@ -1,0 +1,7 @@
+  복원할 프로젝트를 확인하는 중...
+  복원할 모든 프로젝트가 최신 상태입니다.
+  M3Tests -> D:\Unity\EK_game_create\ek_lighthouse_unity\Tools\m3dotnet\bin\Release\net9.0\M3Tests.dll
+D:\Unity\EK_game_create\ek_lighthouse_unity\Tools\m3dotnet\bin\Release\net9.0\M3Tests.dll(.NETCoreApp,Version=v9.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+
+통과!  - 실패:     0, 통과:    64, 건너뜀:     0, 전체:    64, 기간: 3 s - M3Tests.dll (net9.0)

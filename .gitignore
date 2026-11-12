@@ -47,3 +47,7 @@
 # dotnet test build outputs (Tools/*dotnet)
 Tools/*dotnet/bin/
 Tools/*dotnet/obj/
+
+# G2 tool build outputs
+Tools/g2tool/bin/
+Tools/g2tool/obj/

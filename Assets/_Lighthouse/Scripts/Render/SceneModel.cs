@@ -62,17 +62,26 @@ namespace Lighthouse.Render
 
         public static double V(DecorSlot sl, int stage) { if (sl.Xy) return 0; var ab = sl.AB(Terrain.N(stage)); return (ab[0] + ab[1]) * 4; }
 
-        /// <summary>decorDevFill: 구역 순서대로, 자리 번호 순서로, 허용 구역·크기에 맞는 장식을 돌려 가며 채운다(삽입 순서 보존).</summary>
-        public static List<(string slot, string item)> DevFill()
+        /// <summary>HTML G1 의 꾸미기 상태(자리 20·아이템 10) — 원본 골든이 이 구성으로 만들어져 DevFill() 이 그대로 지킨다.</summary>
+        public static readonly string[] LegacySlotIds = { "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "F1", "F4", "F5", "F6", "B3", "SH1", "SH2", "SH3", "SH4", "SH5", "SK1", "SK2" };
+        public static readonly string[] LegacyItemIds = { "path_stone", "path_shell", "fence_wood", "flower_planter", "lamp_post", "tent_small", "pine_small", "palm_tree", "pumpkin_pile", "cloud_small" };
+
+        /// <summary>decorDevFill: 구역 순서대로, 자리 번호 순서로, 허용 구역·크기에 맞는 장식을 돌려 가며 채운다(삽입 순서 보존). HTML 골든과 같은 G1 구성(자리 20·아이템 10).</summary>
+        public static List<(string slot, string item)> DevFill() => Fill(true);
+
+        /// <summary>G2' 전체 구성(자리 28·아이템 25)으로 같은 규칙을 적용한 채움.</summary>
+        public static List<(string slot, string item)> DevFillAll() => Fill(false);
+
+        static List<(string slot, string item)> Fill(bool legacy)
         {
             var put = new List<(string, string)>();
             foreach (var z in Zones)
             {
-                var slots = DecorBaker.Slots.Where(s => s.Chip == z && !s.Blocked).OrderBy(s => s.Num).ToList();
+                var slots = DecorBaker.Slots.Where(s => s.Chip == z && !s.Blocked && (!legacy || LegacySlotIds.Contains(s.Id))).OrderBy(s => s.Num).ToList();
                 for (int i = 0; i < slots.Count; i++)
                 {
                     var sl = slots[i];
-                    var fit = DecorBaker.Items.Where(k => k.Zones.Contains(z) && DecorBaker.SizeRank(k.Size) <= DecorBaker.SizeRank(sl.Size)).ToList();
+                    var fit = DecorBaker.Items.Where(k => (!legacy || LegacyItemIds.Contains(k.Id)) && k.Zones.Contains(z) && DecorBaker.SizeRank(k.Size) <= DecorBaker.SizeRank(sl.Size)).ToList();
                     if (fit.Count > 0) put.Add((sl.Id, fit[i % fit.Count].Id));
                 }
             }

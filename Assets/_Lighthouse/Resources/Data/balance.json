@@ -91,6 +91,6 @@
  "decorVisMin": 0.8,
  "decorVisMinBack": 0.65,
  "decorSlotCount": 28,
- "decorOpenCount": 20,
- "decorBlockedCount": 8
+ "decorOpenCount": 28,
+ "decorBlockedCount": 0
 }

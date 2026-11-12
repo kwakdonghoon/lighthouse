@@ -181,10 +181,11 @@ namespace Lighthouse.Tests.M2
         }
 
         /// <summary>꾸미기: 굽기(아이템 × 계절 × 마을 외형, 낮·밤)·목록 아이콘·자리 좌표(28×6)·장면 목록(A/B 두 패스 순서).</summary>
+        static readonly HashSet<string> G2Slots = new HashSet<string> { "B1", "B2", "B4", "B5", "B6", "F2", "F3", "F7" };
         public static List<Result> Decor()
         {
             var res = new List<Result>(); var gp = Pack("decor.bin.gz");
-            foreach (var it in DecorBaker.Items)
+            foreach (var it in DecorBaker.Items.Where(i => DecorLayout.LegacyItemIds.Contains(i.Id))   /* G2': HTML 골든은 1차 10종만 갖는다. 새 아이템은 DecorG2Tests 의 자체 스냅샷 */)
                 foreach (var sn in it.Ss ? Palettes.Seasons : new[] { "summer" })
                     foreach (var sk in it.Sk ? new[] { "classic", "seaside", "festival" } : new[] { "classic" })
                     {
@@ -192,13 +193,13 @@ namespace Lighthouse.Tests.M2
                         res.Add(Cmp.Diff("decor", "decor_" + tag, b, gp.Items["decor_" + tag]));
                         res.Add(Cmp.Diff("decor", "decorN_" + tag, Night.Of(b), gp.Items["decorN_" + tag], NightTol));
                     }
-            foreach (var it in DecorBaker.Items) res.Add(Cmp.Diff("decor", "decoicon_" + it.Id, DecorBaker.Icon(it), gp.Items["decoicon_" + it.Id]));
+            foreach (var it in DecorBaker.Items.Where(i => DecorLayout.LegacyItemIds.Contains(i.Id))) res.Add(Cmp.Diff("decor", "decoicon_" + it.Id, DecorBaker.Icon(it), gp.Items["decoicon_" + it.Id]));
             // 자리 좌표
             int posBad = 0, posN = 0;
             foreach (var line in File.ReadAllLines(Path.Combine(Dir, "decor_pos.txt")))
             {
                 if (string.IsNullOrWhiteSpace(line)) continue;
-                var p = line.Split(';'); posN++; int st = int.Parse(p[0]); var sl = DecorBaker.Slot(p[1]);
+                var p = line.Split(';'); if (G2Slots.Contains(p[1])) continue; posN++; int st = int.Parse(p[0]); var sl = DecorBaker.Slot(p[1]);   // G2' 가 좌표를 다시 정한 8자리는 HTML 골든(막힘 좌표) 대상이 아니다 — DecorG2Tests 가 맡는다
                 var (x, y) = DecorLayout.Pos(sl, st, 180); double v = DecorLayout.V(sl, st);
                 if (x != int.Parse(p[2]) || y != int.Parse(p[3]) || Math.Abs(v - double.Parse(p[4], CultureInfo.InvariantCulture)) > 1e-9)
                 { posBad++; res.Add(new Result { Set = "decor", Name = "pos_" + p[0] + "_" + p[1], OverTol = 1, Note = string.Format("기대 {0},{1},{2} 실제 {3},{4},{5}", p[2], p[3], p[4], x, y, v) }); }

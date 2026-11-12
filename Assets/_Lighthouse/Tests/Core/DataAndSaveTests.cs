@@ -21,8 +21,8 @@ namespace Lighthouse.Tests
             Assert.AreEqual((int)t["GIFTS"], T.Gifts.Count); Assert.AreEqual(18, T.Gifts.Count);
             Assert.AreEqual(9, T.Ships.Count); Assert.AreEqual(24, T.Sea.Count); Assert.AreEqual(8, T.Regulars.Count);
             Assert.AreEqual(6, T.Regulars[0].Story.Length); Assert.IsTrue(T.Regulars.All(r => r.Story.Length == 6));
-            Assert.AreEqual(28, T.DecorSlots.Count); Assert.AreEqual(8, T.DecorSlots.Count(s => s.Blocked)); Assert.AreEqual(20, T.DecorSlots.Count(s => !s.Blocked));
-            Assert.AreEqual(10, T.DecorItems.Count); Assert.AreEqual(33, T.SkinLayers.Sum(l => l.SkinIds.Count)); Assert.AreEqual(7, T.Products.Count); Assert.AreEqual(3, T.AdKinds.Count);
+            Assert.AreEqual(28, T.DecorSlots.Count); Assert.AreEqual(0, T.DecorSlots.Count(s => s.Blocked)); Assert.AreEqual(28, T.DecorSlots.Count(s => !s.Blocked));
+            Assert.AreEqual(25, T.DecorItems.Count); Assert.AreEqual(33, T.SkinLayers.Sum(l => l.SkinIds.Count)); Assert.AreEqual(7, T.Products.Count); Assert.AreEqual(3, T.AdKinds.Count);
             Assert.AreEqual(3, T.Tracks.Count); Assert.AreEqual(10, T.Ranks.Count); Assert.AreEqual((int)t["MILESTONES"], T.Milestones.Count); Assert.AreEqual((int)t["DIARY"], T.Diary.Count);
             Assert.AreEqual(5, T.DecorZones.Count); Assert.AreEqual(4, T.SeasonGuests.Count); Assert.AreEqual(4, T.Anniv.Count); Assert.AreEqual(3, T.NatureLetters.Count);
             Assert.AreEqual(12, T.Lint.Branches.Count); Assert.AreEqual((int)t["ICONS"], T.Lint.Icons.Count);
@@ -38,6 +38,12 @@ namespace Lighthouse.Tests
             Assert.IsNull(M1Fixture.Diff(st.ToJson(), d), "기본 저장 왕복 불일치");
         }
 
+        /// <summary>G2' 가 열림 조건·좌표를 다시 정한 8자리의 놓은 값은 HTML 골든(막힘이라 값만 보존)과 다르게 취급된다 — 이제 열린 자리라 열려 있지 않으면 치운다. 새 동작은 DecorG2Tests.</summary>
+        public static void StripG2Puts(JToken s)
+        {
+            if (s is JObject o && o["isle"] is JObject il && il["put"] is JObject put) foreach (var id in FuncAndLintTests.G2Redesigned) put.Remove(id);
+        }
+
         [Test]
         public void MigrateMatchesJsGolden()
         {
@@ -47,7 +53,8 @@ namespace Lighthouse.Tests
                 JObject actual;
                 try { actual = mig.Migrate(Js.Parse((string)c["inputText"])); }
                 catch (Exception e) { fails.Add(c["name"] + ": 예외 " + e.Message); continue; }
-                string diff = M1Fixture.Diff(actual, c["expected"]);
+                var expected = c["expected"].DeepClone(); StripG2Puts(actual); StripG2Puts(expected);
+                string diff = M1Fixture.Diff(actual, expected);
                 if (diff != null) fails.Add(c["name"] + " → " + diff);
             }
             Assert.IsEmpty(fails, string.Join("\n", fails));

@@ -40,7 +40,7 @@ namespace Lighthouse.App
         public readonly List<double> FrameMs = new List<double>();
 
         UiStrings str; SaveStore store; SaveMigrator mig; BubbleView bubble; OfflineResult pendingNews;
-        bool rebuildPending = true; int lastW, lastH, lastDecorRev = -1; long hiddenAtMs;
+        bool rebuildPending = true; int lastW, lastH, lastDecorRev = -1; long hiddenAtMs; string lastSeasonSeen;
         bool pressing, moved; Vector2 pressStart; float pressT; bool booted;
         string lastSkinKey; bool restarting; LoadNotice pendingNotice; Lighthouse.Platform.ScreenReaderBridge a11y;
         public ITextTransfer Transfer { get; private set; }
@@ -247,6 +247,7 @@ namespace Lighthouse.App
             }
             else { Loop.Tick(rdt); Save.Tick(rdt); HandleInput(); }
 
+            { string sn = Ctx.CurSeason(); if (sn != lastSeasonSeen) { lastSeasonSeen = sn; if (DecorRules.SeasonTick(T, Ctx.S, sn)) { Ctx.NotifyChanged(); rebuildPending = true; } } }      // G2': 계절 장식(호박 더미·꽃잎 길·눈사람)은 그 계절을 만난 순간 영구 해금(원본 decorSeasonTick)
             // 월드 다시 굽기: 화면 크기·단계·계절·외형·장식이 바뀌었을 때
             if (ScreenW != lastW || ScreenH != lastH) rebuildPending = true;
             if (Ui.Ctl.DecorRev != lastDecorRev) { if (lastDecorRev >= 0) rebuildPending = true; lastDecorRev = Ui.Ctl.DecorRev; }
@@ -264,7 +265,7 @@ namespace Lighthouse.App
             foreach (var id in Ctx.S.Isle.Put.Keys)
             {
                 var item = DecorRules.PutOf(T, Ctx.S, id);
-                if (item != null && T.DecorSlotById.TryGetValue(id, out var sl) && DecorRules.SlotOpen(sl, Ctx.Stage, gl)) put.Add((id, item));
+                if (item != null && T.DecorSlotById.TryGetValue(id, out var sl) && DecorRules.SlotOpen(sl, Ctx.Stage, gl) && DecorRules.Owned(T, Ctx.S, item, gl)) put.Add((id, item));      // G2': 구매·해금이 없는 장식은 그리지 않는다(팩 환불·복원 전)
             }
             World.Rebuild(Loop, Ctx, lastW, lastH, ViewMode, layer => Ui.Ctl.SkinId(layer), put);
         }

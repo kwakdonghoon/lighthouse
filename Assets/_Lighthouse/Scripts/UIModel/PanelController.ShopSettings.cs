@@ -314,7 +314,7 @@ namespace Lighthouse.UI.Model
         void ImportAct()
         {
             if (code == null) return;
-            var res = code.Parse(impText);
+            var res = code.Parse(impText, S.Owned);
             if (res.Err != null) { impMsg = res.Err; impArmed = false; return; }
             if (!impArmed)
             {

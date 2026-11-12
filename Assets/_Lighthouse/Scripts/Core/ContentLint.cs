@@ -46,13 +46,17 @@ namespace Lighthouse.Core
             var it = T.DecorItemById[id]; string[] ORD = { "첫", "두", "세", "네", "다섯", "여섯" };
             if (it.Src == "earn") return isLong ? T.TrackById[it.NeedKey].Name + " Lv." + JsNumStr(it.NeedVal) + GaI(it.NeedVal) + " 되면 만날 수 있어요." : T.TrackById[it.NeedKey].Name + " Lv." + JsNumStr(it.NeedVal);
             if (it.Src == "story") return isLong ? it.Who + "의 " + ORD[(int)it.NeedVal - 1] + " 번째 이야기를 들으면 만날 수 있어요." : it.Who + "의 " + ORD[(int)it.NeedVal - 1] + " 번째 이야기";
-            if (it.Src == "season") return isLong ? T.Lint.SeasonName[it.NeedKey] + "을 만나면 계속 가질 수 있어요." : T.Lint.SeasonName[it.NeedKey] + "에 만나요";
+            if (it.Src == "season") return isLong ? T.Lint.SeasonName[it.NeedKey] + "을 만나면 계속 가질 수 있어요." + (it.AltStr != null ? " 안내한 배가 " + JsNumStr(it.AltNum[1]) + "척이 되어도 만날 수 있어요." : "") : T.Lint.SeasonName[it.NeedKey] + "에 만나요";
+            if (it.Src == "guided" || it.Src == "ad") return isLong ? "안내한 배가 " + JsNumStr(it.NeedVal) + "척이 되면 만날 수 있어요." : "안내한 배 " + JsNumStr(it.NeedVal) + "척";
+            if (it.Src == "iap") { var pk = T.Products.FirstOrDefault(q => q.Grants.Contains(it.NeedKey)); string nm = pk != null ? pk.Name : ""; return isLong ? nm + "에 들어 있어요." : nm; }
             if (it.Src == "gift") return isLong ? T.GiftById[it.NeedKey].Name + "{을/를} " + JsNumStr(it.NeedVal) + "개 받으면 만날 수 있어요." : T.GiftById[it.NeedKey].Name + " " + JsNumStr(it.NeedVal) + "개";
             return "";
         }
 
         public string SlotNeedText(DecorSlotDef sl, bool isLong)
             => sl.OpenLv != 0 ? (isLong ? "정원 Lv." + sl.OpenLv + GaI(sl.OpenLv) + " 되면 열려요." : "정원 Lv." + sl.OpenLv) : (isLong ? "섬이 " + sl.OpenStage + "단계가 되면 열려요." : "섬 " + sl.OpenStage + "단계");
+        /// <summary>정원 레벨은 됐고 섬 단계만 모자란 자리의 문구(G2' MinStage).</summary>
+        public string SlotNeedStageText(DecorSlotDef sl, bool isLong) => isLong ? "섬이 " + sl.MinStage + "단계가 되면 열려요." : "섬 " + sl.MinStage + "단계";
 
         public string SlotLabel(DecorSlotDef sl) => T.DecorZones.First(z => z.Id == sl.Chip).Title + " " + sl.Num + "번 자리";
 
@@ -61,7 +65,7 @@ namespace Lighthouse.Core
         {
             var o = new List<string>();
             foreach (var it in T.DecorItems) { o.Add(it.Name); if (it.NeedStr != null) { o.Add(GameContext.FixJosa(DecorNeedText(it.Id, false))); o.Add(GameContext.FixJosa(DecorNeedText(it.Id, true))); } }
-            foreach (var sl in T.DecorSlots) if (!sl.Blocked) { o.Add(SlotLabel(sl)); if (sl.OpenLv != 0 || sl.OpenStage != 0) { o.Add(SlotNeedText(sl, false)); o.Add(SlotNeedText(sl, true)); } }
+            foreach (var sl in T.DecorSlots) if (!sl.Blocked) { o.Add(SlotLabel(sl)); if (sl.OpenLv != 0 || sl.OpenStage != 0) { o.Add(SlotNeedText(sl, false)); o.Add(SlotNeedText(sl, true)); if (sl.MinStage > 1) { o.Add(SlotNeedStageText(sl, false)); o.Add(SlotNeedStageText(sl, true)); } } }
             foreach (var m in T.Lint.DecoMsg.Values) o.Add(m);
             return o;
         }
@@ -96,7 +100,7 @@ namespace Lighthouse.Core
             }
             if (T.DecorSlots.Count != T.Bal.DecorSlotCount) bad.Add("자리가 28개가 아님");
             int live = T.DecorSlots.Count(s => !s.Blocked);
-            if (live != T.Bal.DecorOpenCount) bad.Add("사용 자리 " + live + " (20여야 함)");
+            if (live != T.Bal.DecorOpenCount) bad.Add("사용 자리 " + live + " (28이어야 함)");
             return bad;
         }
 

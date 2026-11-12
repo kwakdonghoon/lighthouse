@@ -39,7 +39,8 @@ namespace Lighthouse.UI.Model
         List<string> ZoneOpenIds(string z) => DecorRules.ZoneOpen(T, z, Ctx.Stage, GardenLv).Select(s => s.Id).ToList();
         List<string> ZoneSlotIds(string z) => DecorRules.ZoneSlots(T, z).Select(s => s.Id).ToList();
         string PutOf(string slot) => DecorRules.PutOf(T, S, slot);
-        IEnumerable<DecorItemDef> Catalog() => T.DecorItems.Where(i => i.Phase == "GL");
+        /// <summary>꾸미기 목록의 아이템: GL(1차 10종)과 G2(광고 3·팩 4·2차 8). 구매 필요 아이템(팩)은 상점이 켜져 있을 때만 보인다(D42, 외형의 iap 규칙과 같음).</summary>
+        IEnumerable<DecorItemDef> Catalog() => T.DecorItems.Where(i => (i.Phase == "GL" || i.Phase == "G2") && (i.Src != "iap" || Features.Shop));
         string ZoneLong(string z) => T.DecorZones.First(q => q.Id == z).Title;
         string ZoneChip(string z) => T.DecorZones.First(q => q.Id == z).Chip;
         string SlotLabel(string id) => F_("deco.slotLabel", ZoneLong(T.DecorSlotById[id].Chip), T.DecorSlotById[id].Num);
@@ -54,7 +55,9 @@ namespace Lighthouse.UI.Model
             {
                 case "earn": return lng ? F_("deco.needEarnL", TrackName(it.NeedKey), it.NeedVal, GaI(it.NeedVal)) : F_("deco.needEarn", TrackName(it.NeedKey), it.NeedVal);
                 case "story": return lng ? F_("deco.needStoryL", it.Who, ord[(int)it.NeedVal - 1]) : F_("deco.needStory", it.Who, ord[(int)it.NeedVal - 1]);
-                case "season": return lng ? F_("deco.needSeasonL", SeasonName(it.NeedKey)) : F_("deco.needSeason", SeasonName(it.NeedKey));
+                case "season": return lng ? FixJosa(F_("deco.needSeasonL", SeasonName(it.NeedKey))) + (it.AltStr != null ? " " + F_("deco.needSeasonAltL", Fmt(it.AltNum[1])) : "") : F_("deco.needSeason", SeasonName(it.NeedKey));
+                case "guided": case "ad": return lng ? F_("deco.needGuidedL", Fmt(it.NeedVal)) : F_("deco.needGuided", Fmt(it.NeedVal));
+                case "iap": { var pk = T.Products.FirstOrDefault(q => q.Grants.Contains(it.NeedKey)); string nm = pk != null ? pk.Name : ""; return lng ? F_("deco.needPackL", nm) : nm; }
                 case "gift": return lng ? F_("deco.needGiftL", T.GiftById[it.NeedKey].Name, it.NeedVal) : F_("deco.needGift", T.GiftById[it.NeedKey].Name, it.NeedVal);
             }
             return "";
@@ -63,6 +66,8 @@ namespace Lighthouse.UI.Model
         string DecorSlotNeed(string id, bool lng)
         {
             var sl = T.DecorSlotById[id];
+            if (sl.OpenLv != 0 && GardenLv >= sl.OpenLv && Ctx.Stage < sl.MinStage)       // G2': 정원 레벨은 됐고 섬 단계만 모자란 자리(작은 섬에는 자리가 안 들어간다)
+                return lng ? F_("deco.slotNeedStageL", sl.MinStage) : F_("deco.slotNeedStage", sl.MinStage);
             if (sl.OpenLv != 0) return lng ? F_("deco.slotNeedLvL", sl.OpenLv, GaI(sl.OpenLv)) : F_("deco.slotNeedLv", sl.OpenLv);
             return lng ? F_("deco.slotNeedStageL", sl.OpenStage) : F_("deco.slotNeedStage", sl.OpenStage);
         }
@@ -240,9 +245,9 @@ namespace Lighthouse.UI.Model
             var locked = ZoneSlotIds(DecoZone).Where(id => !SlotNowOpen(id)).ToList();
             if (locked.Count > 0)
             {
-                double Gap(string id) { var s = T.DecorSlotById[id]; return s.OpenLv != 0 ? s.OpenLv - GardenLv : s.OpenStage - Ctx.Stage; }
+                double Gap(string id) { var s = T.DecorSlotById[id]; return s.OpenLv != 0 ? Math.Max(s.OpenLv - GardenLv, s.MinStage - Ctx.Stage) : s.OpenStage - Ctx.Stage; }
                 var best = locked.OrderBy(Gap).ThenBy(i => T.DecorSlotById[i].Num).First(); var bs = T.DecorSlotById[best];
-                bool Same(string id) { var s = T.DecorSlotById[id]; return s.OpenLv == bs.OpenLv && s.OpenStage == bs.OpenStage && s.OpenBase == bs.OpenBase; }
+                bool Same(string id) { var s = T.DecorSlotById[id]; return s.OpenLv == bs.OpenLv && s.OpenStage == bs.OpenStage && s.OpenBase == bs.OpenBase && s.MinStage == bs.MinStage; }
                 foreach (var id in locked.Where(Same).Take(2))
                     grid.Add(new Block(BK.Cell) { Style = "slot lockd", Act = "slotlock:" + id, Locked = true, Tag = T.DecorSlotById[id].Size, Count = T.DecorSlotById[id].Num.ToString(), Icon = "lock", Text = DecorSlotNeed(id, false) });
             }

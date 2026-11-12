@@ -39,7 +39,7 @@ namespace Lighthouse.Core
     {
         const double OnlinePerMin = 7.8;       // 온라인 안내 속도 가정: 분당 7.8척 (하루 468척 = 1시간)
 
-        public static SimResult Run(GameTables T, IClock clock, double shipsPerDay = 468, int days = 120, long seed = 1, int visitEvery = 1)
+        public static SimResult Run(GameTables T, IClock clock, double shipsPerDay = 468, int days = 120, long seed = 1, int visitEvery = 1, Action<int, GameContext> dayHook = null)
         {
             var rng = new Mulberry32(seed);
             var smig = new SaveMigrator(T, clock);
@@ -78,6 +78,7 @@ namespace Lighthouse.Core
                     var news = ctx.RunOffline(visitEvery * 86400.0 - onlineSec);
                     if (news != null) res.OfflineShips += news.Count;
                     Check(d);
+                    dayHook?.Invoke(d, ctx);          // G2': 꾸미기 해금 진행도 기록(난수·상태를 건드리지 않는 읽기 전용 훅)
                 }
                 for (int i = 0; i < shipsPerDay; i++)
                 {
@@ -87,6 +88,7 @@ namespace Lighthouse.Core
                     ctx.AutoOfferAll();
                     Check(d);
                 }
+                dayHook?.Invoke(d, ctx);
             }
             foreach (var kv in state.Growth) res.FinalGrowth[kv.Key] = kv.Value;
             res.FinalStage = ctx.Stage; res.FinalGuided = state.Guided;

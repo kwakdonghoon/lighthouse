@@ -33,7 +33,8 @@ namespace Lighthouse.Core
         // ---------- 가져오기 ----------
         static readonly Regex CodeRe = new Regex(@"^LHS1\.([A-Za-z0-9+/=]+)\.([a-z0-9]+)$", RegexOptions.CultureInvariant);
 
-        public SaveCodeResult Parse(string text)
+        /// <summary>deviceOwned: 이 기기의 구매 기록(코드에는 안 담긴다). 주면 구매가 필요한 장식(팩)을 놓은 자리를 이 기기 기준으로 검증한다.</summary>
+        public SaveCodeResult Parse(string text, JObject deviceOwned = null)
         {
             string t = Regex.Replace(text ?? "", @"\s+", "");
             var m = CodeRe.Match(t);
@@ -50,7 +51,8 @@ namespace Lighthouse.Core
             if (o == null || !(o["gifts"] is JObject) || !(o["growth"] is JObject) || !(o["dex"] is JObject) || !Js.IsInteger(o["stage"]) || Js.Num(o["stage"]) < 1 || Js.Num(o["stage"]) > T.MaxStage
                 || !(o["letters"] is JArray) || !(o["deco"] is JArray || o["isle"] is JObject))
                 return Fail("이 게임의 저장 코드가 아니에요.");
-            return new SaveCodeResult { Data = mig.Migrate(Sanitize(o)) };
+            var san = Sanitize(o); if (deviceOwned != null) san["owned"] = deviceOwned.DeepClone();
+            return new SaveCodeResult { Data = mig.Migrate(san) };
         }
 
         static SaveCodeResult Fail(string e) => new SaveCodeResult { Err = e };

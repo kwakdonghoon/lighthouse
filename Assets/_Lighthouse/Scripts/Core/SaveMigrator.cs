@@ -270,7 +270,7 @@ namespace Lighthouse.Core
             news = news.Take(6).ToList();
             if (s != null)
             {
-                foreach (var k in Js.Keys(own)) if (!T.DecorItemById.TryGetValue(k, out var it) || it.Src != "season") own.Remove(k);
+                foreach (var k in Js.Keys(own)) if (!T.DecorItemById.TryGetValue(k, out var it) || (it.Src != "season" && it.Src != "ad")) own.Remove(k);
                 news = news.Where(k => T.DecorItemById.ContainsKey(k)).ToList();
                 int st = DecorStageOf(s); int gl = DecorLvOf(s, "garden");
                 foreach (var k in Js.Keys(put))
@@ -316,11 +316,21 @@ namespace Lighthouse.Core
                 if (!Js.Truthy(g) || !Js.HasOwn(g, it.NeedKey)) return false;
                 return Js.ToNumber(Js.Get(g, it.NeedKey)) >= it.NeedVal;
             }
-            if (it.Src == "season")
+            if (it.Src == "season" || it.Src == "ad")
             {
                 JToken o = own != null ? own : (Js.Truthy(s["isle"]) ? Js.Get(s["isle"], "own") : null);
-                return Js.Truthy(Js.Get(o, id));
+                if (Js.Truthy(Js.Get(o, id))) return true;
+                double g = Js.ToNumber(s["guided"]); if (double.IsNaN(g)) g = 0;
+                if (it.Src == "ad") return g >= it.NeedVal;                                                  // 업적 경로(D43·U5)
+                return it.AltStr != null && it.AltStr.Length > 1 && it.AltStr[0] == "guided" && g >= it.AltNum[1];      // 호박 더미 두 번째 경로(D44)
             }
+            if (it.Src == "guided")
+            {
+                double g = Js.ToNumber(s["guided"]); if (double.IsNaN(g)) g = 0;
+                return g >= it.NeedVal;
+            }
+            if (it.Src == "iap")                                                                              // 구매 검증: 구매 기록(owned)에 없으면 놓은 것을 치운다
+                return s["owned"] is JObject ow && ow[it.NeedKey] != null && Js.Truthy(ow[it.NeedKey]);
             return false;
         }
 
@@ -342,6 +352,7 @@ namespace Lighthouse.Core
                     if (skin.ContainsKey(layer.Id) && Js.IsString(skin[layer.Id]) && layer.SkinSet.Contains((string)skin[layer.Id])) sk[layer.Id] = (string)skin[layer.Id];
             s["skin"] = sk;
             s.Remove("deco");
+            if (s["owned"] is JObject ownedMap) ShopMath.NormalizeOwned(T, ownedMap);                         // G2': 팩 단위 주는 것 복원(festpack 의 pack:festival)
             s["isle"] = CleanIsle(s["isle"], s);
             foreach (var k in new[] { "gifts", "dex", "shiny", "found", "reg", "stats", "tips", "anniv", "seasonLetters", "diarySeen" }) s[k] = Strip(s[k]);
             if (s["totals"] is JObject tot) tot["gifts"] = Strip(tot["gifts"]);

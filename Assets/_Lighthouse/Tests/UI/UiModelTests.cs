@@ -196,9 +196,10 @@ namespace Lighthouse.Tests
             r.P.Act("clearall:yes");
             Assert.That(S.Isle.Put.Keys.Count(id => DecorRules.SlotOpen(T.DecorSlotById[id], 6, r.Ctx.LvlOf("garden"))), Is.EqualTo(0));
             Assert.That(r.Host.Log, Does.Contain("dirty"));
-            // 닫은 칸(막힘)은 누를 수 없다
-            var blocked = T.DecorSlots.First(s => s.Blocked);
-            r.P.Act("slot:" + blocked.Id); Assert.IsNull(r.P.DecoSel);
+            // 아직 열리지 않은 자리(G2': 막힘은 없어졌다 — 1단계·정원 낮을 때 닫힌 자리)는 누를 수 없다
+            var lo = UiFixture.Make(1, 0); lo.P.Open(PanelMode.Deco);
+            var closed = T.DecorSlots.First(s => !DecorRules.SlotOpen(s, 1, lo.Ctx.LvlOf("garden")));
+            lo.P.Act("slot:" + closed.Id); Assert.IsNull(lo.P.DecoSel);
         }
 
         [Test]

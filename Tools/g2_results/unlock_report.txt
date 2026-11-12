@@ -1,0 +1,38 @@
+| 프로필 | 구분 | 1일 | 2~7일 | 8~14일 | 15~30일 | 31~60일 | 61~120일 | 합계 |
+|---|---|---|---|---|---|---|---|---|
+| A | 아이템 이전(10종) | 7 | 2 | 0 | 0 | 0 | 0 | 9 |
+| A | 아이템 G2'(달력 2종 제외) | 7 | 4 | 2 | 3 | 2 | 0 | 18 |
+| A | 자리 이전(20) | 17 | 3 | 0 | 0 | 0 | 0 | 20 |
+| A | 자리 G2'(28) | 20 | 5 | 3 | 0 | 0 | 0 | 28 |
+| B | 아이템 이전(10종) | 6 | 3 | 0 | 0 | 0 | 0 | 9 |
+| B | 아이템 G2'(달력 2종 제외) | 6 | 5 | 0 | 4 | 3 | 0 | 18 |
+| B | 자리 이전(20) | 15 | 5 | 0 | 0 | 0 | 0 | 20 |
+| B | 자리 G2'(28) | 15 | 10 | 3 | 0 | 0 | 0 | 28 |
+| C | 아이템 이전(10종) | 4 | 5 | 0 | 0 | 0 | 0 | 9 |
+| C | 아이템 G2'(달력 2종 제외) | 4 | 6 | 1 | 3 | 4 | 0 | 18 |
+| C | 자리 이전(20) | 13 | 7 | 0 | 0 | 0 | 0 | 20 |
+| C | 자리 G2'(28) | 13 | 12 | 1 | 2 | 0 | 0 | 28 |
+| Z | 아이템 이전(10종) | 4 | 5 | 0 | 0 | 0 | 0 | 9 |
+| Z | 아이템 G2'(달력 2종 제외) | 4 | 6 | 1 | 3 | 4 | 0 | 18 |
+| Z | 자리 이전(20) | 11 | 9 | 0 | 0 | 0 | 0 | 20 |
+| Z | 자리 G2'(28) | 11 | 14 | 1 | 2 | 0 | 0 | 28 |
+| D | 아이템 이전(10종) | 4 | 4 | 1 | 0 | 0 | 0 | 9 |
+| D | 아이템 G2'(달력 2종 제외) | 4 | 5 | 1 | 1 | 2 | 3 | 16 |
+| D | 자리 이전(20) | 13 | 5 | 1 | 1 | 0 | 0 | 20 |
+| D | 자리 G2'(28) | 13 | 9 | 1 | 2 | 3 | 0 | 28 |
+
+[A] path_stone=1, path_shell=1, fence_wood=1, flower_planter=1, lamp_post=1, tent_small=-, pine_small=2, palm_tree=1, pumpkin_pile=2, cloud_small=1, lantern_float=2, kite_red=5, balloon_cluster=13, path_brick=12, path_plank=34, path_petal=1, sandcastle=17, beach_umbrella=21, snowman=-, paper_plane=26, star_mobile=36
+[A] 자리 P1=1, P2=1, P3=1, P4=1, P5=1, P6=1, P7=1, P8=1, F1=1, F2=4, F3=10, F4=1, F5=2, F6=1, F7=1, B1=2, B2=8, B3=1, B4=10, B5=1, B6=1, SH1=1, SH2=1, SH3=4, SH4=1, SH5=3, SK1=1, SK2=1
+[A] 누적 열린 자리/보유(무료·업적) 아이템: 1일 20/8  7일 25/12  14일 28/14  30일 28/17  60일 28/19  120일 28/19  
+[B] path_stone=1, path_shell=1, fence_wood=1, flower_planter=1, lamp_post=1, tent_small=-, pine_small=2, palm_tree=2, pumpkin_pile=3, cloud_small=1, lantern_float=2, kite_red=7, balloon_cluster=17, path_brick=16, path_plank=44, path_petal=1, sandcastle=23, beach_umbrella=27, snowman=-, paper_plane=33, star_mobile=47
+[B] 자리 P1=1, P2=1, P3=1, P4=1, P5=1, P6=1, P7=2, P8=2, F1=1, F2=5, F3=12, F4=1, F5=2, F6=1, F7=2, B1=2, B2=10, B3=1, B4=12, B5=2, B6=2, SH1=1, SH2=1, SH3=5, SH4=1, SH5=4, SK1=1, SK2=1
+[B] 누적 열린 자리/보유(무료·업적) 아이템: 1일 15/7  7일 25/12  14일 28/12  30일 28/16  60일 28/19  120일 28/19  
+[C] path_stone=1, path_shell=2, fence_wood=1, flower_planter=1, lamp_post=2, tent_small=-, pine_small=3, palm_tree=2, pumpkin_pile=4, cloud_small=1, lantern_float=3, kite_red=8, balloon_cluster=20, path_brick=19, path_plank=51, path_petal=1, sandcastle=27, beach_umbrella=32, snowman=-, paper_plane=39, star_mobile=56
+[C] 자리 P1=1, P2=1, P3=1, P4=1, P5=1, P6=1, P7=2, P8=2, F1=1, F2=6, F3=15, F4=1, F5=3, F6=1, F7=2, B1=3, B2=12, B3=1, B4=15, B5=2, B6=2, SH1=1, SH2=1, SH3=6, SH4=1, SH5=5, SK1=2, SK2=2
+[C] 누적 열린 자리/보유(무료·업적) 아이템: 1일 13/5  7일 25/11  14일 26/12  30일 28/15  60일 28/19  120일 28/19  
+[Z] path_stone=1, path_shell=2, fence_wood=1, flower_planter=1, lamp_post=2, tent_small=-, pine_small=3, palm_tree=2, pumpkin_pile=4, cloud_small=1, lantern_float=3, kite_red=9, balloon_cluster=22, path_brick=20, path_plank=55, path_petal=1, sandcastle=28, beach_umbrella=34, snowman=-, paper_plane=42, star_mobile=59
+[Z] 자리 P1=1, P2=1, P3=1, P4=1, P5=2, P6=2, P7=2, P8=2, F1=1, F2=7, F3=16, F4=1, F5=3, F6=1, F7=2, B1=3, B2=13, B3=1, B4=16, B5=2, B6=2, SH1=1, SH2=1, SH3=7, SH4=1, SH5=5, SK1=2, SK2=2
+[Z] 누적 열린 자리/보유(무료·업적) 아이템: 1일 11/5  7일 25/11  14일 26/12  30일 28/15  60일 28/19  120일 28/19  
+[D] path_stone=1, path_shell=4, fence_wood=1, flower_planter=1, lamp_post=4, tent_small=-, pine_small=7, palm_tree=4, pumpkin_pile=10, cloud_small=1, lantern_float=7, kite_red=22, balloon_cluster=58, path_brick=55, path_plank=-, path_petal=1, sandcastle=79, beach_umbrella=94, snowman=-, paper_plane=115, star_mobile=-
+[D] 자리 P1=1, P2=1, P3=1, P4=1, P5=1, P6=1, P7=4, P8=4, F1=1, F2=16, F3=43, F4=1, F5=7, F6=1, F7=4, B1=7, B2=34, B3=1, B4=43, B5=4, B6=4, SH1=1, SH2=1, SH3=16, SH4=1, SH5=13, SK1=4, SK2=4
+[D] 누적 열린 자리/보유(무료·업적) 아이템: 1일 13/5  7일 22/10  14일 23/11  30일 25/12  60일 28/14  120일 28/17  

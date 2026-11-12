@@ -146,7 +146,7 @@ namespace Lighthouse.Data
             foreach (JObject o in (JArray)dc["slots"])
             {
                 var op = (JObject)o["open"];
-                var d = new DecorSlotDef { Id = S(o["id"]), Chip = S(o["chip"]), Size = S(o["size"]), Blocked = o["blocked"] != null && (int)o["blocked"] != 0, OpenBase = op["base"] != null ? (int)op["base"] : 0, OpenStage = op["stage"] != null ? (int)op["stage"] : 0, OpenLv = op["lv"] != null ? (int)op["lv"] : 0 };
+                var d = new DecorSlotDef { Id = S(o["id"]), Chip = S(o["chip"]), Size = S(o["size"]), Blocked = o["blocked"] != null && (int)o["blocked"] != 0, OpenBase = op["base"] != null ? (int)op["base"] : 0, OpenStage = op["stage"] != null ? (int)op["stage"] : 0, OpenLv = op["lv"] != null ? (int)op["lv"] : 0, MinStage = o["minStage"] != null ? (int)o["minStage"] : 1 };
                 if (o["ab"] is JArray ab) d.Ab = ab.Select(x => (double)x).ToArray();
                 if (o["abLin"] is JArray al) d.AbLin = al.Select(x => new LinComp { K = D(x["k"]), C = D(x["c"]) }).ToArray();
                 if (o["xyFn"] is JArray xf) d.XyFn = xf.Select(x => new LinComp { K = D(x["k"]), C = D(x["c"]), Round = B(x["round"]), Neg = B(x["neg"]) }).ToArray();
@@ -161,6 +161,8 @@ namespace Lighthouse.Data
                     d.NeedStr = nd.Select(x => x.Type == JTokenType.String ? (string)x : null).ToArray();
                     d.NeedNum = nd.Select(x => x.Type == JTokenType.String ? double.NaN : Js.Num(x)).ToArray();
                 }
+                d.Draft = B(o["draft"]);
+                if (o["alt"] is JArray alt) { d.AltStr = alt.Select(x => x.Type == JTokenType.String ? (string)x : null).ToArray(); d.AltNum = alt.Select(x => x.Type == JTokenType.String ? double.NaN : Js.Num(x)).ToArray(); }
                 T.DecorItems.Add(d); T.DecorItemById[d.Id] = d;
             }
 

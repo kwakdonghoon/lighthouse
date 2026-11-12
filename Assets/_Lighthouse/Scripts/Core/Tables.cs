@@ -78,6 +78,7 @@ namespace Lighthouse.Core
     {
         public string Id, Chip, Size;
         public int OpenBase, OpenStage, OpenLv;     // 0 이면 없음
+        public int MinStage = 1;                    // G2': 정원 레벨로 여는 자리도 이 섬 단계 이상이어야 열린다(작은 섬에는 자리 좌표가 안 들어가서). 1 이면 조건 없음
         public bool Blocked;
         public double[] Ab;                          // 고정 좌표(없으면 null)
         public LinComp[] AbLin;                      // N 의 함수 좌표(없으면 null)
@@ -104,7 +105,7 @@ namespace Lighthouse.Core
 
     public sealed class DecorItemDef
     {
-        public string Id, Phase, Name, Size, Src, Who;
+        public string Id, Phase, Name, Size, Src, Who; public bool Draft; public string[] AltStr; public double[] AltNum;   // Draft: 시안 격자(D42). Alt: 두 번째 해금 경로(D44)
         public string[] Zones; public string[] NeedStr; public double[] NeedNum;   // need: ['garden',3] / ['swallow',3] / ['shell',20] / ['autumn']
         public int Ax, Ay; public bool Ss, Sk; public string[] Rows;
         public string NeedKey => NeedStr != null && NeedStr.Length > 0 ? NeedStr[0] : null;

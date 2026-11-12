@@ -63,17 +63,22 @@ namespace Lighthouse.Tests
             NoFails(f);
         }
 
+        /// <summary>G2' 가 좌표·열림 조건을 다시 정한 8자리. HTML 골든은 이 자리들을 "막힘"으로 갖고 있어(비교 대상이 아님) 새 골든(Tools/golden/g2/decor_g2.json)과 DecorG2Tests 가 맡는다.</summary>
+        public static readonly HashSet<string> G2Redesigned = new HashSet<string> { "B1", "B2", "B4", "B5", "B6", "F2", "F3", "F7" };
+
         [Test]
         public void DecorSlotsOpenPositionsAndOwnershipMatchJs()
         {
             var f = new List<string>();
             foreach (JObject o in (JArray)F["slotOpen"])
             {
+                if (G2Redesigned.Contains((string)o["id"])) continue;
                 var sl = T.DecorSlotById[(string)o["id"]]; var bits = (JArray)o["bits"];
                 for (int st = 1; st <= 6; st++) for (int gl = 0; gl <= 30; gl++) { char b = DecorRules.SlotOpen(sl, st, gl) ? '1' : '0'; if (b != ((string)bits[st - 1])[gl]) f.Add(sl.Id + " st" + st + " gl" + gl); }
             }
             foreach (JObject o in (JArray)F["slotPos"])
             {
+                if (G2Redesigned.Contains((string)o["id"])) continue;
                 var sl = T.DecorSlotById[(string)o["id"]]; var abs = (JArray)o["ab"]; var xys = (JArray)o["xy"];
                 for (int i = 0; i < 6; i++)
                 {
@@ -165,6 +170,7 @@ namespace Lighthouse.Tests
             var f = new List<string>();
             foreach (JObject o in (JArray)F["dueOf"])
             {
+                if ((string)o["id"] == "festpack") continue;       // G2': 팩에 pack:festival 이 더해져 상품이 바뀜(주는 것 2→3). 새 기준은 DecorG2Tests 의 festpack 차감가 시험
                 var p = T.Products.First(x => x.Id == (string)o["id"]);
                 foreach (JObject r in (JArray)o["rows"])
                 {
@@ -227,11 +233,11 @@ namespace Lighthouse.Tests
         {
             var lint = new ContentLint(T);
             Assert.IsEmpty(lint.DecorSelfCheck(), string.Join("\n", lint.DecorSelfCheck()));
-            Assert.AreEqual(20, DecorRules.OpenCount(T, 6, 30), "단계 6·정원 30 에서 열린 자리");
+            Assert.AreEqual(28, DecorRules.OpenCount(T, 6, 30), "단계 6·정원 30 에서 열린 자리(G2': 막힘 8자리가 모두 열림)");
             Assert.AreEqual(0.8, T.Bal.DecorVisMin); Assert.AreEqual(0.65, T.Bal.DecorVisMinBack);
             Assert.IsTrue(T.DecorSlotById["B3"].Chip == "back" && !T.DecorSlotById["B3"].Blocked, "B3 는 열림(뒤 구역 가시 65% 기준)");
-            Assert.IsTrue(T.DecorSlotById["B5"].Blocked);
-            Assert.AreEqual("F2,F3,F7,B1,B2,B4,B5,B6".Split(',').OrderBy(x => x), T.DecorSlots.Where(s => s.Blocked).Select(s => s.Id).OrderBy(x => x));
+            Assert.IsFalse(T.DecorSlotById["B5"].Blocked);
+            Assert.IsEmpty(T.DecorSlots.Where(s => s.Blocked).Select(s => s.Id), "G2': 막힘 자리 없음");
         }
     }
 }

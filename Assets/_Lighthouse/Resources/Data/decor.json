@@ -264,10 +264,11 @@
    "open": {
     "lv": 12
    },
-   "blocked": 1,
+   "blocked": 0,
+   "minStage": 4,
    "ab": [
-    2.5,
-    1.5
+    5.75,
+    -0.5
    ]
   },
   {
@@ -277,10 +278,11 @@
    "open": {
     "lv": 16
    },
-   "blocked": 1,
+   "blocked": 0,
+   "minStage": 4,
    "ab": [
-    4.5,
-    1.5
+    6,
+    4.5
    ]
   },
   {
@@ -329,46 +331,10 @@
    "open": {
     "stage": 4
    },
-   "blocked": 1,
-   "abLin": [
-    {
-     "k": 1,
-     "c": -2.5
-    },
-    {
-     "k": -1,
-     "c": 3.5
-    }
-   ],
-   "abByStage": [
-    [
-     -2.5,
-     3.5
-    ],
-    [
-     3.5,
-     -2.5
-    ],
-    [
-     3.5,
-     -2.5
-    ],
-    [
-     4.5,
-     -3.5
-    ],
-    [
-     5.5,
-     -4.5
-    ],
-    [
-     5.5,
-     -4.5
-    ],
-    [
-     6.5,
-     -5.5
-    ]
+   "blocked": 0,
+   "ab": [
+    3,
+    6.25
    ]
   },
   {
@@ -378,10 +344,11 @@
    "open": {
     "lv": 8
    },
-   "blocked": 1,
+   "blocked": 0,
+   "minStage": 4,
    "ab": [
-    -0.5,
-    -3.5
+    -6.75,
+    2.75
    ]
   },
   {
@@ -391,10 +358,10 @@
    "open": {
     "stage": 6
    },
-   "blocked": 1,
+   "blocked": 0,
    "ab": [
-    -4.5,
-    -3.5
+    -7.5,
+    -0.5
    ]
   },
   {
@@ -417,10 +384,11 @@
    "open": {
     "lv": 16
    },
-   "blocked": 1,
+   "blocked": 0,
+   "minStage": 4,
    "ab": [
-    1.5,
-    -4.5
+    1.25,
+    -6.75
    ]
   },
   {
@@ -428,12 +396,12 @@
    "chip": "back",
    "size": "S",
    "open": {
-    "base": 1
+    "stage": 4
    },
-   "blocked": 1,
+   "blocked": 0,
    "ab": [
-    1,
-    -3.5
+    -6,
+    5
    ]
   },
   {
@@ -443,46 +411,10 @@
    "open": {
     "stage": 4
    },
-   "blocked": 1,
-   "abLin": [
-    {
-     "k": -1,
-     "c": 2.5
-    },
-    {
-     "k": 0,
-     "c": 0.5
-    }
-   ],
-   "abByStage": [
-    [
-     2.5,
-     0.5
-    ],
-    [
-     -3.5,
-     0.5
-    ],
-    [
-     -3.5,
-     0.5
-    ],
-    [
-     -4.5,
-     0.5
-    ],
-    [
-     -5.5,
-     0.5
-    ],
-    [
-     -5.5,
-     0.5
-    ],
-    [
-     -6.5,
-     0.5
-    ]
+   "blocked": 0,
+   "ab": [
+    3.5,
+    -6
    ]
   },
   {
@@ -1038,6 +970,10 @@
     "OoOOOOoOQQ",
     ".QoOOoQQQ.",
     "..QQQQQQ.."
+   ],
+   "alt": [
+    "guided",
+    1500
    ]
   },
   {
@@ -1057,6 +993,443 @@
     "CCCCCCCCcc",
     "cccccccccd",
     ".dddddddd."
+   ]
+  },
+  {
+   "id": "lantern_float",
+   "phase": "G2",
+   "name": "소원 등불",
+   "size": "S",
+   "zones": [
+    "shore"
+   ],
+   "src": "ad",
+   "need": [
+    "guided",
+    1000
+   ],
+   "ax": 4,
+   "ay": 5,
+   "rows": [
+    "........",
+    "..RRRR..",
+    "..rRRe..",
+    "..HHhk..",
+    "wWWWWWWx",
+    ".wwWWxx.",
+    "...wx..."
+   ]
+  },
+  {
+   "id": "kite_red",
+   "phase": "G2",
+   "name": "빨간 연",
+   "size": "S",
+   "zones": [
+    "sky"
+   ],
+   "src": "ad",
+   "need": [
+    "guided",
+    5000
+   ],
+   "ax": 5,
+   "ay": 6,
+   "rows": [
+    "....RR....",
+    "...RRrr...",
+    "..RRRRrr..",
+    ".RRRUUrrr.",
+    "..RRUUrr..",
+    "...RRrr...",
+    "....Rr....",
+    "....w.....",
+    "...w......",
+    "....w.....",
+    ".....w....",
+    "....w....."
+   ]
+  },
+  {
+   "id": "balloon_cluster",
+   "phase": "G2",
+   "name": "풍선 묶음",
+   "size": "S",
+   "zones": [
+    "sky"
+   ],
+   "src": "ad",
+   "need": [
+    "guided",
+    15000
+   ],
+   "ax": 5,
+   "ay": 6,
+   "rows": [
+    "..RR..AA..",
+    ".RRRr.AAa.",
+    ".RRRr.AAa.",
+    "..Rr...Aa.",
+    "..w.TT.w..",
+    "...wTTt...",
+    "....TTt...",
+    ".....Tt...",
+    "....w.w...",
+    ".....w....",
+    ".....w....",
+    ".....w...."
+   ]
+  },
+  {
+   "id": "festival_bunting",
+   "phase": "G2",
+   "name": "축제 깃발 줄",
+   "size": "M",
+   "zones": [
+    "front",
+    "back",
+    "shore"
+   ],
+   "src": "iap",
+   "need": [
+    "pack:festival"
+   ],
+   "ax": 5,
+   "ay": 10,
+   "draft": 1,
+   "rows": [
+    "..........",
+    ".x........",
+    ".xi.......",
+    ".xrai.....",
+    ".xrabti.W.",
+    ".x.abtraw.",
+    ".x...traw.",
+    ".x.....aw.",
+    ".x......w.",
+    "........w.",
+    "........w.",
+    "........w.",
+    ".........."
+   ]
+  },
+  {
+   "id": "festival_stall",
+   "phase": "G2",
+   "name": "작은 축제 가판",
+   "size": "L",
+   "zones": [
+    "back"
+   ],
+   "src": "iap",
+   "need": [
+    "pack:festival"
+   ],
+   "ax": 8,
+   "ay": 15,
+   "draft": 1,
+   "rows": [
+    "................",
+    "......RR........",
+    "....RRRRCC......",
+    "..RRRRCCCCRR....",
+    ".rRRCCCCRRRRCC..",
+    "..xcCCRRRRCCCCd.",
+    "..x..rRRCCCCdd..",
+    "..x..hkcCCdd.w..",
+    "..x.aAC..d...w..",
+    "..x.CCCCCx...w..",
+    "..CCCCCCCxC..w..",
+    "..wcCCCCCxCCCw..",
+    "..wwwcCCCxCCCx..",
+    "..wwwwwcCxCxxx..",
+    "..wwwwwwwxxxxx..",
+    "....wwwwwxxxxx..",
+    "......wwwxxx....",
+    "........wx......"
+   ]
+  },
+  {
+   "id": "festival_lanterns",
+   "phase": "G2",
+   "name": "등롱 기둥",
+   "size": "S",
+   "zones": [
+    "front",
+    "back",
+    "shore"
+   ],
+   "src": "iap",
+   "need": [
+    "pack:festival"
+   ],
+   "ax": 4,
+   "ay": 11,
+   "draft": 1,
+   "rows": [
+    ".RWWW...",
+    ".rewW...",
+    ".hkHHRR.",
+    ".hkhkre.",
+    "...hkhk.",
+    "...wxhk.",
+    "...wx...",
+    "...wx...",
+    "...wx...",
+    "...wx...",
+    "...wx...",
+    "........"
+   ]
+  },
+  {
+   "id": "festival_arch",
+   "phase": "G2",
+   "name": "축제 환영 아치",
+   "size": "M",
+   "zones": [
+    "front",
+    "back",
+    "shore"
+   ],
+   "src": "iap",
+   "need": [
+    "pack:festival"
+   ],
+   "ax": 5,
+   "ay": 14,
+   "draft": 1,
+   "rows": [
+    "..........",
+    ".LLL......",
+    "WWWPPP....",
+    "wwWWWLLL..",
+    "wwwwWWWPPP",
+    "wwxewwWWWq",
+    "wwxea.wwxx",
+    "wwx...twxx",
+    "wwx....wxx",
+    "wwx....wxx",
+    "wwx....wxx",
+    "wwx....wxx",
+    ".wx....wxx",
+    ".......wxx",
+    ".......wxx",
+    ".......wxx",
+    ".........."
+   ]
+  },
+  {
+   "id": "path_brick",
+   "phase": "G2",
+   "name": "벽돌 길 조각",
+   "size": "S",
+   "zones": [
+    "path"
+   ],
+   "src": "earn",
+   "need": [
+    "garden",
+    17
+   ],
+   "ax": 4,
+   "ay": 3,
+   "rows": [
+    "...RR...",
+    ".RJRRJR.",
+    "rRRJRRRe",
+    ".rrRJRe.",
+    "...rJ..."
+   ]
+  },
+  {
+   "id": "path_plank",
+   "phase": "G2",
+   "name": "나무판 길",
+   "size": "S",
+   "zones": [
+    "path"
+   ],
+   "src": "guided",
+   "need": [
+    "guided",
+    40000
+   ],
+   "ax": 4,
+   "ay": 3,
+   "rows": [
+    "...WW...",
+    ".WWwWWw.",
+    "WwWWwWWx",
+    ".wwWwWx.",
+    "...wx..."
+   ]
+  },
+  {
+   "id": "path_petal",
+   "phase": "G2",
+   "name": "꽃잎 길",
+   "size": "S",
+   "zones": [
+    "path"
+   ],
+   "src": "season",
+   "need": [
+    "spring"
+   ],
+   "ax": 4,
+   "ay": 3,
+   "rows": [
+    "..Z..U..",
+    ".ZZ.ZZ..",
+    "Z.UKZ.ZU",
+    ".UZ.Z.Z.",
+    "..Z.U..."
+   ]
+  },
+  {
+   "id": "sandcastle",
+   "phase": "G2",
+   "name": "모래성",
+   "size": "S",
+   "zones": [
+    "shore"
+   ],
+   "src": "guided",
+   "need": [
+    "guided",
+    20000
+   ],
+   "ax": 5,
+   "ay": 7,
+   "rows": [
+    "....RR....",
+    "....wr....",
+    "..D.wD.D..",
+    ".DDDDDDDD.",
+    "DDJDDJDDJE",
+    "DJJJDJJJJE",
+    "DJJJJJJJJE",
+    ".EEEEEEEE.",
+    ".........."
+   ]
+  },
+  {
+   "id": "beach_umbrella",
+   "phase": "G2",
+   "name": "해변 파라솔",
+   "size": "M",
+   "zones": [
+    "shore"
+   ],
+   "src": "earn",
+   "need": [
+    "port",
+    19
+   ],
+   "ax": 6,
+   "ay": 13,
+   "rows": [
+    ".....TT.....",
+    "...TTUUTT...",
+    "..TUUTTUUT..",
+    ".tTUUTTUUTu.",
+    "ttTTUUttUUuu",
+    "t.t..wx...uu",
+    ".....wx.....",
+    ".....wx.....",
+    ".....wx.....",
+    ".....wx.....",
+    ".....wx.....",
+    ".....wx.....",
+    "....DDDD....",
+    "...DJJJJE...",
+    "............"
+   ]
+  },
+  {
+   "id": "snowman",
+   "phase": "G2",
+   "name": "눈사람",
+   "size": "S",
+   "zones": [
+    "front",
+    "back"
+   ],
+   "src": "season",
+   "need": [
+    "winter"
+   ],
+   "ax": 4,
+   "ay": 11,
+   "rows": [
+    "...ii...",
+    "..iIIj..",
+    "..UUUU..",
+    ".U*UU*U.",
+    ".UUOUUU.",
+    "..UUUU..",
+    "wwUUUUww",
+    ".UU*UUU.",
+    "UUUUUUUU",
+    "UUU*UUcc",
+    ".UUUUccc",
+    "..cccc.."
+   ]
+  },
+  {
+   "id": "paper_plane",
+   "phase": "G2",
+   "name": "종이비행기",
+   "size": "S",
+   "zones": [
+    "sky"
+   ],
+   "src": "guided",
+   "need": [
+    "guided",
+    30000
+   ],
+   "ax": 5,
+   "ay": 5,
+   "rows": [
+    "..........",
+    ".........U",
+    ".......UUC",
+    ".....UUUUc",
+    "...UUUUUcc",
+    ".UUUUUUccc",
+    "UUUUUccccd",
+    ".cccccdddd",
+    "...cdddd..",
+    ".....dd..."
+   ]
+  },
+  {
+   "id": "star_mobile",
+   "phase": "G2",
+   "name": "별 모빌",
+   "size": "S",
+   "zones": [
+    "sky"
+   ],
+   "src": "earn",
+   "need": [
+    "lens",
+    21
+   ],
+   "ax": 5,
+   "ay": 6,
+   "rows": [
+    ".gggggggg.",
+    ".g...g..g.",
+    ".g...g..g.",
+    "AAA..g.AAA",
+    "AAa..g.AAa",
+    ".A...g..A.",
+    "...AAAa...",
+    "...AAAAa..",
+    "....Aaa...",
+    ".........."
    ]
   }
  ]

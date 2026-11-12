@@ -13,7 +13,7 @@ namespace Lighthouse.Core
     {
         /// <summary>slotOpenS(sl, stage, gl): 열림 판정. 막힘 자리는 열리지 않는다(저장 값은 보존).</summary>
         public static bool SlotOpen(DecorSlotDef sl, int stage, int gardenLv)
-            => !sl.Blocked && (sl.OpenBase != 0 || (sl.OpenStage != 0 && stage >= sl.OpenStage) || (sl.OpenLv != 0 && gardenLv >= sl.OpenLv));
+            => !sl.Blocked && stage >= sl.MinStage && (sl.OpenBase != 0 || (sl.OpenStage != 0 && stage >= sl.OpenStage) || (sl.OpenLv != 0 && gardenLv >= sl.OpenLv));
 
         /// <summary>구역의 자리 목록(막힘은 빠진다, 번호순).</summary>
         public static List<DecorSlotDef> ZoneSlots(GameTables T, string zone)
@@ -52,10 +52,16 @@ namespace Lighthouse.Core
                         return idx >= 0 && idx < T.Bal.VisitAt.Length && r.V >= T.Bal.VisitAt[idx];
                     }
                 case "gift": return s.Totals.TryGetValue(it.NeedKey, out double g) && g >= it.NeedVal;
-                case "season": return s.Isle.Own.TryGetValue(id, out double o) && o != 0;
+                case "season": return (s.Isle.Own.TryGetValue(id, out double o) && o != 0) || AltGuided(it, s);       // D44: 두 번째 경로(안내한 배 N척)
+                case "guided": return s.Guided >= it.NeedVal;                                                           // G2' 2차 아이템: 누적 안내한 배 수(방치로 찬다)
+                case "ad": return s.Guided >= it.NeedVal || (s.Isle.Own.TryGetValue(id, out double oa) && oa != 0);      // D43·U5: 업적 경로(안내한 배 N척). own 은 광고로 받는 경로 자리(광고 SDK 는 M8 뒤)
+                case "iap": { var v = s.Owned[it.NeedKey]; return v != null && Js.Truthy(v); }                       // 팩: 구매 기록(스토어 영수증이 정본)
                 default: return false;
             }
         }
+
+        /// <summary>두 번째 해금 경로(alt = ['guided', N]): 누적 안내한 배 수가 N 이상.</summary>
+        public static bool AltGuided(DecorItemDef it, GameState s) => it.AltStr != null && it.AltStr.Length > 1 && it.AltStr[0] == "guided" && s.Guided >= it.AltNum[1];
 
         static double FiniteOr0(double p) => double.IsNaN(p) || double.IsInfinity(p) ? 0 : p;
 

@@ -525,11 +525,12 @@
   {
    "id": "festpack",
    "name": "축제 마을 팩",
-   "desc": "축제 분위기의 집·꽃밭·깃발 + 선원 옷",
+   "desc": "축제 분위기의 집·꽃밭·깃발 + 선원 옷 + 장식 4종(깃발 줄·가판·등롱 기둥·환영 아치)",
    "price": 2200,
    "grants": [
     "decor:festival",
-    "keeper:sailor"
+    "keeper:sailor",
+    "pack:festival"
    ]
   },
   {
@@ -589,6 +590,7 @@
   "tower:moonlit": "달빛 등대",
   "tower:widelamp": "넓은 램프 등대",
   "decor:festival": "축제 마을 집·꽃밭·깃발",
+  "pack:festival": "축제 마을 장식 4종",
   "beam:sunset": "노을빛",
   "beam:violet": "보랏빛"
  },
