@@ -226,6 +226,7 @@ namespace Lighthouse.EditorTools
             bool night = state == "main" && false;
             var ctx = SampleState.Make(T, Clock(), 11, stage, stage == 6 ? 260 : stage == 4 ? 150 : 70, stage >= 4 ? 4 : 1, night);
             ctx.S.Found["shell"] = Math.Max(1, ctx.S.Found.ContainsKey("shell") ? ctx.S.Found["shell"] : 1);
+            if (state.StartsWith("cf_badges")) PrepBadges(ctx, state);
             // 월드 배경: M2 장면을 같은 크기로 굽는다(없는 것처럼 어둡게 가려질 것이므로 단계만 맞춘다)
             Texture2D world = null;
             var wgo = new GameObject("world"); var sc = wgo.AddComponent<M2Showcase>(); sc.SpriteMaterial = AssetDatabase.LoadAssetAtPath<Material>(MatPath); sc.Stage = stage; sc.Season = "summer"; sc.Decor = stage >= 4; sc.Extras = true; sc.Animate = false; sc.Dusk = state == "main" ? 0.0f : 0.0f;
@@ -262,6 +263,39 @@ namespace Lighthouse.EditorTools
             return png;
         }
 
+        /// <summary>콘텐츠 보완 1차 확인용 캡처(Step5): 320·393 폭에서 타이틀·긴 토스트·배지 숫자·말풍선(꿈·닌·죠)·둬.</summary>
+        public static void Step5_ContentCapture()
+        {
+            string outDir = Arg("-m3Out", Path.Combine(ProjectRoot, "Tools", "m4_results", "content_fix1")); Directory.CreateDirectory(outDir);
+            var report = new StringBuilder(); var bad = new List<string>(); int checks = 0, shots = 0;
+            try
+            {
+                var T = Tables(); var str = Strings(); UiRoot.BootStrings = str;
+                var states = new[] { "title", "cf_toast_fog", "cf_toast_sos", "cf_toast_first", "cf_badges_hud99", "cf_badges_n", "cf_badges_99", "cf_badges_7", "cf_bubbles" };
+                foreach (var (name, w, h) in new[] { ("320x568", 320, 568), ("393x852", 393, 852) })
+                    foreach (var st in states)
+                    {
+                        var png = CaptureOne(T, str, w * 2, h * 2, 2f, st, report, bad, ref checks);
+                        File.WriteAllBytes(Path.Combine(outDir, $"cf1_{name}_{st}.png"), png); shots++;
+                    }
+                report.AppendLine($"캡처 {shots}장, 감사 항목 {checks}건, 위반 {bad.Count}건"); foreach (var b in bad) report.AppendLine("  위반: " + b);
+                File.WriteAllText(Path.Combine(outDir, "audit.txt"), report.ToString(), new UTF8Encoding(false));
+                Debug.Log("[M3] Step5 완료\n" + report);
+            }
+            catch (Exception e) { Debug.LogError("[M3] Step5 실패: " + e); File.WriteAllText(Path.Combine(outDir, "audit_error.txt"), e.ToString()); EditorApplication.Exit(1); return; }
+            EditorApplication.Exit(0);
+        }
+
+        /// <summary>고정 시계에서는 토스트 투명도가 0(막 나타나는 순간)이라, 1초 지난 것처럼 만들어 보이게 한다.</summary>
+        static void CfToast(UiRoot ui, string title, string sub) { ui.ShowToast(title, sub); ui.ToastState.ShownAt -= 1000; ui.Toast.Apply(ui.ToastState, ui.ToastState.ShownAt + 1000); }
+
+        static void PrepBadges(GameContext ctx, string state)
+        {
+            ctx.S.Letters.Clear(); int n = state == "cf_badges_99" || state == "cf_badges_hud99" ? 150 : state == "cf_badges_7" ? 7 : 0;
+            for (int i = 0; i < n; i++) ctx.S.Letters.Add(new Letter { Id = 8000 + i, Ship = "x", Cap = "y", T = ctx.Clock.NowMs, Read = false, Region = "home", Text = "t" + i, Sign = "s" });
+            ctx.S.DexSeen = 0;      // 도감 새 항목 N
+        }
+
         static void ApplyState(UiRoot ui, GameContext ctx, string state)
         {
             var c = ui.Ctl; var P = ui.Panel;
@@ -281,6 +315,22 @@ namespace Lighthouse.EditorTools
                 case "settings": c.Open(PanelMode.Growth); c.Act("gear"); c.Act("setmore"); c.Act("tips"); break;
                 case "news": c.OpenNews(new OfferNews(ctx.RunOffline(3 * 3600 + 5))); break;
                 case "title": ui.ShowTitle(false); break;
+                case "cf_toast_fog": CfToast(ui, ui.Str.Get("world.fogEnd"), ui.Str.F("world.bonusSub", ui.Str.F("world.fogEndSub", 12), "안개 조각")); break;      // 콘텐츠 검토 F-01: 가장 긴 토스트(원본 실측 390px)
+                case "cf_toast_sos": CfToast(ui, ui.Str.Get("world.sos"), ui.Str.Get("world.sosSub")); break;
+                case "cf_toast_first": CfToast(ui, ui.Str.F("toast.firstSea", "작은 게"), ui.Str.Get("toast.firstSub")); break;
+                case "cf_badges_99": case "cf_badges_7": c.Open(PanelMode.Growth); break;
+                case "cf_badges_hud99": case "cf_badges_n": break;
+                case "cf_bubbles":
+                    {
+                        int k = 0;
+                        foreach (var ch in new[] { '꿈', '닌', '죠' })
+                        {
+                            var line = ctx.T.Regulars.SelectMany(r => r.Lines).FirstOrDefault(l => l.IndexOf(ch) >= 0); if (line == null) continue;
+                            var b = Lighthouse.App.BubbleView.Create(ui.transform); b.gameObject.SetActive(true); b.SetText(line); b.Place(UiRoot.CanvasW / 2f, 140f + 90f * k, UiRoot.CanvasW, UiRoot.CanvasH, 0f); k++;
+                        }
+                        CfToast(ui, ui.Str.Get("world.sos"), ui.Str.Get("world.sosSub"));      // '둬' 가 들어 있는 문장
+                        break;
+                    }
                 case "photo": ui.SetPhoto(true); break;
                 case "ad": c.Open(PanelMode.Shop); ui.AdAdapter.Show("ship"); ui.Ad.gameObject.SetActive(true); ui.Ad.SetReady(false, 3, ui.Str); break;
             }

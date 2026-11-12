@@ -159,7 +159,7 @@ namespace Lighthouse.Tests
                 string tag = sz[0] + "x" + sz[1];
                 Lighthouse.Render.Verify.PngLite.Save(Path.Combine(outDir, "play_scene_" + tag + ".png"), tv.Renderer.Pixels, tv.Renderer.Lw, tv.Renderer.Lh, 2);
                 report.AppendLine("타이틀 " + tag + ": 그림 " + tv.Renderer.Lw + "x" + tv.Renderer.Lh + " 도트 x" + tv.Renderer.Size.Sx + ", 색 " + colors.Count + "가지, 30프레임 뒤 바뀐 점 " + moved + ", 부제 " + tv.Tagline.text + " / " + tv.Day.text);
-                yield return CaptureUi(app, Path.Combine(outDir, "play_title_" + tag + ".png"), sz[0], sz[1]);
+                // 화면 전체(글자 포함) 캡처는 배치 PlayMode 에서 WaitForEndOfFrame/카메라 전환 때 멈추는 것을 확인(2026-11-12)해 호출하지 않는다. 대신 M3Tools.Step5_ContentCapture(오프스크린 UI 카메라)가 같은 일을 한다.
             }
             GameApp.ForceW = GameApp.ForceH = 0;
         }
@@ -172,7 +172,7 @@ namespace Lighthouse.Tests
             try
             {
                 cg = new GameObject("titleCapCam"); var cam = cg.AddComponent<Camera>(); cam.orthographic = true; cam.clearFlags = CameraClearFlags.SolidColor; cam.backgroundColor = Color.black; cam.cullingMask = 1 << 5;
-                rt = new RenderTexture(w, h, 0, RenderTextureFormat.ARGB32); cam.targetTexture = rt;
+                rt = new RenderTexture(w, h, 24, RenderTextureFormat.ARGB32); cam.targetTexture = rt;      // 렌더 그래프는 깊이 버퍼가 있는 RT 만 받는다(깊이 0 이면 프레임마다 경고가 쏟아지고 시험이 멈췄다)
                 var canvas = app.Ui.Canvas; var mode = canvas.renderMode; canvas.renderMode = RenderMode.ScreenSpaceCamera; canvas.worldCamera = cam; canvas.planeDistance = 1f;
                 Canvas.ForceUpdateCanvases(); cam.Render();
                 var prev = RenderTexture.active; RenderTexture.active = rt; var tex = new Texture2D(w, h, TextureFormat.RGB24, false); tex.ReadPixels(new Rect(0, 0, w, h), 0, 0); tex.Apply(); RenderTexture.active = prev;

@@ -53,6 +53,7 @@ namespace Lighthouse.UI
             var t = badge.transform.Find("t") != null ? badge.transform.Find("t").GetComponent<TMP_Text>() : null;
             if (t == null) { t = Text(badge.transform, "", 10f, Color.white, true, TextAlignmentOptions.Center, "t"); t.enableWordWrapping = false; Stretch(t.rectTransform); }
             t.text = text; var rt = (RectTransform)badge.transform;
+            if (rt.pivot != Vector2.one) { var corner = rt.anchoredPosition + new Vector2(rt.sizeDelta.x * (1f - rt.pivot.x), rt.sizeDelta.y * (1f - rt.pivot.y)); rt.pivot = Vector2.one; rt.anchoredPosition = corner; }      // 오른쪽 위 모서리를 고정해 글이 길어지면 왼쪽으로 자란다(화면 가장자리에 붙지 않게)
             rt.sizeDelta = new Vector2(Mathf.Max(14f, t.GetPreferredValues(text).x + 6f), 14f);
         }
 

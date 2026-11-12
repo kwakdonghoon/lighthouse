@@ -41,6 +41,11 @@ try {
         Run 'capture' $a | Out-Null
         if (Test-Path "$Out\m3\audit.txt") { Get-Content "$Out\m3\audit.txt" -Encoding UTF8 | Select-Object -First 80 } else { Write-Host 'capture: no audit'; if (Test-Path "$Out\m3\audit_error.txt") { Get-Content "$Out\m3\audit_error.txt" -Encoding UTF8 | Select-Object -First 20 } }
     }
+    if ($Steps -contains 'cfcapture') {
+        $dir = "$proj\Tools\m4_results\content_fix1"
+        Run 'cfcapture' @('-executeMethod', 'Lighthouse.EditorTools.M3Tools.Step5_ContentCapture', '-m3Out', $dir) | Out-Null
+        if (Test-Path "$dir\audit.txt") { Get-Content "$dir\audit.txt" -Encoding UTF8 | Select-Object -First 60 } else { Write-Host 'cfcapture: no audit'; if (Test-Path "$dir\audit_error.txt") { Get-Content "$dir\audit_error.txt" -Encoding UTF8 | Select-Object -First 20 } }
+    }
     if ($Steps -contains 'edit') {
         $xml = "$Out\EditMode.xml"; Remove-Item $xml -ErrorAction SilentlyContinue
         $args2 = @('-nographics', '-runTests', '-testPlatform', 'EditMode', '-testResults', $xml)
