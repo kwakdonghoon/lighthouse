@@ -252,7 +252,7 @@ namespace Lighthouse.App
             {
                 var sl = DecorBaker.Slots.FirstOrDefault(s => s.Id == id); if (sl == null) continue;
                 var p = DecorLayout.Pos(sl, Ctx.Stage, World.W); double rx = sl.Size == "S" ? 6 : sl.Size == "M" ? 9 : 12;
-                Loop.Markers.Add(new DecoMarker { X = p.x, Y = p.y, Rx = rx, Sel = ctl.DecoSel == id, Full = DecorRules.PutOf(T, Ctx.S, id) != null });
+                Loop.Markers.Add(new DecoMarker { X = p.x, Y = p.y, Rx = rx, Sel = ctl.DecoSel == id, Full = DecorRules.PutOf(T, Ctx.S, id) != null, Num = WorldPainter.SlotNum(id) });
             }
         }
 

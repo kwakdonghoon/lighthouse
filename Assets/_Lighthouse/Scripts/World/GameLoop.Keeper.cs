@@ -93,9 +93,10 @@ namespace Lighthouse.World
         void UpdateKeeper(double dt)
         {
             var k = Keeper; bool night = Ctx.Night; int stage = Ctx.Stage;
+            UpdateGulls(dt);
             if (night != k.WasNight)                                   // 해가 지면 별을 보러, 해가 뜨면 하루 일과로 돌아간다
             {
-                k.WasNight = night; k.Ni = 0; k.LampPending = stage >= 2; k.LampVia = stage >= 3; k.Wait = 0; k.Act = null; k.WaveT = 0; k.StarT = 0; GullsOut = false;
+                k.WasNight = night; k.Ni = 0; k.LampPending = stage >= 2; k.LampVia = stage >= 3; k.Wait = 0; k.Act = null; k.WaveT = 0; k.StarT = 0; GullsOut = false; Gulls.Clear(); Crumbs.Clear();
             }
             if (k.WaveT > 0) { k.WaveT -= dt; k.Walking = false; return; }          // 안내를 마친 배에 손을 흔든다
             if (stage >= 5 && !night && !k.Walking)
@@ -112,11 +113,13 @@ namespace Lighthouse.World
                 if (k.Act == "feed")
                 {
                     k.NextToss -= dt;
-                    if (k.NextToss <= 0) k.NextToss = 0.8 + R() * 0.5;       // 빵 부스러기 던지기(그림은 렌더)
+                    if (k.NextToss <= 0) { k.NextToss = 0.8 + R() * 0.5; ThrowCrumbs(); }       // 빵 부스러기를 던진다
                 }
-                if (k.Act == "stars")                                          // 망원경으로 별 보기: 가끔 작은 선물을 발견한다 (별똥별 외침은 별똥별을 옮기지 않아 생략)
+                if (k.Act == "stars")                                          // 망원경으로 별 보기: 별똥별이 흐르면 소리치고, 가끔 작은 선물을 발견한다
                 {
                     k.StarT += dt;
+                    if (Meteors.Count > 0 && !k.SawMeteor) { k.SawMeteor = true; KeeperSay(Str.Get("world.meteorSay")); }
+                    if (Meteors.Count == 0) k.SawMeteor = false;
                     if (k.StarT >= 32)
                     {
                         k.StarT = 0; Bump("stars");
@@ -154,15 +157,15 @@ namespace Lighthouse.World
                 bool last = night && !wasLamp && nx >= route.Count - 1;
                 k.Wait = last ? 9999 : tgt.act == "pass" ? 0.05 : tgt.act == "lamp" ? 5 : 6 + R() * 5;
                 k.Act = tgt.act; k.ActT = 0; k.Dir = tgt.face; k.NextCast = 3; k.NextToss = 0.5; k.StarT = 0;
-                if (tgt.act == "feed") GullsOut = true;
+                if (tgt.act == "feed") { GullsOut = true; SpawnGulls(); }
                 bool first = keeperSeen.Add(tgt.act);
                 if (Str.Has("world.act." + tgt.act) && (first || last || R() < 0.35)) KeeperSay(PickOf(Lines("world.act." + tgt.act), R()));      // 새 일은 처음 한 번 꼭, 그 뒤로는 가끔
                 return;
             }
             if (k.Act == "feed" && GullsOut)                                   // 먹이 주기가 끝나면 갈매기들이 날아간다: 가끔 고마움의 선물을 남긴다
             {
-                GullsOut = false;
-                if (R() < 0.5) { var p = KeeperPos(); KeeperItemGift("fish", p.x + k.Dir * 8, p.y - 8, "fed"); }
+                GullsOut = false; bool any = ScatterGulls();
+                if (any && R() < 0.5) { var p = KeeperPos(); KeeperItemGift("fish", p.x + k.Dir * 8, p.y - 8, "fed"); }
             }
             k.Act = null; k.Walking = true; k.StepD += 9 * dt; if (k.StepD >= 5) { k.StepD = 0; KeeperStepSound(); }
             {

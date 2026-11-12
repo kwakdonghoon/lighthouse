@@ -132,6 +132,7 @@ namespace Lighthouse.World
         public void TapAt(double x, double y)
         {
             double cx = W / 2.0;
+            if (TryWish(x, y) || TryPickDrift(x, y)) return;                      // 흐르는 별똥별 → 떠다니는 표류물 (원본 tapAt 5125행)
             foreach (var sh in Ships.OrderByDescending(s => Lanes.Y[s.Lane]))      // 앞쪽 배부터 판정
             {
                 double ly = Lanes.Y[sh.Lane], ls = Lanes.S[sh.Lane];

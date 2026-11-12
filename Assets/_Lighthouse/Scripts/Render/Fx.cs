@@ -155,6 +155,7 @@ namespace Lighthouse.Render
             if (!glowCache.TryGetValue(key, out var s)) glowCache[key] = s = BakeGlow(ri, cr, cg, cb);
             int ga8 = (int)JsMath.Round(Math.Min(1, a * 1.1) * groupAlpha * 255);
             int ox = (int)JsMath.Round(JsMath.Round(x) + s.Ax), oy = (int)JsMath.Round(JsMath.Round(y) + s.Ay);
+            c.Touch(Math.Max(0, oy), Math.Min(c.H - 1, oy + s.W - 1));
             for (int j = 0; j < s.W; j++)
             {
                 int dy = oy + j; if (dy < 0 || dy >= c.H) continue;
@@ -163,9 +164,9 @@ namespace Lighthouse.Render
                     int dx = ox + i; if (dx < 0 || dx >= c.W) continue;
                     int k = j * s.W + i; if (s.A[k] == 0) continue;
                     uint d = c.D[dy * c.W + dx];
-                    int nr = Math.Min(255, (int)(d & 255) + (int)JsMath.Round(s.R[k] * ga8 / 255.0));
-                    int ng = Math.Min(255, (int)((d >> 8) & 255) + (int)JsMath.Round(s.G[k] * ga8 / 255.0));
-                    int nb = Math.Min(255, (int)((d >> 16) & 255) + (int)JsMath.Round(s.B[k] * ga8 / 255.0));
+                    int nr = Math.Min(255, (int)(d & 255) + (s.R[k] * ga8 + 127) / 255);                  // JS Math.round(n/255) 와 같은 정수식
+                    int ng = Math.Min(255, (int)((d >> 8) & 255) + (s.G[k] * ga8 + 127) / 255);
+                    int nb = Math.Min(255, (int)((d >> 16) & 255) + (s.B[k] * ga8 + 127) / 255);
                     c.D[dy * c.W + dx] = Bitmap.Pack(nr, ng, nb, 255);
                 }
             }
@@ -175,12 +176,14 @@ namespace Lighthouse.Render
         public static void AddRect(CpuCanvas c, double x, double y, double w, double h, Col col, double ga)
         {
             int x0 = (int)JsMath.Round(x), y0 = (int)JsMath.Round(y), w0 = (int)Math.Max(1, JsMath.Round(w)), h0 = (int)Math.Max(1, JsMath.Round(h)), g8 = (int)JsMath.Round(ga * 255);
-            for (int j = y0; j < y0 + h0; j++) for (int i = x0; i < x0 + w0; i++)
+            int ya = Math.Max(0, y0), yb = Math.Min(c.H, y0 + h0), xa = Math.Max(0, x0), xb = Math.Min(c.W, x0 + w0);
+            if (ya >= yb || xa >= xb) return;
+            c.Touch(ya, yb - 1);
+            int ar = (int)JsMath.Round(col.R * g8 / 255.0), ag = (int)JsMath.Round(col.G * g8 / 255.0), ab = (int)JsMath.Round(col.B * g8 / 255.0);      // 사각형 안에서 모두 같은 값
+            for (int j = ya; j < yb; j++) for (int i = xa; i < xb; i++)
             {
-                if (i < 0 || j < 0 || i >= c.W || j >= c.H) continue;
                 uint d = c.D[j * c.W + i];
-                Func<int, double, int> ad = (dst, cc) => Math.Min(255, dst + (int)JsMath.Round(cc * g8 / 255.0));
-                c.D[j * c.W + i] = Bitmap.Pack(ad((int)(d & 255), col.R), ad((int)((d >> 8) & 255), col.G), ad((int)((d >> 16) & 255), col.B), 255);
+                c.D[j * c.W + i] = Bitmap.Pack(Math.Min(255, (int)(d & 255) + ar), Math.Min(255, (int)((d >> 8) & 255) + ag), Math.Min(255, (int)((d >> 16) & 255) + ab), 255);
             }
         }
 

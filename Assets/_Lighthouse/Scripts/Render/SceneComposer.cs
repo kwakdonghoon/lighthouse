@@ -13,6 +13,11 @@ namespace Lighthouse.Render
     {
         public readonly int W, H; public readonly uint[] D;
         public CpuCanvas(int w, int h) { W = w; H = h; D = new uint[w * h]; }
+        /// <summary>가산층으로 쓸 때: Fx.AddRect/DrawGlow 가 쓴 줄 범위(Overlay.Merge 가 그 줄만 합친다). 비어 있으면 MinY &gt; MaxY.</summary>
+        public int MinY = int.MaxValue, MaxY = -1;
+        public void Touch(int y0, int y1) { if (y0 < MinY) MinY = y0; if (y1 > MaxY) MaxY = y1; }
+        /// <summary>전부 0 으로(가산층 비우기) + 줄 범위 초기화.</summary>
+        public void ClearAll() { Array.Clear(D, 0, D.Length); MinY = int.MaxValue; MaxY = -1; }
 
         public void Copy(Bitmap bg) { Array.Copy(bg.D, D, D.Length); }
         public void CopyFrom(CpuCanvas o) { Array.Copy(o.D, D, D.Length); }

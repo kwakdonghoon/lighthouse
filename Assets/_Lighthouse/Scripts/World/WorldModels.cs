@@ -21,7 +21,15 @@ namespace Lighthouse.World
     public sealed class Dolphin { public double X0, Y0, T, Dur = 4.6; public int Dir; }
     public sealed class Siren { public double Age; }
     /// <summary>꾸미기 놓기가 열려 있을 때 지금 구역의 열린 자리 표시(원본 drawDecorMarkers). Rx: 크기별 반지름(S 6·M 9·L 12).</summary>
-    public sealed class DecoMarker { public double X, Y, Rx; public bool Sel, Full; }
+    public sealed class DecoMarker { public double X, Y, Rx; public bool Sel, Full; public int Num; }
+
+    // ----- A1: 월드 연출 상태 (원본 motes·lanterns·meteors·drift·gulls·crumbs) -----
+    public sealed class Mote { public double X, Y, Vx, Vy, Ph; public string S; }
+    public sealed class Lantern { public double X, Y, Ph; }
+    public sealed class Meteor { public double X, Y, Vx, Vy, Age, Life = 1.8; public bool Wished; }
+    public sealed class DriftItem { public double X, Y, Vx, Ph, Take = -1; public string Gift; public bool Taking => Take >= 0; }
+    public sealed class Gull { public double X, Y, Tx, Ty, Ph, Peck, Pk, Delay, Vx, Vy, Life; public int Face; public string St = "in"; }
+    public sealed class Crumb { public double X, Y, Vx, Vy, Gy, Life; public bool Land; }
 
     /// <summary>말풍선 한 개: 대상(배 또는 관리인)을 따라간다. 위치는 화면 쪽이 Anchor 로 묻는다.</summary>
     public sealed class BubbleInfo { public string Text; public Ship Ship; public bool Keeper; public double Until; }
@@ -57,6 +65,15 @@ namespace Lighthouse.World
             }
         }
         public static bool IsBig(string type) => type == "galleon" || type == "cruise";
+        /// <summary>SHIPS[type].top 갑판 높이(선원 위치).</summary>
+        public static double Top(string type)
+        {
+            switch (type)
+            {
+                case "fish": return 5; case "trade": return 6; case "ferry": return 7; case "explorer": return 8; case "rowboat": return 4;
+                case "schooner": return 7; case "steamer": return 8; case "galleon": return 10; case "cruise": return 9; default: return 5;
+            }
+        }
     }
 
     /// <summary>시험용 손으로 돌리는 시계: 가속 시험에서 시간을 일 단위로 건너뛴다.</summary>

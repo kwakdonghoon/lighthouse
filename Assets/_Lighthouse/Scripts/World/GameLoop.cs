@@ -120,8 +120,8 @@ namespace Lighthouse.World
             Ctx.Night = Dusk >= 0.5;
             UpdateBeam(dt);
             double th0 = BeamTh;
-            UpdateShips(dt, th0); UpdateRoles(dt); UpdateKeeper(dt); UpdateAmbient(dt);
-            UpdateParticles(dt);
+            UpdateShips(dt, th0); UpdateRoles(dt); UpdateKeeper(dt); UpdateAmbient(dt); UpdateDrift(dt); UpdateSeason(dt);
+            UpdateParticles(dt); SeeLife();
             string sn = Ctx.CurSeason();
             if (sn != LastSeason) { LastSeason = sn; Rebuild?.Invoke("season"); }
             if (Ctx.NeedRebuild) { Ctx.NeedRebuild = false; Rebuild?.Invoke("garden"); }

@@ -10,9 +10,10 @@ namespace Lighthouse.World
     /// 순수 C#이라 dotnet 에서 골든(HTML 프레임)과 대조할 수 있다. 좌표는 설계 좌표 + OY(= 원본 ctx.translate(0, OY)).
     /// 배·관리인 몸·섬 같은 스프라이트는 GPU(WorldView)가 그리고, 여기서는 그 위에 얹히는 효과만 그린다.
     /// </summary>
-    public sealed class WorldPainter
+    public sealed partial class WorldPainter
     {
         public Overlay Ov { get; private set; } public CpuCanvas Add { get; private set; }
+        Overlay co; CpuCanvas ca;                                 // 지금 그리는 층(기본 맨 위 층, A1 의 뒤 층을 그릴 때만 바뀐다)
         int W, H, OY;
         double beamPrevTh, beamPrevT, beamV;                    // 빛줄기 도는 빠르기 (잔상 길이)
         readonly Dictionary<string, Bitmap> icons = new Dictionary<string, Bitmap>();
@@ -20,23 +21,32 @@ namespace Lighthouse.World
 
         public WorldPainter(int w, int h, int oy) { Resize(w, h, oy); }
 
-        public void Resize(int w, int h, int oy) { W = w; H = h; OY = oy; Ov = new Overlay(w, h); Add = new CpuCanvas(w, h); Ov.AddLayer = Add; }
+        public void Resize(int w, int h, int oy) { W = w; H = h; OY = oy; Ov = new Overlay(w, h); Add = new CpuCanvas(w, h); Ov.AddLayer = Add; co = Ov; ca = Add; ResizeLayers(); }
 
-        static readonly Col CRing = Col.Hex("#ffeeaf");
-        static readonly Col[] SparkCols = { Col.Hex("#ffe08a"), Col.Hex("#ff9bb8"), Col.Hex("#a8d4ff"), Col.Hex("#8be096"), Col.Hex("#ffffff") };
-        static readonly Col[] RainbowCols = { Col.Hex("#e0453e"), Col.Hex("#f0a040"), Col.Hex("#f4e060"), Col.Hex("#6fd07a"), Col.Hex("#5aa8e0"), Col.Hex("#6a6ad0"), Col.Hex("#9a60c0") };
-        const double KY = Terrain.KY;
+        static readonly Col CRing = Hx("#ffeeaf");
+        static readonly Col[] SparkCols = { Hx("#ffe08a"), Hx("#ff9bb8"), Hx("#a8d4ff"), Hx("#8be096"), Hx("#ffffff") };
+        static readonly Col[] RainbowCols = { Hx("#e0453e"), Hx("#f0a040"), Hx("#f4e060"), Hx("#6fd07a"), Hx("#5aa8e0"), Hx("#6a6ad0"), Hx("#9a60c0") };
+        const double KY = Terrain.KY; const int Horizon = BgBaker.Horizon;
+
+        /// <summary>진단 전용: true 면 A1 연출(뒤·중간 층, 비계, 생물, 갈매기 무리, 배 물보라·깃발·표식, 계절 입자)을 그리지 않는다 — 프레임 비용 증가분을 재는 데만 쓴다.</summary>
+        public static bool A1Off;
 
         /// <summary>한 프레임의 연출 층을 새로 그린다(Ov·Add 를 비우고 시작).</summary>
         public void Paint(GameLoop L, SceneSprites s)
         {
-            Ov.Clear(); Array.Clear(Add.D, 0, Add.D.Length);
+            Ov.Clear(); Add.ClearAll();
             double t = L.T, dusk = L.Dusk; bool night = L.Ctx.Night; int stage = L.Ctx.Stage; double cx = W / 2.0, ly = GameLoop.LampY(stage); long nowMs = L.Ctx.Clock.NowMs;
+            bool a1 = !A1Off;                                                                             // 진단 전용(실측 비교): A1 연출을 끄면 M4 상태와 같다
+            if (a1) PaintScenery(L);                                                                      // A1 뒤 층·중간 층(먼 섬·표류물·불빛 번짐·부이·뒤쪽 배의 물보라)
             PaintRings(L);
             PaintDolphins(L);
             PaintRainbow(L, nowMs);
             PaintReefSpray(L, t);
+            if (a1) PaintGulls(L, t);
             PaintKeeperAct(L, t);
+            if (a1 && L.Ctx.S.Build != null) PaintScaffold(L, t);                                         // 공사 중인 탑의 비계
+            if (a1) foreach (var sh in L.Ships) if (!IsBackLane(sh.Lane)) PaintShipBody(L, sh, t);        // 앞쪽 항로 배의 물보라·선원
+            if (a1) { PaintLife(L, t); PaintShipMarks(L, t); }
             PaintDecoMarkers(L, t);
             PaintBirds(L, night); PaintSparks(L); PaintTwinkles(L); PaintPops(L);
             var style = BeamStyleOf(L.Ctx);
@@ -49,10 +59,11 @@ namespace Lighthouse.World
                 double gp = (t * 0.4) % 1;                                                                 // 가끔 작은 별빛이 한 번 반짝인다
                 if (gp < 0.22)
                 {
-                    double ga2 = ga * 0.75 * Math.Sin(gp / 0.22 * Math.PI); var c = Col.Hex("#fff2c0");
+                    double ga2 = ga * 0.75 * Math.Sin(gp / 0.22 * Math.PI); var c = Hx("#fff2c0");
                     for (int k = 2; k <= 4; k++) { AddQ(cx + k, ly, 1, 1, c, ga2); AddQ(cx - k - 1, ly, 1, 1, c, ga2); AddQ(cx, ly - k, 1, 1, c, ga2); AddQ(cx, ly + k + 0.5, 1, 1, c, ga2); }
                 }
             }
+            if (a1) PaintSeasonFx(L, t);
             PaintDuskTint(L, dusk, nowMs);
             PaintWeather(L, t);
             PaintRoleEffects(L, cx, ly);
@@ -63,19 +74,19 @@ namespace Lighthouse.World
         public void Merge(uint[] dst, bool flipY = false) { Ov.Merge(Add, dst, flipY); }
 
         // ----- 도우미 -----
-        void AddQ(double x, double y, double w, double h, Col c, double ga) => Fx.AddRect(Add, x, y + OY, w, h, c, ga);
-        void OvQ(double x, double y, double w, double h, Col c, double ga = 1) => Ov.Q(x, y + OY, w, h, c, ga);
+        void AddQ(double x, double y, double w, double h, Col c, double ga) => Fx.AddRect(ca, x, y + OY, w, h, c, ga);
+        void OvQ(double x, double y, double w, double h, Col c, double ga = 1) => co.Q(x, y + OY, w, h, c, ga);
 
         Bitmap Icon(string id) { if (!icons.TryGetValue(id, out var b)) icons[id] = b = IconBaker.Bake(id); return b; }
 
         /// <summary>HTML ellipse(): 줄마다 사각형 한 줄씩.</summary>
-        void OvEllipse(double cx, double cy, double rx, double ry, Col c, double alpha)
+        void OvEllipse(double cx, double cy, double rx, double ry, Col c, double alpha, double ga = 1)
         {
             int n = (int)Math.Max(1, JsMath.Round(ry)); double y0 = JsMath.Round(cy);
             for (int i = -n; i < n; i++)
             {
                 double v = (i + 0.5) / n, w = rx * Math.Sqrt(1 - v * v);
-                Ov.FillRect((int)JsMath.Round(cx - w), (int)(y0 + i) + OY, (int)JsMath.Round(w * 2), 1, c, alpha);
+                co.FillRect((int)JsMath.Round(cx - w), (int)(y0 + i) + OY, (int)JsMath.Round(w * 2), 1, c, alpha, ga);
             }
         }
 
@@ -85,7 +96,7 @@ namespace Lighthouse.World
             for (int i = -n; i < n; i++)
             {
                 double v = (i + 0.5) / n, w = rx * Math.Sqrt(1 - v * v); int ww = (int)JsMath.Round(w * 2);
-                if (ww > 0) Fx.AddRect(Add, JsMath.Round(cx - w), y0 + i + OY, ww, 1, c, alpha);
+                if (ww > 0) Fx.AddRect(ca, JsMath.Round(cx - w), y0 + i + OY, ww, 1, c, alpha);
             }
         }
 
@@ -157,7 +168,7 @@ namespace Lighthouse.World
         }
 
         public void SetBeamPrev(double th, double t, double v) { beamPrevTh = th; beamPrevT = t; beamV = v; }
-        public void Clear() { Ov.Clear(); System.Array.Clear(Add.D, 0, Add.D.Length); }
+        public void Clear() { Ov.Clear(); Add.ClearAll(); }
         public void DrawBeam(GameLoop L, double th0, double lx, double ly, double k0, double ga, BeamStyle st)
         {
             double now = L.Perf;
@@ -202,9 +213,9 @@ namespace Lighthouse.World
                 {
                     var (x, y, up) = GameLoop.DolphinAt(d, d.T - b.lag);
                     if (!up) continue;
-                    OvQ(x - b.sz / 2, y - b.sz / 2, b.sz, b.sz, Col.Hex(b.col));
-                    if (b.lag == 0) OvQ(x + d.Dir * 1, y, 1, 1, Col.Hex("#e8f4ff"));
-                    if (b.lag == 0.1) OvQ(x, y - 2, 1, 1, Col.Hex("#4a6a8c"));
+                    OvQ(x - b.sz / 2, y - b.sz / 2, b.sz, b.sz, Hx(b.col));
+                    if (b.lag == 0) OvQ(x + d.Dir * 1, y, 1, 1, Hx("#e8f4ff"));
+                    if (b.lag == 0.1) OvQ(x, y - 2, 1, 1, Hx("#4a6a8c"));
                 }
             }
         }
@@ -224,7 +235,7 @@ namespace Lighthouse.World
         void PaintReefSpray(GameLoop L, double t)
         {
             if (L.Ctx.Tier() < 2) return;
-            var c = Col.Hex("#e6f4fa");
+            var c = Hx("#e6f4fa");
             foreach (var reef in Lanes.Reefs)
             {
                 double x = JsMath.Round(W * reef[0]), ry = reef[1];
@@ -232,13 +243,16 @@ namespace Lighthouse.World
             }
         }
 
-        /// <summary>꾸미기 자리 표시(원본 drawDecorMarkers 3903행): 빈 자리·고른 자리는 점선 마름모, 고른 자리는 노란 화살표. 번호 배지(숫자 도트)는 옮기지 않았다.</summary>
-        void PaintDecoMarkers(GameLoop L, double t)
+        /// <summary>움직임 줄이기: 켜면 화살표가 위아래로 까딱이지 않는다(원본 REDUCE_MOTION). 설정이 연결되면 화면 쪽이 채운다.</summary>
+        public bool ReduceMotion;
+
+        /// <summary>꾸미기 자리 표시(원본 drawDecorMarkers 3903행): 빈 자리·고른 자리는 점선 마름모, 자리마다 번호 배지, 고른 자리는 노란 화살표.</summary>
+        public void PaintDecoMarkers(GameLoop L, double t)
         {
             var shade = new Col(10, 20, 50);
             foreach (var m in L.Markers)
             {
-                double ry = m.Rx / 2; var col = Col.Hex(m.Sel ? "#ffd93a" : "#ffffff");
+                double ry = m.Rx / 2; var col = Hx(m.Sel ? "#ffd93a" : "#ffffff");
                 if (!m.Full || m.Sel)
                 {
                     double ga = m.Sel ? 1 : 0.85;
@@ -249,10 +263,11 @@ namespace Lighthouse.World
                         OvQ(px + 1, py + 1, 1, 1, shade, 0.7 * ga); OvQ(px, py, 1, 1, col, ga);
                     }
                 }
+                PaintDecoBadge(m);                                                                  // 자리 번호 배지
                 if (m.Sel)
                 {
-                    double bob = JsMath.Round(Math.Sin(t * 5) * 1.2), ay = m.Y - 22 + bob;
-                    for (int k = 0; k < 4; k++) OvQ(m.X - 3 + k, ay + k, 7 - k * 2, 1, Col.Hex("#ffd93a"));
+                    double bob = ReduceMotion ? 0 : JsMath.Round(Math.Sin(t * 5) * 1.2), ay = m.Y - 22 + bob;
+                    for (int k = 0; k < 4; k++) OvQ(m.X - 3 + k, ay + k, 7 - k * 2, 1, Hx("#ffd93a"));
                     OvQ(m.X - 3, ay - 1, 7, 1, shade, 0.7);
                 }
             }
@@ -261,7 +276,7 @@ namespace Lighthouse.World
         // ----- 새·불꽃·반짝임·선물 -----
         public void PaintBirds(GameLoop L, bool night)
         {
-            var col = Col.Hex(night ? "#cfd8f0" : "#ffffff");
+            var col = Hx(night ? "#cfd8f0" : "#ffffff");
             foreach (var b in L.Birds)
             {
                 int f = (int)(Math.Floor(L.T * 7 + b.Ph) % 2); double ga = Math.Min(1, b.Life);
@@ -273,7 +288,7 @@ namespace Lighthouse.World
 
         public void PaintTwinkles(GameLoop L)
         {
-            Col a = Col.Hex("#ffe9a0"), b = Col.Hex("#fff6cc");
+            Col a = Hx("#ffe9a0"), b = Hx("#fff6cc");
             foreach (var f in L.Fx) { double ga = Math.Min(1, f.Life * 1.5); OvQ(f.X, f.Y, 1, 1, a, ga); OvQ(f.X - 0.5, f.Y + 0.25, 2, 0.5, b, ga); OvQ(f.X + 0.25, f.Y - 0.5, 0.5, 2, b, ga); }
         }
 
@@ -323,15 +338,15 @@ namespace Lighthouse.World
             if (wx.Kind == "fog")
             {
                 if (fogTile == null) fogTile = BakeFog();
-                Ov.FillRect(0, (int)(BgBaker.Horizon - 10) + OY, W, (int)(BgBaker.DesignH - BgBaker.Horizon + 10), Col.Hex("#cfd9e6"), 1, wx.Amt * 0.2);
+                Ov.FillRect(0, (int)(BgBaker.Horizon - 10) + OY, W, (int)(BgBaker.DesignH - BgBaker.Horizon + 10), Hx("#cfd9e6"), 1, wx.Amt * 0.2);
                 double off = (t * 5) % 64; int ox = -(int)Math.Floor(off + 0.5 - 1e-9), oy0       /* 원본: 소수 이동은 가장 가까운 칸으로(실측: .2·.3 내림, .55·.7·.85·.9 올림), 정확히 .5 는 내림(원본은 열에 따라 섞음) */  = (int)(BgBaker.Horizon - 14) + OY; double ga = wx.Amt * 0.75;
                 for (int x0 = ox; x0 < W; x0 += 64) Ov.Put(fogTile, x0, oy0, ga);        // 패턴 채우기: 가로로 타일을 이어 붙인다
             }
             else
             {
                 bool snow = L.Ctx.CurSeason() == "winter";
-                Ov.FillRect(0, 0, W, H, Col.Hex(snow ? "#8fa0b8" : "#0a1426"), 1, wx.Amt * (snow ? 0.12 : 0.3));
-                double ga = wx.Amt * 0.8; var snowC = Col.Hex("#ffffff"); var rainC = Col.Hex("#bcd6f0");
+                Ov.FillRect(0, 0, W, H, Hx(snow ? "#8fa0b8" : "#0a1426"), 1, wx.Amt * (snow ? 0.12 : 0.3));
+                double ga = wx.Amt * 0.8; var snowC = Hx("#ffffff"); var rainC = Hx("#bcd6f0");
                 for (int i = 0; i < 80; i++)
                 {
                     double dx = JsMath.Hsh(i, 201), dy = JsMath.Hsh(i, 202), sp = 0.8 + JsMath.Hsh(i, 203) * 0.6;
@@ -348,18 +363,18 @@ namespace Lighthouse.World
             if (now < L.WarnUntil)
             {
                 bool on = Math.Floor(now / 140) % 2 == 0;
-                if (on) { Fx.DrawGlow(Add, cx, ly + OY, 8, 255, 80, 70, 0.5); Fx.DrawGlow(Add, L.WarnX, L.WarnY - 6 + OY, 8, 255, 60, 50, 0.6); OvQ(L.WarnX - 1, L.WarnY - 8, 2, 2, Col.Hex("#ff5a4a")); }
+                if (on) { Fx.DrawGlow(Add, cx, ly + OY, 8, 255, 80, 70, 0.5); Fx.DrawGlow(Add, L.WarnX, L.WarnY - 6 + OY, 8, 255, 60, 50, 0.6); OvQ(L.WarnX - 1, L.WarnY - 8, 2, 2, Hx("#ff5a4a")); }
             }
             if (now < L.SignalUntil)                                  // 신호: 짧게 세 번, 쉬었다가 다시 세 번 작게 깜빡인다
             {
                 int slot = (int)Math.Floor((now - (L.SignalUntil - 2600)) / 190); int[] pat = { 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1 };
                 if (slot >= 0 && slot < pat.Length && pat[slot] == 1)
                 {
-                    Fx.DrawGlow(Add, cx, ly + OY, 8, 255, 245, 200, 0.45); var c = Col.Hex("#fff2c0");
+                    Fx.DrawGlow(Add, cx, ly + OY, 8, 255, 245, 200, 0.45); var c = Hx("#fff2c0");
                     for (int k = 2; k <= 4; k++) { OvQ(cx + k, ly, 1, 1, c, 0.8); OvQ(cx - k - 1, ly, 1, 1, c, 0.8); OvQ(cx, ly - k, 1, 1, c, 0.8); OvQ(cx, ly + k + 0.5, 1, 1, c, 0.8); }
                 }
             }
-            var sc = Col.Hex("#dfe9ff");
+            var sc = Hx("#dfe9ff");
             foreach (var s in L.Sirens)
             {
                 double r = s.Age * 46, ga = Math.Max(0, 1 - s.Age / 2.2) * 0.85;
@@ -372,15 +387,15 @@ namespace Lighthouse.World
         {
             double p = 1 - flash, e = Math.Min(1, p / 0.12) * Math.Pow(flash, 1.5);
             Fx.DrawGlow(Add, cx, ly + OY, 6 + 4 * p, 255, 240, 190, 0.26 * e);
-            double L = 3 + 4 * Math.Min(1, p / 0.3); Col a = Col.Hex("#fff2c0"), b = Col.Hex("#ffe29a");
+            double L = 3 + 4 * Math.Min(1, p / 0.3); Col a = Hx("#fff2c0"), b = Hx("#ffe29a");
             for (int k = 1; k <= L; k++)
             {
                 double al = 1 - k / (L + 1), ga = 0.85 * e * al;
                 AddQ(cx + k, ly, 1, 1, a, ga); AddQ(cx - k - 1, ly, 1, 1, a, ga); AddQ(cx, ly - k, 1, 1, a, ga); AddQ(cx, ly + k + 0.5, 1, 1, a, ga);
                 if (k <= L * 0.55) { AddQ(cx + k, ly - k, 1, 1, b, ga); AddQ(cx - k, ly - k, 1, 1, b, ga); AddQ(cx + k, ly + k, 1, 1, b, ga); AddQ(cx - k, ly + k, 1, 1, b, ga); }
             }
-            AddQ(cx - 1, ly - 1, 2, 2, Col.Hex("#ffffff"), 1);
-            double R = 3 + 12 * (1 - Math.Pow(flash, 2)); var rc = Col.Hex("#ffe9a8");
+            AddQ(cx - 1, ly - 1, 2, 2, Hx("#ffffff"), 1);
+            double R = 3 + 12 * (1 - Math.Pow(flash, 2)); var rc = Hx("#ffe9a8");
             for (int i = 0; i < 24; i++) { double ang = i / 24.0 * Math.PI * 2; if ((i & 1) != 0 && R > 8) continue; AddQ(cx + Math.Cos(ang) * R, ly + Math.Sin(ang) * R * 0.8, 1, 1, rc, 0.5 * Math.Pow(flash, 1.2)); }
         }
 
@@ -396,10 +411,10 @@ namespace Lighthouse.World
         {
             if (kact == "enter" && !kwalking && kwave <= 0) return;
             bool sit = kact == "sit" && !kwalking && kwave <= 0; double y = sit ? y0 + 3 : y0;
-            double dr = kdir, hx = dr > 0 ? x + 3 : x - 4, hy = y - 6; Col skin = Col.Hex("#f0c8a0"); int tick = (int)(Math.Floor(t * 5) % 2);
+            double dr = kdir, hx = dr > 0 ? x + 3 : x - 4, hy = y - 6; Col skin = Hx("#f0c8a0"); int tick = (int)(Math.Floor(t * 5) % 2);
             string act = kwave > 0 ? "wave" : kwalking ? null : kact;
             Action<double, double, double, double, Col, double> Q = (qx, qy, qw, qh, qc, ga) => OvQ(qx, qy, qw, qh, qc, ga);
-            Action<double, double, double, double, string> Qh = (qx, qy, qw, qh, hex) => OvQ(qx, qy, qw, qh, Col.Hex(hex), 1);
+            Action<double, double, double, double, string> Qh = (qx, qy, qw, qh, hex) => OvQ(qx, qy, qw, qh, Hx(hex), 1);
             Action<double, double, double, int, int, int, double> G = (gx, gy, gr, cr, cg, cb, ga) => Fx.DrawGlow(Add, gx, gy + OY, gr, cr, cg, cb, ga);
             if (act == "wave") { Q(hx, hy - 3 - (tick != 0 ? 1 : 0), 1, 2, skin, 1); Q(hx + (tick != 0 ? dr : -dr), hy - 5 - (tick != 0 ? 1 : 0), 1, 1, skin, 1); }
             else if (act == "sweep")

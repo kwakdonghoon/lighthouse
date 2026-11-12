@@ -25,10 +25,16 @@ namespace Lighthouse.App
         public FitView Fit { get; private set; }
         public int W, H, OY;
         public double LastFrameMs, LastPaintMs, LastBakeMs, LastBgMs;
+        public WorldPainter Painter => painter;
+        /// <summary>움직임 줄이기(원본 prefers-reduced-motion): 월드에서는 꾸미기 고른 자리 화살표의 까딱임만 멈춘다. 설정/접근성 쪽이 채운다.</summary>
+        public bool ReduceMotion;
         public int DevW { get; private set; }
 
         GameLoop loop; GameContext ctx;
         WorldPainter painter; Texture2D ovTex; uint[] ovBuf; SpriteRenderer ovSr; Sprite ovSprite;
+        // A1: 스프라이트 사이에 끼는 뒤 층(먼 섬·표류물)·중간 층(불빛 번짐·부이·뒤쪽 배 물보라)
+        Texture2D backTex, midTex; SpriteRenderer backSr, midSr; string keeperSkin = "classic";
+        public double LastLayersMs;
         CpuCanvas bg, bgMix; double mixD = -1; double shownDusk = -1;
         string shipSkin = "classic";
         readonly Dictionary<Ship, ShipVis> ships = new Dictionary<Ship, ShipVis>();
@@ -56,6 +62,7 @@ namespace Lighthouse.App
             string tower = Safe("tower", "classic", id => Palettes.TowerSkins.Any(s => s.Id == id)), isle = Safe("isle", "classic", id => Palettes.IsleSkinSeason.ContainsKey(id));
             string decor = Safe("decor", "classic", id => new[] { "classic", "seaside", "festival", "dev" }.Contains(id));
             shipSkin = Safe("ship", "classic", id => ShipBaker.SkinIds.Contains(id));
+            keeperSkin = Safe("keeper", "classic", id => KeeperArt.IsSkin(id)); keeperSpr.Clear();
             Sprites = SceneSprites.Build(W, H, c.CurSeason(), c.Stage, isle, decor, tower, gardenLv: c.EffLv("garden"), slotLv: c.LvlOf("garden"), put: put);
             var ops = SceneComposer.Ops(Sprites);
             // 암초(2단계부터): 그림은 정적 층, 물보라는 연출 층
@@ -63,8 +70,13 @@ namespace Lighthouse.App
             if (c.Tier() >= 2)
             {
                 int at = 1;
+                var shD = KeeperArt.Ellipse(11, 3, 10, 50, 90, 77); var shN = KeeperArt.Ellipse(11, 3, 0, 6, 24, 102);       // 암초 그림자 타원(원본 drawReefs: ellipse(x+2, ry+1, 11, 3))
                 foreach (var rf in Lanes.Reefs)
-                    ops.Insert(at++, new DrawOp { D = reefD, N = reefN, X = JsMath.Round(W * rf[0]), Y = rf[1] + 1 + OY, Tag = "reef", AlphaD = k => k < 0.999 ? 1 : 0, AlphaN = k => k > 0.001 ? k : 0 });
+                {
+                    double rx = JsMath.Round(W * rf[0]);
+                    ops.Insert(at++, new DrawOp { D = shD, N = shN, X = rx + 2, Y = rf[1] + 1 + OY, Tag = "reefShadow", AlphaD = k => k < 0.5 ? 1 : 0, AlphaN = k => k >= 0.5 ? 1 : 0 });
+                    ops.Insert(at++, new DrawOp { D = reefD, N = reefN, X = rx, Y = rf[1] + 1 + OY, Tag = "reef", AlphaD = k => k < 0.999 ? 1 : 0, AlphaN = k => k > 0.001 ? k : 0 });
+                }
             }
             ops[0] = new DrawOp { D = Sprites.BgD, N = null, X = 0, Y = 0, Tag = "bg", AlphaD = k => 1, AlphaN = k => 0 };       // 배경은 동적: 낮·밤 섞기를 CPU 가 한다
             bg = new CpuCanvas(W, H); bgMix = null; mixD = -1;
@@ -81,7 +93,26 @@ namespace Lighthouse.App
             var go = new GameObject("overlay"); go.transform.SetParent(View.Root, false);
             ovSr = go.AddComponent<SpriteRenderer>(); ovSr.sprite = ovSprite; ovSr.sharedMaterial = PremulMat; ovSr.sortingOrder = frontBase + 150; ovSr.color = Color.white;
             go.transform.position = Vector3.zero;
+            // 뒤 층(먼 섬·표류물: 뒤쪽 항로 배 아래)·중간 층(물가 뒤·섬 앞: 불빛 번짐·부이·뒤쪽 배 물보라)
+            backTex = NewLayerTex("layerBack"); midTex = NewLayerTex("layerMid");
+            backSr = NewLayerSr("layerBack", backTex, backOrder - 50); midSr = NewLayerSr("layerMid", midTex, View.OrderBefore("island") - 10);
             LastBakeMs = sw.Elapsed.TotalMilliseconds;
+        }
+
+        Texture2D NewLayerTex(string name) { var t = new Texture2D(W, H, TextureFormat.RGBA32, false, false) { filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp, name = name }; extraTex.Add(t); return t; }
+        SpriteRenderer NewLayerSr(string name, Texture2D tex, int order)
+        {
+            var go = new GameObject(name); go.transform.SetParent(View.Root, false);
+            var sr = go.AddComponent<SpriteRenderer>(); sr.sprite = BitmapTexture.ToSprite(tex); sr.sharedMaterial = PremulMat; sr.sortingOrder = order; sr.color = Color.white; sr.enabled = false;
+            go.transform.position = Vector3.zero; return sr;
+        }
+
+        /// <summary>뒤·중간 층을 다시 구웠으면(Changed) 올리고, 비어 있으면 감춘다.</summary>
+        void UploadLayer(WorldPainter.SceneLayer l, Texture2D tex, SpriteRenderer sr)
+        {
+            sr.enabled = l.Used && !WorldPainter.A1Off;
+            if (l.Changed && l.Used) { tex.SetPixelData(l.Buf, 0); tex.Apply(false, false); }
+            l.Changed = false;
         }
 
         void DropExtra() { foreach (var t in extraTex) if (t != null) Destroy(t); extraTex.Clear(); }
@@ -98,8 +129,9 @@ namespace Lighthouse.App
             UpdateShips(dusk);
             UpdateKeeper();
             var sw2 = Stopwatch.StartNew();
-            painter.Paint(loop, Sprites); painter.Merge(ovBuf, true);
+            painter.ReduceMotion = ReduceMotion; painter.Paint(loop, Sprites); painter.Merge(ovBuf, true);
             ovTex.SetPixelData(ovBuf, 0); ovTex.Apply(false, false);
+            UploadLayer(painter.Back, backTex, backSr); UploadLayer(painter.Mid, midTex, midSr);
             LastPaintMs = sw2.Elapsed.TotalMilliseconds;
             LastFrameMs = sw.Elapsed.TotalMilliseconds;
         }
@@ -131,18 +163,8 @@ namespace Lighthouse.App
             var sr = go.AddComponent<SpriteRenderer>(); sr.sharedMaterial = m; return sr;
         }
 
-        /// <summary>줄마다 사각형 한 줄(HTML ellipse())로 채운 그림자 비트맵. 색은 straight rgba.</summary>
-        static Bitmap Ellipse(double rx, double ry, int r, int g, int b, int a)
-        {
-            int n = (int)Math.Max(1, JsMath.Round(ry)), hw = (int)Math.Ceiling(rx) + 2;
-            var bm = new Bitmap(-hw, -n, hw * 2, n * 2);
-            for (int i = -n; i < n; i++)
-            {
-                double v = (i + 0.5) / n, w = rx * Math.Sqrt(1 - v * v); int x0 = (int)JsMath.Round(0 - w), ww = (int)JsMath.Round(w * 2);
-                for (int x = x0; x < x0 + ww; x++) { int bx = x + hw; if (bx >= 0 && bx < bm.W) bm.D[(i + n) * bm.W + bx] = Bitmap.Pack(r, g, b, a); }
-            }
-            return bm;
-        }
+        /// <summary>줄마다 사각형 한 줄(HTML ellipse())로 채운 그림자 비트맵(Render/KeeperArt 에서 골든 대조). 색은 straight rgba.</summary>
+        static Bitmap Ellipse(double rx, double ry, int r, int g, int b, int a) => KeeperArt.Ellipse(rx, ry, r, g, b, a);
 
         static void Place(SpriteRenderer sr, Bitmap b, double xt, double y, int dir)
         {
@@ -187,7 +209,7 @@ namespace Lighthouse.App
                 var sb = ShipBmp(sh.Type, sh.Lane); var hb = HelpBmp(sh.Type, sh.Lane); var sd = ShadowBmp(sh.Type, sh.Lane);
                 double xt = JsMath.Round(sh.X), bob = JsMath.Round(Math.Sin(t * 1.1 + sh.Ph) * 0.8 * ls), y = ly + bob + OY;
                 // 그림자: 반전 없이 (x_t + 1, 항로 y + 1.8) 둘레
-                SetSr(v.ShadowD, sd.d, baseOrder + 0, Alpha(true, dusk)); SetSr(v.ShadowN, sd.n, baseOrder + 1, Alpha(false, dusk));
+                SetSr(v.ShadowD, sd.d, baseOrder + 0, dusk < 0.5 ? 1 : 0); SetSr(v.ShadowN, sd.n, baseOrder + 1, dusk >= 0.5 ? 1 : 0);      // 원본 ellipse: NIGHT(dusk≥0.5) 으로 색을 고른다(섞지 않는다)
                 PlaceShadow(v.ShadowD, sd.d, xt + 1, JsMath.Round(ly + 1.8) + OY); PlaceShadow(v.ShadowN, sd.n, xt + 1, JsMath.Round(ly + 1.8) + OY);
                 SetSr(v.BodyD, sb.d, baseOrder + 2, Alpha(true, dusk)); SetSr(v.BodyN, sb.n, baseOrder + 3, Alpha(false, dusk));
                 Place(v.BodyD, sb.d, xt, y, sh.Dir); Place(v.BodyN, sb.n, xt, y, sh.Dir);
@@ -195,7 +217,7 @@ namespace Lighthouse.App
                 bool help = hk > 0.02;
                 SetSr(v.HelpD, hb.d, baseOrder + 4, help ? Alpha(true, dusk, hk) : 0); SetSr(v.HelpN, hb.n, baseOrder + 5, help ? Alpha(false, dusk, hk) : 0);
                 if (help) { Place(v.HelpD, hb.d, xt, y, sh.Dir); Place(v.HelpN, hb.n, xt, y, sh.Dir); }
-                if (night) { double target = loop.BeamHits(loop.BeamTh, sh.X, Lanes.Y[sh.Lane]); sh.Lit += (target - sh.Lit) * 0.12; }      // 밤에는 빛줄기가 닿은 배가 밝아진다
+                if (night) { double target = loop.BeamHits(loop.BeamTh, sh.X, Lanes.Y[sh.Lane] + sh.Yo); sh.Lit += (target - sh.Lit) * 0.12; }      // 밤에는 빛줄기가 닿은 배가 밝아진다
                 SetSr(v.Lit, sb.d, baseOrder + 6, night && sh.Lit > 0.02 ? sh.Lit : 0);
                 if (night && sh.Lit > 0.02) Place(v.Lit, sb.d, xt, y, sh.Dir);
             }
@@ -212,12 +234,7 @@ namespace Lighthouse.App
         Bitmap KeeperBmp(int dir, int frame)
         {
             string k = dir + ":" + frame; if (keeperSpr.TryGetValue(k, out var b)) return b;
-            string[] head = { "..cccc..", ".cccccc.", "..ssss..", "..ssse..", "..ssss..", ".bbbbbb.", "BbbbbbbB", "BbbbbbbB", "sbbbbbbs", ".bbbbbb.", "..pppp.." };
-            string[][] legs = { new[] { "..pp.pp.", "..pp.pp.", "..dd.dd." }, new[] { "..pppp..", "..pppp..", "..dddd.." } };
-            var rows = head.Concat(legs[frame]).Select(r => dir > 0 ? r : new string(r.Reverse().ToArray())).ToArray();
-            var pal = new Dictionary<char, string> { { 'c', "#3d5a8a" }, { 's', "#f0c8a0" }, { 'b', "#e8b84a" }, { 'p', "#2c3a58" }, { 'd', "#20140c" }, { 'e', "#20140c" } };
-            var bc = Col.Hex("#e8b84a"); pal['B'] = string.Format("#{0:x2}{1:x2}{2:x2}", (int)JsMath.Round(bc.R * 0.78), (int)JsMath.Round(bc.G * 0.78), (int)JsMath.Round(bc.B * 0.78));
-            return keeperSpr[k] = ShipBaker.FromDesign(new ShipDesign { Ox = 4, Oy = 14, Rows = rows }, pal);
+            return keeperSpr[k] = KeeperArt.Body(keeperSkin, dir, frame);       // 옷 외형(노을빛·달빛·선원)까지 Render 에서 HTML 골든과 대조
         }
 
         void UpdateKeeper()
