@@ -1,7 +1,7 @@
 {
     "name": "Lighthouse.Tests.UIUnity",
     "rootNamespace": "Lighthouse.Tests",
-    "references": ["Lighthouse.Core","Lighthouse.Data","Lighthouse.UI.Model","Lighthouse.UI","Lighthouse.Tests.Core","Lighthouse.Tests.UI","UnityEngine.UI","Unity.TextMeshPro","UnityEngine.TestRunner","UnityEditor.TestRunner"],
+    "references": ["Lighthouse.Core","Lighthouse.Data","Lighthouse.UI.Model","Lighthouse.UI","Lighthouse.Tests.Core","Lighthouse.Tests.UI","Lighthouse.Editor","UnityEngine.UI","Unity.TextMeshPro","UnityEngine.TestRunner","UnityEditor.TestRunner"],
     "includePlatforms": ["Editor"],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

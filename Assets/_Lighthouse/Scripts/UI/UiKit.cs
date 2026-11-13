@@ -141,6 +141,6 @@ namespace Lighthouse.UI
             return btn;
         }
 
-        public static TMP_Text LabelOf(Button b) => b.transform.Find("label").GetComponent<TMP_Text>();
+        public static TMP_Text LabelOf(Button b) => (b.transform.Find("label") ?? b.transform.Find("row/label")).GetComponent<TMP_Text>();
     }
 }

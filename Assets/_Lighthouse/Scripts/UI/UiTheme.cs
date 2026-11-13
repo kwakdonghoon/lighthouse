@@ -50,6 +50,12 @@ namespace Lighthouse.UI
         static readonly Dictionary<string, Sprite> icons = new Dictionary<string, Sprite>();
         static readonly Dictionary<string, string> trackIcon = new Dictionary<string, string> { { "lens", "pearl" }, { "garden", "seed" }, { "port", "bottle" } };
 
+        /// <summary>Unity UI 전용 교체 그림(동결 HTML 표·골든은 그대로). 톱니: 상하좌우·대각 8 이빨이 대칭인 16×16, 같은 팔레트.</summary>
+        static readonly Dictionary<string, string> UnityIcons = new Dictionary<string, string>
+        {
+            { "gear", "gear;d=#2c3a4a,w=#c8d2e4,h=#f0f4fc,s=#9aa8c0;......dddd......|......dhhd......|..ddd.dhhd.ddd..|..dhhdhhhwdwwd..|..dhhhhhwwwwwd..|...dhhhwwwwwd...|dddhhhwwwwwwsddd|dhhhhwwddwwssssd|dhhhwwwddwsssssd|dddwwwwwwssssddd|...dwwwwssssd...|..dwwwwssssssd..|..dwwdssssdssd..|..ddd.dssd.ddd..|......dssd......|......dddd......" },
+        };
+
         /// <summary>아이콘 id: 선물·아이콘 이름, "decor:id"(장식 16×16), "ship:type"(배 그림), "track:id".</summary>
         public static Sprite Icon(string id)
         {
@@ -61,6 +67,7 @@ namespace Lighthouse.UI
                 if (id.StartsWith("decor:")) b = DecorBaker.Icon(DecorBaker.Item(id.Substring(6)));
                 else if (id.StartsWith("ship:")) b = ShipBaker.Sprite(id.Substring(5), 1);
                 else if (id.StartsWith("track:")) b = IconBaker.Bake(trackIcon.TryGetValue(id.Substring(6), out var t) ? t : "star");
+                else if (UnityIcons.TryGetValue(id, out var line)) b = IconBaker.BakeLine(line);
                 else b = IconBaker.Bake(id);
             }
             catch (System.Exception) { b = IconBaker.Bake("unknown"); }

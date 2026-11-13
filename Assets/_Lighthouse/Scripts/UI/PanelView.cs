@@ -23,6 +23,7 @@ namespace Lighthouse.UI
         public List<Button> TabButtons = new List<Button>();
         public List<GameObject> TabBadges = new List<GameObject>();
         public RectTransform RibbonRow, HeaderButtons;
+        const float HeadGapDots = 4f;      // 톱니·소리·닫기 사이 간격(칸). 44dp 단추끼리 붙어 보이지 않도록 4칸
         public PanelController Ctl; public UiStrings Str; PanelMode lastMode = PanelMode.None; string lastSub;
         BlockRenderer renderer;
         public PanelModel Model { get; private set; }
@@ -64,8 +65,8 @@ namespace Lighthouse.UI
                 // 아이콘은 라벨 앞에
                 var ic = Kit.IconImage(b.transform, TabIcons[Array.IndexOf(TabIds, id)]); ic.transform.SetSiblingIndex(0);
                 var ds = ic.GetComponent<DotSize>(); ds.Mult = 1; ds.ApplyDot(UiRoot.CurrentDot);
-                Kit.Elem(b.gameObject, flexW: 1, minW: 40f, minH: 30f * UiRoot.CurrentDot);      // 원본 #ptabs button min-height 30칸. 높이를 52 로 고정하면 16칸 아이콘 + 글자가 넘쳐 겹친다(내용 높이가 이기게 둔다)
-                var tdl = b.GetComponent<DotLayout>(); tdl.Elem = b.GetComponent<LayoutElement>(); tdl.MinHeightDots = 30; tdl.PadDots = new Vector4(1, 3, 1, 2); tdl.ApplyDot(UiRoot.CurrentDot);
+                Kit.Elem(b.gameObject, flexW: 1, minW: 40f, minH: 32f * UiRoot.CurrentDot);      // 원본 #ptabs button min-height 30칸. 높이를 52 로 고정하면 16칸 아이콘 + 글자가 넘쳐 겹친다(내용 높이가 이기게 둔다)
+                var tdl = b.GetComponent<DotLayout>(); tdl.Elem = b.GetComponent<LayoutElement>(); tdl.MinHeightDots = 32; tdl.PadDots = new Vector4(1, 3, 1, 4); tdl.SpacingDots = 1; tdl.ApplyDot(UiRoot.CurrentDot);      // 아래 그림자 띠만큼 아래 여백을 더 두고, 아이콘과 글자 사이를 한 칸 띄워 위·아래 여백을 맞춘다
                 var badge = Kit.Solid(b.transform, UiTheme.Red, "badge"); var br = badge.rectTransform;
                 br.anchorMin = br.anchorMax = new Vector2(1, 1); br.pivot = new Vector2(0.5f, 0.5f); br.sizeDelta = new Vector2(12, 12); br.anchoredPosition = new Vector2(-6, -6);
                 badge.gameObject.AddComponent<LayoutElement>().ignoreLayout = true; badge.gameObject.SetActive(false);
@@ -85,7 +86,7 @@ namespace Lighthouse.UI
             pv.Scroll.viewport = pv.ViewportRect; pv.Scroll.content = pv.Content;
 
             // 머리 단추(톱니·소리·닫기): 카드 오른쪽 위에 겹쳐 둔다(리본이 그 폭을 비워 둔다)
-            pv.HeaderButtons = Kit.HBox(pv.CardRect, "head buttons", Vector4.zero, 1, TextAnchor.UpperRight, false).GetComponent<RectTransform>();
+            pv.HeaderButtons = Kit.HBox(pv.CardRect, "head buttons", Vector4.zero, HeadGapDots, TextAnchor.UpperRight, false).GetComponent<RectTransform>();
             pv.HeaderButtons.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;
             pv.Gear = HeadButton(pv.HeaderButtons, "gear", "gear"); pv.Sound = HeadButton(pv.HeaderButtons, "sound", "sfxOn"); pv.Close = HeadButton(pv.HeaderButtons, "close", "close");
             return pv;
@@ -94,8 +95,7 @@ namespace Lighthouse.UI
         static Button HeadButton(Transform p, string name, string icon)
         {
             var b = Kit.FrameButton(p, "hbtn", "hbtn_p", "", 12f, UiTheme.Ink, null, "hb:" + name, true, 44f);
-            Kit.Elem(b.gameObject, minW: 44f, prefW: 44f, minH: 44f, prefH: 44f);
-            UnityEngine.Object.DestroyImmediate(b.transform.Find("label").gameObject);
+            Kit.Elem(b.gameObject, minW: 44f, prefW: 44f, minH: 44f, prefH: 44f);            UnityEngine.Object.DestroyImmediate(b.transform.Find("label").gameObject);
             var ic = Kit.IconImage(b.transform, icon, 8, 1); ic.GetComponent<LayoutElement>().flexibleWidth = 0;
             return b;
         }
@@ -194,7 +194,7 @@ namespace Lighthouse.UI
             CardRect.anchoredPosition = new Vector2(UiRoot.SnapPx(r.X), -UiRoot.SnapPx(r.Y)); CardRect.sizeDelta = new Vector2(UiRoot.SnapPx(r.W), UiRoot.SnapPx(r.H));      // 기기 픽셀 정수에 맞춘다(배율 2.75 에서 X=27.5px 같은 반픽셀 방지)
             // 머리 단추: 카드 오른쪽 위
             var hb = HeaderButtons; hb.anchorMin = new Vector2(1, 1); hb.anchorMax = new Vector2(1, 1); hb.pivot = new Vector2(1, 1);
-            float d = UiRoot.CurrentDot; hb.anchoredPosition = new Vector2(-4 * d, -3 * d); hb.sizeDelta = new Vector2(3 * 44f + 2f, 44f);
+            float d = UiRoot.CurrentDot; hb.anchoredPosition = new Vector2(-4 * d, -3 * d); hb.sizeDelta = new Vector2(3 * 44f + 2 * HeadGapDots * d, 44f);
             LayoutRebuilder.ForceRebuildLayoutImmediate(CardRect);
         }
 

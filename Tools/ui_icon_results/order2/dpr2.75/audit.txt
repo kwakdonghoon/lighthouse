@@ -1,0 +1,6 @@
+캡처 21장, 감사 항목 12014건, 위반 5건
+  위반: 880x1562 dex: 가로 넘침 PopupPanel/card/scroll/viewport/content/seg/btn:dex:sea 97.4..151.5 vs -140.8..141.2
+  위반: 880x1562 dex: 가로 넘침 PopupPanel/card/scroll/viewport/content/seg/btn:dex:sea/label 105.4..143.5 vs -140.8..141.2
+  위반: 880x1562 dex: 가로 넘침 PopupPanel/card/scroll/viewport/content/seg/btn:dex:sea/sub 105.4..143.5 vs -140.8..141.2
+  위반: 880x1562 dexsea: 가로 넘침 PopupPanel/card/scroll/viewport/content/seg/btn:dex:sea 97.4..151.5 vs -140.8..141.2
+  위반: 880x1562 dexsea: 가로 넘침 PopupPanel/card/scroll/viewport/content/seg/btn:dex:sea/sub 105.4..143.5 vs -140.8..141.2

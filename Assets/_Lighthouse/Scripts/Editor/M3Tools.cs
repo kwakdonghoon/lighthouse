@@ -181,7 +181,7 @@ namespace Lighthouse.EditorTools
 
         // ---------- ④ 캡처·감사 ----------
         sealed class Res { public string Name; public int DpW, DpH; public string[] States; }
-        static readonly string[] AllStates = { "main", "mail", "dex", "dexsea", "growth", "offer", "deco", "skin", "shop", "settings", "news", "title", "photo", "ad" };
+        static readonly string[] AllStates = { "main", "mail", "dex", "dexsea", "growth", "offer", "deco", "skin", "shop", "settings", "news", "title", "photo", "ad", "tip" };
         static readonly string[] SomeStates = { "main", "dex", "deco", "shop", "settings", "title" };
 
         public static void Step4_Capture()
@@ -213,6 +213,7 @@ namespace Lighthouse.EditorTools
                 report.AppendLine($"캡처 {shots}장, 감사 항목 {checks}건, 위반 {bad.Count}건");
                 foreach (var b in bad) report.AppendLine("  위반: " + b);
                 File.WriteAllText(Path.Combine(outDir, "audit.txt"), report.ToString(), new UTF8Encoding(false));
+                File.WriteAllText(Path.Combine(outDir, "center_log.tsv"), string.Join("\n", CenterLog), new UTF8Encoding(false)); CenterLog.Clear();
                 Debug.Log("[M3] Step4 완료\n" + report);
             }
             catch (Exception e) { Debug.LogError("[M3] Step4 실패: " + e); File.WriteAllText(Path.Combine(outDir, "audit_error.txt"), e.ToString()); EditorApplication.Exit(1); return; }
@@ -336,6 +337,7 @@ namespace Lighthouse.EditorTools
                         break;
                     }
                 case "photo": ui.SetPhoto(true); break;
+                case "tip": ui.Tip.Show(new TipInfo { Id = "t", Icon = "star", Text = "등대를 눌러 오늘의 첫 불빛을 켜 보세요" }, ui.Str, UiRoot.CanvasW / 2f, 220f, true, UiRoot.CanvasW); break;
                 case "ad": c.Open(PanelMode.Shop); ui.AdAdapter.Show("ship"); ui.Ad.gameObject.SetActive(true); ui.Ad.SetReady(false, 3, ui.Str); break;
             }
             P.Refresh(false);
@@ -394,6 +396,8 @@ namespace Lighthouse.EditorTools
                         if (inter.width > 1f && inter.height > 1f) bad.Add($"{tag}: 단추 겹침 {PathOf(btns[i].b.transform, ui.transform)} × {PathOf(btns[j].b.transform, ui.transform)}");
                     }
             }
+            CenterAudit(ui, tag, bad, ref checks);
+            foreach (var t in ui.GetComponentsInChildren<TMP_Text>(false)) if (t.name == "chip" && t.isActiveAndEnabled) { var rr = R(t.rectTransform); checks++; if (rr.height > t.fontSize * 1.7f) bad.Add($"{tag}: 칩 높이가 글자보다 훨씬 큼(옆 줄 높이로 늘어남) {PathOf(t.transform, ui.transform)} '{t.text}' 칸 {rr.height:F0} 글자 {t.fontSize:F0}"); }
             // HUD 가 안전 영역 위쪽을 침범하지 않는다
             if (ui.Hud.gameObject.activeInHierarchy)
             {
@@ -415,6 +419,71 @@ namespace Lighthouse.EditorTools
                 if (rr.xMin < screen.xMin - 0.5f || rr.xMax > screen.xMax + 0.5f || rr.yMin < screen.yMin - 0.5f || rr.yMax > screen.yMax + 0.5f) bad.Add($"{tag}: {rt.name} 가 화면 밖 {rr}");
             }
         }
+        /// <summary>단추 안 글·아이콘이 단추 면 가운데에 오는지 전수 확인: 보이는 모든 단추의 내용 묶음 상자 중심 ↔ 단추 중심(그림자 띠 보정). 오차는 도트 단위로 기록.</summary>
+        static readonly string[] FaceFrames = { "main", "main_p", "gold", "gold_p", "btn", "btn_p", "btn_d", "hbtn", "hbtn_p", "hbtn_on", "hbtn_on_p", "ib", "ib_p", "hud", "field" };
+        public static readonly List<string> CenterLog = new List<string>();
+        /// <summary>EditMode 회귀 시험이 부르는 진입점(그림 없이 사각형만 본다).</summary>
+        public static int CenterAuditPublic(UiRoot ui, string tag, List<string> bad) { int c = 0; CenterAudit(ui, tag, bad, ref c); return c; }
+        static void CenterAudit(UiRoot ui, string tag, List<string> bad, ref int checks)
+        {
+            var canvas = ui.CanvasRect; var corners = new Vector3[4]; float dot = Mathf.Max(0.5f, UiRoot.CurrentDot);
+            Rect R(RectTransform r) { r.GetWorldCorners(corners); var a = canvas.InverseTransformPoint(corners[0]); var b = canvas.InverseTransformPoint(corners[2]); return Rect.MinMaxRect(a.x, a.y, b.x, b.y); }
+            Rect vp = ui.Panel.gameObject.activeInHierarchy ? R(ui.Panel.ViewportRect) : default;
+            foreach (var b in ui.GetComponentsInChildren<Button>(false))
+            {
+                if (!b.isActiveAndEnabled || b.name == "dim") continue;
+                var fi = b.GetComponent<Image>(); string fn = fi != null && fi.sprite != null ? fi.sprite.name : "";
+                bool face = System.Array.IndexOf(FaceFrames, fn) >= 0;      // 면이 있는 단추 틀. 그 밖(편지 줄·글자 링크·카드 머리줄·칸 접시)은 아래 '넘침·가운데' 약식 검사만 한다
+                var brt = (RectTransform)b.transform; var br = R(brt);
+                if (ui.Panel.gameObject.activeInHierarchy && b.transform.IsChildOf(ui.Panel.Content) && (br.yMax < vp.yMin || br.yMin > vp.yMax || br.yMax > vp.yMax + 0.5f || br.yMin < vp.yMin - 0.5f)) continue;       // 보이지 않거나 잘려 있는 단추
+                bool any = false; float x0 = float.MaxValue, x1 = float.MinValue, y0 = float.MaxValue, y1 = float.MinValue; bool centered = false; int items = 0;
+                foreach (var t in b.GetComponentsInChildren<TMP_Text>(false))
+                {
+                    if (!t.isActiveAndEnabled || string.IsNullOrWhiteSpace(t.text) || t.transform.IsChildOf(brt) && InBadge(t.transform, brt)) continue;
+                    t.ForceMeshUpdate(); var bb = t.textBounds; if (bb.size.x <= 0.01f) continue;
+                    var p0 = canvas.InverseTransformPoint(t.transform.TransformPoint(bb.min)); var p1 = canvas.InverseTransformPoint(t.transform.TransformPoint(bb.max));
+                    x0 = Mathf.Min(x0, p0.x); x1 = Mathf.Max(x1, p1.x); y0 = Mathf.Min(y0, p0.y); y1 = Mathf.Max(y1, p1.y); any = true; items++;
+                    if ((t.alignment & TextAlignmentOptions.Center) == TextAlignmentOptions.Center || (t.alignment & TextAlignmentOptions.Midline) != 0 && (t.alignment & TextAlignmentOptions.Left) == 0 && (t.alignment & TextAlignmentOptions.Right) == 0) centered = true;
+                }
+                foreach (var g in b.GetComponentsInChildren<Image>(false))
+                {
+                    if (g.transform == b.transform || !g.isActiveAndEnabled || !g.name.StartsWith("icon:") || InBadge(g.transform, brt)) continue;
+                    var ir = R(g.rectTransform); if (ir.width < 0.5f) continue;
+                    { float side = Mathf.Min(ir.width, ir.height); ir = new Rect(ir.center.x - side / 2f, ir.center.y - side / 2f, side, side); }      // preserveAspect: 실제 그려지는 정사각 그림 범위
+                    x0 = Mathf.Min(x0, ir.xMin); x1 = Mathf.Max(x1, ir.xMax); y0 = Mathf.Min(y0, ir.yMin); y1 = Mathf.Max(y1, ir.yMax); any = true; items++;
+                }
+                if (!any || br.width < 20f) continue; checks++;
+                if (!face)
+                {
+                    // 약식: 내용이 단추 사각형 안에 들어오는가(글자 링크는 가운데 정렬이면 좌우 1칸·상하 1.5칸 이내도 확인)
+                    float fdx = ((x0 + x1) / 2f - br.center.x) / dot, fdy = ((y0 + y1) / 2f - br.center.y) / dot;
+                    bool inside = x0 >= br.xMin - 0.6f && x1 <= br.xMax + 0.6f && y0 >= br.yMin - 0.6f && y1 <= br.yMax + 0.6f;
+                    bool plainLink = fn == "" && centered && items == 1;
+                    bool ctrOk = !plainLink || (Mathf.Abs(fdx) <= 1.0f && Mathf.Abs(fdy) <= 1.5f);
+                    CenterLog.Add($"{tag}\tFIT {PathOf(b.transform, ui.transform)}\tdx={fdx:F1}\tdy={fdy:F1}\titems={items}\tbtn={br.width:F0}x{br.height:F0}\tcontent={(x1 - x0):F0}x{(y1 - y0):F0}\tframe={fn}");
+                    if (!inside) bad.Add($"{tag}: 단추 내용이 사각형을 넘음 {PathOf(b.transform, ui.transform)} 내용 {(x1 - x0):F0}x{(y1 - y0):F0} 단추 {br.width:F0}x{br.height:F0}");
+                    if (!ctrOk) bad.Add($"{tag}: 글자 링크가 가운데가 아님 {PathOf(b.transform, ui.transform)} dx={fdx:F1}칸 dy={fdy:F1}칸");
+                    continue;
+                }
+                // 틀 그림의 위·아래 테두리 두께(도트): 아래 테두리는 그림자 띠를 포함 → 내용 기준 중심은 (아래-위)/2 칸 위
+                float bTop = 3f, bBot = 5f, bSide = 3f; var fimg = b.GetComponent<Image>(); if (fimg != null && fimg.sprite != null && fimg.type == Image.Type.Sliced) { var bd = fimg.sprite.border; bSide = bd.x; bBot = bd.y; bTop = bd.w; }
+                float expect = (bBot - bTop) / 2f;
+                float cx = (x0 + x1) / 2f - br.center.x, cy = (y0 + y1) / 2f - br.center.y;      // cy>0 이면 내용이 위쪽
+                float dxDots = cx / dot, dyDots = cy / dot - expect;
+                bool horizOk = !centered || items > 2 || Mathf.Abs(dxDots) <= 1.0f;
+                bool vertOk = items > 2 || Mathf.Abs(dyDots) <= 2.2f;      // 정수 아닌 배율에서는 레이아웃이 반 칸 단위로 어긋나 보일 수 있다(실제 화면 픽셀 기준은 Tools/ui_center_pixel_audit.py 가 1칸 이내로 검사)
+                // 내용이 단추 안쪽 면(테두리·그림자 제외)을 넘는가
+                float innerW = br.width - 2 * 2f * dot, innerH = br.height - (2f + 3f) * dot;      // 눈에 보이는 테두리 2칸 + 아래 그림자 3칸만 뺀 면
+                bool fit = (x1 - x0) <= innerW + 0.6f && (y1 - y0) <= innerH + 0.6f;
+                if (!fit && items == 1 && !b.GetComponentsInChildren<TMP_Text>(false).Any(t => t.isActiveAndEnabled && !string.IsNullOrWhiteSpace(t.text))) fit = (x1 - x0) <= br.width && (y1 - y0) <= br.height - 2f * dot;      // 아이콘만 있는 단추는 틀 안에 들어오면 된다
+                string pxr = "";
+                { var cv = ui.GetComponentInParent<Canvas>(); var cam = cv != null ? cv.worldCamera : null; if (cam != null) { brt.GetWorldCorners(corners); var s0 = RectTransformUtility.WorldToScreenPoint(cam, corners[0]); var s2 = RectTransformUtility.WorldToScreenPoint(cam, corners[2]); pxr = $"{s0.x:F1},{cam.pixelHeight - s2.y:F1},{s2.x:F1},{cam.pixelHeight - s0.y:F1}"; } }
+                CenterLog.Add($"{tag}\t{PathOf(b.transform, ui.transform)}\tdx={dxDots:F1}\tdy={dyDots:F1}\titems={items}\tbtn={br.width:F0}x{br.height:F0}\tcontent={(x1 - x0):F0}x{(y1 - y0):F0}\tinner={innerW:F0}x{innerH:F0}\tpx={pxr}\tdot={dot:F2}\tchk={(brt.Find("badge:check") != null ? 1 : 0)}");
+                if (!horizOk || !vertOk) bad.Add($"{tag}: 단추 내용이 가운데가 아님 {PathOf(b.transform, ui.transform)} dx={dxDots:F1}칸 dy={dyDots:F1}칸 (단추 {br.width:F0}x{br.height:F0})");
+                if (!fit) bad.Add($"{tag}: 단추 내용이 면을 넘음 {PathOf(b.transform, ui.transform)} 내용 {(x1 - x0):F0}x{(y1 - y0):F0} 면 {innerW:F0}x{innerH:F0}");
+            }
+        }
+        static bool InBadge(Transform t, Transform stop) { for (var c = t; c != null && c != stop; c = c.parent) if (c.name == "badge" || c.name.StartsWith("badge")) return true; return false; }
         static string Short(string s) => s.Length > 24 ? s.Substring(0, 24) + "…" : s;
         static string PathOf(Transform t, Transform root) { var l = new List<string>(); for (var c = t; c != null && c != root; c = c.parent) l.Insert(0, c.name); return string.Join("/", l); }
 

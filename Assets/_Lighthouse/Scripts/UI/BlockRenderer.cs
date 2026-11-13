@@ -88,7 +88,7 @@ namespace Lighthouse.UI
         // ---------- 단추 ----------
         void ButtonBlock(Transform p, Block b) { MakeButton(p, b, false); }
 
-        Selectable_ MakeButton(Transform p, Block b, bool inSeg)
+        Selectable_ MakeButton(Transform p, Block b, bool inSeg, bool check = false)
         {
             string frame = "btn", pressed = "btn_p"; Color tc = Ink; bool link = b.Style == "tbtn" || b.Style == "txt";
             if (b.Disabled) { frame = "btn_d"; pressed = null; tc = UiTheme.Soft; }
@@ -99,15 +99,22 @@ namespace Lighthouse.UI
                 var r = Kit.Rect("link", p); var img = r.gameObject.AddComponent<Image>(); img.color = new Color(0, 0, 0, 0); img.raycastTarget = true;
                 var btn = r.gameObject.AddComponent<Button>(); btn.targetGraphic = img; btn.transition = Selectable.Transition.None;
                 var le = r.gameObject.AddComponent<LayoutElement>(); le.minHeight = 44f;
-                var t = Kit.Text(r, b.Text, 14f, UiTheme.Teal2, true, TextAlignmentOptions.Center, "label"); t.fontStyle = FontStyles.Underline; Kit.Stretch(t.rectTransform);
+                var t = Kit.Text(r, b.Text, 14f, UiTheme.Teal2, true, b.Act == "setback" ? TextAlignmentOptions.MidlineLeft : TextAlignmentOptions.Center, "label"); t.fontStyle = FontStyles.Underline; Kit.Stretch(t.rectTransform);      // 뒤로 가기 링크는 왼쪽 위에 붙여 읽는 흐름의 시작에 둔다(가운데에 떠 있지 않게)
                 if (b.Act != null) { string a = b.Act; btn.onClick.AddListener(() => onAct(a)); r.gameObject.AddComponent<ActTag>().Act = a; }
                 return new Selectable_ { Btn = btn, Rect = r };
             }
             string label = b.Text; string sub = inSeg ? b.Sub : null;
-            var button = Kit.FrameButton(p, frame, pressed, label, inSeg ? 13.5f : 14f, tc, null, "btn:" + (b.Act ?? b.Text), true, 44f, inSeg ? 1.5f : 5f);
+            var button = Kit.FrameButton(p, frame, pressed, label, inSeg ? 13.5f : 14f, tc, null, "btn:" + (b.Act ?? b.Text), true, 44f, inSeg ? 3.5f : 5f);      // 칸 폭이 좁을 때 글자가 테두리에 닿지 않도록 좌우 여백 3.5칸(넘치면 줄바꿈)
             var g = button.GetComponent<Image>();
             if (b.Locked && !b.On) g.color = new Color(1, 1, 1, 0.78f);
             if (!string.IsNullOrEmpty(sub)) Kit.Text(button.transform, sub, 11f, b.On ? UiTheme.OnGold : UiTheme.Soft, false, TextAlignmentOptions.Center, "sub");
+            if (check && inSeg && b.On && string.IsNullOrEmpty(sub))      // 선택된 칸: 색뿐 아니라 체크 표시도 붙인다(색만으로 구분하지 않기). 칸이 넓은(3칸 이하)·한 줄 단추에만 — 좁은 칸·2줄 칸에서는 글자와 겹친다
+            {
+                // 글자 배치(가운데 정렬)를 건드리지 않도록 단추 오른쪽 위 모서리에 얹는다(레이아웃 제외, 이름이 badge 로 시작해 가운데 검사에서 빠진다)
+                var ck = Kit.IconImage(button.transform, "check"); ck.name = "badge:check";
+                var ds = ck.GetComponent<DotSize>(); ds.Mult = 1; ds.ApplyDot(UiRoot.CurrentDot); ck.GetComponent<LayoutElement>().ignoreLayout = true;
+                var cr = ck.rectTransform; cr.anchorMin = cr.anchorMax = cr.pivot = new Vector2(1, 1); float cd = UiRoot.CurrentDot; cr.sizeDelta = new Vector2(8 * cd, 8 * cd); cr.anchoredPosition = new Vector2(-3 * cd, -4 * cd);
+            }
             if (b.Disabled) button.interactable = false;
             else if (b.Act != null) { string a = b.Act; button.onClick.AddListener(() => onAct(a)); button.gameObject.AddComponent<ActTag>().Act = a; NavNone(button, a); }
             return new Selectable_ { Btn = button, Rect = (RectTransform)button.transform };
@@ -131,8 +138,18 @@ namespace Lighthouse.UI
             int n = b.Kids?.Count ?? 0; if (n == 0) return;
             int cols = b.Style == "zones" ? Mathf.Min(n, 5) : b.Style == "dx" ? 5 : b.Style == "wrap" ? (UiRoot.CanvasW < 360f ? 3 : 4) : Mathf.Min(n, 4);
             cols = Mathf.Min(cols, n);
+            if (b.Style == "wrap")
+            {
+                // 한 칸만 외톨이로 남지 않게: 한 줄에 다 들어가면(넓은 화면 5개 이하) 한 줄, 아니면 줄마다 고르게 나눈다
+                int max = UiRoot.CanvasW < 360f ? 3 : 5, rows = (n + max - 1) / max;
+                cols = (n + rows - 1) / rows;
+            }
             var grid = Kit.Rect("seg", p); var fc = grid.gameObject.AddComponent<FixedColumnsLayout>(); fc.Columns = cols; fc.SpacingDots = 2; fc.MinCellHeight = 44f; fc.ApplyDot(UiRoot.CurrentDot);
-            foreach (var k in b.Kids) MakeButton(grid, k, true);
+            foreach (var k in b.Kids)
+            {
+                var s = MakeButton(grid, k, true, cols <= 3);
+                if (cols >= 5 && UiRoot.CanvasW < 360f) { var lt = Kit.LabelOf(s.Btn); if (lt != null) lt.fontSize = 12.5f; }      // 좁은 화면 5칸: 한 단어가 칸 폭에 닿지 않게 한 단계 줄인다
+            }
         }
 
         // ---------- 요약·카드 ----------
@@ -197,7 +214,7 @@ namespace Lighthouse.UI
         void Chip(Transform p, string text, string border)
         {
             var c = Kit.Frame(p, "plate_gold", null, "chip"); c.raycastTarget = false;
-            var h = c.gameObject.AddComponent<HorizontalLayoutGroup>(); h.childControlWidth = h.childControlHeight = true; h.childForceExpandWidth = false; h.childAlignment = TextAnchor.MiddleCenter;
+            var h = c.gameObject.AddComponent<HorizontalLayoutGroup>(); h.childControlWidth = h.childControlHeight = true; h.childForceExpandWidth = false; h.childForceExpandHeight = false; h.childAlignment = TextAnchor.MiddleCenter;      // 높이를 억지로 늘리면 칩이 옆 글자 줄 높이로 커진다(도감 계절·시간 칸)
             var dl = c.gameObject.AddComponent<DotLayout>(); dl.Group = h; dl.PadDots = new Vector4(3, 1, 3, 2); dl.ApplyDot(UiRoot.CurrentDot);
             var ct = Kit.Text(c.transform, text, 11f, UiTheme.GoldTx, true, TextAlignmentOptions.Center, "chip"); ct.textWrappingMode = TextWrappingModes.NoWrap; Kit.Elem(ct.gameObject, minW: ct.GetPreferredValues(ct.text).x + 1f); Kit.Elem(c.gameObject, minW: ct.GetPreferredValues(ct.text).x + 7f * UiRoot.CurrentDot, flexW: 0);
         }

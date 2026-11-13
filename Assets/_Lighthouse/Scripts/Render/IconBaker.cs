@@ -38,9 +38,19 @@ namespace Lighthouse.Render
         public static IconDef Def(string id) { Init(); return defs.TryGetValue(id, out var d) ? d : defs["unknown"]; }
 
         /// <summary>모르는 id 는 "?" 대체 아이콘 (ICON_UNKNOWN).</summary>
-        public static Bitmap Bake(string id)
+        public static Bitmap Bake(string id) => Bake(Def(id));
+
+        /// <summary>"id;팔레트;줄|줄…" 한 줄 정의를 직접 굽는다(Unity UI 가 동결 표 대신 쓰는 교체 그림용; 표·골든은 건드리지 않는다).</summary>
+        public static Bitmap BakeLine(string line)
         {
-            var d = Def(id); int n = d.Rows.Length;
+            var p = line.Split(';'); var pal = new Dictionary<char, string>();
+            foreach (var kv in p[1].Split(',')) pal[kv[0]] = kv.Substring(2);
+            return Bake(new IconDef { Id = p[0], Pal = pal, Rows = p[2].Split('|') });
+        }
+
+        static Bitmap Bake(IconDef d)
+        {
+            int n = d.Rows.Length;
             var B = new Bitmap(0, 0, n, n);
             for (int y = 0; y < n; y++)
                 for (int x = 0; x < n; x++)

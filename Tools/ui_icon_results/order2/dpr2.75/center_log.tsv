@@ -1,0 +1,290 @@
+880x1562 main	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=726.0,22.0,858.0,154.0	dot=2.18
+880x1562 mail	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=726.0,22.0,858.0,154.0	dot=2.18
+880x1562 mail	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=63.8,179.7,200.1,371.7	dot=2.18
+880x1562 mail	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=218.1,179.7,354.4,371.7	dot=2.18
+880x1562 mail	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=372.4,179.7,508.7,371.7	dot=2.18
+880x1562 mail	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=526.7,179.7,663.0,371.7	dot=2.18
+880x1562 mail	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=681.0,179.7,817.3,371.7	dot=2.18
+880x1562 mail	PopupPanel/card/scroll/viewport/content/summary/btn:readall	dx=0.0	dy=-0.1	items=1	btn=252x44	content=55x17	inner=243x33	px=94.0,516.3,787.0,637.3	dot=2.18
+880x1562 mail	FIT PopupPanel/card/scroll/viewport/content/letter/top	dx=4.4	dy=0.0	items=4	btn=256x44	content=237x35	frame=
+880x1562 mail	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=418.0,46.0,551.0,167.0	dot=2.18
+880x1562 mail	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=557.0,46.0,690.0,167.0	dot=2.18
+880x1562 mail	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=696.0,46.0,829.0,167.0	dot=2.18
+880x1562 dex	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=726.0,22.0,858.0,154.0	dot=2.18
+880x1562 dex	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=63.8,179.7,200.1,371.7	dot=2.18
+880x1562 dex	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=218.1,179.7,354.4,371.7	dot=2.18
+880x1562 dex	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=372.4,179.7,508.7,371.7	dot=2.18
+880x1562 dex	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=526.7,179.7,663.0,371.7	dot=2.18
+880x1562 dex	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=681.0,179.7,817.3,371.7	dot=2.18
+880x1562 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:gift	dx=1.3	dy=-0.1	items=3	btn=54x66	content=44x48	inner=45x55	px=63.8,691.3,212.8,873.1	dot=2.18
+880x1562 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:shine	dx=0.0	dy=-0.1	items=2	btn=54x66	content=34x28	inner=45x55	px=224.8,691.3,373.8,873.1	dot=2.18
+880x1562 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:reg	dx=0.0	dy=-0.1	items=2	btn=54x66	content=23x28	inner=45x55	px=385.8,691.3,534.8,873.1	dot=2.18
+880x1562 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:ship	dx=0.0	dy=-0.1	items=2	btn=54x66	content=17x28	inner=45x55	px=546.8,691.3,695.8,873.1	dot=2.18
+880x1562 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:sea	dx=0.0	dy=-0.1	items=2	btn=54x66	content=23x28	inner=45x55	px=707.8,691.3,856.8,873.1	dot=2.18
+880x1562 dex	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=418.0,46.0,551.0,167.0	dot=2.18
+880x1562 dex	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=557.0,46.0,690.0,167.0	dot=2.18
+880x1562 dex	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=696.0,46.0,829.0,167.0	dot=2.18
+880x1562 dexsea	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=726.0,22.0,858.0,154.0	dot=2.18
+880x1562 dexsea	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=63.8,179.7,200.1,371.7	dot=2.18
+880x1562 dexsea	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=218.1,179.7,354.4,371.7	dot=2.18
+880x1562 dexsea	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=372.4,179.7,508.7,371.7	dot=2.18
+880x1562 dexsea	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=526.7,179.7,663.0,371.7	dot=2.18
+880x1562 dexsea	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=681.0,179.7,817.3,371.7	dot=2.18
+880x1562 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:gift	dx=0.0	dy=-0.1	items=2	btn=54x66	content=29x28	inner=45x55	px=63.8,658.3,212.8,840.1	dot=2.18
+880x1562 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:shine	dx=0.0	dy=-0.1	items=2	btn=54x66	content=34x28	inner=45x55	px=224.8,658.3,373.8,840.1	dot=2.18
+880x1562 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:reg	dx=0.0	dy=-0.1	items=2	btn=54x66	content=23x28	inner=45x55	px=385.8,658.3,534.8,840.1	dot=2.18
+880x1562 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:ship	dx=0.0	dy=-0.1	items=2	btn=54x66	content=17x28	inner=45x55	px=546.8,658.3,695.8,840.1	dot=2.18
+880x1562 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:sea	dx=1.3	dy=-0.1	items=3	btn=54x66	content=44x48	inner=45x55	px=707.8,658.3,856.8,840.1	dot=2.18
+880x1562 dexsea	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=418.0,46.0,551.0,167.0	dot=2.18
+880x1562 dexsea	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=557.0,46.0,690.0,167.0	dot=2.18
+880x1562 dexsea	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=696.0,46.0,829.0,167.0	dot=2.18
+880x1562 growth	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=726.0,22.0,858.0,154.0	dot=2.18
+880x1562 growth	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=63.8,179.7,200.1,371.7	dot=2.18
+880x1562 growth	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=218.1,179.7,354.4,371.7	dot=2.18
+880x1562 growth	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=372.4,179.7,508.7,371.7	dot=2.18
+880x1562 growth	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=526.7,179.7,663.0,371.7	dot=2.18
+880x1562 growth	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=681.0,179.7,817.3,371.7	dot=2.18
+880x1562 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:grow	dx=0.0	dy=-0.1	items=2	btn=135x53	content=63x35	inner=126x42	px=63.8,399.8,434.5,545.3	dot=2.18
+880x1562 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:offer	dx=0.0	dy=-0.1	items=1	btn=135x53	content=25x16	inner=126x42	px=446.5,399.8,817.3,545.3	dot=2.18
+880x1562 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:mile	dx=0.0	dy=-0.1	items=1	btn=135x44	content=37x16	inner=126x33	px=63.8,557.3,434.5,678.3	dot=2.18
+880x1562 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:log	dx=0.0	dy=-0.1	items=1	btn=135x44	content=53x16	inner=126x33	px=446.5,557.3,817.3,678.3	dot=2.18
+880x1562 growth	FIT PopupPanel/card/scroll/viewport/content/card:rolecard/head	dx=-41.2	dy=2.7	items=2	btn=252x44	content=72x32	frame=
+880x1562 growth	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=418.0,46.0,551.0,167.0	dot=2.18
+880x1562 growth	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=557.0,46.0,690.0,167.0	dot=2.18
+880x1562 growth	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=696.0,46.0,829.0,167.0	dot=2.18
+880x1562 skin	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=726.0,22.0,858.0,154.0	dot=2.18
+880x1562 skin	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=63.8,179.7,200.1,371.7	dot=2.18
+880x1562 skin	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=218.1,179.7,354.4,371.7	dot=2.18
+880x1562 skin	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=372.4,179.7,508.7,371.7	dot=2.18
+880x1562 skin	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=526.7,179.7,663.0,371.7	dot=2.18
+880x1562 skin	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=50x70	content=35x52	inner=41x59	px=681.0,179.7,817.3,371.7	dot=2.18
+880x1562 skin	PopupPanel/card/scroll/viewport/content/seg/btn:dtab:place	dx=0.0	dy=-0.1	items=1	btn=135x53	content=53x16	inner=126x42	px=63.8,399.8,434.5,545.3	dot=2.18
+880x1562 skin	PopupPanel/card/scroll/viewport/content/seg/btn:dtab:skin	dx=0.0	dy=-0.1	items=2	btn=135x53	content=63x35	inner=126x42	px=446.5,399.8,817.3,545.3	dot=2.18
+880x1562 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.classic	dx=0.0	dy=-0.1	items=2	btn=88x53	content=63x35	inner=80x42	px=63.8,905.1,306.9,1050.6	dot=2.18
+880x1562 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.stonetower	dx=0.0	dy=-0.1	items=1	btn=88x53	content=40x16	inner=80x42	px=318.9,905.1,562.1,1050.6	dot=2.18
+880x1562 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.cream	dx=0.0	dy=-0.1	items=1	btn=88x53	content=53x32	inner=80x42	px=574.1,905.1,817.3,1050.6	dot=2.18
+880x1562 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.forest	dx=0.0	dy=-0.1	items=1	btn=88x47	content=53x16	inner=80x37	px=63.8,1062.6,306.9,1193.0	dot=2.18
+880x1562 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.blossom	dx=0.0	dy=-0.1	items=2	btn=88x47	content=65x29	inner=80x37	px=318.9,1062.6,562.1,1193.0	dot=2.18
+880x1562 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.maple	dx=0.0	dy=-0.1	items=2	btn=88x47	content=65x29	inner=80x37	px=574.1,1062.6,817.3,1193.0	dot=2.18
+880x1562 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.snow	dx=0.0	dy=-0.1	items=2	btn=88x64	content=65x29	inner=80x53	px=63.8,1205.0,306.9,1379.9	dot=2.18
+880x1562 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.bands	dx=0.0	dy=-0.1	items=2	btn=88x64	content=53x46	inner=80x53	px=318.9,1205.0,562.1,1379.9	dot=2.18
+880x1562 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.spire	dx=0.0	dy=-0.1	items=2	btn=88x64	content=53x46	inner=80x53	px=574.1,1205.0,817.3,1379.9	dot=2.18
+880x1562 skin	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=418.0,46.0,551.0,167.0	dot=2.18
+880x1562 skin	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=557.0,46.0,690.0,167.0	dot=2.18
+880x1562 skin	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=696.0,46.0,829.0,167.0	dot=2.18
+880x1562 settings	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=726.0,22.0,858.0,154.0	dot=2.18
+880x1562 settings	FIT PopupPanel/card/scroll/viewport/content/link	dx=-47.0	dy=0.2	items=1	btn=274x44	content=69x17	frame=
+880x1562 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:snd:on	dx=0.0	dy=-0.1	items=2	btn=124x53	content=63x35	inner=115x42	px=94.0,471.0,434.5,616.5	dot=2.18
+880x1562 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:snd:off	dx=0.0	dy=-0.1	items=1	btn=124x53	content=25x16	inner=115x42	px=446.5,471.0,787.0,616.5	dot=2.18
+880x1562 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:view:near	dx=0.0	dy=-0.1	items=1	btn=81x53	content=37x16	inner=72x42	px=94.0,811.4,317.0,956.9	dot=2.18
+880x1562 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:view:normal	dx=0.0	dy=-0.1	items=2	btn=81x53	content=63x35	inner=72x42	px=329.0,811.4,552.0,956.9	dot=2.18
+880x1562 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:view:wide	dx=0.0	dy=-0.1	items=1	btn=81x53	content=25x16	inner=72x42	px=564.0,811.4,787.0,956.9	dot=2.18
+880x1562 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:auto	dx=0.0	dy=-0.1	items=2	btn=81x53	content=63x35	inner=72x42	px=94.0,1237.6,317.0,1383.1	dot=2.18
+880x1562 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:spring	dx=0.0	dy=-0.1	items=1	btn=81x53	content=12x16	inner=72x42	px=329.0,1237.6,552.0,1383.1	dot=2.18
+880x1562 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:summer	dx=0.0	dy=-0.1	items=1	btn=81x53	content=25x16	inner=72x42	px=564.0,1237.6,787.0,1383.1	dot=2.18
+880x1562 settings	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=418.0,46.0,551.0,167.0	dot=2.18
+880x1562 settings	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=557.0,46.0,690.0,167.0	dot=2.18
+880x1562 settings	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=696.0,46.0,829.0,167.0	dot=2.18
+1080x2343 main	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=926.0,22.0,1058.0,154.0	dot=2.18
+1080x2343 mail	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=926.0,22.0,1058.0,154.0	dot=2.18
+1080x2343 mail	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=63.8,327.7,240.1,519.8	dot=2.18
+1080x2343 mail	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=258.1,327.7,434.4,519.8	dot=2.18
+1080x2343 mail	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=452.3,327.7,628.7,519.8	dot=2.18
+1080x2343 mail	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=646.7,327.7,822.9,519.8	dot=2.18
+1080x2343 mail	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=841.0,327.7,1017.3,519.8	dot=2.18
+1080x2343 mail	PopupPanel/card/scroll/viewport/content/summary/btn:readall	dx=0.0	dy=-0.1	items=1	btn=325x44	content=55x17	inner=316x33	px=94.0,664.3,987.0,785.3	dot=2.18
+1080x2343 mail	FIT PopupPanel/card/scroll/viewport/content/letter/top	dx=4.4	dy=0.0	items=4	btn=329x44	content=310x35	frame=
+1080x2343 mail	FIT PopupPanel/card/scroll/viewport/content/letter/top	dx=4.4	dy=-0.3	items=5	btn=329x49	content=310x48	frame=
+1080x2343 mail	FIT PopupPanel/card/scroll/viewport/content/letter/top	dx=4.4	dy=-0.3	items=5	btn=329x49	content=310x48	frame=
+1080x2343 mail	FIT PopupPanel/card/scroll/viewport/content/letter/top	dx=4.4	dy=0.0	items=4	btn=329x47	content=310x47	frame=
+1080x2343 mail	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=618.0,194.0,751.0,315.0	dot=2.18
+1080x2343 mail	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=757.0,194.0,890.0,315.0	dot=2.18
+1080x2343 mail	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=896.0,194.0,1029.0,315.0	dot=2.18
+1080x2343 dex	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=926.0,22.0,1058.0,154.0	dot=2.18
+1080x2343 dex	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=63.8,327.7,240.1,519.8	dot=2.18
+1080x2343 dex	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=258.1,327.7,434.4,519.8	dot=2.18
+1080x2343 dex	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=452.3,327.7,628.7,519.8	dot=2.18
+1080x2343 dex	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=646.7,327.7,822.9,519.8	dot=2.18
+1080x2343 dex	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=841.0,327.7,1017.3,519.8	dot=2.18
+1080x2343 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:gift	dx=0.1	dy=-0.1	items=3	btn=66x66	content=50x48	inner=57x55	px=63.8,806.3,244.9,988.1	dot=2.18
+1080x2343 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:shine	dx=0.0	dy=-0.1	items=2	btn=66x66	content=37x29	inner=57x55	px=256.9,806.3,438.0,988.1	dot=2.18
+1080x2343 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:reg	dx=0.0	dy=-0.1	items=2	btn=66x66	content=25x29	inner=57x55	px=450.0,806.3,631.1,988.1	dot=2.18
+1080x2343 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:ship	dx=0.0	dy=-0.1	items=2	btn=66x66	content=17x29	inner=57x55	px=643.1,806.3,824.2,988.1	dot=2.18
+1080x2343 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:sea	dx=0.0	dy=-0.1	items=2	btn=66x66	content=25x29	inner=57x55	px=836.2,806.3,1017.3,988.1	dot=2.18
+1080x2343 dex	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=618.0,194.0,751.0,315.0	dot=2.18
+1080x2343 dex	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=757.0,194.0,890.0,315.0	dot=2.18
+1080x2343 dex	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=896.0,194.0,1029.0,315.0	dot=2.18
+1080x2343 dexsea	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=926.0,22.0,1058.0,154.0	dot=2.18
+1080x2343 dexsea	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=63.8,327.7,240.1,519.8	dot=2.18
+1080x2343 dexsea	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=258.1,327.7,434.4,519.8	dot=2.18
+1080x2343 dexsea	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=452.3,327.7,628.7,519.8	dot=2.18
+1080x2343 dexsea	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=646.7,327.7,822.9,519.8	dot=2.18
+1080x2343 dexsea	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=841.0,327.7,1017.3,519.8	dot=2.18
+1080x2343 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:gift	dx=0.0	dy=-0.1	items=2	btn=66x66	content=29x29	inner=57x55	px=63.8,806.3,244.9,988.1	dot=2.18
+1080x2343 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:shine	dx=0.0	dy=-0.1	items=2	btn=66x66	content=37x29	inner=57x55	px=256.9,806.3,438.0,988.1	dot=2.18
+1080x2343 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:reg	dx=0.0	dy=-0.1	items=2	btn=66x66	content=25x29	inner=57x55	px=450.0,806.3,631.1,988.1	dot=2.18
+1080x2343 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:ship	dx=0.0	dy=-0.1	items=2	btn=66x66	content=17x29	inner=57x55	px=643.1,806.3,824.2,988.1	dot=2.18
+1080x2343 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:sea	dx=0.1	dy=-0.1	items=3	btn=66x66	content=50x48	inner=57x55	px=836.2,806.3,1017.3,988.1	dot=2.18
+1080x2343 dexsea	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=618.0,194.0,751.0,315.0	dot=2.18
+1080x2343 dexsea	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=757.0,194.0,890.0,315.0	dot=2.18
+1080x2343 dexsea	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=896.0,194.0,1029.0,315.0	dot=2.18
+1080x2343 growth	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=926.0,22.0,1058.0,154.0	dot=2.18
+1080x2343 growth	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=63.8,327.7,240.1,519.8	dot=2.18
+1080x2343 growth	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=258.1,327.7,434.4,519.8	dot=2.18
+1080x2343 growth	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=452.3,327.7,628.7,519.8	dot=2.18
+1080x2343 growth	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=646.7,327.7,822.9,519.8	dot=2.18
+1080x2343 growth	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=841.0,327.7,1017.3,519.8	dot=2.18
+1080x2343 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:grow	dx=0.0	dy=-0.1	items=2	btn=83x53	content=63x35	inner=75x42	px=63.8,547.8,293.1,693.3	dot=2.18
+1080x2343 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:offer	dx=0.0	dy=-0.1	items=1	btn=83x53	content=25x16	inner=75x42	px=305.1,547.8,534.5,693.3	dot=2.18
+1080x2343 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:mile	dx=0.0	dy=-0.1	items=1	btn=83x53	content=37x16	inner=75x42	px=546.5,547.8,775.9,693.3	dot=2.18
+1080x2343 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:log	dx=0.0	dy=-0.1	items=1	btn=83x53	content=53x16	inner=75x42	px=787.9,547.8,1017.3,693.3	dot=2.18
+1080x2343 growth	FIT PopupPanel/card/scroll/viewport/content/card:rolecard/head	dx=-57.8	dy=2.7	items=2	btn=325x44	content=72x32	frame=
+1080x2343 growth	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=618.0,194.0,751.0,315.0	dot=2.18
+1080x2343 growth	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=757.0,194.0,890.0,315.0	dot=2.18
+1080x2343 growth	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=896.0,194.0,1029.0,315.0	dot=2.18
+1080x2343 skin	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=926.0,22.0,1058.0,154.0	dot=2.18
+1080x2343 skin	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=63.8,327.7,240.1,519.8	dot=2.18
+1080x2343 skin	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=258.1,327.7,434.4,519.8	dot=2.18
+1080x2343 skin	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=452.3,327.7,628.7,519.8	dot=2.18
+1080x2343 skin	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=646.7,327.7,822.9,519.8	dot=2.18
+1080x2343 skin	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=841.0,327.7,1017.3,519.8	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:dtab:place	dx=0.0	dy=-0.1	items=1	btn=171x53	content=53x16	inner=162x42	px=63.8,547.8,534.5,693.3	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:dtab:skin	dx=0.0	dy=-0.1	items=2	btn=171x53	content=63x35	inner=162x42	px=546.5,547.8,1017.3,693.3	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.classic	dx=0.1	dy=-0.1	items=2	btn=66x67	content=50x35	inner=57x56	px=63.8,1008.6,244.9,1191.7	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.stonetower	dx=0.0	dy=-0.1	items=1	btn=66x67	content=40x16	inner=57x56	px=256.9,1008.6,438.0,1191.7	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.cream	dx=0.0	dy=-0.1	items=1	btn=66x67	content=25x49	inner=57x56	px=450.0,1008.6,631.1,1191.7	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.forest	dx=0.0	dy=-0.1	items=1	btn=66x67	content=25x32	inner=57x56	px=643.1,1008.6,824.2,1191.7	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.blossom	dx=0.0	dy=-0.1	items=2	btn=66x67	content=49x46	inner=57x56	px=836.2,1008.6,1017.3,1191.7	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.maple	dx=0.0	dy=-0.1	items=2	btn=66x80	content=49x46	inner=57x69	px=63.8,1203.7,244.9,1423.2	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.snow	dx=0.0	dy=-0.1	items=2	btn=66x80	content=49x46	inner=57x69	px=256.9,1203.7,438.0,1423.2	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.bands	dx=0.0	dy=-0.1	items=2	btn=66x80	content=49x46	inner=57x69	px=450.0,1203.7,631.1,1423.2	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.spire	dx=0.0	dy=-0.1	items=2	btn=66x80	content=49x62	inner=57x69	px=643.1,1203.7,824.2,1423.2	dot=2.18
+1080x2343 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.moonlit	dx=0.0	dy=-0.1	items=2	btn=66x80	content=43x46	inner=57x69	px=836.2,1203.7,1017.3,1423.2	dot=2.18
+1080x2343 skin	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=618.0,194.0,751.0,315.0	dot=2.18
+1080x2343 skin	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=757.0,194.0,890.0,315.0	dot=2.18
+1080x2343 skin	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=896.0,194.0,1029.0,315.0	dot=2.18
+1080x2343 settings	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=926.0,22.0,1058.0,154.0	dot=2.18
+1080x2343 settings	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=63.8,327.7,240.1,519.8	dot=2.18
+1080x2343 settings	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=258.1,327.7,434.4,519.8	dot=2.18
+1080x2343 settings	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=452.3,327.7,628.7,519.8	dot=2.18
+1080x2343 settings	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=646.7,327.7,822.9,519.8	dot=2.18
+1080x2343 settings	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=64x70	content=35x52	inner=55x59	px=841.0,327.7,1017.3,519.8	dot=2.18
+1080x2343 settings	FIT PopupPanel/card/scroll/viewport/content/link	dx=-63.7	dy=0.2	items=1	btn=347x44	content=69x17	frame=
+1080x2343 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:snd:on	dx=0.0	dy=-0.1	items=2	btn=160x53	content=63x35	inner=151x42	px=94.0,828.0,534.5,973.5	dot=2.18
+1080x2343 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:snd:off	dx=0.0	dy=-0.1	items=1	btn=160x53	content=25x16	inner=151x42	px=546.5,828.0,987.0,973.5	dot=2.18
+1080x2343 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:view:near	dx=0.0	dy=-0.1	items=1	btn=105x53	content=37x16	inner=97x42	px=94.0,1168.4,383.7,1313.9	dot=2.18
+1080x2343 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:view:normal	dx=0.0	dy=-0.1	items=2	btn=105x53	content=63x35	inner=97x42	px=395.7,1168.4,685.3,1313.9	dot=2.18
+1080x2343 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:view:wide	dx=0.0	dy=-0.1	items=1	btn=105x53	content=25x16	inner=97x42	px=697.3,1168.4,987.0,1313.9	dot=2.18
+1080x2343 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:auto	dx=0.6	dy=-0.1	items=2	btn=61x53	content=48x35	inner=53x42	px=94.0,1551.8,263.0,1697.3	dot=2.18
+1080x2343 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:spring	dx=0.0	dy=-0.1	items=1	btn=61x53	content=12x16	inner=53x42	px=275.0,1551.8,444.0,1697.3	dot=2.18
+1080x2343 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:summer	dx=0.0	dy=-0.1	items=1	btn=61x53	content=25x16	inner=53x42	px=456.0,1551.8,625.0,1697.3	dot=2.18
+1080x2343 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:autumn	dx=0.0	dy=-0.1	items=1	btn=61x53	content=25x16	inner=53x42	px=637.0,1551.8,806.0,1697.3	dot=2.18
+1080x2343 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:winter	dx=0.0	dy=-0.1	items=1	btn=61x53	content=25x16	inner=53x42	px=818.0,1551.8,987.0,1697.3	dot=2.18
+1080x2343 settings	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=618.0,194.0,751.0,315.0	dot=2.18
+1080x2343 settings	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=757.0,194.0,890.0,315.0	dot=2.18
+1080x2343 settings	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=896.0,194.0,1029.0,315.0	dot=2.18
+2112x2816 main	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=1958.0,22.0,2090.0,154.0	dot=2.18
+2112x2816 mail	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=1958.0,22.0,2090.0,154.0	dot=2.18
+2112x2816 mail	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=486.8,327.8,700.0,519.8	dot=2.18
+2112x2816 mail	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=718.1,327.8,931.4,519.8	dot=2.18
+2112x2816 mail	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=949.4,327.8,1162.7,519.8	dot=2.18
+2112x2816 mail	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1180.7,327.8,1394.0,519.8	dot=2.18
+2112x2816 mail	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1412.0,327.8,1625.3,519.8	dot=2.18
+2112x2816 mail	PopupPanel/card/scroll/viewport/content/summary/btn:readall	dx=0.0	dy=-0.1	items=1	btn=392x44	content=55x17	inner=383x33	px=517.0,664.3,1595.0,785.3	dot=2.18
+2112x2816 mail	FIT PopupPanel/card/scroll/viewport/content/letter/top	dx=4.4	dy=0.0	items=4	btn=396x44	content=377x35	frame=
+2112x2816 mail	FIT PopupPanel/card/scroll/viewport/content/letter/top	dx=4.4	dy=-0.3	items=5	btn=396x49	content=377x48	frame=
+2112x2816 mail	FIT PopupPanel/card/scroll/viewport/content/letter/top	dx=4.4	dy=-0.3	items=5	btn=396x49	content=377x48	frame=
+2112x2816 mail	FIT PopupPanel/card/scroll/viewport/content/letter/top	dx=4.4	dy=0.0	items=4	btn=396x47	content=377x47	frame=
+2112x2816 mail	FIT PopupPanel/card/scroll/viewport/content/letter/top	dx=4.4	dy=0.0	items=4	btn=396x47	content=377x47	frame=
+2112x2816 mail	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1226.0,194.0,1359.0,315.0	dot=2.18
+2112x2816 mail	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1365.0,194.0,1498.0,315.0	dot=2.18
+2112x2816 mail	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1504.0,194.0,1637.0,315.0	dot=2.18
+2112x2816 dex	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=1958.0,22.0,2090.0,154.0	dot=2.18
+2112x2816 dex	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=486.8,327.8,700.0,519.8	dot=2.18
+2112x2816 dex	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=718.1,327.8,931.4,519.8	dot=2.18
+2112x2816 dex	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=949.4,327.8,1162.7,519.8	dot=2.18
+2112x2816 dex	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1180.7,327.8,1394.0,519.8	dot=2.18
+2112x2816 dex	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1412.0,327.8,1625.3,519.8	dot=2.18
+2112x2816 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:gift	dx=0.0	dy=-0.1	items=3	btn=79x66	content=63x48	inner=71x55	px=486.8,806.3,704.8,988.1	dot=2.18
+2112x2816 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:shine	dx=0.0	dy=-0.1	items=2	btn=79x66	content=37x29	inner=71x55	px=716.9,806.3,935.0,988.1	dot=2.18
+2112x2816 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:reg	dx=0.0	dy=-0.1	items=2	btn=79x66	content=25x29	inner=71x55	px=947.0,806.3,1165.1,988.1	dot=2.18
+2112x2816 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:ship	dx=0.0	dy=-0.1	items=2	btn=79x66	content=17x29	inner=71x55	px=1177.1,806.3,1395.2,988.1	dot=2.18
+2112x2816 dex	PopupPanel/card/scroll/viewport/content/seg/btn:dex:sea	dx=0.0	dy=-0.1	items=2	btn=79x66	content=25x29	inner=71x55	px=1407.2,806.3,1625.3,988.1	dot=2.18
+2112x2816 dex	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1226.0,194.0,1359.0,315.0	dot=2.18
+2112x2816 dex	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1365.0,194.0,1498.0,315.0	dot=2.18
+2112x2816 dex	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1504.0,194.0,1637.0,315.0	dot=2.18
+2112x2816 dexsea	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=1958.0,22.0,2090.0,154.0	dot=2.18
+2112x2816 dexsea	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=486.8,327.8,700.0,519.8	dot=2.18
+2112x2816 dexsea	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=718.1,327.8,931.4,519.8	dot=2.18
+2112x2816 dexsea	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=949.4,327.8,1162.7,519.8	dot=2.18
+2112x2816 dexsea	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1180.7,327.8,1394.0,519.8	dot=2.18
+2112x2816 dexsea	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1412.0,327.8,1625.3,519.8	dot=2.18
+2112x2816 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:gift	dx=0.0	dy=-0.1	items=2	btn=79x66	content=29x29	inner=71x55	px=486.8,806.3,704.8,988.1	dot=2.18
+2112x2816 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:shine	dx=0.0	dy=-0.1	items=2	btn=79x66	content=37x29	inner=71x55	px=716.9,806.3,935.0,988.1	dot=2.18
+2112x2816 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:reg	dx=0.0	dy=-0.1	items=2	btn=79x66	content=25x29	inner=71x55	px=947.0,806.3,1165.1,988.1	dot=2.18
+2112x2816 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:ship	dx=0.0	dy=-0.1	items=2	btn=79x66	content=17x29	inner=71x55	px=1177.1,806.3,1395.2,988.1	dot=2.18
+2112x2816 dexsea	PopupPanel/card/scroll/viewport/content/seg/btn:dex:sea	dx=0.0	dy=-0.1	items=3	btn=79x66	content=63x48	inner=71x55	px=1407.2,806.3,1625.3,988.1	dot=2.18
+2112x2816 dexsea	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1226.0,194.0,1359.0,315.0	dot=2.18
+2112x2816 dexsea	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1365.0,194.0,1498.0,315.0	dot=2.18
+2112x2816 dexsea	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1504.0,194.0,1637.0,315.0	dot=2.18
+2112x2816 growth	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=1958.0,22.0,2090.0,154.0	dot=2.18
+2112x2816 growth	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=486.8,327.8,700.0,519.8	dot=2.18
+2112x2816 growth	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=718.1,327.8,931.4,519.8	dot=2.18
+2112x2816 growth	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=949.4,327.8,1162.7,519.8	dot=2.18
+2112x2816 growth	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1180.7,327.8,1394.0,519.8	dot=2.18
+2112x2816 growth	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1412.0,327.8,1625.3,519.8	dot=2.18
+2112x2816 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:grow	dx=0.0	dy=-0.1	items=2	btn=100x53	content=63x35	inner=92x42	px=486.8,547.8,762.4,693.3	dot=2.18
+2112x2816 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:offer	dx=0.0	dy=-0.1	items=1	btn=100x53	content=25x16	inner=92x42	px=774.4,547.8,1050.0,693.3	dot=2.18
+2112x2816 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:mile	dx=0.0	dy=-0.1	items=1	btn=100x53	content=37x16	inner=92x42	px=1062.0,547.8,1337.6,693.3	dot=2.18
+2112x2816 growth	PopupPanel/card/scroll/viewport/content/seg/btn:grow:log	dx=0.0	dy=-0.1	items=1	btn=100x53	content=53x16	inner=92x42	px=1349.6,547.8,1625.3,693.3	dot=2.18
+2112x2816 growth	FIT PopupPanel/card/scroll/viewport/content/card:rolecard/head	dx=-73.2	dy=2.7	items=2	btn=392x44	content=72x32	frame=
+2112x2816 growth	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1226.0,194.0,1359.0,315.0	dot=2.18
+2112x2816 growth	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1365.0,194.0,1498.0,315.0	dot=2.18
+2112x2816 growth	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1504.0,194.0,1637.0,315.0	dot=2.18
+2112x2816 skin	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=1958.0,22.0,2090.0,154.0	dot=2.18
+2112x2816 skin	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=486.8,327.8,700.0,519.8	dot=2.18
+2112x2816 skin	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=718.1,327.8,931.4,519.8	dot=2.18
+2112x2816 skin	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=949.4,327.8,1162.7,519.8	dot=2.18
+2112x2816 skin	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1180.7,327.8,1394.0,519.8	dot=2.18
+2112x2816 skin	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1412.0,327.8,1625.3,519.8	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:dtab:place	dx=0.0	dy=-0.1	items=1	btn=205x53	content=53x16	inner=196x42	px=486.8,547.7,1050.0,693.3	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:dtab:skin	dx=0.0	dy=-0.1	items=2	btn=205x53	content=63x35	inner=196x42	px=1062.0,547.7,1625.3,693.3	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.classic	dx=0.0	dy=-0.1	items=2	btn=79x64	content=63x35	inner=71x53	px=486.8,964.0,704.8,1138.9	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.stonetower	dx=0.0	dy=-0.1	items=1	btn=79x64	content=40x16	inner=71x53	px=716.9,964.0,935.0,1138.9	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.cream	dx=0.0	dy=-0.1	items=1	btn=79x64	content=53x32	inner=71x53	px=947.0,964.0,1165.1,1138.9	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.forest	dx=0.0	dy=-0.1	items=1	btn=79x64	content=53x16	inner=71x53	px=1177.1,964.0,1395.2,1138.9	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.blossom	dx=0.0	dy=-0.1	items=2	btn=79x64	content=49x46	inner=71x53	px=1407.2,964.0,1625.3,1138.9	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.maple	dx=0.0	dy=-0.1	items=2	btn=79x64	content=49x46	inner=71x53	px=486.8,1150.9,704.8,1325.9	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.snow	dx=0.0	dy=-0.1	items=2	btn=79x64	content=49x46	inner=71x53	px=716.9,1150.9,935.0,1325.9	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.bands	dx=0.0	dy=-0.1	items=2	btn=79x64	content=53x46	inner=71x53	px=947.0,1150.9,1165.1,1325.9	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.spire	dx=0.0	dy=-0.1	items=2	btn=79x64	content=53x46	inner=71x53	px=1177.1,1150.9,1395.2,1325.9	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.moonlit	dx=0.0	dy=-0.1	items=2	btn=79x64	content=53x29	inner=71x53	px=1407.2,1150.9,1625.3,1325.9	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.widelamp	dx=0.0	dy=-0.1	items=2	btn=79x80	content=53x46	inner=71x69	px=486.8,1337.9,704.8,1557.3	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.gilded	dx=0.0	dy=-0.1	items=2	btn=79x80	content=43x62	inner=71x69	px=716.9,1337.9,935.0,1557.3	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.sea	dx=0.0	dy=-0.1	items=2	btn=79x80	content=49x46	inner=71x69	px=947.0,1337.9,1165.1,1557.3	dot=2.18
+2112x2816 skin	PopupPanel/card/scroll/viewport/content/seg/btn:skin:tower.dawn	dx=0.0	dy=-0.1	items=2	btn=79x80	content=49x46	inner=71x69	px=1177.1,1337.9,1395.2,1557.3	dot=2.18
+2112x2816 skin	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1226.0,194.0,1359.0,315.0	dot=2.18
+2112x2816 skin	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1365.0,194.0,1498.0,315.0	dot=2.18
+2112x2816 skin	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1504.0,194.0,1637.0,315.0	dot=2.18
+2112x2816 settings	Hud/menu button	dx=0.0	dy=-1.2	items=1	btn=48x48	content=35x35	inner=39x37	px=1958.0,22.0,2090.0,154.0	dot=2.18
+2112x2816 settings	PopupPanel/card/tabs/tab:mail	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=486.8,327.8,700.0,519.8	dot=2.18
+2112x2816 settings	PopupPanel/card/tabs/tab:dex	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=718.1,327.8,931.4,519.8	dot=2.18
+2112x2816 settings	PopupPanel/card/tabs/tab:growth	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=949.4,327.8,1162.7,519.8	dot=2.18
+2112x2816 settings	PopupPanel/card/tabs/tab:deco	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1180.7,327.8,1394.0,519.8	dot=2.18
+2112x2816 settings	PopupPanel/card/tabs/tab:shop	dx=0.0	dy=-0.5	items=2	btn=78x70	content=35x52	inner=69x59	px=1412.0,327.8,1625.3,519.8	dot=2.18
+2112x2816 settings	FIT PopupPanel/card/scroll/viewport/content/link	dx=-79.1	dy=0.2	items=1	btn=414x44	content=69x17	frame=
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:snd:on	dx=0.0	dy=-0.1	items=2	btn=194x53	content=63x35	inner=185x42	px=517.0,828.0,1050.0,973.5	dot=2.18
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:snd:off	dx=0.0	dy=-0.1	items=1	btn=194x53	content=25x16	inner=185x42	px=1062.0,828.0,1595.0,973.5	dot=2.18
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:view:near	dx=0.0	dy=-0.1	items=1	btn=128x53	content=37x16	inner=119x42	px=517.0,1168.4,868.3,1313.9	dot=2.18
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:view:normal	dx=0.0	dy=-0.1	items=2	btn=128x53	content=63x35	inner=119x42	px=880.3,1168.4,1231.7,1313.9	dot=2.18
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:view:wide	dx=0.0	dy=-0.1	items=1	btn=128x53	content=25x16	inner=119x42	px=1243.7,1168.4,1595.0,1313.9	dot=2.18
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:auto	dx=-1.0	dy=-0.1	items=2	btn=75x53	content=55x35	inner=66x42	px=517.0,1551.8,723.0,1697.3	dot=2.18
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:spring	dx=0.0	dy=-0.1	items=1	btn=75x53	content=12x16	inner=66x42	px=735.0,1551.8,941.0,1697.3	dot=2.18
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:summer	dx=0.0	dy=-0.1	items=1	btn=75x53	content=25x16	inner=66x42	px=953.0,1551.8,1159.0,1697.3	dot=2.18
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:autumn	dx=0.0	dy=-0.1	items=1	btn=75x53	content=25x16	inner=66x42	px=1171.0,1551.8,1377.0,1697.3	dot=2.18
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:season:winter	dx=0.0	dy=-0.1	items=1	btn=75x53	content=25x16	inner=66x42	px=1389.0,1551.8,1595.0,1697.3	dot=2.18
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:clock:fast	dx=0.0	dy=-0.1	items=2	btn=194x53	content=75x35	inner=185x42	px=517.0,1892.2,1050.0,2037.7	dot=2.18
+2112x2816 settings	PopupPanel/card/scroll/viewport/content/card:set/seg/btn:clock:real	dx=0.0	dy=-0.1	items=1	btn=194x53	content=53x16	inner=185x42	px=1062.0,1892.2,1595.0,2037.7	dot=2.18
+2112x2816 settings	PopupPanel/card/head buttons/hb:gear	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1226.0,194.0,1359.0,315.0	dot=2.18
+2112x2816 settings	PopupPanel/card/head buttons/hb:sound	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1365.0,194.0,1498.0,315.0	dot=2.18
+2112x2816 settings	PopupPanel/card/head buttons/hb:close	dx=0.0	dy=-2.1	items=1	btn=48x44	content=35x35	inner=40x33	px=1504.0,194.0,1637.0,315.0	dot=2.18
