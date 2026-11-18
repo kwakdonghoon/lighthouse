@@ -51,7 +51,7 @@ namespace Lighthouse.UI
         static readonly Dictionary<string, string> trackIcon = new Dictionary<string, string> { { "lens", "pearl" }, { "garden", "seed" }, { "port", "bottle" } };
 
         /// <summary>Unity UI 전용 교체 그림(동결 HTML 표·골든은 그대로). 톱니: 상하좌우·대각 8 이빨이 대칭인 16×16, 같은 팔레트.</summary>
-        static readonly Dictionary<string, string> UnityIcons = new Dictionary<string, string>
+        public static readonly Dictionary<string, string> UnityIcons = new Dictionary<string, string>
         {
             { "gear", "gear;d=#2c3a4a,w=#c8d2e4,h=#f0f4fc,s=#9aa8c0;......dddd......|......dhhd......|..ddd.dhhd.ddd..|..dhhdhhhwdwwd..|..dhhhhhwwwwwd..|...dhhhwwwwwd...|dddhhhwwwwwwsddd|dhhhhwwddwwssssd|dhhhwwwddwsssssd|dddwwwwwwssssddd|...dwwwwssssd...|..dwwwwssssssd..|..dwwdssssdssd..|..ddd.dssd.ddd..|......dssd......|......dddd......" },
         };
