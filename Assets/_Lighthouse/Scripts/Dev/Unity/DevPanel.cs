@@ -1,4 +1,4 @@
-#if LIGHTHOUSE_DEV
+#if LIGHTHOUSE_DEV && UNITY_EDITOR
 using System;
 using System.Globalization;
 using System.Linq;
@@ -17,7 +17,9 @@ namespace Lighthouse.Dev
     /// </summary>
     public sealed class DevPanel : MonoBehaviour
     {
-        bool open; Vector2 scroll; string log = ""; float scale = 1f;
+        bool open; Vector2 scroll; string log = ""; float scale = 1f, zoom = -1f;
+        const string ZoomKey = "lighthouse.dev.zoom";
+        void SetZoom(float z) { zoom = Mathf.Clamp(z, 0.8f, 2.6f); PlayerPrefs.SetFloat(ZoomKey, zoom); }
         string giftN = "10", lvN = "10", guidedN = "100", startDays = "30", awaySec = "14400";
         string simShips = "468", simDays = "120", simSeed = "1", simVisit = "1";
         GameApp App => GameApp.Instance;
@@ -37,13 +39,20 @@ namespace Lighthouse.Dev
 
         void OnGUI()
         {
-            scale = Mathf.Clamp(Screen.dpi > 0 ? Screen.dpi / 110f : 1.5f, 1f, 3f);
+            // 글자 크기: 화면 DPI 기준(최소 1.6배)에 사용자가 고른 배율(＋/－, 저장됨)을 곱한다. 게임 화면이 작게 나와도 읽을 수 있게 처음부터 크게 잡는다.
+            if (zoom <= 0f) zoom = PlayerPrefs.GetFloat(ZoomKey, 1.4f);
+            scale = Mathf.Clamp((Screen.dpi > 0 ? Screen.dpi / 110f : 1.5f) * zoom, 1.6f, 4f);
             GUI.matrix = Matrix4x4.Scale(new Vector3(scale, scale, 1));
             float sw = Screen.width / scale, sh = Screen.height / scale;
             if (GUI.Button(new Rect(sw - 52, 4, 48, 24), open ? "닫기" : "DEV")) open = !open;
             if (!open) return;
-            var app = App; float w = Mathf.Min(360, sw - 8);
+            var app = App; float w = Mathf.Min(sw - 8, Mathf.Min(360, Mathf.Max(260, sw * 0.7f)));      // 게임 화면이 좁을 때도 화면 전체를 덮지 않게 최대 70%
             GUILayout.BeginArea(new Rect(sw - w - 4, 32, w, sh - 40), GUI.skin.box);
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("글자 크기 x" + zoom.ToString("0.0", CultureInfo.InvariantCulture), GUILayout.Width(110));
+            if (GUILayout.Button("－", GUILayout.Width(36))) SetZoom(zoom - 0.2f);
+            if (GUILayout.Button("＋", GUILayout.Width(36))) SetZoom(zoom + 0.2f);
+            GUILayout.EndHorizontal();
             if (app == null || app.Ctx == null) { GUILayout.Label("게임이 아직 시작되지 않았어요."); GUILayout.EndArea(); return; }
             scroll = GUILayout.BeginScrollView(scroll);
             var ctx = app.Ctx; var loop = app.Loop;

@@ -45,7 +45,7 @@ namespace Lighthouse.App
         string lastSkinKey; bool restarting; LoadNotice pendingNotice; Lighthouse.Platform.ScreenReaderBridge a11y;
         public ITextTransfer Transfer { get; private set; }
         public SaveStore Store => store;
-#if LIGHTHOUSE_DEV
+#if LIGHTHOUSE_DEV && UNITY_EDITOR
         // ----- 개발용 훅 (Lighthouse.Dev 의 DevPanel 이 쓴다. LIGHTHOUSE_DEV 가 없으면 컴파일에서 빠진다) -----
         public static DevClock DevClockRef;
         public static float DevTimeMul = 1;             // 1 이면 실제 속도. 2 이상이면 시계와 루프를 함께 빠르게 돌린다
@@ -74,7 +74,7 @@ namespace Lighthouse.App
             var src = new ResourcesDataSource();
             T = DataLoader.Load(src); str = UiStrings.Parse(src.ReadText("ko/ui.json"));
             Clock = ManualClockMode ? (IClock)new ManualClock(ManualStartMs > 0 ? ManualStartMs : new SystemClock().NowMs, new SystemClock().OffsetMinutes(new SystemClock().NowMs)) : new SystemClock();
-#if LIGHTHOUSE_DEV
+#if LIGHTHOUSE_DEV && UNITY_EDITOR
             if (!ManualClockMode) { DevClockRef = new DevClock(new SystemClock(), DevClockRef != null ? DevClockRef.ExtraMs : 0); Clock = DevClockRef; }      // 개발용: 배속·시간 건너뛰기(출시 빌드에는 이 줄이 없다)
 #endif
             SaveDir = !string.IsNullOrEmpty(SaveDirOverride) ? SaveDirOverride : Application.persistentDataPath;
@@ -229,7 +229,7 @@ namespace Lighthouse.App
             if (!booted || restarting) return;
             var sw = Stopwatch.StartNew();
             float rdt = Mathf.Min(0.1f, Time.unscaledDeltaTime);
-#if LIGHTHOUSE_DEV
+#if LIGHTHOUSE_DEV && UNITY_EDITOR
             if (!ManualClockMode && DevTimeMul > 1.001f && DevClockRef != null)
             {
                 // 개발용 배속: 시계를 (배속-1)×dt 만큼 더 보내고 루프를 배속×dt 로 0.1초씩 나눠 돌린다 (ManualClockMode 와 같은 방식)

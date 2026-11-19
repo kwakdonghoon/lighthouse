@@ -46,7 +46,7 @@ namespace Lighthouse.Tests
             var path = guids.Select(UnityEditor.AssetDatabase.GUIDToAssetPath).FirstOrDefault(p => p.EndsWith("/Dev/Lighthouse.Dev.asmdef"));
             Assert.IsNotNull(path, "Lighthouse.Dev.asmdef 를 찾지 못했다");
             string json = File.ReadAllText(path);
-            StringAssert.Contains("\"defineConstraints\": [\"LIGHTHOUSE_DEV\"]", json, "개발 어셈블리는 LIGHTHOUSE_DEV 가 있을 때만 컴파일된다");
+            StringAssert.Contains("\"defineConstraints\": [\"LIGHTHOUSE_DEV\", \"UNITY_EDITOR\"]", json, "개발 어셈블리는 LIGHTHOUSE_DEV 가 있고 Unity 에디터일 때만 컴파일된다(플레이어 빌드에는 들어가지 않는다)");
             StringAssert.Contains("\"autoReferenced\": false", json);
         }
 
