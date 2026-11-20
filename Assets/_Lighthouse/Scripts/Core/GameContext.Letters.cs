@@ -254,8 +254,23 @@ namespace Lighthouse.Core
                 AddGift(g, new AddGiftOpts { NoShiny = true });
                 letter = AddLetter(new Letter { Id = S.LetterId++, Ship = r.Ship, Cap = r.Cap, Gift = g, T = Clock.NowMs, Read = false, Reg = r.Id, Region = r.Region ?? "home", Text = r.Story[idx], Sign = r.Ship + "호 " + r.Cap + " 드림" });
             }
+            else if (rec.V == Math.Floor(rec.V) && rec.V > T.Bal.VisitAt[T.Bal.VisitAt.Length - 1] && (rec.V - T.Bal.VisitAt[T.Bal.VisitAt.Length - 1]) % GreetEvery == 0)
+                letter = GreetingLetter(r);
             if (!quiet) Persist();
             return letter;
+        }
+
+        /// <summary>이야기를 다 들은 단골이 이 번째 방문마다 안부 편지를 보낸다(마지막 이야기 이후 10·20·30…번째). 일반 편지로 쌓이고(남겨 두지 않음) 오래되면 지워진다.</summary>
+        public const int GreetEvery = 10;
+
+        Letter GreetingLetter(RegularDef r)
+        {
+            string g = RollGift(r.Type);
+            AddGift(g, new AddGiftOpts { NoShiny = true });
+            var parts = LetterParts();
+            string line = r.Lines != null && r.Lines.Length > 0 ? " " + r.Lines[(int)Math.Floor(Rng.NextDouble() * r.Lines.Length)] : "";
+            parts.Insert(1, r.Ship + "호 " + r.Cap + "입니다." + line);
+            return AddLetter(new Letter { Id = S.LetterId++, Ship = r.Ship, Cap = r.Cap, Gift = g, T = Clock.NowMs, Read = false, Region = r.Region ?? "home", Text = FillLetter(parts, g, false), Sign = r.Ship + "호 " + r.Cap + " 드림" });
         }
 
         /// <summary>한 번이라도 만난 단골.</summary>

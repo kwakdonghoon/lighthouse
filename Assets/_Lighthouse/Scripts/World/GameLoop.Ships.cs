@@ -113,7 +113,9 @@ namespace Lighthouse.World
             if (l != null)
             {
                 MailAlertUntil = Perf + 4000; Say("mail");
-                SendToast(Str.F("world.regLetter", r.Cap), v == Ctx.T.Bal.GiftAt ? Str.Get("world.regSpecial") : Str.F("world.regVisit", r.Ship, v));
+                var vb = Ctx.T.Bal.VisitAt;
+                if (v > vb[vb.Length - 1]) SendToast(Str.F("world.regGreet", r.Cap), Str.F("world.regVisit", r.Ship, v));      // 이야기를 다 들은 단골의 안부 편지
+                else SendToast(Str.F("world.regLetter", r.Cap), v == Ctx.T.Bal.GiftAt ? Str.Get("world.regSpecial") : Str.F("world.regVisit", r.Ship, v));
             }
             Ctx.NotifyChanged();
         }
