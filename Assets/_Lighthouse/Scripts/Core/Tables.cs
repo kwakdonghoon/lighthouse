@@ -44,6 +44,11 @@ namespace Lighthouse.Core
         public int Stage; public string[] Story;
         public double Sp = 1; public string[] Lines = new string[0];       // M4: 배 속도 배율·말풍선 대사 (원본 r.sp, r.lines; 데이터에는 이미 있었다)
     }
+    /// <summary>희귀 손님(Unity 전용 U20): 조건이 맞을 때 아주 가끔 오는 한 번뿐인 인연. Cond = night|dawn|rain|fog|winter|summer|autumn|spring 중 하나(밤+계절은 "night+winter" 처럼 +로 잇는다).</summary>
+    public sealed class RareGuestDef
+    {
+        public string Id, Ship, Cap, Type, Cond, Hint, Gift, Text; public int Stage; public string[] Lines = new string[0];
+    }
     public sealed class SeasonGuestDef { public string Season, Ship, Cap, Text; }
     public sealed class AnnivDef { public int Day; public string Gift, Ship, Cap, Text; }   // Gift: null | "normal" | "shiny"
     public sealed class FinaleDef { public string Nm, Sign, Head, None, SomeSuffix, Tail; public int SomeUntil; }
@@ -170,6 +175,7 @@ namespace Lighthouse.Core
         // 글
         public LetterTexts Texts = new LetterTexts();
         public List<DiaryDef> Diary = new List<DiaryDef>();
+        public List<RareGuestDef> RareGuests = new List<RareGuestDef>(); public Dictionary<string, RareGuestDef> RareById = new Dictionary<string, RareGuestDef>();
         public List<RegularDef> Regulars = new List<RegularDef>(); public Dictionary<string, RegularDef> RegularById = new Dictionary<string, RegularDef>();
         public List<SeasonGuestDef> SeasonGuests = new List<SeasonGuestDef>(); public List<AnnivDef> Anniv = new List<AnnivDef>();
         public List<KeyValuePair<string, string>> FinaleVoices = new List<KeyValuePair<string, string>>(); public FinaleDef Finale = new FinaleDef();

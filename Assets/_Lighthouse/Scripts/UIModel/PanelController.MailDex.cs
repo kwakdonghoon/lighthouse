@@ -204,6 +204,15 @@ namespace Lighthouse.UI.Model
                 }
                 else r.Add(new Block(BK.Row) { Style = "ship", Locked = true, Icon = null, Text = "???", Sub = rg.Stage > Tier() ? StageFor(rg.Stage) + S_("dex.stageMeet") : S_("dex.notYet") });
             }
+            if (T.RareGuests.Count > 0)      // 드문 손님: 만나면 이름이, 못 만났으면 만날 때(힌트)가 보인다
+            {
+                r.Add(Block.H(S_("dex.rareHead")));
+                foreach (var rg in T.RareGuests)
+                {
+                    if (Ctx.RareMet(rg.Id)) r.Add(new Block(BK.Row) { Style = "reg", Icon = "ship:" + rg.Type, Text = rg.Ship + S_("mail.shipSuffix") + " · " + rg.Cap, Extra = "✦", Sub = S_("dex.rareMet") });
+                    else r.Add(new Block(BK.Row) { Style = "ship", Locked = true, Icon = null, Text = "???", Sub = rg.Stage > Tier() ? StageFor(rg.Stage) + S_("dex.stageMeet") : rg.Hint });
+                }
+            }
         }
 
         // ================= 그동안의 소식 (원본 renderNews) =================

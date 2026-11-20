@@ -30,6 +30,11 @@ namespace Lighthouse.World
             Ships.Add(sh);
             var reg = Ctx.PickRegular();                                    // 가끔 이름과 사연이 있는 단골 손님이 온다 (규칙 난수)
             if (reg != null) { sh.Reg = reg.Id; sh.Type = reg.Type; sh.Sp *= reg.Sp; }
+            else if (!mid)                                                  // 드문 손님: 조건(밤·비·안개·겨울 밤 …)이 맞을 때 아주 가끔
+            {
+                var rare = Ctx.PickRareGuest(rareRnd, id => Ships.Any(s => s.Rare == id));
+                if (rare != null) { sh.Rare = rare.Id; sh.Type = rare.Type; }
+            }
             return sh;
         }
 
@@ -93,6 +98,7 @@ namespace Lighthouse.World
             if (rw.Letter != null) MailAlertUntil = Perf + 3200;
             Say(rw.Letter != null ? "mail" : "ding");
             if (sh.Reg != null) VisitRegularAnnounce(sh);
+            if (sh.Rare != null) RareAnnounce(sh, ly, ls);
             if (Ctx.Wx == "fog") Wx.Count++;
             if (sh.Sos)                                                     // 구조 성공: 선물이 더 도착한다
             {
@@ -120,6 +126,19 @@ namespace Lighthouse.World
             Ctx.NotifyChanged();
         }
 
+        /// <summary>드문 손님 안내 완료: 첫 만남은 편지와 빛나는 선물, 다시 만나면 선물 하나.</summary>
+        void RareAnnounce(Ship sh, double ly, double ls)
+        {
+            if (!Ctx.T.RareById.TryGetValue(sh.Rare, out var d)) return;
+            bool first = !Ctx.RareMet(d.Id);
+            var l = Ctx.MeetRare(d.Id, out string g);
+            if (g != null) Pops.Add(new Pop { X = sh.X, Y = ly - 30 * ls, Gift = g });
+            if (l != null) MailAlertUntil = Perf + 4000;
+            Say(first ? "level" : "ding");
+            SendToast(Str.Get(first ? "world.rareFirst" : "world.rareAgain"), Str.F(first ? "world.rareFirstSub" : "world.rareAgainSub", d.Ship));
+            Ctx.NotifyChanged();
+        }
+
         // ================= 탭 (원본 tapAt 5123행) =================
         static string PickOf(string[] a, double r) => a[Math.Min(a.Length - 1, (int)(r * a.Length))];
         string[] Lines(string key) => Str.Get(key).Split('|');
@@ -144,7 +163,8 @@ namespace Lighthouse.World
                     for (int k = 0; k < 6; k++) Fx.Add(new Twinkle { X = sh.X, Y = ly - 16 * ls, Vx = (R() - 0.5) * 18, Vy = -6 - R() * 10, Life = 0.9 });
                     var reg = sh.Reg != null ? Ctx.RegById(sh.Reg) : null;
                     var say = sh.Done ? Lines("world.sayDone") : Ctx.Night ? Lines("world.sayNight") : Lines("world.sayDay");
-                    ShowBubble(reg != null && reg.Lines.Length > 0 ? reg.Ship + Str.Get("world.shipSuffix") + " · " + PickOf(reg.Lines, R()) : PickOf(say, R()), sh, false);
+                    var rare = sh.Rare != null && Ctx.T.RareById.TryGetValue(sh.Rare, out var rd) && rd.Lines.Length > 0 ? rd : null;
+                    ShowBubble(reg != null && reg.Lines.Length > 0 ? reg.Ship + Str.Get("world.shipSuffix") + " · " + PickOf(reg.Lines, R()) : rare != null ? rare.Ship + Str.Get("world.shipSuffix") + " · " + PickOf(rare.Lines, R()) : PickOf(say, R()), sh, false);
                     return;
                 }
             }

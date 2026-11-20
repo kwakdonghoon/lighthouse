@@ -48,6 +48,7 @@ namespace Lighthouse.World
         public event Action Celebrated;                         // 승급 불꽃
         public event Action<string> Log;                        // 시험·진단용
 
+        readonly Random rareRnd = new Random();               // 희귀 손님 추첨 전용(규칙 난수·원본 동등 기록과 분리)
         int shipId; double spawnIn = 4, reefGiftAt, nextDolphin = 14, nextRescue, sirenAt, finaleHold;
 
         public GameLoop(GameContext ctx, UiStrings str, IRng fxRng)

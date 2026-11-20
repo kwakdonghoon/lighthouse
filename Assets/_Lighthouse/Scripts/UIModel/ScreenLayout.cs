@@ -113,6 +113,7 @@ namespace Lighthouse.UI.Model
             foreach (var r in T.Ranks) Add(r.Name);
             foreach (var d in T.Diary) Add(d.Text);
             foreach (var r in T.Regulars) { Add(r.Ship); Add(r.Cap); if (r.Story != null) foreach (var s in r.Story) Add(s); if (r.Lines != null) foreach (var s in r.Lines) Add(s); }      // Lines = 말풍선 대사(M4 에서 늘어난 필드; 빠뜨리면 꿈·닌·죠 글리프가 비었다)
+            foreach (var g in T.RareGuests) { Add(g.Ship); Add(g.Cap); Add(g.Text); Add(g.Hint); foreach (var s in g.Lines) Add(s); }
             foreach (var s in T.SeasonGuests) { Add(s.Cap); Add(s.Text); }
             foreach (var a in T.Anniv) { Add(a.Cap); Add(a.Text); }
             Add(T.Finale.Nm); Add(T.Finale.Sign); Add(T.Finale.Head); Add(T.Finale.None); Add(T.Finale.SomeSuffix); Add(T.Finale.Tail);

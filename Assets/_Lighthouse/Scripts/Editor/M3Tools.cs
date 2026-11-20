@@ -181,7 +181,7 @@ namespace Lighthouse.EditorTools
 
         // ---------- ④ 캡처·감사 ----------
         sealed class Res { public string Name; public int DpW, DpH; public string[] States; }
-        static readonly string[] AllStates = { "main", "mail", "dex", "dexsea", "growth", "offer", "deco", "skin", "shop", "settings", "news", "title", "photo", "ad", "tip" };
+        static readonly string[] AllStates = { "main", "mail", "dex", "dexsea", "dexreg", "growth", "offer", "deco", "skin", "shop", "settings", "news", "title", "photo", "ad", "tip" };
         static readonly string[] SomeStates = { "main", "dex", "deco", "shop", "settings", "title" };
 
         public static void Step4_Capture()
@@ -312,6 +312,7 @@ namespace Lighthouse.EditorTools
                 case "mail": c.Open(PanelMode.Mail); var first = ctx.S.Letters.FirstOrDefault(); if (first != null) c.Act("letter:" + first.Id.ToString("0")); break;
                 case "dex": c.Open(PanelMode.Dex); break;
                 case "dexsea": c.Open(PanelMode.Dex); c.Act("dex:sea"); break;
+                case "dexreg": ctx.MeetRare("moonpeddler", out _); c.Open(PanelMode.Dex); c.Act("dex:reg"); break;
                 case "growth": c.Open(PanelMode.Growth); c.Act("rolebox"); c.Act("trk:lens"); break;
                 case "offer": c.Open(PanelMode.Growth); c.Act("grow:offer"); break;
                 case "deco": c.Open(PanelMode.Deco); c.Act("zone:front"); { var o = DecorRules.ZoneOpen(ctx.T, "front", ctx.Stage, ctx.LvlOf("garden")); if (o.Count > 0) { c.Act("slot:" + o[0].Id); c.Act("put:flower_planter"); if (o.Count > 1) c.Act("slot:" + o[1].Id); } } break;

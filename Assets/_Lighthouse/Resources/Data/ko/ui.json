@@ -120,7 +120,7 @@
   "world.fogEnd": "안개가 걷혔어요", "world.fogEndSub": "사이렌 덕분에 {0}척이 무사히 지나갔어요", "world.fogEndSub0": "사이렌이 멀리까지 울렸어요", "world.snowEnd": "눈이 그쳤어요", "world.snowEndSub": "하늘이 맑게 갰어요",
   "world.rainEnd": "비가 그쳤어요", "world.rainEndNight": "별이 더 맑아졌어요", "world.rainEndDay": "하늘에 무지개가 떴어요", "world.bonusSub": "{0} · {1}을(를) 받았어요",
   "world.sos": "표류하는 배가 보여요", "world.sosSub": "빛을 비추면 길을 찾아요. 그냥 둬도 괜찮아요.", "world.rescued": "표류하던 배를 무사히 구했어요", "world.rescuedSub": "선물이 더 도착했어요",
-  "world.regLetter": "{0}의 이야기 편지가 도착했어요", "world.regGreet": "{0}의 안부 편지가 도착했어요", "world.regSpecial": "특별한 선물이 함께 왔어요", "world.regVisit": "{0}호 · {1}번째 방문", "world.shipSuffix": "호",
+  "world.regLetter": "{0}의 이야기 편지가 도착했어요", "world.regGreet": "{0}의 안부 편지가 도착했어요", "world.rareFirst": "드문 손님이 들렀어요", "world.rareFirstSub": "{0}호 · 편지와 빛나는 선물을 두고 갔어요", "world.rareAgain": "그 드문 손님이 또 왔어요", "world.rareAgainSub": "{0}호 · 선물을 두고 갔어요", "dex.rareHead": "드문 손님", "dex.rareMet": "만났어요 · 편지는 편지함에 남겨 뒀어요", "world.regSpecial": "특별한 선물이 함께 왔어요", "world.regVisit": "{0}호 · {1}번째 방문", "world.shipSuffix": "호",
   "world.sayDay": "날씨가 참 좋네요|순풍이에요!|갈매기가 따라와요|등대가 예쁘네요|고마워요!",
   "world.sayNight": "오늘 밤 바다가 고요하네요|등대 불빛이 따뜻해요|덕분에 길이 보여요|별이 정말 많네요|고마워요!",
   "world.sayDone": "덕분에 무사히 지나가요|고마워요, 등대지기님!|불빛이 길을 알려 줬어요|이제 마음이 놓여요",

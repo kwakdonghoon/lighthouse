@@ -276,6 +276,48 @@ namespace Lighthouse.Core
         /// <summary>한 번이라도 만난 단골.</summary>
         public List<string> MetRegulars() => T.Regulars.Where(r => RegVisits(r.Id) > 0).Select(r => r.Id).ToList();
 
+        // ================= 희귀 손님 (Unity 전용 U20) =================
+        /// <summary>조건이 맞는 배가 새로 올 때 이 확률로 희귀 손님이 끼어든다. 이미 만난 손님은 훨씬 드물게 다시 온다.</summary>
+        public const double RareChance = 0.05, RareRepeatChance = 0.015;
+
+        /// <summary>만난 적 있나: 첫 만남에 남겨 둔 편지(keep = "rare", 보낸 배 이름이 손님)가 곧 기록이다(저장 구조를 늘리지 않는다. keep 종류는 balance.json keepKinds).</summary>
+        public bool RareMet(string id)
+        {
+            if (!T.RareById.TryGetValue(id, out var d)) return false;
+            return S.Letters.Any(l => l.Ship == d.Ship && l.Keep != null && l.Keep.Type == Newtonsoft.Json.Linq.JTokenType.String && (string)l.Keep == "rare");
+        }
+
+        public bool RareCondOk(string cond)
+        {
+            foreach (var c in (cond ?? "").Split('+'))
+            {
+                bool ok = c == "night" ? Night : c == "rain" ? Wx == "rain" : c == "fog" ? Wx == "fog" : c == CurSeason();
+                if (!ok) return false;
+            }
+            return true;
+        }
+
+        /// <summary>pickRare: 지금 조건·등급에 맞고 바다에 없는 희귀 손님 중 하나를 확률로 고른다. 규칙 난수를 쓰지 않아 원본 동등 기록을 건드리지 않는다.</summary>
+        public RareGuestDef PickRareGuest(Random rnd, Func<string, bool> onSea = null)
+        {
+            if (Sim || T.RareGuests.Count == 0) return null;
+            var c = T.RareGuests.Where(r => Tier() >= r.Stage && RareCondOk(r.Cond) && !(onSea != null && onSea(r.Id))).ToList();
+            if (c.Count == 0) return null;
+            var d = c[(int)Math.Floor(rnd.NextDouble() * c.Count)];
+            return rnd.NextDouble() < (RareMet(d.Id) ? RareRepeatChance : RareChance) ? d : null;
+        }
+
+        /// <summary>meetRare: 첫 만남은 남겨 두는 편지 + 빛나는 선물, 다시 만나면 평범한 선물 하나. 첫 만남이면 편지를 돌려준다.</summary>
+        public Letter MeetRare(string id, out string gift)
+        {
+            gift = null; if (!T.RareById.TryGetValue(id, out var d)) return null;
+            if (RareMet(id)) { gift = RollGift("trade"); AddGift(gift, new AddGiftOpts { NoShiny = true }); Persist(); return null; }
+            gift = d.Gift ?? RollGift("trade");
+            AddGift(gift, new AddGiftOpts { Shiny = true });
+            var l = AddLetter(new Letter { Id = S.LetterId++, Ship = d.Ship, Cap = d.Cap, Gift = gift, T = Clock.NowMs, Read = false, Region = "home", Shiny = true, Keep = new Newtonsoft.Json.Linq.JValue("rare"), Text = d.Text, Sign = d.Ship + "호 " + d.Cap + " 드림" });
+            Persist(); return l;
+        }
+
         // ================= 계절 손님·기념일·완결 편지 =================
         Letter MkGuestLetter(string ship, string cap, string text, bool isSeason, long now, string keep, string gift, bool? shiny)
             => AddLetter(new Letter

@@ -8,7 +8,7 @@ namespace Lighthouse.World
     public sealed class Ship
     {
         public int Id, Lane, Dir;
-        public string Type, Reg;
+        public string Type, Reg, Rare;
         public double Ph, Guide, Need = 1, X, Sp, Sp0, Wave, DoneAge, DodgeT, DodgeDir, Yo, RestT, Lit;
         public bool Done, WillRest, Rested, Reefed, Sos;
     }

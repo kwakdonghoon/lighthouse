@@ -113,6 +113,8 @@ namespace Lighthouse.Data
 
             var rg = Read("ko/regulars.json");
             foreach (JObject o in (JArray)rg["regulars"]) { var d = new RegularDef { Id = S(o["id"]), Ship = S(o["ship"]), Cap = S(o["cap"]), Type = S(o["type"]), Gift = S(o["gift"]), Region = S(o["region"]), Stage = (int)o["stage"], Story = Strs(o["story"]), Sp = o["sp"] != null ? D(o["sp"]) : 1, Lines = o["lines"] != null ? Strs(o["lines"]) : new string[0] }; T.Regulars.Add(d); T.RegularById[d.Id] = d; }
+            if (rg["rareGuests"] is JArray rgs)
+                foreach (JObject o in rgs) { var d = new RareGuestDef { Id = S(o["id"]), Ship = S(o["ship"]), Cap = S(o["cap"]), Type = S(o["type"]), Cond = S(o["cond"]), Hint = S(o["hint"]), Gift = o["gift"] != null ? S(o["gift"]) : null, Text = S(o["text"]), Stage = (int)o["stage"], Lines = o["lines"] != null ? Strs(o["lines"]) : new string[0] }; T.RareGuests.Add(d); T.RareById[d.Id] = d; }
             foreach (JObject o in (JArray)rg["seasonGuests"]) T.SeasonGuests.Add(new SeasonGuestDef { Season = S(o["season"]), Ship = S(o["ship"]), Cap = S(o["cap"]), Text = S(o["text"]) });
             foreach (JObject o in (JArray)rg["annivLetters"]) T.Anniv.Add(new AnnivDef { Day = (int)o["day"], Gift = S(o["gift"]), Ship = S(o["ship"]), Cap = S(o["cap"]), Text = S(o["text"]) });
             foreach (JObject o in (JArray)rg["finaleVoices"]) T.FinaleVoices.Add(new KeyValuePair<string, string>(S(o["id"]), S(o["text"])));

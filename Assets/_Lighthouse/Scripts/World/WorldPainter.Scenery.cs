@@ -416,7 +416,7 @@ namespace Lighthouse.World
                     OvQ(x - 1, y - 7, 3, 5, red); OvQ(x - 1, y - 1, 3, 2, red); OvQ(x, y - 6, 1, 3, Hx("#fff0e8"));
                 }
                 if (sh.RestT > 0) { var ic = Icon("anchor"); co.Put(ic, x - 4 - ic.Ax, JsMath.Round(fy - 34 * ls) + OY - ic.Ay, 1); }
-                if (sh.Reg != null) { var ic = Icon("star"); co.Put(ic, x - 4 - ic.Ax, JsMath.Round(fy - ShipBaker.Design(sh.Type, sh.Lane).Oy - 11 - Math.Floor(t * 2) % 2) + OY - ic.Ay, 1); }      // 단골 손님 표시
+                if (sh.Reg != null || sh.Rare != null) { var ic = Icon("star"); co.Put(ic, x - 4 - ic.Ax, JsMath.Round(fy - ShipBaker.Design(sh.Type, sh.Lane).Oy - 11 - Math.Floor(t * 2) % 2) + OY - ic.Ay, 1); }      // 단골 손님 표시
             }
         }
 
