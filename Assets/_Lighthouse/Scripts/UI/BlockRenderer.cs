@@ -88,7 +88,7 @@ namespace Lighthouse.UI
         // ---------- 단추 ----------
         void ButtonBlock(Transform p, Block b) { MakeButton(p, b, false); }
 
-        Selectable_ MakeButton(Transform p, Block b, bool inSeg, bool check = false)
+        Selectable_ MakeButton(Transform p, Block b, bool inSeg, bool check = false, bool tight = false)
         {
             string frame = "btn", pressed = "btn_p"; Color tc = Ink; bool link = b.Style == "tbtn" || b.Style == "txt";
             if (b.Disabled) { frame = "btn_d"; pressed = null; tc = UiTheme.Soft; }
@@ -108,12 +108,12 @@ namespace Lighthouse.UI
             var g = button.GetComponent<Image>();
             if (b.Locked && !b.On) g.color = new Color(1, 1, 1, 0.78f);
             if (!string.IsNullOrEmpty(sub)) Kit.Text(button.transform, sub, 11f, b.On ? UiTheme.OnGold : UiTheme.Soft, false, TextAlignmentOptions.Center, "sub");
-            if (check && inSeg && b.On && string.IsNullOrEmpty(sub))      // 선택된 칸: 색뿐 아니라 체크 표시도 붙인다(색만으로 구분하지 않기). 칸이 넓은(3칸 이하)·한 줄 단추에만 — 좁은 칸·2줄 칸에서는 글자와 겹친다
+            if (check && inSeg && b.On && (tight ? UiRoot.CanvasW >= 360f : string.IsNullOrEmpty(sub)))      // 4칸 이상은 폭 360 이상에서만(320 폭 5칸은 글자와 겹쳐 색+테두리로만 구분)      // 선택된 칸: 색뿐 아니라 체크 표시도 붙인다(색만으로 구분하지 않기). 칸이 넓은(3칸 이하)·한 줄 단추에만 — 좁은 칸·2줄 칸에서는 글자와 겹친다
             {
                 // 글자 배치(가운데 정렬)를 건드리지 않도록 단추 오른쪽 위 모서리에 얹는다(레이아웃 제외, 이름이 badge 로 시작해 가운데 검사에서 빠진다)
                 var ck = Kit.IconImage(button.transform, "check"); ck.name = "badge:check";
                 var ds = ck.GetComponent<DotSize>(); ds.Mult = 1; ds.ApplyDot(UiRoot.CurrentDot); ck.GetComponent<LayoutElement>().ignoreLayout = true;
-                var cr = ck.rectTransform; cr.anchorMin = cr.anchorMax = cr.pivot = new Vector2(1, 1); float cd = UiRoot.CurrentDot; cr.sizeDelta = new Vector2(8 * cd, 8 * cd); cr.anchoredPosition = new Vector2(-3 * cd, -4 * cd);
+                var cr = ck.rectTransform; cr.anchorMin = cr.anchorMax = cr.pivot = new Vector2(1, 1); float cd = UiRoot.CurrentDot; cr.sizeDelta = new Vector2(8 * cd, 8 * cd); cr.anchoredPosition = tight ? new Vector2(-1 * cd, -1 * cd) : new Vector2(-3 * cd, -4 * cd);      // 4칸 이상(좁은 칸)은 모서리에 바짝 붙여 글자와 덜 겹치게
             }
             if (b.Disabled) button.interactable = false;
             else if (b.Act != null) { string a = b.Act; button.onClick.AddListener(() => onAct(a)); button.gameObject.AddComponent<ActTag>().Act = a; NavNone(button, a); }
@@ -147,7 +147,7 @@ namespace Lighthouse.UI
             var grid = Kit.Rect("seg", p); var fc = grid.gameObject.AddComponent<FixedColumnsLayout>(); fc.Columns = cols; fc.SpacingDots = 2; fc.MinCellHeight = 44f; fc.ApplyDot(UiRoot.CurrentDot);
             foreach (var k in b.Kids)
             {
-                var s = MakeButton(grid, k, true, cols <= 3);
+                var s = MakeButton(grid, k, true, true, cols > 3);
                 if (cols >= 5 && UiRoot.CanvasW < 360f) { var lt = Kit.LabelOf(s.Btn); if (lt != null) lt.fontSize = 12.5f; }      // 좁은 화면 5칸: 한 단어가 칸 폭에 닿지 않게 한 단계 줄인다
             }
         }
