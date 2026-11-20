@@ -151,7 +151,7 @@ namespace Lighthouse.Tests
             for (int i = 0; i < 300; i++) { e.Sfx(SynthEngine.SfxNames[i % 30]); sc.Dusk = (i % 10) / 10.0; e.SetScene(sc); System.Threading.Thread.Sleep(1); }
             // 요청 300번이 끝난 뒤에도 렌더 스레드가 1초어치(44100표본)를 돌 때까지 기다린다(최대 20초). 다른 시험과 함께 돌 때 스레드가 느리게 시작해도 시험이 시간에 좌우되지 않게(통합 단계에서 32768 로 실패한 적이 있다)
             var until = System.Diagnostics.Stopwatch.StartNew(); while (System.Threading.Volatile.Read(ref rendered) <= 44100 && until.Elapsed.TotalSeconds < 20) System.Threading.Thread.Sleep(5);
-            stop = true; th.Join(); Assert.Greater(rendered, 44100, "렌더가 돌았다"); Assert.Less(e.ActiveVoices, 220);
+            stop = true; th.Join(); Assert.Greater(rendered, 44100, "렌더가 돌았다"); Assert.LessOrEqual(e.ActiveVoices, 220, "소리 풀 상한(220)을 넘지 않는다");      // 렌더 스레드가 느리면 풀이 딱 가득 찰 수 있다(출시 구성 시험에서 220 으로 실패). 상한 자체를 넘지 않으면 된다
         }
 
         [Test]

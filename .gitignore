@@ -51,3 +51,9 @@ Tools/*dotnet/obj/
 # G2 tool build outputs
 Tools/g2tool/bin/
 Tools/g2tool/obj/
+
+# UI 캡처·감사 결과: 반복 실행분은 올리지 않는다(남길 비교 캡처만 git add -f 로 추가)
+/Tools/ui_icon_results/*/
+!/Tools/ui_icon_results/final/
+!/Tools/ui_icon_results/order5/
+/Tools/unity.lock
