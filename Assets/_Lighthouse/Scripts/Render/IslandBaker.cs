@@ -222,6 +222,44 @@ namespace Lighthouse.Render
             S.Box(a - 0.62, b - 0.12, 1.05, 0.24, 0.24, 0.5, m); S.Box(a + 0.38, b - 0.12, 1.05, 0.24, 0.24, 0.5, m); S.Box(a - 0.38, b - 0.12, 0.8, 0.76, 0.24, 0.24, m);
         }
 
+        // ---- 정원 레벨이 상한(6)을 넘은 뒤에 하나씩 서는 풍경 조각(U23). env.TreeLv(실제 정원 레벨)가 12·16·20·24 일 때 ----
+        static void VPond(VShift S, double a, double b)                // Lv12 작은 연못: 돌 테두리 + 물
+        {
+            var rim = Vmat.Make("#8a90ae", new VmatOpts { G = 0.05, Tx = Tex.Stone });
+            var water = Vmat.Make("#3f7fb8", new VmatOpts { T = "#74b8e4", L = "#2e6a9c", R = "#1f5078", Bv = 0, G = 0 });
+            S.Box(a - 0.95, b - 0.7, 0, 1.9, 1.4, 0.24, rim);
+            S.Box(a - 0.75, b - 0.5, 0.24, 1.5, 1.0, 0.04, water);
+            S.Box(a - 0.35, b - 0.1, 0.28, 0.28, 0.2, 0.03, Vmat.Make("#6fbf63", new VmatOpts { T = "#8fe083", Bv = 0, G = 0 }));      // 수련 잎
+            S.Box(a + 0.25, b - 0.3, 0.28, 0.2, 0.2, 0.03, Vmat.Make("#6fbf63", new VmatOpts { T = "#8fe083", Bv = 0, G = 0 }));
+        }
+
+        static void VPicnic(VShift S, double a, double b)              // Lv16 소풍 돗자리와 바구니
+        {
+            S.Box(a - 0.75, b - 0.55, 0, 1.5, 1.1, 0.05, Vmat.Make("#d0453e", new VmatOpts { T = "#ecd9c8", L = "#b03a34", R = "#8a2c28", Bv = 0, G = 0.04 }));
+            S.Box(a - 0.35, b - 0.2, 0.05, 0.5, 0.4, 0.28, Vmat.Make(WoodL, new VmatOpts { G = 0.05, Tx = Tex.Wood }));
+            S.Box(a - 0.3, b - 0.25, 0.33, 0.4, 0.05, 0.1, Vmat.Make(Wood, new VmatOpts { G = 0.04 }));
+            S.Box(a + 0.3, b + 0.05, 0.05, 0.2, 0.2, 0.18, Vmat.Make("#e5645c", new VmatOpts { T = "#ff9a8c", Bv = 0, G = 0 }));            // 사과
+        }
+
+        static void VScope(VShift S, double a, double b)               // Lv20 별 보는 망원경
+        {
+            var leg = Vmat.Make(WoodD, new VmatOpts { Bv = 0 }); var brass = Vmat.Make("#c8a24a", new VmatOpts { T = "#f0d070", L = "#b08a38", R = "#7a5c20", G = 0.1 });
+            S.Box(a - 0.35, b - 0.1, 0, 0.1, 0.1, 0.95, leg); S.Box(a + 0.25, b - 0.1, 0, 0.1, 0.1, 0.95, leg); S.Box(a - 0.05, b + 0.25, 0, 0.1, 0.1, 0.95, leg);
+            S.Box(a - 0.25, b - 0.2, 0.95, 0.5, 0.4, 0.12, brass);
+            S.Box(a - 0.45, b - 0.1, 1.07, 0.9, 0.2, 0.2, brass);
+            S.Box(a - 0.6, b - 0.07, 1.1, 0.16, 0.14, 0.14, Vmat.Make("#4a3a2a"));
+        }
+
+        static void VCat(VShift S, double a, double b)                 // Lv24 앉아 있는 고양이
+        {
+            var fur = Vmat.Make("#e89a4a", new VmatOpts { T = "#f6b868", L = "#d08038", R = "#a8602a", G = 0.06 }); var dark = Vmat.Make("#c27434", new VmatOpts { Bv = 0 });
+            S.Box(a - 0.3, b - 0.2, 0, 0.55, 0.4, 0.32, fur);
+            S.Box(a + 0.15, b - 0.17, 0.2, 0.3, 0.34, 0.3, fur);
+            S.Box(a + 0.17, b - 0.15, 0.5, 0.1, 0.1, 0.12, dark); S.Box(a + 0.33, b - 0.15, 0.5, 0.1, 0.1, 0.12, dark);
+            S.Box(a - 0.45, b - 0.04, 0.05, 0.22, 0.1, 0.38, dark);
+            S.Box(a + 0.3, b - 0.04, 0.35, 0.06, 0.06, 0.06, Vmat.Make("#2a1a10", new VmatOpts { Bv = 0, G = 0 }));
+        }
+
         static void VSign(VShift S, double a, double b)
         {
             S.Box(a - 0.07, b - 0.07, 0, 0.14, 0.14, 1.3, Vmat.Make(WoodD));
@@ -307,6 +345,9 @@ namespace Lighthouse.Render
             Obj(S, 2.5, N + 1.2, 0, q => VRock(q, 2.5, N + 1.2, 0.8));
             if (Tier >= 2) pc(-3.5, 3.5, GZ, (q, aa, bb) => VHut(q, aa, bb));
             StageDecor(pc);
+            // 정원 Lv12·16·20·24: 상한 뒤에도 하나씩 서는 풍경 조각(U23). 자리는 6단계 섬(N=9) 안에서 탑·나무에 가리지 않고 다른 조각과 떨어진 풀밭(화면 x≈393+15.5(a−b), y≈1289+15.4(a+b))
+            void Late(int lv, double a0, double b0, Action<VShift, double, double> f) { if (env.TreeLv >= lv && Math.Abs(a0) < N - 1.5 && Math.Abs(b0) < N - 1.5) pc(a0, b0, GZ, f); }      // 작은 섬(단계가 낮을 때)은 자리가 밖이면 건너뛴다
+            Late(12, 5.8, -5.6, VPond); Late(16, 4.8, 5.6, VPicnic); Late(20, 6.8, -2.8, VScope); Late(24, -5.4, 5.0, VCat);
             if (!env.Winter)
             {
                 string[] fcol = { "#ffffff", "#ffe27a", "#ff9bb8", "#a8d4ff" };

@@ -181,7 +181,7 @@ namespace Lighthouse.EditorTools
 
         // ---------- ④ 캡처·감사 ----------
         sealed class Res { public string Name; public int DpW, DpH; public string[] States; }
-        static readonly string[] AllStates = { "main", "mail", "dex", "dexsea", "dexreg", "growth", "offer", "deco", "skin", "shop", "settings", "news", "title", "photo", "ad", "tip" };
+        static readonly string[] AllStates = { "main", "mail", "dex", "dexsea", "dexreg", "scenery", "scenery0", "scenery_decor", "growth", "offer", "deco", "skin", "shop", "settings", "news", "title", "photo", "ad", "tip" };
         static readonly string[] SomeStates = { "main", "dex", "deco", "shop", "settings", "title" };
 
         public static void Step4_Capture()
@@ -226,14 +226,14 @@ namespace Lighthouse.EditorTools
         static byte[] CaptureOne(GameTables T, UiStrings str, int devW, int devH, float dprUsed, string state, StringBuilder report, List<string> bad, ref int checks)
         {
             // 상태
-            int stage = state.StartsWith("a2_") ? 4 : state == "dexsea" || state == "growth" || state == "offer" || state == "deco" || state == "skin" ? 6 : state == "shop" ? 4 : 3;
+            int stage = state.StartsWith("a2_") ? 4 : state == "dexsea" || state == "growth" || state == "offer" || state == "deco" || state == "skin" || state.StartsWith("scenery") ? 6 : state == "shop" ? 4 : 3;
             bool night = state == "main" && false;
             var ctx = SampleState.Make(T, Clock(), 11, stage, stage == 6 ? 260 : stage == 4 ? 150 : 70, stage >= 4 ? 4 : 1, night);
             ctx.S.Found["shell"] = Math.Max(1, ctx.S.Found.ContainsKey("shell") ? ctx.S.Found["shell"] : 1);
             if (state.StartsWith("cf_badges")) PrepBadges(ctx, state);
             // 월드 배경: M2 장면을 같은 크기로 굽는다(없는 것처럼 어둡게 가려질 것이므로 단계만 맞춘다)
             Texture2D world = null;
-            var wgo = new GameObject("world"); var sc = wgo.AddComponent<M2Showcase>(); sc.SpriteMaterial = AssetDatabase.LoadAssetAtPath<Material>(MatPath); sc.Stage = stage; sc.Season = "summer"; sc.Decor = stage >= 4; sc.Extras = true; sc.Animate = false; sc.Dusk = state == "main" ? 0.0f : 0.0f;
+            var wgo = new GameObject("world"); var sc = wgo.AddComponent<M2Showcase>(); sc.SpriteMaterial = AssetDatabase.LoadAssetAtPath<Material>(MatPath); sc.Stage = stage; sc.Season = "summer"; sc.Decor = stage >= 4 && !state.StartsWith("scenery") || state == "scenery_decor"; sc.TreeLv = state.StartsWith("scenery") && state != "scenery0" ? 30 : 0; sc.Extras = true; sc.Animate = false; sc.Dusk = state == "main" ? 0.0f : 0.0f;
             sc.Rebuild(devW, devH); sc.AnimateAt(0);
             var wb = sc.View.Capture(); world = new Texture2D(wb.W, wb.H, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point };
             var px = new Color32[wb.W * wb.H];

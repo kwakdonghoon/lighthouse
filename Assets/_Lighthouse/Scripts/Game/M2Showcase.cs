@@ -18,6 +18,7 @@ namespace Lighthouse.Game
         public string Season = "summer", TowerSkin = "classic", IsleSkin = "classic", DecorSkin = "classic";
         public bool Decor = true, Extras = true, AutoCycle = false, Animate = true;     // Animate: 해·달·별·구름·갈매기·바다 물결(프레임마다 CPU 로 그려 배경에 올림)
         [Range(0f, 1f)] public float Dusk = 0f;
+        public int TreeLv = 0;      // 실제 정원 레벨(상한 없음): 8 이상이면 나무·12 이상 연못·16 소풍·20 망원경·24 고양이가 더 선다
 
         public WorldView View { get; private set; }
         public SceneSprites Sprites { get; private set; }
@@ -59,7 +60,7 @@ namespace Lighthouse.Game
             var sw = Stopwatch.StartNew();
             Screen = new LogicalScreen(devW > 0 ? devW : UnityEngine.Screen.width, devH > 0 ? devH : UnityEngine.Screen.height);
             var put = Decor ? DecorLayout.DevFill() : null;
-            Sprites = SceneSprites.Build(Screen.W, Screen.H, Season, Stage, IsleSkin, DecorSkin, TowerSkin, gardenLv: 6, slotLv: 32, put: put);
+            Sprites = SceneSprites.Build(Screen.W, Screen.H, Season, Stage, IsleSkin, DecorSkin, TowerSkin, gardenLv: 6, slotLv: 32, put: put, treeLv: TreeLv);
             var ops = Extras ? SceneExtras.OpsWithExtras(Sprites) : SceneComposer.Ops(Sprites);
             View.DynamicBg = Animate;
             if (Animate)

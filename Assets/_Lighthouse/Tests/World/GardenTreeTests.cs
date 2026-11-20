@@ -15,7 +15,32 @@ namespace Lighthouse.Tests
             int baseline = Pieces(0);
             Assert.AreEqual(baseline, Pieces(7), "Lv7 까지는 그대로");
             Assert.AreEqual(baseline + 1, Pieces(8), "Lv8 에서 나무 한 그루");
-            Assert.AreEqual(baseline + 1, Pieces(30), "더 올라도 그 한 그루");
+            Assert.AreEqual(baseline + 1, Pieces(11), "Lv11 까지는 그 한 그루뿐");
+        }
+
+        [Test]
+        public void SceneryPiecesAppearOneByOneAtLv12Lv16Lv20Lv24()
+        {
+            int tree = Pieces(8);
+            Assert.AreEqual(tree, Pieces(11), "Lv11 까지는 나무까지만");
+            Assert.AreEqual(tree + 1, Pieces(12), "Lv12 연못");
+            Assert.AreEqual(tree + 2, Pieces(16), "Lv16 소풍");
+            Assert.AreEqual(tree + 3, Pieces(20), "Lv20 망원경");
+            Assert.AreEqual(tree + 4, Pieces(24), "Lv24 고양이");
+            Assert.AreEqual(tree + 4, Pieces(99), "그 위로는 더 늘지 않는다");
+        }
+
+        [Test]
+        public void EveryNewSceneryLevelRequestsARebuild()
+        {
+            var st = GameState.FromJson(M1Fixture.Migrator().Defaults());
+            var c = new GameContext(M1Fixture.Tables, st, new Mulberry32(2), M1Fixture.Clock()) { Stage = 6 };
+            foreach (int lv in new[] { 12, 16, 20, 24 })
+            {
+                st.Growth["garden"] = Progress.LvAt(c.T, lv - 1); c.NeedRebuild = false;
+                c.BumpGrowth("garden", Progress.LvAt(c.T, lv) - st.Growth["garden"]);
+                Assert.IsTrue(c.NeedRebuild, "Lv" + lv + " 에 닿으면 섬을 다시 굽는다");
+            }
         }
 
         [Test]
