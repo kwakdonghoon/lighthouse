@@ -30,7 +30,8 @@ namespace Lighthouse.Core
         public Cond CondOv;                           // 지금의 때를 덮어쓰는 값(오프라인 추첨·시뮬레이터·일지)
         public bool Sim;                              // 시뮬레이터가 도는 동안 true: 알림 대기열·자연 편지·손님 편지를 건너뛴다
         public string GrowthEvent;                    // 마지막 레벨 오름 알림 글
-        public bool NeedRebuild;                      // 정원이 오르면 섬을 다시 구워야 함
+        public const int GardenTreeLv = 8;            // 정원 이 레벨부터 섬에 나무 한 그루가 더 선다(원본에서는 효과 레벨이 6에서 멈춰 닿지 않던 자리, U22)
+        public bool NeedRebuild;                     // 정원이 오르면 섬을 다시 구워야 함
         public double CycleSec = 600;                 // 하루 주기(빠른 모드)
         public bool TitleOpen;                        // 타이틀이 떠 있으면 seeSea 가 기록하지 않는다 (anyTime 이 아니면)
         public readonly List<string[]> FirstQ = new List<string[]>();     // 처음 만난 것 알림 대기열 [종류, id]
@@ -129,7 +130,7 @@ namespace Lighthouse.Core
             {
                 var ms = T.Milestones.Where(m => m.K == k && m.Lv > before && m.Lv <= now).Select(m => m.Text).ToList();
                 GrowthEvent = T.TrackById[k].Name + " Lv." + now + (ms.Count > 0 ? " · 새 보상: " + string.Join(", ", ms) : "");
-                if (k == "garden" && before < T.LvCap["garden"]) NeedRebuild = true;
+                if (k == "garden" && (before < T.LvCap["garden"] || (before < GardenTreeLv && now >= GardenTreeLv))) NeedRebuild = true;      // 상한 뒤에도 Lv8 에서 나무가 하나 더 선다(U22)
                 GrowthChanged?.Invoke(k);
             }
         }

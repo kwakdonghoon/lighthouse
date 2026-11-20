@@ -81,10 +81,10 @@ namespace Lighthouse.Render
 
         /// <summary>한 장면에 필요한 것을 모두 굽는다. put == null 이면 꾸미기 없음. gardenLv: 섬 풍경(나무·꽃)용, slotLv: 꾸미기 자리 열림용.</summary>
         public static SceneSprites Build(int w, int h, string season, int stage, string isleSkin = "classic", string decorSkin = "classic", string towerSkin = "classic",
-                                         int gardenLv = 0, int slotLv = 0, List<(string slot, string item)> put = null, int t1v = 2)
+                                         int gardenLv = 0, int slotLv = 0, List<(string slot, string item)> put = null, int t1v = 2, int treeLv = 0)
         {
             var s = new SceneSprites { Stage = stage, W = w, H = h, Oy = h - BgBaker.DesignH, Season = season, Put = put ?? new List<(string, string)>() };
-            s.Island = new IslandBaker(Palettes.IslandEnvFor(season, stage, isleSkin, decorSkin, gardenLv)).Bake();
+            s.Island = new IslandBaker(Palettes.IslandEnvFor(season, stage, isleSkin, decorSkin, gardenLv, treeLv)).Bake();
             s.IslandN = Night.Of(s.Island.Island);
             foreach (var p in s.Island.Pieces) s.PieceN.Add(Night.Of(p.Spr));
             var sk = Palettes.TowerSkinOf(towerSkin); var P = TowerParams.ForStage(stage, t1v, sk);

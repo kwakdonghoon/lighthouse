@@ -70,11 +70,11 @@ namespace Lighthouse.Render
         }
 
         /// <summary>섬 굽기 입력을 계절·섬 외형·마을 외형으로 만든다 (HTML isleGrass/treeCol/lookPal 의 규칙).</summary>
-        public static IslandEnv IslandEnvFor(string season, int stage, string isleSkin = "classic", string decorSkin = "classic", int gardenLv = 0)
+        public static IslandEnv IslandEnvFor(string season, int stage, string isleSkin = "classic", string decorSkin = "classic", int gardenLv = 0, int treeLv = 0)
         {
             string fixedSeason = IsleSkinSeason.TryGetValue(isleSkin, out var fs) ? fs : null;
             string cs = fixedSeason ?? season;
-            return new IslandEnv { Stage = stage, Grass = Grass(cs), Tree = Tree(cs), Winter = season == "winter", GardenLv = gardenLv, Decor = Decor(decorSkin) };
+            return new IslandEnv { Stage = stage, Grass = Grass(cs), Tree = Tree(cs), Winter = season == "winter", GardenLv = gardenLv, TreeLv = treeLv, Decor = Decor(decorSkin) };
         }
 
         public static readonly TowerSkin[] TowerSkins =

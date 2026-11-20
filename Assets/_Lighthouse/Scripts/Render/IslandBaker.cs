@@ -23,6 +23,7 @@ namespace Lighthouse.Render
         public string[] Tree = { "#2d6738", "#3a7d46", "#3a7d46", "#4a9455", "#8be096" };    // TREE_COL.summer
         public bool Winter = false;
         public int GardenLv = 0;                                                             // effLv('garden')
+        public int TreeLv = 0;                                                               // 실제 정원 레벨(상한 없음). 0 이면 원본 그대로(나무 한 그루 덜). 8 이상이면 나무가 하나 더 선다
         public DecorPal Decor = new DecorPal();
     }
 
@@ -294,7 +295,7 @@ namespace Lighthouse.Render
             if (Tier >= 2) trees.Add(new[] { 4.5, -2.5 });
             if (gl >= 2) trees.Add(new[] { 0.5, -4.5 });
             if (gl >= 4) trees.Add(new[] { 4.5, 2.5 });
-            if (gl >= 8) trees.Add(new[] { -4.5, -3.5 });
+            if (gl >= 8 || env.TreeLv >= 8) trees.Add(new[] { -4.5, -3.5 });
             foreach (var t in trees) if (Math.Abs(t[0]) < N - 1 && Math.Abs(t[1]) < N - 1) pc(t[0], t[1], GZ, (q, aa, bb) => VTree(q, aa, bb));
             foreach (var r in new[] { new[] { N - 0.5, -N + 2.5, 1 }, new[] { -N + 1.5, -N + 0.5, 0.8 }, new[] { -N + 0.5, 1.5, 1 }, new[] { N - 2.5, N - 0.5, 0.8 } })
             {

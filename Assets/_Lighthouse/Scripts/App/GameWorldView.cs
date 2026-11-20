@@ -64,7 +64,7 @@ namespace Lighthouse.App
             string decor = Safe("decor", "classic", id => new[] { "classic", "seaside", "festival", "dev" }.Contains(id));
             shipSkin = Safe("ship", "classic", id => ShipBaker.SkinIds.Contains(id));
             keeperSkin = Safe("keeper", "classic", id => KeeperArt.IsSkin(id)); keeperSpr.Clear();
-            Sprites = SceneSprites.Build(W, H, c.CurSeason(), c.Stage, isle, decor, tower, gardenLv: c.EffLv("garden"), slotLv: c.LvlOf("garden"), put: put);
+            Sprites = SceneSprites.Build(W, H, c.CurSeason(), c.Stage, isle, decor, tower, gardenLv: c.EffLv("garden"), slotLv: c.LvlOf("garden"), put: put, treeLv: c.LvlOf("garden"));
             var ops = SceneComposer.Ops(Sprites);
             // 암초(2단계부터): 그림은 정적 층, 물보라는 연출 층
             var reefD = PropBaker.Reef(); var reefN = Night.Of(reefD);
