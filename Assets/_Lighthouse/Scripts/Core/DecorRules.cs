@@ -78,6 +78,19 @@ namespace Lighthouse.Core
         public static string PutOf(GameTables T, GameState s, string slotId)
             => s.Isle.Put.TryGetValue(slotId, out var v) && T.DecorItemById.ContainsKey(v) ? v : null;
 
+        /// <summary>지금 열린 자리에 놓인, 서로 다른 장식 종류 수(같은 장식을 여러 자리에 놓아도 1종).</summary>
+        public static int DistinctPlaced(GameTables T, GameState s, int stage, int gardenLv)
+            => s.Isle.Put.Where(kv => T.DecorSlotById.TryGetValue(kv.Key, out var sl) && SlotOpen(sl, stage, gardenLv) && T.DecorItemById.ContainsKey(kv.Value)).Select(kv => kv.Value).Distinct().Count();
+
+        /// <summary>꾸미기 조합 보너스(Unity 전용 U21): 서로 다른 장식을 많이 놓을수록 빛나는 선물 확률이 조금 오른다(4종 +1%p, 8종 +3%p, 올라간 만큼만 겹치지 않고 가장 높은 구간 하나).</summary>
+        public static double DecorShiny(GameTables T, GameState s, int stage, int gardenLv)
+        {
+            var at = T.Bal.DecorShinyAt; var bonus = T.Bal.DecorShinyBonus; if (at == null || bonus == null) return 0;
+            int n = DistinctPlaced(T, s, stage, gardenLv); double r = 0;
+            for (int i = 0; i < at.Length && i < bonus.Length; i++) if (n >= at[i]) r = bonus[i];
+            return r;
+        }
+
         /// <summary>그 장식이 지금 열린 자리에 몇 개 놓여 있는지.</summary>
         public static int PlacedCount(GameTables T, GameState s, string itemId, int stage, int gardenLv)
             => s.Isle.Put.Count(kv => kv.Value == itemId && T.DecorSlotById.TryGetValue(kv.Key, out var sl) && SlotOpen(sl, stage, gardenLv));

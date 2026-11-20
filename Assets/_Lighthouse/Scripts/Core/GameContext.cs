@@ -90,7 +90,10 @@ namespace Lighthouse.Core
         public int LvlOf(string k) => Progress.LevelOf(T, Get(S.Growth, k));
         public int TotalLv() => LvlOf("lens") + LvlOf("garden") + LvlOf("port");
         public int EffLv(string k) => Math.Min(LvlOf(k), T.LvCap[k]);
-        public double ShinyChance() => Progress.ShinyChance(T, TotalLv(), LvlOf("lens"));
+        public double ShinyChance() => Progress.ShinyChance(T, TotalLv(), LvlOf("lens"), DecorShinyBonus());
+        /// <summary>꾸미기 조합 몫(U21, 없으면 0). 시뮬레이션은 꾸미기를 놓지 않으니 0.</summary>
+        public double DecorShinyBonus() => DecorRules.DecorShiny(T, S, Stage, LvlOf("garden"));
+        public int DecorDistinct() => DecorRules.DistinctPlaced(T, S, Stage, LvlOf("garden"));
         public double HarvestChance() => Progress.HarvestChance(T, LvlOf("garden"));
         public double RegularBonus() => Progress.RegularBonus(T, LvlOf("port"));
         public double OfflineMax() => Progress.OfflineMax(T, LvlOf("port"));

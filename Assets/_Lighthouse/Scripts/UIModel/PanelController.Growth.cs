@@ -59,6 +59,7 @@ namespace Lighthouse.UI.Model
             var rank = new Block(BK.Card) { Style = "rank", Text = T.Ranks[rk].Name, Sub = S_("grow.rank") };
             rank.Add(Block.N(F_("grow.lvSum", tot) + (nr != null ? F_("grow.toNext", nr.Min - tot) : ""), "small"));
             rank.Add(Block.N(F_("grow.shinyChance", (Ctx.ShinyChance() * 100).ToString("0.0", CultureInfo.InvariantCulture)), "small"));
+            if (Ctx.DecorDistinct() > 0) rank.Add(Block.N(ComboLine(), "small"));
             r.Add(rank);
             var st = new Block(BK.Card) { Style = "stage", Text = T.StageName[stage], Sub = stage + " / " + T.MaxStage + S_("grow.stageUnit"), Tag = S.Build != null ? S_("grow.building") : null };
             if (goal > 0)

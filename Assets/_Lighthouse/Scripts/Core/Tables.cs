@@ -132,6 +132,7 @@ namespace Lighthouse.Core
         public int[] VisitAt; public int GiftAt;
         public double OfflineMaxBaseHours, OfflineMaxPortHoursCap, OfflineMinSec, OfflineDiaryMinSec, OfflineHomeMinSec, OfflineFirstBackMinSec, OfflineQuietSec, OfflineRegLongSec, OfflineRegMaxP;
         public double OfflineShipEps, DiaryMax, DiaryPerHour;
+        public int[] DecorShinyAt; public double[] DecorShinyBonus;      // 꾸미기 조합(U21): 서로 다른 장식 N종 이상 → 빛나는 선물 확률 +x
         public double ShinyBase, ShinyPerLv, ShinyMax, LensShinyPerLv, LensShinyLvCap;
         public double HarvestPerLv, HarvestMax, RegularBonusPerLv, RegularBonusMax, RegularBase;
         public double LensMulPerLv, LensMulBeyondPerLv, LensMulMax;

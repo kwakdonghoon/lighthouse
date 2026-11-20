@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Lighthouse.Core;
 
@@ -35,6 +36,14 @@ namespace Lighthouse.UI.Model
 
         // ================= 규칙 도우미 =================
         int GardenLv => Ctx.LvlOf("garden");
+        /// <summary>꾸미기 조합(U21) 한 줄: 지금 서로 다른 장식 수와 보너스, 다음 구간이 있으면 그것까지.</summary>
+        public string ComboLine()
+        {
+            int n = Ctx.DecorDistinct(); double b = Ctx.DecorShinyBonus(); var at = T.Bal.DecorShinyAt; var bo = T.Bal.DecorShinyBonus;
+            string s = F_("deco.combo", n, (b * 100).ToString("0", CultureInfo.InvariantCulture));
+            if (at != null && bo != null) for (int i = 0; i < at.Length && i < bo.Length; i++) if (n < at[i]) { s += F_("deco.comboNext", at[i], (bo[i] * 100).ToString("0", CultureInfo.InvariantCulture)); break; }
+            return s;
+        }
         bool SlotNowOpen(string id) => T.DecorSlotById.TryGetValue(id, out var sl) && DecorRules.SlotOpen(sl, Ctx.Stage, GardenLv);
         List<string> ZoneOpenIds(string z) => DecorRules.ZoneOpen(T, z, Ctx.Stage, GardenLv).Select(s => s.Id).ToList();
         List<string> ZoneSlotIds(string z) => DecorRules.ZoneSlots(T, z).Select(s => s.Id).ToList();
@@ -253,6 +262,7 @@ namespace Lighthouse.UI.Model
             }
             r.Add(grid);
             r.Add(Block.N(S_("deco.legend"), "legend"));
+            r.Add(Block.N(ComboLine(), "small"));
             var au = DecoAutoPlan();
             var tools = new Block(BK.ButtonRow);
             tools.Add(Block.Btn(S_("deco.auto.btn"), "auto", "main", !au.Can)); tools.Add(Block.Btn(S_("deco.peek"), "peek:on", "btn"));

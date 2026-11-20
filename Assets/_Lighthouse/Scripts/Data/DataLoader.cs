@@ -196,6 +196,7 @@ namespace Lighthouse.Data
             b.OfflineMaxBaseHours = D(j["offlineMaxBaseHours"]); b.OfflineMaxPortHoursCap = D(j["offlineMaxPortHoursCap"]); b.OfflineMinSec = D(j["offlineMinSec"]); b.OfflineDiaryMinSec = D(j["offlineDiaryMinSec"]);
             b.OfflineHomeMinSec = D(j["offlineHomeMinSec"]); b.OfflineFirstBackMinSec = D(j["offlineFirstBackMinSec"]); b.OfflineQuietSec = D(j["offlineQuietSec"]); b.OfflineRegLongSec = D(j["offlineRegLongSec"]); b.OfflineRegMaxP = D(j["offlineRegMaxP"]);
             b.OfflineShipEps = D(j["offlineShipEps"]); b.DiaryMax = D(j["diaryMax"]); b.DiaryPerHour = D(j["diaryPerHour"]);
+            if (j["decorShinyAt"] != null) { b.DecorShinyAt = Ints(j["decorShinyAt"]); b.DecorShinyBonus = ((JArray)j["decorShinyBonus"]).Select(x => (double)x).ToArray(); }
             b.ShinyBase = D(j["shinyBase"]); b.ShinyPerLv = D(j["shinyPerLv"]); b.ShinyMax = D(j["shinyMax"]); b.LensShinyPerLv = D(j["lensShinyPerLv"]); b.LensShinyLvCap = D(j["lensShinyLvCap"]);
             b.HarvestPerLv = D(j["harvestPerLv"]); b.HarvestMax = D(j["harvestMax"]); b.RegularBonusPerLv = D(j["regularBonusPerLv"]); b.RegularBonusMax = D(j["regularBonusMax"]); b.RegularBase = D(j["regularBase"]);
             b.LensMulPerLv = D(j["lensMulPerLv"]); b.LensMulBeyondPerLv = D(j["lensMulBeyondPerLv"]); b.LensMulMax = D(j["lensMulMax"]);

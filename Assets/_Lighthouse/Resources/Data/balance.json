@@ -59,6 +59,8 @@
  "offlineShipEps": 1e-9,
  "diaryMax": 14,
  "diaryPerHour": 1.6,
+ "decorShinyAt": [4, 8],
+ "decorShinyBonus": [0.01, 0.03],
  "shinyBase": 0.03,
  "shinyPerLv": 0.003,
  "shinyMax": 0.25,

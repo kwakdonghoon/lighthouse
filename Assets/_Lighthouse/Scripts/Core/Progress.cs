@@ -65,8 +65,8 @@ namespace Lighthouse.Core
         public static double LensShiny(GameTables T, int lensLv) => T.Bal.LensShinyPerLv * Math.Min(lensLv, T.Bal.LensShinyLvCap);
 
         /// <summary>빛나는 선물 확률 (원본 shinyChance): min(0.25, 0.03 + 0.003×레벨합 + 렌즈).</summary>
-        public static double ShinyChance(GameTables T, int totalLv, int lensLv)
-            => Math.Min(T.Bal.ShinyMax, T.Bal.ShinyBase + T.Bal.ShinyPerLv * totalLv + LensShiny(T, lensLv));
+        public static double ShinyChance(GameTables T, int totalLv, int lensLv, double decorBonus = 0)
+            => Math.Min(T.Bal.ShinyMax, T.Bal.ShinyBase + T.Bal.ShinyPerLv * totalLv + LensShiny(T, lensLv) + decorBonus);
 
         /// <summary>풍년(정원이 상한을 넘으면 선물이 하나 더) 확률.</summary>
         public static double HarvestChance(GameTables T, int gardenLv) => Math.Min(T.Bal.HarvestMax, T.Bal.HarvestPerLv * Math.Max(0, gardenLv - T.LvCap["garden"]));
